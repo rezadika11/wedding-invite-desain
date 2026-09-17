@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testimoni &amp; Kisah Pengantin - JanjiSuci Platform Undangan Pernikahan Digital</title>
+  <meta name="description" content="Simak cerita nyata dari 75.000+ pasangan pengantin yang telah mempercayakan momen sakral mereka dengan JanjiSuci.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Native CSS -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+    /* ========== TESTIMONI PAGE SPECIFIC ========== */
+    .testi-hero {
+      position: relative; overflow: hidden;
+      padding-top: 3rem; padding-bottom: 3.5rem;
+      text-align: center;
+      background: var(--cream-bg);
+    }
+    @media (min-width:768px){ .testi-hero{ padding-top:4rem; padding-bottom:4.5rem; } }
+    .testi-hero::before {
+      content:""; position:absolute; top:0; left:50%; transform:translateX(-50%);
+      width:75%; height:20rem;
+      background: rgba(247,237,232,0.6);
+      filter: blur(32px); border-radius:50%;
+      pointer-events:none;
+    }
+    .testi-hero .container { position:relative; z-index:1; }
+    .badge-kisah {
+      display:inline-flex; align-items:center; gap:0.45rem;
+      padding:0.35rem 0.9rem;
+      background: var(--blush-soft); border:1px solid var(--sand-warm);
+      border-radius:9999px; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+      color: var(--status-badge);
+    }
+    .badge-kisah .dot { width:8px; height:8px; border-radius:50%; background:var(--status-badge); animation:pulse 1.6s infinite; }
+    .testi-title {
+      font-family:'Playfair Display',serif;
+      font-size:28px; line-height:36px; font-weight:600;
+      color:var(--primary); max-width:48rem; margin:0.9rem auto 0;
+      letter-spacing:-0.015em;
+    }
+    @media (min-width:768px){ .testi-title{ font-size:38px; line-height:48px; } }
+    @media (min-width:1024px){ .testi-title{ font-size:48px; line-height:58px; letter-spacing:-0.02em; } }
+    .testi-sub { font-size:15px; line-height:26px; color:var(--on-surface-variant); max-width:36rem; margin:0.75rem auto 0; }
+    @media (min-width:768px){ .testi-sub{ font-size:18px; line-height:28px; } }
+    /* Trust barometer */
+    .trust-bar {
+      max-width:64rem; margin:2.5rem auto 0;
+      display:grid; gap:1px; background: rgba(232,223,211,0.6);
+      border:1px solid rgba(232,223,211,0.7); border-radius:1rem; overflow:hidden;
+      box-shadow: var(--shadow-card);
+    }
+    @media (min-width:768px){ .trust-bar{ grid-template-columns:repeat(3,1fr); } }
+    .trust-cell {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(6px);
+      padding:1.5rem 1rem;
+      display:flex; flex-direction:column; align-items:center; text-align:center;
+    }
+    .trust-score { display:flex; align-items:center; gap:0.35rem; color:#E0A926; }
+    .trust-score span { font-size:18px; font-weight:700; color:var(--primary); }
+    .trust-cell strong { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:var(--primary); }
+    .trust-cell p { font-size:13px; color:var(--on-surface-variant); margin-top:0.25rem; }
+    /* Filter sticky */
+    .filter-sticky {
+      position: sticky; top:80px; z-index:30;
+      background: rgba(250,247,242,0.95); backdrop-filter: blur(10px);
+      border-top:1px solid rgba(232,223,211,0.5); border-bottom:1px solid rgba(232,223,211,0.5);
+      padding:0.9rem 0;
+    }
+    .filter-scroll { display:flex; align-items:center; gap:0.6rem; overflow-x:auto; padding:0.2rem 0; scrollbar-width:none; }
+    .filter-scroll::-webkit-scrollbar{ display:none; }
+    .filter-chip {
+      flex-shrink:0; padding:0.55rem 1rem;
+      border-radius:9999px; font-size:12px; font-weight:600;
+      border:1px solid var(--sand-warm); background:var(--surface-card); color:var(--on-surface-variant);
+      transition:all 0.2s; cursor:pointer; white-space:nowrap;
+    }
+    .filter-chip:hover{ border-color:var(--primary-container); color:var(--primary); }
+    .filter-chip.active{ background:var(--primary-container); color:#fff; border-color:var(--primary-container); box-shadow:var(--shadow-sm); }
+    /* Card grid */
+    .story-grid { display:grid; gap:1.75rem; padding-top:3rem; padding-bottom:3rem; align-items:start; }
+    @media (min-width:768px){ .story-grid{ grid-template-columns:repeat(2,1fr); } }
+    @media (min-width:1024px){ .story-grid{ grid-template-columns:repeat(3,1fr); } }
+    .story-card {
+      background:var(--surface-card); border:1px solid rgba(232,223,211,0.85);
+      border-radius:1rem; overflow:hidden;
+      box-shadow: var(--shadow-card);
+      display:flex; flex-direction:column;
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .story-card:hover { box-shadow:0 16px 36px -4px rgba(27,59,54,0.12); transform:translateY(-3px); border-color: rgba(201,142,117,0.45); }
+    .story-media { position:relative; height:240px; overflow:hidden; background:var(--surface-container); }
+    .story-media img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s; display:block; }
+    .story-card:hover .story-media img{ transform:scale(1.05); }
+    .story-badge {
+      position:absolute; top:12px; right:12px;
+      background:rgba(255,255,255,0.92); backdrop-filter:blur(6px);
+      border:1px solid var(--sand-warm);
+      padding:0.25rem 0.6rem; border-radius:0.4rem;
+      font-size:10px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .story-body { padding:1.25rem 1.25rem 1.1rem; flex:1; display:flex; flex-direction:column; }
+    .stars-row { display:flex; align-items:center; gap:0.15rem; color:#E0A926; font-size:0.9rem; margin-bottom:0.75rem; }
+    .stars-row span.score { margin-left:0.4rem; font-size:11px; font-weight:700; color:var(--on-surface-variant); }
+    .story-quote { font-size:15px; line-height:24px; font-style:italic; color:var(--on-surface-variant); flex:1; }
+    .story-foot { display:flex; align-items:center; justify-content:space-between; gap:0.75rem; padding-top:0.9rem; margin-top:1rem; border-top:1px solid rgba(232,223,211,0.6); }
+    .story-name { font-size:15px; font-weight:700; color:var(--primary); }
+    .story-meta { font-size:12px; color:var(--on-surface-variant); }
+    .verified { width:32px; height:32px; border-radius:50%; background:var(--cream-bg); border:1px solid var(--sand-warm); display:grid; place-items:center; color:var(--status-success); font-size:0.9rem; flex-shrink:0; }
+    /* Video reels */
+    .reels-section { background: rgba(252,241,239,0.6); border-top:1px solid rgba(232,223,211,0.5); border-bottom:1px solid rgba(232,223,211,0.5); padding:4rem 0; }
+    .reels-header { display:flex; flex-direction:column; gap:1rem; margin-bottom:2.5rem; }
+    @media (min-width:768px){ .reels-header{ flex-direction:row; align-items:flex-end; justify-content:space-between; } }
+    .reels-badge { display:inline-flex; align-items:center; gap:0.4rem; padding:0.3rem 0.75rem; background:var(--blush-soft); border:1px solid var(--sand-warm); border-radius:9999px; font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--secondary); }
+    .reels-title { font-family:'Playfair Display',serif; font-size:26px; line-height:34px; font-weight:600; color:var(--primary); }
+    @media (min-width:768px){ .reels-title{ font-size:30px; line-height:38px; } }
+    .reels-desc { font-size:15px; line-height:24px; color:var(--on-surface-variant); max-width:28rem; }
+    .reels-grid { display:grid; gap:1.25rem; }
+    @media (min-width:640px){ .reels-grid{ grid-template-columns:repeat(2,1fr); } }
+    @media (min-width:1024px){ .reels-grid{ grid-template-columns:repeat(4,1fr); } }
+    .reel-card { position:relative; border-radius:1rem; overflow:hidden; aspect-ratio:9/16; background:var(--navy-accent); box-shadow:var(--shadow-card); border:1px solid rgba(232,223,211,0.6); cursor:pointer; }
+    .reel-card img { width:100%; height:100%; object-fit:cover; opacity:0.9; transition:transform 0.5s; display:block; }
+    .reel-card:hover img{ transform:scale(1.05); }
+    .reel-overlay { position:absolute; inset:0; background: linear-gradient(to top, rgba(3,37,33,0.88) 0%, rgba(3,37,33,0.18) 45%, transparent 70%); display:flex; flex-direction:column; justify-content:space-between; padding:1rem; }
+    .reel-top { display:flex; justify-content:flex-end; }
+    .reel-volume { width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.35); backdrop-filter:blur(8px); display:grid; place-items:center; color:#fff; font-size:1rem; }
+    .reel-bottom { text-align:center; }
+    .reel-play { width:48px; height:48px; border-radius:50%; background:rgba(255,255,255,0.92); color:var(--primary); display:grid; place-items:center; font-size:1.5rem; margin:0 auto 0.75rem; box-shadow:0 4px 16px rgba(0,0,0,0.18); transition:transform 0.2s; }
+    .reel-card:hover .reel-play{ transform:scale(1.08); }
+    .reel-name { font-size:15px; font-weight:700; color:#fff; }
+    .reel-quote { font-size:12px; line-height:18px; color:var(--sand-warm); margin-top:0.2rem; }
+    /* Instagram gallery */
+    .insta-section { padding:4rem 0; }
+    .insta-header { text-align:center; max-width:36rem; margin:0 auto 2.5rem; }
+    .insta-badge { display:inline-flex; align-items:center; gap:0.35rem; padding:0.3rem 0.75rem; background:var(--blush-soft); border:1px solid var(--sand-warm); border-radius:9999px; font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--status-badge); }
+    .insta-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; }
+    @media (min-width:768px){ .insta-grid{ grid-template-columns:repeat(4,1fr); gap:1.25rem; } }
+    .insta-card { position:relative; border-radius:1rem; overflow:hidden; aspect-ratio:1/1; background:var(--surface-container); border:1px solid rgba(232,223,211,0.6); box-shadow:var(--shadow-card); }
+    .insta-card img{ width:100%; height:100%; object-fit:cover; transition:transform 0.5s; display:block; }
+    .insta-card:hover img{ transform:scale(1.08); }
+    .insta-overlay { position:absolute; inset:0; background:rgba(3,37,33,0.7); opacity:0; display:grid; place-items:center; padding:1rem; text-align:center; transition:opacity 0.3s; }
+    .insta-card:hover .insta-overlay{ opacity:1; }
+    .insta-overlay p{ color:#fff; font-size:13px; font-weight:600; }
+    /* CTA deep */
+    .cta-deep {
+      position:relative; overflow:hidden;
+      background: var(--primary); color:#fff;
+      padding:4rem 0;
+      text-align:center;
+    }
+    .cta-deep::before, .cta-deep::after { content:""; position:absolute; border-radius:50%; filter:blur(32px); pointer-events:none; }
+    .cta-deep::before{ top:-6rem; right:-6rem; width:24rem; height:24rem; background: rgba(68,100,95,0.3); }
+    .cta-deep::after{ bottom:-6rem; left:-6rem; width:24rem; height:24rem; background: rgba(45,76,71,0.5); }
+    .cta-deep .container { position:relative; z-index:1; max-width:56rem; }
+    .cta-eyebrow-light { display:inline-flex; align-items:center; gap:0.45rem; padding:0.35rem 0.85rem; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18); border-radius:9999px; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold-light); backdrop-filter:blur(6px); margin-bottom:1rem; }
+    .cta-deep-title { font-family:'Playfair Display',serif; font-size:28px; line-height:36px; font-weight:600; color:#fff; max-width:48rem; margin:0 auto; }
+    @media (min-width:768px){ .cta-deep-title{ font-size:38px; line-height:48px; } }
+    @media (min-width:1024px){ .cta-deep-title{ font-size:48px; line-height:58px; } }
+    .cta-deep-desc { font-size:16px; line-height:26px; color:var(--sand-warm); max-width:36rem; margin:1rem auto 0; }
+    .cta-deep-actions { display:flex; flex-direction:column; gap:0.85rem; margin-top:2rem; align-items:center; justify-content:center; }
+    @media (min-width:640px){ .cta-deep-actions{ flex-direction:row; } }
+    .cta-deep-actions a { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:1rem 1.75rem; border-radius:0.6rem; font-size:14px; font-weight:700; transition:all 0.2s; text-decoration:none; width:100%; }
+    @media (min-width:640px){ .cta-deep-actions a{ width:auto; } }
+    .cta-deep-actions a.primary { background:var(--surface-card); color:var(--primary); box-shadow:0 4px 16px rgba(0,0,0,0.12); }
+    .cta-deep-actions a.primary:hover{ background:var(--gold-light); }
+    .cta-deep-actions a.ghost { background:transparent; color:#fff; border:1px solid rgba(232,223,211,0.4); }
+    .cta-deep-actions a.ghost:hover{ background:rgba(255,255,255,0.1); }
+    .cta-trust { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:1rem 1.5rem; margin-top:2rem; font-size:13px; color:rgba(232,223,211,0.8); }
+    .cta-trust span{ display:flex; align-items:center; gap:0.35rem; }
+    .cta-trust i{ color:var(--status-success); }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="JanjiSuci beranda">
+        <div class="brand-icon"><i class="bi bi-heart-fill"></i></div>
+        <div class="brand-text">
+          <span class="brand-name">JanjiSuci</span>
+          <span class="brand-sub">Wedding Invitation</span>
+        </div>
+      </a>
+      <nav class="nav-desktop" aria-label="Navigasi utama">
+        <a href="fitur.html" class="nav-link">Fitur</a>
+        <a href="katalog.html" class="nav-link">Katalog Tema</a>
+        <a href="harga.html" class="nav-link">Harga</a>
+        <a href="contoh.html" class="nav-link">Contoh Undangan</a>
+        <a href="testimoni.html" class="nav-link active">Testimoni</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+      </nav>
+      <div class="header-actions">
+        <a href="login.html" class="btn btn-ghost">Masuk</a>
+        <a href="dashboard.html" class="btn btn-primary">
+          <span>Buat Undangan Sekarang</span>
+          <i class="bi bi-arrow-right"></i>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Navigasi mobile">
+      <a href="fitur.html">Fitur</a>
+      <a href="katalog.html">Katalog Tema</a>
+      <a href="harga.html">Harga</a>
+      <a href="contoh.html">Contoh Undangan</a>
+      <a href="testimoni.html" class="active">Testimoni</a>
+      <a href="blog.html">Blog</a>
+      <a href="login.html">Masuk</a>
+    </nav>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="testi-hero">
+    <div class="container">
+      <div class="badge-kisah"><span class="dot"></span> KISAH NYATA 75.000+ MEMPELAI</div>
+      <h1 class="testi-title">Berbagi Bahagia Bersama JanjiSuci di Seluruh Nusantara</h1>
+      <p class="testi-sub">Simak cerita nyata dari pasangan pengantin yang telah mempercayakan momen sakral mereka dengan kemudahan dan keanggunan undangan digital kami.</p>
+      <div class="trust-bar">
+        <div class="trust-cell">
+          <div class="trust-score"><i class="bi bi-star-fill"></i> <span>4.95 / 5.0</span></div>
+          <p>12.400+ Ulasan Terverifikasi</p>
+        </div>
+        <div class="trust-cell">
+          <strong>75.000+</strong>
+          <p>Undangan Diterbitkan</p>
+        </div>
+        <div class="trust-cell">
+          <strong>3.8 Juta+</strong>
+          <p>Tamu Terlayani di 38 Provinsi</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FILTER CHIPS ==================== -->
+  <section class="filter-sticky">
+    <div class="container">
+      <div class="filter-scroll" role="tablist" aria-label="Filter testimoni">
+        <button class="filter-chip active" role="tab" aria-selected="true">Semua Ulasan (1,240+)</button>
+        <button class="filter-chip" role="tab">Pernikahan Adat Minang</button>
+        <button class="filter-chip" role="tab">Pernikahan Adat Jawa</button>
+        <button class="filter-chip" role="tab">Pernikahan Adat Sunda</button>
+        <button class="filter-chip" role="tab">Konsep Minimalis Modern</button>
+        <button class="filter-chip" role="tab">Tema Botanical Garden</button>
+        <button class="filter-chip" role="tab">Syar'i &amp; Khidmat</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== STORY GRID ==================== -->
+  <section class="section-surface">
+    <div class="container">
+      <div class="story-grid">
+        <!-- Dimas & Nadya -->
+        <article class="story-card">
+          <div class="story-media">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdo0UEchogmYDhIiPn2JtIeojTSHOaunAMD3sH7yax1QQTC3J_KLLd0cUwtYlOIWthG1rKWR3LLIZkx25TAkglEPNKV1jzT5VfScJ8Q-kLCRKpUMnswnHSZraDLMWFEQbsUK3KZx6gzz8rExpoFlUCzhOhhaU3D9HTrIp8YbC_pH5-qtXS9GM1xUKMD_xw_rnBRTezd2e9QLtDV5cc9wYjJ8S7vGh9bcxHvqn4ucY44IJE5AOxGO0l" alt="Pasangan Dimas & Nadya dengan busana emerald dan gold di resepsi Jakarta">
+            <span class="story-badge">Tema Emerald Heritage</span>
+          </div>
+          <div class="story-body">
+            <div class="stars-row"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i> <span class="score">5.0</span></div>
+            <p class="story-quote">“Jujur kami takjub banget! Bikin undangan cuma butuh 10 menit di kamar tidur. Tamu-tamu pada puji desainnya mewah banget, fitur amplop QRIS-nya lancar langsung masuk rekening tanpa potongan sama sekali.”</p>
+            <div class="story-foot">
+              <div>
+                <div class="story-name">Dimas &amp; Nadya</div>
+                <div class="story-meta">Jakarta Selatan • Okt 2024</div>
+              </div>
+              <span class="verified"><i class="bi bi-patch-check-fill"></i></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Reza & Syifa -->
+        <article class="story-card">
+          <div class="story-media">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuByu883c9bjjVmtQpPf-ZO4FitqFO9Q0XkOpiYPfNvKyC1S5dIJK7FsHL2Q5zL7vJyjviRxC7ylCRcZGaeaj79pcryLb9PYSt7Ko-DbbePKsXvkc52hJJEwCAIf8z5KDS8HPCWng0J4ZxoA33mQzI78JlPcdZy0qrjv-6PepCxeGbeBWVETck7ych4bJ1HNVCfNui_SzenSGjhs2c_cH6qJ8sQPzRVZ0thjYrYVmLTBWuECiQAwwfhN" alt="Pasangan Reza & Syifa dengan busana adat Minang Suntiang emas">
+            <span class="story-badge">Nusantara Royale Minang</span>
+          </div>
+          <div class="story-body">
+            <div class="stars-row"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i> <span class="score">5.0</span></div>
+            <p class="story-quote">“Keluarga kami perpaduan adat Jawa &amp; Minang, dan tema Nusantara Royale di JanjiSuci mewakili keanggunan adat kami dengan sangat sempurna. Fitur WhatsApp blaster mempermudah rekap katering!”</p>
+            <div class="story-foot">
+              <div>
+                <div class="story-name">Reza &amp; Syifa</div>
+                <div class="story-meta">Bandung • Nov 2024</div>
+              </div>
+              <span class="verified"><i class="bi bi-patch-check-fill"></i></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Aditya & Karina -->
+        <article class="story-card">
+          <div class="story-media">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbLUR0fxBkpmFhb0t-Rg5SK8RmjB2CPS77Iq7zqebwlvWReiaaA5yn9IbpOFBKKD9p0YUtEMddnz7gS6WiKu3mTNXUk-pA13RJATQWJ4vpFHM1q1KBe2X803_f6xwLAye3SFtwDYUB81_5ngDChcD5CBWDRk-ropO1u5mF_nDuzkGlvSDGJU7c21K4oAWtkaO8n03-Cbe8U7Kl_j_hpA9RyZ5Ai4AJEK3VaU7E5eboO_PbstWnOkqF" alt="Pasangan Aditya & Karina modern minimalis di Surabaya">
+            <span class="story-badge">Minimalist Monogram</span>
+          </div>
+          <div class="story-body">
+            <div class="stars-row"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i> <span class="score">5.0</span></div>
+            <p class="story-quote">“Dengan Rp 99.000 aktif selamanya, ini platform undangan digital paling worth-it di Indonesia. Support CS WhatsApp-nya luar biasa ramah dan responsif membantu edit teks saya jam 11 malam.”</p>
+            <div class="story-foot">
+              <div>
+                <div class="story-name">Aditya &amp; Karina</div>
+                <div class="story-meta">Surabaya • Des 2024</div>
+              </div>
+              <span class="verified"><i class="bi bi-patch-check-fill"></i></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Fajar & Amanda -->
+        <article class="story-card">
+          <div class="story-media">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsVxcYvTbJVxYUd9612M1qgW3bX93rOJBwGyFn6CwCBx0zzjBJi83NVTPcxl2T8RR1diHdhsUPhjKbp40xWtxz2HWD6psnWsdoWbSM21ARuAjFOlFd6WVVDQGQeFDLdxwjQ1zcbW9UQCdyhmDKmh43MsjWZz_S9jItCYOgUexeJOkyQSegW-nQOFLwP1YRy94KshxWBMUGMWFT5BwTqqUGuJUq27bEEWuh7RQGtoSgdv7jmoSsT0OM" alt="Pasangan Fajar & Amanda busana Javanese Solo Basahan di Yogyakarta">
+            <span class="story-badge">Golden Jasmine Kraton</span>
+          </div>
+          <div class="story-body">
+            <div class="stars-row"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i> <span class="score">5.0</span></div>
+            <p class="story-quote">“Ornamen gunungan wayangnya sangat otentik. Keluarga sesepuh yang tadinya ragu undangan digital malah kagum pas buka link-nya karena alunan gamelannya syahdu.”</p>
+            <div class="story-foot">
+              <div>
+                <div class="story-name">Fajar &amp; Amanda</div>
+                <div class="story-meta">Yogyakarta • Jan 2025</div>
+              </div>
+              <span class="verified"><i class="bi bi-patch-check-fill"></i></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Rizky & Farah -->
+        <article class="story-card">
+          <div class="story-media">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3vcroxOBS6Luzp6dtvrFd7mDzMzo5s5AWlO01plCepAr1XwGx5wvr93yEOWTxjnGQEOHxY6q42h7B5oSMHoXxXd6xzKPS9PtY5VXa5PNBqjJ5wojsBr2dxC1DlhOWhq4_7vlWsYPiUTriNZtBIDpYn7iNuM_l1Z85OVjjQJ0Oa_V0A_otKTEYcgnYH6zhr1kVm7DBYP2Z_rkaru5khG5ruVj6djDXAJV0cXbD0UK_yI71ILLK7JLb" alt="Pasangan Rizky & Farah botanical garden di Medan">
+            <span class="story-badge">Botanical Whispers</span>
+          </div>
+          <div class="story-body">
+            <div class="stars-row"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i> <span class="score">5.0</span></div>
+            <p class="story-quote">“Peta Google Maps sangat akurat, tamu luar kota langsung sampai ke venue tanpa nyasar. RSVP juga realtime jadi tahu persis berapa yang hadir.”</p>
+            <div class="story-foot">
+              <div>
+                <div class="story-name">Rizky &amp; Farah</div>
+                <div class="story-meta">Medan • Jan 2025</div>
+              </div>
+              <span class="verified"><i class="bi bi-patch-check-fill"></i></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ilham & Annisa -->
+        <article class="story-card">
+          <div class="story-media">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFSJd6JCaKYyfby_Mr-qzJmrPb0VPs5peBY4EwGkiQV1yzT_ETbUwAH7xT1L8YNX8cEL4lcLkLrTci80mK_DoNYsdme3fzMyNTKxW4yTjhvV2f-aQtvT0JCDdNGBlMwPQNI60IKKn67n8ttgaR95hH6hkfjo_nNixyEdXO0W40ZrTS63-KJR44ZHaofijeN15VHc6r8fgtZJ92aF3g66PtNweMDVlUI-0JCZdHmVuNCitwsFPZy6mr" alt="Pernikahan Ilham & Annisa Syar'i putih di Makassar">
+            <span class="story-badge">Serenity White Syar'i</span>
+          </div>
+          <div class="story-body">
+            <div class="stars-row"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i> <span class="score">5.0</span></div>
+            <p class="story-quote">“Sangat cocok untuk konsep syar'i tanpa foto wajah. Desain tipografinya sangat khidmat dan elegan. Recommended banget buat yang ingin akad privat sakral!”</p>
+            <div class="story-foot">
+              <div>
+                <div class="story-name">Ilham &amp; Annisa</div>
+                <div class="story-meta">Makassar • Feb 2025</div>
+              </div>
+              <span class="verified"><i class="bi bi-patch-check-fill"></i></span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== VIDEO REELS ==================== -->
+  <section class="reels-section">
+    <div class="container">
+      <div class="reels-header">
+        <div>
+          <div class="reels-badge"><i class="bi bi-play-circle"></i> VIDEO CERITA KITA</div>
+          <h2 class="reels-title">Dengar Langsung dari Layar Mereka</h2>
+        </div>
+        <p class="reels-desc">Ulasan video candid dari para pasangan saat mempersiapkan hari bahagia mereka bersama platform JanjiSuci.</p>
+      </div>
+      <div class="reels-grid">
+        <div class="reel-card">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuADVdpxN67-NfpLLQ2U0JT-J87SfEQFQEoy-aliFEFGJA4sLnMLY_2hP9ISNoFi-i12UOSGo93fTR3urvJ3uAcGZCbWJ1eJUZI2TNrGKAfp1EuqTGd9ID-o64VblhSnrPnUJnFgj-N315-5W_c33bbRiv5cTueriStIltX4uQrVG96K20RBrll9ELvU3xeTFm0XxQvAvsaj3eAwpsvUfZoRpBEhod6pLhpgj2LTsGz-bKZN-45td6bz" alt="Bagas & Tari video testimoni">
+          <div class="reel-overlay">
+            <div class="reel-top"><span class="reel-volume"><i class="bi bi-volume-up"></i></span></div>
+            <div class="reel-bottom">
+              <div class="reel-play"><i class="bi bi-play-fill"></i></div>
+              <div class="reel-name">Bagas &amp; Tari</div>
+              <div class="reel-quote">“Gampang banget ganti foto &amp; lagu sesuka hati”</div>
+            </div>
+          </div>
+        </div>
+        <div class="reel-card">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA93RvkbScV39kti2ciFTdvDbT3sWAKd8NYW3vtthKnzUPmenqf0XBb4Z3ADV9ew-38FDaZLBJgJzQJKhcqX6AltTcTTG2SxFJCFtXmcW7fgy-0dqBdUhFa6r6TEuTKPe-eHRwk2T1rIJNycMGPRv-Y7b8JY8OiKVnd4_Awyw13nut4AOjVYJC3CETK6_iFb4rQqlXm5juvAV99SaidEqkWCtvsrH90AxPnxWkF5QzPq7JnienpVkNw" alt="Deni & Putri video testimoni">
+          <div class="reel-overlay">
+            <div class="reel-top"><span class="reel-volume"><i class="bi bi-volume-up"></i></span></div>
+            <div class="reel-bottom">
+              <div class="reel-play"><i class="bi bi-play-fill"></i></div>
+              <div class="reel-name">Deni &amp; Putri</div>
+              <div class="reel-quote">“Fitur QR check-in tamu resepsi anti ribet!”</div>
+            </div>
+          </div>
+        </div>
+        <div class="reel-card">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsKwOcgkrGHssvQgtDuJB4qC-QpY6yqR034OuY4HRpce2uMfwM8RdScVkwd3K-SrhPb_IzayLwjEgKMHbQjRQwomH5d1lUfuUaBijctnNvsC66IOllwI9_ZMVu0no1nUTwLEjpq-m7raPznCst3YQK6zIBI85yu1NiSpz5voWFT1W4TtjmYa1c8_RquekpPbzaxra9FVzWJFPhZx9D_05RS57_0HNqajeaSGnljr3zPKaMvYz1E7yh" alt="Galih & Ratih video testimoni">
+          <div class="reel-overlay">
+            <div class="reel-top"><span class="reel-volume"><i class="bi bi-volume-up"></i></span></div>
+            <div class="reel-bottom">
+              <div class="reel-play"><i class="bi bi-play-fill"></i></div>
+              <div class="reel-name">Galih &amp; Ratih</div>
+              <div class="reel-quote">“Kakek nenek pun gampang bukanya!”</div>
+            </div>
+          </div>
+        </div>
+        <div class="reel-card">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5VZta4FyILVa8bXiaX7rH2-8sdhGk6jqedGaIqd7KZXjXdCkTp2vNNNnIWyWT_5cNYArZvCVhWmfvjdOclZdT1SwxW2V01cm3LMaGoCXC97-Tr14GKKFUSX8cMhcL5d3VA28GSuiqpypmsZbmKsh0_PLBwAt3TifzWvIMbCqjxV3lhcBaaA3pJEyTR2Vec_LbdTIqaOgQlqe4KVX7FmN1RlSm-WAxZWYefN7k1vduhGJAVHa-ekSb" alt="Fauzan & Gita video testimoni">
+          <div class="reel-overlay">
+            <div class="reel-top"><span class="reel-volume"><i class="bi bi-volume-up"></i></span></div>
+            <div class="reel-bottom">
+              <div class="reel-play"><i class="bi bi-play-fill"></i></div>
+              <div class="reel-name">Fauzan &amp; Gita</div>
+              <div class="reel-quote">“Hemat anggaran cetak kertas jutaan rupiah!”</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== INSTAGRAM GALLERY ==================== -->
+  <section class="insta-section section-cream">
+    <div class="container">
+      <div class="insta-header">
+        <div class="insta-badge"><i class="bi bi-camera"></i> INSTAGRAM COMMUNITY</div>
+        <h2 class="section-title" style="margin-top:0.6rem;">Galeri Senyum Mempelai Bahagia</h2>
+        <p class="section-desc">Momen candid sakral dan penuh haru yang diabadikan oleh pengantin JanjiSuci dengan tagar <strong style="color:var(--primary);">#JanjiSuciStory</strong> di Instagram <a href="#" style="color:var(--secondary);font-weight:700;text-decoration:underline;">@janjisuci.id</a>.</p>
+      </div>
+      <div class="insta-grid">
+        <div class="insta-card">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_GJbVXtJ2R5b3xLpJKbWwfIZunbi1aczg4RlU-a5evkxc0RqLy3jvrD2K-tlQgYejj9cTdRJeuP8foYwpJrgOmsY1E7yCpgIQvlaaur-PJOOpVOQ4wxSqcKjz4YG6zGI6Qitt68nOwgUKTPDYiv8di1Odn0JC05oG8Y-3xXEUKA7IDtZNye04aG7jg_mtYyd6YynHk72YZpNPjp27c8v6Ol2v9AnwxWdhw_UvowTrbXqNobGFOUky" alt="Momen candid pengantin">
+          <div class="insta-overlay"><p>@nadya.dimas • #JanjiSuciStory</p></div>
+        </div>
+        <div class="insta-card">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBB8UaWaY1o7VD8em8b4ls8i_wLiqMGpBuOKboGdmyqgOgChWJuhr0I-iuN9s3xpVpaFDEn4M7pEDTkGHoyl84-7aULLDpByhMewPO4DbuwO_01rjrSJb8qRg3gBDms7btqOJ6xMomDgTZTmWB2njaHC0ShvllVW5gY9MzBmXwepRjK1urairpttzHDnRpjMBgzvEXy6TKgsXqLJ6aKMi7Rmgow_ChiPnSqKUAkqbW9QiSx_q8GsOk-" alt="Pasangan di bawah arch bunga putih">
+          <div class="insta-overlay"><p>@syifa_reza • #JanjiSuciStory</p></div>
+        </div>
+        <div class="insta-card">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmOFVF-axY_qikMPDjidhvmjHd2CC1HSagaBITrRNRWhEd5eN-ALMb0SNtT-IWKRXUyWwhARdEDpgPNwRJZ8ZNjXg513YRhtKDbUGrkGfr1XhKskN6IcUiDvimhTkad7_m0H9BtLsIgXFOiJDxqpvvfy8U6CUXbC2Z9LqUrEADXlEsCUnTh-QqeqCxUuGMPfM_ZD-ML74l7Voc6r6cEjwUEa1AiAQFMwvuxc2pKZCsZ2hybm5dQCFp" alt="Tamu menampilkan RSVP di smartphone">
+          <div class="insta-overlay"><p>@karina.adit • #JanjiSuciStory</p></div>
+        </div>
+        <div class="insta-card">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuArK0b6hN3NRKzoXNN8qHyH3C-woadP8TH1_-py1on5cKf__cgsfPmc0yTKiJfs0vGSHpD-6U5JWXGbXbRuVi_yhehMj247ctWKTq3Wv_38orfY1mLsxWENW6Rq-NcqTNHZN-BUHWqx6CoMgMfU1DVQbMgRpM1ixZjLElvdiSpIL90mqNXQUZSlxTPUVfK9w5TyBLVm1vLFqy86rms949dieiGf3Fece6njo-2Y39vWM2SnRiTdHMFv" alt="Bride throwing bouquet">
+          <div class="insta-overlay"><p>@amanda_fjr • #JanjiSuciStory</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA ==================== -->
+  <section class="cta-deep" id="buat-undangan">
+    <div class="container">
+      <div class="cta-eyebrow-light"><i class="bi bi-stars"></i> WAKTUNYA BERBAGI KABAR BAHAGIA</div>
+      <h2 class="cta-deep-title">Ingin Momen Pernikahanmu Berkesan Seperti Mereka?</h2>
+      <p class="cta-deep-desc">Buat undangan digital impianmu hanya dalam hitungan menit. Desain eksklusif adat &amp; modern, fitur tamu tanpa batas, dan siap sebar hari ini.</p>
+      <div class="cta-deep-actions">
+        <a href="dashboard.html" class="primary"><span>Buat Undangan Sekarang</span> <i class="bi bi-arrow-right"></i></a>
+        <a href="katalog.html" class="ghost"><i class="bi bi-journal-richtext"></i> <span>Lihat Katalog Tema</span></a>
+      </div>
+      <div class="cta-trust">
+        <span><i class="bi bi-check-circle-fill"></i> Aktif Selamanya</span>
+        <span><i class="bi bi-check-circle-fill"></i> Amplop QRIS 0% Potongan</span>
+        <span><i class="bi bi-check-circle-fill"></i> Garansi Bantuan CS 24 Jam</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand">
+            <div class="brand-icon" style="width:36px;height:36px;font-size:1rem;"><i class="bi bi-heart-fill"></i></div>
+            <span class="brand-name" style="font-size:20px;">JanjiSuci</span>
+          </div>
+          <p>Platform undangan pernikahan digital modern terdepan di Indonesia. Menggabungkan keanggunan adat Nusantara dengan teknologi undangan interaktif terkini.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+            <a href="https://wa.me/628123456789" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Produk &amp; Layanan</h4>
+            <ul>
+              <li><a href="katalog.html">Katalog Tema</a></li>
+              <li><a href="fitur.html">Fitur Lengkap</a></li>
+              <li><a href="harga.html">Paket Harga</a></li>
+              <li><a href="contoh.html">Contoh Undangan</a></li>
+              <li><a href="testimoni.html" style="font-weight:700;color:var(--primary);">Testimoni</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Tentang JanjiSuci</h4>
+            <ul>
+              <li><a href="#">Tentang Kami</a></li>
+              <li><a href="#">Syarat &amp; Ketentuan</a></li>
+              <li><a href="#">Kebijakan Privasi</a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Bantuan Ramah</h4>
+            <p>Punya pertanyaan seputar undanganmu? Tim Customer Care kami siap membantu kapan saja.</p>
+            <a href="https://wa.me/628123456789" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.75rem;padding:0.6rem 1rem;background:var(--status-success);color:#fff;border-radius:0.5rem;font-size:12px;font-weight:700;text-decoration:none;">
+              <i class="bi bi-headset"></i> Hubungi CS WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 JanjiSuci Platform Undangan Pernikahan Digital. Hak cipta dilindungi undang-undang.</p>
+        <small style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--secondary);">Proudly Crafted in Indonesia 🇮🇩</small>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('navToggle');
+    const nav = document.getElementById('mobileNav');
+    btn?.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      btn.innerHTML = open ? '<i class="bi bi-x-lg"></i>' : '<i class="bi bi-list"></i>';
+    });
+    nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      btn.innerHTML = '<i class="bi bi-list"></i>';
+    }));
+    // filter chip toggle
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+        chip.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

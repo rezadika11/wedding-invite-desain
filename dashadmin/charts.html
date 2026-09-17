@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charts — JanjiSuci Nusantara Royale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/css/dashadmin.css" rel="stylesheet">
+<link href="assets/css/theme-switcher.css" rel="stylesheet">
+<style>
+  /* Chart legends */
+  .chart-legend{
+    display:flex;flex-wrap:wrap;gap:14px;
+    margin-top:14px;font-size:12px;color:var(--dash-muted);
+  }
+  .chart-legend .dot{
+    width:10px;height:10px;border-radius:50%;
+    display:inline-block;flex-shrink:0;
+  }
+  .chart-legend .lg-item{display:flex;align-items:center;gap:6px;font-weight:600;}
+  .chart-legend .lg-grow{margin-left:auto;display:flex;align-items:center;gap:6px;}
+  /* Donut legend list */
+  .donut-legend{width:100%;margin-top:14px;display:grid;gap:8px;font-size:12px;}
+  .donut-legend .row{display:flex;justify-content:space-between;align-items:center;}
+  .donut-legend .name{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dash-text);}
+  .donut-legend .pct{font-weight:700;color:var(--dash-primary);}
+  .donut-legend .cnt{font-size:11px;color:var(--dash-muted);font-weight:500;}
+  /* Pure CSS sparkline bars — realtime mock */
+  .spark-bars{
+    display:flex;align-items:flex-end;gap:4px;
+    height:64px;padding:10px 12px;
+    background:linear-gradient(180deg, rgba(27,59,54,0.04) 0%, transparent 100%);
+    border:1px dashed var(--dash-border);border-radius:12px;
+  }
+  .spark-bars span{
+    flex:1;border-radius:3px 3px 0 0;
+    background:linear-gradient(180deg, var(--dash-primary-soft) 0%, #1b3b36 100%);
+    opacity:0.85;
+    animation:sparkPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes sparkPulse{0%,100%{transform:scaleY(1)}50%{transform:scaleY(0.72)}}
+  .spark-bars span:nth-child(odd){animation-delay:.4s}
+  .spark-bars span:nth-child(3n){animation-delay:.8s;background:linear-gradient(180deg,#F5EBD7 0%,#e9c176 100%)}
+  .spark-meta{
+    display:flex;justify-content:space-between;align-items:baseline;
+    margin-top:10px;font-size:12px;color:var(--dash-muted);
+  }
+  .spark-meta strong{font-family:'Inter',sans-serif;font-size:18px;color:var(--dash-primary);}
+  /* Period tabs row */
+  .chart-toolbar{
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+    gap:12px;margin-bottom:16px;
+  }
+  /* Responsive 2-chart rows */
+  .charts-grid{display:grid;gap:16px;grid-template-columns:1fr;}
+  @media(min-width:1024px){.charts-grid{grid-template-columns:1fr 1fr;}}
+  .charts-grid .span-2{grid-column:1/-1;}
+</style>
+</head>
+<body class="dash-body">
+
+<!-- Navbar -->
+<nav class="dash-navbar">
+  <div class="dash-navbar-left">
+    <button class="dash-menu-btn" data-navbar-toggle data-toggle="sidebar" aria-label="Toggle sidebar"><i class="bi bi-list"></i></button>
+    <div class="dash-search">
+      <i class="bi bi-search" style="color:#9aa0a6"></i>
+      <input placeholder="Cari undangan, tamu, tema, transaksi...">
+      <span class="dash-kbd">⌘ K</span>
+    </div>
+  </div>
+  <div class="dash-navbar-right">
+          <div class="dash-dd" id="ddBellWrap">
+        <button class="dash-icon-btn" aria-label="Notifications" data-dd="ddBell"><i class="bi bi-bell"></i><span class="badge">7</span></button>
+        <div class="dash-dd-menu" id="ddBell">
+          <div class="dash-dd-header">Notifikasi <a href="tables.html">Lihat Semua</a></div>
+          <div class="dash-dd-body">
+            <div class="dash-dd-item"><div class="dash-dd-icon emerald"><i class="bi bi-envelope-check"></i></div><div class="dash-dd-text"><p>Pesanan #1284 — Arya &amp; Nabila<span class="dash-dd-time">10 menit lalu • Nusantara Royale</span></p></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><div class="dash-dd-icon rose"><i class="bi bi-people"></i></div><div class="dash-dd-text"><p>RSVP baru: 12 tamu hadir<span class="dash-dd-time">25 menit lalu • Botanical Whispers</span></p></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><div class="dash-dd-icon gold"><i class="bi bi-currency-dollar"></i></div><div class="dash-dd-text"><p>Pembayaran Rp 99.000 diterima<span class="dash-dd-time">1 jam lalu • Reza &amp; Syifa</span></p></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><div class="dash-dd-icon navy"><i class="bi bi-star"></i></div><div class="dash-dd-text"><p>Ulasan 5 bintang dari Dimas &amp; Nadya<span class="dash-dd-time">2 jam lalu • Tema Minimalist</span></p></div><span class="dash-dd-dot read"></span></div>
+          </div>
+          <div class="dash-dd-footer" onclick="dashToast('Semua notifikasi ditandai dibaca')">Tandai semua dibaca</div>
+        </div>
+      </div>
+      <div class="dash-dd" id="ddChatWrap">
+        <button class="dash-icon-btn" aria-label="Messages" data-dd="ddChat"><i class="bi bi-chat-dots"></i><span class="badge" style="background:#2D6A4F">3</span></button>
+        <div class="dash-dd-menu" id="ddChat">
+          <div class="dash-dd-header">Pesan <a href="widgets.html#chat">Buka Chat</a></div>
+          <div class="dash-dd-body">
+            <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=33" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Nabila Saraswati<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Kak, bisa ganti lagunya setelah publish?</span></p><span class="dash-dd-time">5 menit lalu</span></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=26" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Dimas Prasetyo<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Upload galeri prewedding 20 foto ya</span></p><span class="dash-dd-time">32 menit lalu</span></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=14" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Syifa Aulia<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Terima kasih, undangannya cantik banget!</span></p><span class="dash-dd-time">1 jam lalu</span></div><span class="dash-dd-dot read"></span></div>
+          </div>
+          <div class="dash-dd-footer" onclick="location.href='widgets.html#chat'">Lihat semua percakapan</div>
+        </div>
+      </div>
+    <button class="dash-icon-btn" id="dashDarkToggle" aria-label="Toggle dark mode" title="Dark / Light"><i class="bi bi-moon-stars"></i></button>
+    <button class="dash-icon-btn" aria-label="Apps"><i class="bi bi-grid"></i></button>
+        <div class="dash-dd" id="ddProfileWrap">
+      <div class="dash-profile" data-dd="ddProfile" role="button">
+        <img src="https://i.pravatar.cc/100?img=15" alt="Admin">
+        <div class="dash-profile-info">
+          <strong>Admin JanjiSuci</strong><span>Super Admin • Online</span>
+        </div>
+        <i class="bi bi-chevron-down" style="font-size:12px;opacity:0.6"></i>
+      </div>
+      <div class="dash-dd-menu dash-dd-profile-menu" id="ddProfile">
+        <div class="dash-dd-userinfo"><img src="https://i.pravatar.cc/100?img=15"><div><strong>Admin JanjiSuci</strong><span>admin@janjisuci.id</span></div></div>
+        <a class="dash-dd-profile-item" href="profile.html"><i class="bi bi-person"></i> Profil Saya</a>
+        <a class="dash-dd-profile-item" href="profile.html#settings"><i class="bi bi-gear"></i> Pengaturan</a>
+        <a class="dash-dd-profile-item" href="ui-elements.html"><i class="bi bi-layers"></i> Komponen UI</a>
+        <a class="dash-dd-profile-item" href="../index.html"><i class="bi bi-house"></i> Lihat Website</a>
+        <div class="dash-divider" style="margin:6px 0"></div>
+        <a class="dash-dd-profile-item danger" href="../login.html"><i class="bi bi-box-arrow-right"></i> Keluar</a>
+      </div>
+    </div></div>
+</nav>
+
+<!-- Sidebar -->
+<aside class="dash-sidebar" id="dashSidebar">
+  <div class="dash-sidebar-header">
+    <a href="index.html" class="dash-brand">
+      <div class="dash-brand-icon"><i class="bi bi-heart-fill"></i></div>
+      <div class="dash-brand-text">
+        <strong>JanjiSuci</strong><span>Admin Royale</span>
+      </div>
+    </a>
+  </div>
+  <div class="dash-sidebar-scroll">
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Utama</div>
+      <ul class="dash-nav">
+        <li><a href="index.html"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
+        <li><a href="../index.html"><i class="bi bi-house"></i><span>Landing Preview</span><span class="dash-badge gold">Visit</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Manajemen Pernikahan</div>
+      <ul class="dash-nav">
+        <li><a href="widgets.html"><i class="bi bi-collection"></i><span>Widgets & Stats</span><span class="dash-badge success">12</span></a></li>
+        <li><a href="../katalog.html"><i class="bi bi-palette"></i><span>Katalog Tema</span></a></li>
+        <li><a href="../contoh.html"><i class="bi bi-images"></i><span>Contoh Undangan</span></a></li>
+        <li><a href="../dashboard.html"><i class="bi bi-pencil-square"></i><span>Editor Undangan</span></a></li>
+        <li><a href="../preview.html"><i class="bi bi-phone"></i><span>Live Preview</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Komponen — Ala AdminLTE</div>
+      <ul class="dash-nav">
+        <li class="dash-nav-item">
+          <button><i class="bi bi-layers"></i><span>UI Elements</span><i class="bi bi-chevron-right dash-nav-arrow"></i></button>
+          <ul class="dash-subnav">
+            <li><a href="ui-elements.html">General & Cards</a></li>
+            <li><a href="ui-elements.html#buttons">Buttons & Badges</a></li>
+            <li><a href="ui-elements.html#alerts">Alerts & Modals</a></li>
+            <li><a href="ui-elements.html#tabs">Tabs & Timeline</a></li>
+          </ul>
+        </li>
+        <li><a href="forms.html"><i class="bi bi-input-cursor-text"></i><span>Forms</span></a></li>
+        <li><a href="tables.html"><i class="bi bi-table"></i><span>Tables</span></a></li>
+        <li><a href="charts.html" class="active"><i class="bi bi-bar-chart-line"></i><span>Charts</span><span class="dash-badge">3</span></a></li>
+                <li><a href="plugins.html"><i class="bi bi-puzzle"></i><span>Plugins & Addons</span><span class="dash-badge gold">14</span></a></li>
+<li><a href="ui-elements.html#widgets"><i class="bi bi-kanban"></i><span>Kanban & Calendar</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+          <div class="dash-nav-group">
+      <div class="dash-nav-title">Transaksi</div>
+      <ul class="dash-nav">
+        <li><a href="invoice.html"><i class="bi bi-receipt-cutoff"></i><span>Invoice</span><span class="dash-badge success">Baru</span></a></li>
+        <li><a href="tables.html"><i class="bi bi-credit-card"></i><span>Pembayaran</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-title">Halaman</div>
+      <ul class="dash-nav">
+        <li><a href="profile.html"><i class="bi bi-person-circle"></i><span>Profile</span></a></li>
+        <li><a href="../harga.html"><i class="bi bi-credit-card"></i><span>Paket & Harga</span></a></li>
+        <li><a href="../testimoni.html"><i class="bi bi-chat-heart"></i><span>Testimoni</span></a></li>
+        <li><a href="../blog.html"><i class="bi bi-journal-text"></i><span>Blog / Artikel</span></a></li>
+        <li><a href="../login.html"><i class="bi bi-box-arrow-in-right"></i><span>Login</span></a></li>
+        <li><a href="../register.html"><i class="bi bi-person-plus"></i><span>Register</span></a></li>
+        <li><a href="../lupa-password.html"><i class="bi bi-key"></i><span>Lupa Password</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Extras</div>
+      <ul class="dash-nav">
+        <li><a href="ui-elements.html#gallery"><i class="bi bi-image"></i><span>Gallery</span></a></li>
+        <li><a href="ui-elements.html#mailbox"><i class="bi bi-envelope"></i><span>Mailbox</span><span class="dash-badge">5</span></a></li>
+        <li><a href="404.html"><i class="bi bi-exclamation-triangle"></i><span>Error 404</span></a></li>
+        <li><a href="500.html"><i class="bi bi-bug"></i><span>Error 500</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dash-sidebar-footer" style="position:relative;">
+    <button class="dash-user-card" type="button" id="sideUserBtn" aria-expanded="false">
+      <img src="https://i.pravatar.cc/100?img=15" alt="">
+      <div class="dash-user-info"><strong>Admin JanjiSuci</strong><span>admin@janjisuci.id</span></div>
+      <i class="bi bi-chevron-up"></i>
+    </button>
+    <div class="dash-user-menu" id="sideUserMenu">
+      <div class="dash-user-menu-head">
+        <img src="https://i.pravatar.cc/100?img=15" alt="">
+        <div><strong>Admin JanjiSuci</strong><span>Super Admin • Online</span></div>
+      </div>
+      <a class="dash-user-menu-item" href="profile.html"><i class="bi bi-person"></i> Profil Saya</a>
+      <a class="dash-user-menu-item" href="profile.html#settings"><i class="bi bi-gear"></i> Pengaturan Akun</a>
+      <a class="dash-user-menu-item" href="ui-elements.html"><i class="bi bi-layers"></i> Komponen UI</a>
+      <a class="dash-user-menu-item" href="../index.html"><i class="bi bi-house"></i> Lihat Website</a>
+      <div class="dash-divider" style="margin:6px 0"></div>
+      <a class="dash-user-menu-item danger" href="../login.html"><i class="bi bi-box-arrow-right"></i> Keluar</a>
+    </div>
+  </div>
+</aside>
+<div class="dash-overlay" id="dashOverlay"></div>
+
+<!-- Main -->
+<main class="dash-main">
+  <div class="dash-content">
+    <div class="dash-page-header">
+      <div class="dash-title">
+        <div class="dash-breadcrumb"><a href="index.html">Home</a> <i class="bi bi-chevron-right"></i> <span>Charts</span></div>
+        <h1>Grafik & Analitik</h1>
+        <p>Visualisasi tren pesanan undangan, pendapatan, dan distribusi tema pernikahan dengan palet Nusantara Royale Romance.</p>
+      </div>
+      <div class="dash-actions">
+        <button class="dash-btn dash-btn-primary" onclick="openOrderModal()"><i class="bi bi-plus-lg"></i> Tambah Pesanan</button>
+        <button class="dash-btn dash-btn-secondary" onclick="dashToast('Data grafik diperbarui')"><i class="bi bi-arrow-clockwise"></i> Refresh</button>
+        <button class="dash-btn dash-btn-primary" onclick="dashToast('Laporan diekspor ke PDF')"><i class="bi bi-download"></i> Ekspor Laporan</button>
+      </div>
+    </div>
+
+    <!-- Chart stats row -->
+    <div class="dash-grid dash-grid-4">
+      <div class="dash-card dash-stat">
+        <div class="dash-stat-info"><h4>Total Views</h4><div class="value">128,4K</div><div class="trend up"><i class="bi bi-arrow-up-short"></i> +9.4% minggu ini</div></div>
+        <div class="dash-stat-icon emerald"><i class="bi bi-eye"></i></div>
+      </div>
+      <div class="dash-card dash-stat">
+        <div class="dash-stat-info"><h4>CTR Undangan</h4><div class="value">6.8%</div><div class="trend up"><i class="bi bi-arrow-up-short"></i> +1.2% vs lalu</div></div>
+        <div class="dash-stat-icon gold"><i class="bi bi-cursor"></i></div>
+      </div>
+      <div class="dash-card dash-stat">
+        <div class="dash-stat-info"><h4>Avg. Session</h4><div class="value">4m 12s</div><div class="trend up"><i class="bi bi-arrow-up-short"></i> +23 detik</div></div>
+        <div class="dash-stat-icon rose"><i class="bi bi-stopwatch"></i></div>
+      </div>
+      <div class="dash-card dash-stat">
+        <div class="dash-stat-info"><h4>Bounce Rate</h4><div class="value">31.5%</div><div class="trend down"><i class="bi bi-arrow-down-short"></i> -2.8% membaik</div></div>
+        <div class="dash-stat-icon navy"><i class="bi bi-box-arrow-up-right"></i></div>
+      </div>
+    </div>
+
+    <!-- Toolbar periode -->
+    <div class="chart-toolbar" style="margin-top:16px">
+      <div style="font-size:13px;color:var(--dash-muted);display:flex;align-items:center;gap:8px">
+        <i class="bi bi-calendar3-range" style="color:var(--dash-secondary)"></i>
+        Periode data: <strong style="color:var(--dash-primary)">15 Agu – 15 Sep 2026</strong>
+      </div>
+      <div class="dash-tabs" id="periodeTabs">
+        <button class="dash-tab active" onclick="dashToast('Periode: Mingguan dimuat')">Mingguan</button>
+        <button class="dash-tab" onclick="dashToast('Periode: Bulanan dimuat')">Bulanan</button>
+        <button class="dash-tab" onclick="dashToast('Periode: Tahunan dimuat')">Tahunan</button>
+      </div>
+    </div>
+
+    <!-- Charts grid — Chart.js + ApexCharts -->
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+      <span class="dash-badge success"><i class="bi bi-check-circle"></i> Chart.js v4.4</span>
+      <span class="dash-badge warning"><i class="bi bi-graph-up-arrow"></i> ApexCharts v3.54</span>
+      <span style="font-size:11px;color:var(--dash-muted);align-self:center"><i class="bi bi-palette"></i> Palet Royale: #1b3b36 #abcec6 #e9c176 #83523d</span>
+    </div>
+    <div class="charts-grid">
+
+      <!-- 1. Chart.js — Line: Tren Pesanan 30 Hari -->
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <h3><i class="bi bi-graph-up"></i> Chart.js — Tren Pesanan 30 Hari</h3>
+          <span class="dash-badge success"><i class="bi bi-arrow-up-short"></i> +12% growth</span>
+        </div>
+        <div class="dash-card-body">
+          <div style="height:260px;position:relative"><canvas id="chartjsLine"></canvas></div>
+          <div class="chart-legend">
+            <span class="lg-item"><span class="dot" style="background:#1b3b36"></span> Pesanan Baru</span>
+            <span class="lg-item"><span class="dot" style="background:#abcec6"></span> Preview Tema</span>
+            <span class="lg-item"><span class="dot" style="background:#e9c176"></span> RSVP Masuk</span>
+            <span class="lg-item lg-grow"><i class="bi bi-info-circle" style="color:var(--dash-secondary)"></i> Chart.js line • tension 0.4</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Chart.js — Bar: Pendapatan per Bulan -->
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <h3><i class="bi bi-bar-chart-line"></i> Chart.js — Pendapatan per Bulan</h3>
+          <span style="font-size:12px;color:var(--dash-muted)">dalam juta Rupiah</span>
+        </div>
+        <div class="dash-card-body">
+          <div style="height:260px;position:relative"><canvas id="chartjsBar"></canvas></div>
+          <div class="chart-legend">
+            <span class="lg-item"><span class="dot" style="background:#c7eae2"></span> Paket Reguler</span>
+            <span class="lg-item"><span class="dot" style="background:#1b3b36"></span> Paket Royale (peak)</span>
+            <span class="lg-item lg-grow"><i class="bi bi-emoji-smile"></i> Chart.js bar • borderRadius 6</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Chart.js — Doughnut: Distribusi Tema -->
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <h3><i class="bi bi-pie-chart"></i> Chart.js — Distribusi Tema</h3>
+          <button class="dash-icon-btn" style="width:32px;height:32px" onclick="dashToast('Opsi distribusi tema')"><i class="bi bi-three-dots"></i></button>
+        </div>
+        <div class="dash-card-body" style="display:grid;place-items:center">
+          <div style="height:200px;width:200px;position:relative"><canvas id="chartjsDoughnut"></canvas></div>
+          <div class="donut-legend">
+            <div class="row">
+              <span class="name"><span class="dot" style="background:#1b3b36"></span> Royale</span>
+              <span><span class="pct">35%</span> <span class="cnt">• 449 pesanan</span></span>
+            </div>
+            <div class="row">
+              <span class="name"><span class="dot" style="background:#abcec6"></span> Minimalis</span>
+              <span><span class="pct">25%</span> <span class="cnt">• 321 pesanan</span></span>
+            </div>
+            <div class="row">
+              <span class="name"><span class="dot" style="background:#e9c176"></span> Botanical</span>
+              <span><span class="pct">20%</span> <span class="cnt">• 256 pesanan</span></span>
+            </div>
+            <div class="row">
+              <span class="name"><span class="dot" style="background:#83523d"></span> Syar'i</span>
+              <span><span class="pct">20%</span> <span class="cnt">• 258 pesanan</span></span>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--dash-muted);margin-top:8px"><i class="bi bi-info-circle"></i> Chart.js doughnut • cutout 62%</div>
+        </div>
+      </div>
+
+      <!-- 4. ApexCharts — Area perbandingan (selain Chart.js) -->
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <h3><i class="bi bi-graph-up-arrow"></i> ApexCharts — Kunjungan vs RSVP (Area)</h3>
+          <span class="dash-badge warning">ApexCharts</span>
+        </div>
+        <div class="dash-card-body">
+          <div id="apexAreaCharts" style="min-height:260px"></div>
+          <div class="chart-legend">
+            <span class="lg-item"><span class="dot" style="background:#1b3b36"></span> Kunjungan Tamu</span>
+            <span class="lg-item"><span class="dot" style="background:#c5a059"></span> RSVP Masuk</span>
+            <span class="lg-item lg-grow"><i class="bi bi-stars" style="color:var(--dash-secondary)"></i> ApexCharts area • gradient fill</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Realtime Preview placeholder -->
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <h3><i class="bi bi-broadcast"></i> Realtime Preview</h3>
+          <span class="dash-badge warning"><i class="bi bi-hourglass-split"></i> Segera Hadir</span>
+        </div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 12px">
+            Slot untuk integrasi <strong style="color:var(--dash-primary)">uPlot</strong> atau <strong style="color:var(--dash-primary)">Flot</strong> —
+            menampilkan kunjungan undangan per-detik saat acara akad berlangsung. Mock sparkline di bawah murni CSS sebagai preview UX.
+          </p>
+          <div class="spark-bars" aria-hidden="true">
+            <span style="height:40%"></span><span style="height:65%"></span><span style="height:52%"></span>
+            <span style="height:78%"></span><span style="height:60%"></span><span style="height:88%"></span>
+            <span style="height:70%"></span><span style="height:95%"></span><span style="height:82%"></span>
+            <span style="height:58%"></span><span style="height:74%"></span><span style="height:90%"></span>
+            <span style="height:66%"></span><span style="height:84%"></span><span style="height:72%"></span>
+            <span style="height:96%"></span><span style="height:80%"></span><span style="height:62%"></span>
+          </div>
+          <div class="spark-meta">
+            <span><i class="bi bi-activity" style="color:var(--dash-success)"></i> Tamu aktif <strong>312</strong></span>
+            <span>latency ~40ms</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Insight strip -->
+      <div class="dash-card span-2" style="background:var(--dash-primary-container);border-color:var(--dash-primary-container)">
+        <div class="dash-card-body" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;color:#fff">
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.12);display:grid;place-items:center;color:var(--dash-gold);flex-shrink:0"><i class="bi bi-lightbulb"></i></div>
+            <div><div style="font-weight:700;font-size:13px">Insight Royale</div><div style="font-size:12px;color:rgba(255,255,255,0.72)">Tema Royale konversi 2x lebih tinggi saat dipreview lewat katalog.</div></div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.12);display:grid;place-items:center;color:var(--dash-gold);flex-shrink:0"><i class="bi bi-geo-alt"></i></div>
+            <div><div style="font-weight:700;font-size:13px">Wilayah Teratas</div><div style="font-size:12px;color:rgba(255,255,255,0.72)">Jakarta (38%), Bandung (21%), Surabaya (17%) dari total views.</div></div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.12);display:grid;place-items:center;color:var(--dash-gold);flex-shrink:0"><i class="bi bi-clock-history"></i></div>
+            <div><div style="font-weight:700;font-size:13px">Jam Ramai</div><div style="font-size:12px;color:rgba(255,255,255,0.72)">Puncak undangan dibuka 19.00–21.00 WIB, siapkan CDN saat itu.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="dash-footer">
+    <div>© 2026 JanjiSuci DashAdmin • Nusantara Royale Romance • v1.0.0</div>
+    <div style="display:flex;gap:16px"><a href="../index.html">Landing</a> <a href="profile.html">Profile</a> <span>Dibuat di Indonesia 🇮🇩</span></div>
+  </footer>
+</main>
+
+<button class="dash-scrolltop" id="dashScrollTop"><i class="bi bi-arrow-up"></i></button>
+
+<script src="assets/plugins/vendor/chartjs/chart.umd.min.js"></script>
+<script src="assets/plugins/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="assets/js/dashadmin.js"></script>
+<script>
+(function(){
+  // Periode tabs
+  document.querySelectorAll('#periodeTabs .dash-tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.querySelectorAll('#periodeTabs .dash-tab').forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+
+  // Chart.js global — Royale
+  if(window.Chart){
+    Chart.defaults.font.family = 'Inter, sans-serif';
+    Chart.defaults.color = '#414846';
+    Chart.defaults.borderColor = '#E8DFD3';
+  }
+
+  // 1. Chart.js Line — Tren Pesanan 30 Hari
+  (function(){
+    const el = document.getElementById('chartjsLine');
+    if(!el || !window.Chart) return;
+    const labels = ['15 Agu','18 Agu','21 Agu','24 Agu','27 Agu','30 Agu','02 Sep','05 Sep','08 Sep','12 Sep'];
+    new Chart(el,{
+      type:'line',
+      data:{
+        labels,
+        datasets:[
+          {label:'Pesanan Baru', data:[12,19,15,22,18,26,24,28,30,34], borderColor:'#1b3b36', backgroundColor:'rgba(27,59,54,0.08)', tension:0.4, fill:true, pointRadius:3, pointBackgroundColor:'#1b3b36', borderWidth:2},
+          {label:'Preview Tema', data:[20,25,22,30,28,35,32,40,38,42], borderColor:'#abcec6', backgroundColor:'rgba(171,206,198,0.12)', tension:0.4, fill:true, pointRadius:0, borderWidth:2, borderDash:[4,4]},
+          {label:'RSVP Masuk', data:[8,12,10,15,14,18,16,20,19,24], borderColor:'#e9c176', backgroundColor:'rgba(233,193,118,0.10)', tension:0.4, fill:true, pointRadius:0, borderWidth:2}
+        ]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        interaction:{mode:'index', intersect:false},
+        plugins:{legend:{display:false}, tooltip:{backgroundColor:'#1b3b36', titleFont:{weight:'700'}, bodyFont:{weight:'500'}}},
+        scales:{
+          x:{grid:{display:false}, ticks:{font:{size:11}, color:'#717976'}},
+          y:{grid:{color:'#f3f4f6', borderDash:[4,4]}, ticks:{font:{size:11}, color:'#717976'}, beginAtZero:true}
+        }
+      }
+    });
+  })();
+
+  // 2. Chart.js Bar — Pendapatan per Bulan
+  (function(){
+    const el = document.getElementById('chartjsBar');
+    if(!el || !window.Chart) return;
+    new Chart(el,{
+      type:'bar',
+      data:{
+        labels:['Apr','Mei','Jun','Jul','Agu','Sep'],
+        datasets:[
+          {label:'Paket Reguler', data:[18,22,28,26,32,30], backgroundColor:'#c7eae2', borderRadius:6, barPercentage:0.55, categoryPercentage:0.7},
+          {label:'Paket Royale', data:[12,16,22,30,45,52], backgroundColor:'#1b3b36', borderRadius:6, barPercentage:0.55, categoryPercentage:0.7}
+        ]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{legend:{display:false}, tooltip:{backgroundColor:'#1b3b36'}},
+        scales:{
+          x:{grid:{display:false}, ticks:{font:{size:11}, color:'#717976'}},
+          y:{grid:{color:'#f3f4f6'}, ticks:{callback:v=>v+'jt', font:{size:11}, color:'#717976'}, beginAtZero:true}
+        }
+      }
+    });
+  })();
+
+  // 3. Chart.js Doughnut — Distribusi Tema
+  (function(){
+    const el = document.getElementById('chartjsDoughnut');
+    if(!el || !window.Chart) return;
+    new Chart(el,{
+      type:'doughnut',
+      data:{
+        labels:['Royale','Minimalis','Botanical','Syar\'i'],
+        datasets:[{data:[35,25,20,20], backgroundColor:['#1b3b36','#abcec6','#e9c176','#83523d'], borderWidth:0, hoverOffset:6}]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        cutout:'62%',
+        plugins:{
+          legend:{display:false},
+          tooltip:{backgroundColor:'#1b3b36', callbacks:{label:ctx=>` ${ctx.label}: ${ctx.parsed}%`}}
+        }
+      },
+      plugins:[{
+        id:'centerText',
+        beforeDraw(chart){
+          const {ctx, chartArea:{left, right, top, bottom}} = chart;
+          const cx = (left+right)/2, cy = (top+bottom)/2;
+          ctx.save();
+          ctx.font = '700 16px Inter, sans-serif';
+          ctx.fillStyle = '#032521';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('100%', cx, cy);
+          ctx.restore();
+        }
+      }]
+    });
+  })();
+
+  // 4. ApexCharts Area — perbandingan (selain Chart.js)
+  (function(){
+    const el = document.querySelector('#apexAreaCharts');
+    if(!el || !window.ApexCharts) return;
+    const days=['Sen','Sel','Rab','Kam','Jum','Sab','Min'];
+    new ApexCharts(el,{
+      chart:{type:'area', height:260, fontFamily:'Inter, sans-serif', toolbar:{show:false}, zoom:{enabled:false}},
+      series:[
+        {name:'Kunjungan Tamu', data:[320,410,380,520,610,880,760]},
+        {name:'RSVP Masuk', data:[120,180,150,240,290,410,360]}
+      ],
+      colors:['#1b3b36','#c5a059'],
+      stroke:{curve:'smooth', width:3},
+      fill:{type:'gradient', gradient:{opacityFrom:.35, opacityTo:0}},
+      dataLabels:{enabled:false},
+      xaxis:{categories:days, axisBorder:{show:false}, axisTicks:{show:false}},
+      yaxis:{labels:{formatter:v=>v>=1000?(v/1000)+'rb':v}},
+      grid:{borderColor:'#eef0f2', strokeDashArray:4},
+      legend:{position:'top', horizontalAlign:'right'},
+      tooltip:{y:{formatter:v=>v+' kunjungan'}}
+    }).render();
+  })();
+})();
+</script>
+<script src="assets/js/theme-switcher.js"></script>
+</body>
+</html>

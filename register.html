@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daftar — JanjiSuci</title>
+<meta name="description" content="Daftar akun JanjiSuci — buat undangan pernikahan digital mewah dalam 5 menit, aktif selamanya.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body class="auth-page">
+
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <!-- Visual - Gambar Saja -->
+    <div class="auth-visual auth-visual--image">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5pY3lIbdiFW0kVZofCRBpg3kr1aTNglddF_qDMM3nATz4q0kQ6tTcJWOABDKdnOJ9et4SWcsii0Wum7DXLf7PhSYDUFH8sSKJrCJcXKbXn-OYjL4MEedg9hBY8J_eiUz7iDqpvf-BY_FQ2HRxhUu2i_xeOiKrDljYqErnAyBUZcG4FGzEHE5rpLvOxKt1T75N3yGe-TaAKuaZ5tM5AjPqXEa_q3VMxeZsbJLW3myNDtmbnzvAGbBv" alt="Nusantara Royale - Pasangan pengantin bahagia">
+      <div class="auth-visual-overlay" aria-hidden="true"></div>
+      <span class="auth-visual-badge"><i class="bi bi-stars" style="color:var(--secondary);"></i> Gratis • Aktif Selamanya</span>
+    </div>
+
+    <!-- Form -->
+    <div class="auth-form-side">
+      <div class="auth-eyebrow"><i class="bi bi-person-plus"></i> Buat Akun Baru</div>
+      <h1 class="auth-title">Daftar Gratis — Selamanya</h1>
+      <p class="auth-subtitle">Sudah punya akun? <a href="login.html">Masuk di sini</a> • Butuh bantuan? <a href="https://wa.me/628123456789">WhatsApp CS</a></p>
+
+      <form class="auth-form" onsubmit="handleRegister(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Nama Lengkap</label>
+            <div class="input-wrap">
+              <i class="bi bi-person input-icon"></i>
+              <input id="name" type="text" placeholder="Nama Anda" required autocomplete="name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="partner">Nama Pasangan</label>
+            <div class="input-wrap">
+              <i class="bi bi-heart input-icon"></i>
+              <input id="partner" type="text" placeholder="Nama pasangan" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="emailR">Email</label>
+          <div class="input-wrap">
+            <i class="bi bi-envelope input-icon"></i>
+            <input id="emailR" type="email" placeholder="nama@contoh.com" required autocomplete="email">
+          </div>
+          <span class="form-hint">Kami kirim tautan verifikasi & info undangan ke email ini.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Nomor WhatsApp</label>
+          <div class="input-wrap">
+            <i class="bi bi-whatsapp input-icon"></i>
+            <input id="phone" type="tel" placeholder="08xx xxxx xxxx" required autocomplete="tel" pattern="[0-9+\s-]{9,}">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pass">Kata Sandi</label>
+            <div class="input-wrap has-right">
+              <i class="bi bi-lock input-icon"></i>
+              <input id="pass" type="password" placeholder="Minimal 8 karakter" required autocomplete="new-password" oninput="checkStrength(this.value)">
+              <button type="button" class="input-action" onclick="togglePass('pass',this)"><i class="bi bi-eye"></i></button>
+            </div>
+            <div class="strength-bar"><span class="strength-seg" id="s1"></span><span class="strength-seg" id="s2"></span><span class="strength-seg" id="s3"></span><span class="strength-seg" id="s4"></span></div>
+            <span class="form-hint" id="strengthText">Kekuatan sandi: —</span>
+          </div>
+          <div class="form-group">
+            <label for="pass2">Konfirmasi Sandi</label>
+            <div class="input-wrap has-right">
+              <i class="bi bi-lock-fill input-icon"></i>
+              <input id="pass2" type="password" placeholder="Ulangi sandi" required autocomplete="new-password">
+              <button type="button" class="input-action" onclick="togglePass('pass2',this)"><i class="bi bi-eye"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="referral" style="font-size:12px;font-weight:500;color:var(--on-surface-variant);">Kode Referral (opsional)</label>
+          <div class="input-wrap">
+            <i class="bi bi-tag input-icon"></i>
+            <input id="referral" type="text" placeholder="Jika ada, kosongkan jika tidak">
+          </div>
+        </div>
+
+        <label class="checkbox-label" style="align-items:flex-start;">
+          <input type="checkbox" id="agree" required>
+          <span style="font-size:12px;line-height:18px;color:var(--on-surface-variant);">Saya menyetujui <a href="#" style="color:var(--primary);font-weight:700;text-decoration:underline;">Syarat &amp; Ketentuan</a> dan <a href="#" style="color:var(--primary);font-weight:700;text-decoration:underline;">Kebijakan Privasi</a> JanjiSuci, serta mengizinkan pengiriman info promo via WhatsApp/Email. <span style="color:var(--error);">*</span></span>
+        </label>
+
+        <button type="submit" class="btn-auth btn-auth-primary" id="regBtn">
+          <span>Buat Akun &amp; Mulai Gratis</span>
+          <i class="bi bi-arrow-right"></i>
+        </button>
+
+        <div class="auth-divider">atau daftar dengan</div>
+        <button type="button" class="btn-auth btn-auth-google" onclick="alert('Demo: Daftar dengan Google')">
+          <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" alt="" style="width:18px;height:18px;object-fit:contain;"> Lanjutkan dengan Google
+        </button>
+
+        <p class="auth-note">Sudah punya akun? <a href="login.html">Masuk di sini</a> • <a href="lupa-password.html">Lupa kata sandi?</a></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+function togglePass(id,btn){
+  const el=document.getElementById(id);
+  const ic=btn.querySelector('i');
+  const isPass=el.type==='password';
+  el.type=isPass?'text':'password';
+  ic.className=isPass?'bi bi-eye-slash':'bi bi-eye';
+}
+function checkStrength(v){
+  const segs=[document.getElementById('s1'),document.getElementById('s2'),document.getElementById('s3'),document.getElementById('s4')];
+  const txt=document.getElementById('strengthText');
+  let score=0;
+  if(v.length>=6) score++;
+  if(v.length>=8 && /[A-Z]/.test(v) && /[a-z]/.test(v)) score++;
+  if(/[0-9]/.test(v) && /[^A-Za-z0-9]/.test(v)) score++;
+  if(v.length>=10) score++;
+  segs.forEach((s,i)=> s.classList.toggle('on', i < score));
+  const labels=['—','Lemah','Cukup','Kuat','Sangat Kuat'];
+  const colors=['var(--outline)','var(--error)','#e9a33a','var(--status-success)','var(--status-success)'];
+  txt.textContent='Kekuatan sandi: '+(v?labels[score]:'—');
+  txt.style.color=v?colors[score]:'var(--outline)';
+}
+function handleRegister(e){
+  e.preventDefault();
+  const p=document.getElementById('pass').value;
+  const p2=document.getElementById('pass2').value;
+  if(p!==p2){alert('Konfirmasi kata sandi tidak cocok.');return;}
+  if(!document.getElementById('agree').checked){alert('Anda harus menyetujui Syarat & Ketentuan.');return;}
+  const btn=document.getElementById('regBtn');
+  btn.innerHTML='<span class="bi bi-arrow-repeat" style="animation:spin 0.8s linear infinite;display:inline-block;"></span> Membuat akun...';
+  btn.disabled=true;
+  setTimeout(()=>{
+    btn.innerHTML='<i class="bi bi-check-circle-fill"></i> Berhasil — Mengalihkan...';
+    setTimeout(()=> location.href='dashboard.html', 900);
+  },1200);
+}
+</script>
+<style>@keyframes spin{to{transform:rotate(360deg);}} .show-sm{display:none;}@media(min-width:640px){.show-sm{display:inline;}}</style>
+</body>
+</html>

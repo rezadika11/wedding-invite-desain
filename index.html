@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JanjiSuci — Platform Undangan Pernikahan Digital Mewah #1 di Indonesia</title>
+  <meta name="description" content="Bikin undangan pernikahan digital mewah, praktis & siap kirim dalam 5 menit. RSVP otomatis, amplop digital QRIS, musik romantis, galeri tanpa batas.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Native CSS -->
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="JanjiSuci beranda">
+        <div class="brand-icon"><i class="bi bi-heart-fill"></i></div>
+        <div class="brand-text">
+          <span class="brand-name">JanjiSuci</span>
+          <span class="brand-sub">Wedding Invitation</span>
+        </div>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Navigasi utama">
+        <a href="fitur.html" class="nav-link">Fitur</a>
+        <a href="katalog.html" class="nav-link">Katalog Tema</a>
+        <a href="harga.html" class="nav-link">Harga</a>
+        <a href="contoh.html" class="nav-link">Contoh Undangan</a>
+        <a href="testimoni.html" class="nav-link">Testimoni</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="login.html" class="btn btn-ghost">Masuk</a>
+        <a href="dashboard.html" class="btn btn-primary">
+          <span>Buat Undangan Sekarang</span>
+          <i class="bi bi-arrow-right"></i>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Navigasi mobile">
+      <a href="fitur.html">Fitur</a>
+      <a href="katalog.html">Katalog Tema</a>
+      <a href="harga.html">Harga</a>
+      <a href="contoh.html">Contoh Undangan</a>
+      <a href="testimoni.html">Testimoni</a>
+      <a href="blog.html">Blog</a>
+      <a href="login.html">Masuk</a>
+      <a href="dashboard.html">Buat Undangan Sekarang</a>
+    </nav>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero">
+    <div class="hero-bg-glow hero-glow-1" aria-hidden="true"></div>
+    <div class="hero-bg-glow hero-glow-2" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Left -->
+        <div class="hero-content">
+          <div class="social-proof">
+            <div class="avatar-stack" aria-hidden="true">
+              <span>AD</span><span>RN</span><span>FK</span>
+            </div>
+            <div class="rating">
+              <i class="bi bi-star-fill"></i>
+              <span class="rating-text">4.9/5 dari 12.400+ ulasan pasangan pengantin</span>
+            </div>
+          </div>
+
+          <h1 class="hero-title">
+            Bikin Undangan Pernikahan Digital Mewah, Praktis &amp; Siap Kirim dalam <span class="accent">5 Menit</span>
+          </h1>
+          <p class="hero-desc">
+            Bagikan momen bahagiamu dengan desain elegan, fitur RSVP otomatis WhatsApp, amplop digital QRIS, musik romantis, dan galeri foto tanpa batas. Sudah dipercaya lebih dari 75.000+ pasangan di seluruh Indonesia.
+          </p>
+
+          <div class="hero-cta">
+            <a href="dashboard.html" class="btn btn-primary btn-large">
+              <i class="bi bi-calendar-plus"></i>
+              <span>Coba Gratis Sekarang</span>
+            </a>
+            <a href="preview.html" class="btn btn-secondary btn-large">
+              <i class="bi bi-eye"></i>
+              <span>Lihat Demo Undangan</span>
+            </a>
+          </div>
+
+          <div class="trust-row">
+            <div class="trust-item"><i class="bi bi-shield-check"></i> 100% Tanpa Iklan</div>
+            <div class="trust-item"><i class="bi bi-lightning"></i> Instan Aktif</div>
+            <div class="trust-item"><i class="bi bi-lock"></i> Privasi Terjaga</div>
+          </div>
+        </div>
+
+        <!-- Right: Phone Mockup -->
+        <div class="hero-visual">
+          <div class="phone-shell">
+            <div class="phone-notch" aria-hidden="true">
+              <div class="notch-dot"></div><div class="notch-bar"></div>
+            </div>
+            <div class="phone-screen">
+              <div class="music-disc" aria-hidden="true"><i class="bi bi-music-note-beamed"></i></div>
+
+              <div class="invite-header">
+                <span class="invite-label">Walimatul 'Ursy</span>
+                <span class="invite-subtitle">The Wedding of</span>
+                <h3 class="invite-names">Arya &amp; Nabila</h3>
+                <p class="invite-date">Minggu, 24 Agustus 2025</p>
+              </div>
+
+              <div class="phone-image">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5pY3lIbdiFW0kVZofCRBpg3kr1aTNglddF_qDMM3nATz4q0kQ6tTcJWOABDKdnOJ9et4SWcsii0Wum7DXLf7PhSYDUFH8sSKJrCJcXKbXn-OYjL4MEedg9hBY8J_eiUz7iDqpvf-BY_FQ2HRxhUu2i_xeOiKrDljYqErnAyBUZcG4FGzEHE5rpLvOxKt1T75N3yGe-TaAKuaZ5tM5AjPqXEa_q3VMxeZsbJLW3myNDtmbnzvAGbBv" alt="Pasangan pengantin Indonesia dengan busana sage dan champagne di paviliun botanical">
+                <div class="phone-image-caption">
+                  <span style="display:flex;align-items:center;gap:4px;"><i class="bi bi-heart-fill" style="font-size:10px;"></i> Keluarga Besar Sastrowardoyo</span>
+                </div>
+              </div>
+
+              <div class="countdown-card">
+                <span class="countdown-label">Menghitung Hari Bahagia</span>
+                <div class="countdown-grid">
+                  <div class="countdown-box"><span class="countdown-num">142</span><span class="countdown-unit">Hari</span></div>
+                  <div class="countdown-box"><span class="countdown-num">18</span><span class="countdown-unit">Jam</span></div>
+                  <div class="countdown-box"><span class="countdown-num">45</span><span class="countdown-unit">Menit</span></div>
+                  <div class="countdown-box"><span class="countdown-num">20</span><span class="countdown-unit">Detik</span></div>
+                </div>
+              </div>
+
+              <div class="invite-cta">
+                <button class="btn-wax">
+                  <span class="wax-seal">✦</span>
+                  <span>Buka Undangan Digital</span>
+                </button>
+                <span class="invite-note">Kepada Yth. Bapak/Ibu/Saudara/i di Tempat</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="floating-tag" aria-hidden="true">
+            <div class="floating-icon"><i class="bi bi-qr-code"></i></div>
+            <div>
+              <p class="floating-title">Amplop QRIS Instan</p>
+              <p class="floating-sub">Langsung cair ke rekening mempelai</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== VALUE PROP ==================== -->
+  <section class="section section-white">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Keunggulan Eksklusif</span>
+        <h2 class="section-title">Mengapa 75.000+ Pengantin Memilih JanjiSuci?</h2>
+        <p class="section-desc">Dirancang khusus untuk menghadirkan kenyamanan pengantin dan kesan mewah bagi seluruh tamu undangan Anda.</p>
+      </div>
+
+      <div class="value-grid">
+        <div class="value-card">
+          <div class="value-icon gold"><i class="bi bi-infinity"></i></div>
+          <h3>Aktif Selamanya</h3>
+          <p>Undangan digital Anda tidak akan pernah dihapus atau kedaluwarsa. Jadikan sebagai memorabilia cinta yang abadi selamanya.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon mint"><i class="bi bi-people"></i></div>
+          <h3>Tanpa Batas Tamu</h3>
+          <p>Kirim undangan ke 500, 1.000, bahkan 10.000 tamu tanpa biaya tambahan kuota sepeserpun. Bebas sepuasnya!</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon blush"><i class="bi bi-send"></i></div>
+          <h3>WhatsApp Blaster Otomatis</h3>
+          <p>Format pesan otomatis tersusun rapi dengan nama penerima personal (<em>Kepada Yth...</em>), siap kirim sekali klik.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon sage"><i class="bi bi-headset"></i></div>
+          <h3>Dukungan CS 24/7 Ramah</h3>
+          <p>Tim konsultan JanjiSuci selalu siap memandu pengisian data hingga undangan tampil sempurna sampai hari-H Anda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FITUR BENTO ==================== -->
+  <section class="section section-cream" id="fitur">
+    <div class="container">
+      <div class="section-header--split section-header" style="margin-bottom:3rem;">
+        <div class="section-header__text">
+          <span class="eyebrow">Fitur Canggih &amp; Terlengkap</span>
+          <h2 class="section-title">Semua yang Kamu Butuhkan Dalam 1 Undangan</h2>
+        </div>
+        <p class="section-desc" style="max-width:26rem;">Dirancang dengan teknologi interaktif modern, mempermudah komunikasi dengan para tamu terhormat secara elegan.</p>
+      </div>
+
+      <div class="bento">
+        <!-- Bento 1: 7 cols -->
+        <div class="bento-card bento-7">
+          <div class="bento-head">
+            <span class="badge-gold">0% Potongan Biaya</span>
+            <i class="bi bi-wallet2" style="color:var(--secondary);font-size:1.4rem;"></i>
+          </div>
+          <h3>Amplop Digital &amp; Kado Cashless</h3>
+          <p style="margin-bottom:1.25rem;">Tamu yang berhalangan hadir dapat mengirimkan tanda kasih langsung ke rekening mempelai (BCA, Mandiri, BNI, BRI) atau scan QRIS instan tanpa biaya potongan sepeserpun.</p>
+          <div class="bento-foot">
+            <div class="bank-pills">
+              <span class="bank-pill">BCA</span>
+              <span class="bank-pill">Mandiri</span>
+              <span class="bank-pill qris">QRIS</span>
+              <span class="bank-pill ewallet">DANA/OVO</span>
+            </div>
+            <span class="copy-link">Salin No. Rekening Sekali Klik <i class="bi bi-copy"></i></span>
+          </div>
+        </div>
+
+        <!-- Bento 2: 5 cols -->
+        <div class="bento-card bento-5">
+          <div class="bento-icon green"><i class="bi bi-chat-dots"></i></div>
+          <h3 class="small">RSVP &amp; Buku Tamu Real-time</h3>
+          <p>Konfirmasi kehadiran jumlah porsi katering langsung rekap otomatis, dan notifikasi konfirmasi hadir dapat diteruskan langsung ke WhatsApp panitia.</p>
+          <div class="bento-divider" style="margin-top:1.25rem;">
+            <span>Rekap Excel Tersedia</span>
+            <span style="color:var(--status-success);font-weight:600;display:flex;align-items:center;gap:6px;"><span class="live-dot"></span> Sinkron Live</span>
+          </div>
+        </div>
+
+        <!-- Bento 3: 4 cols -->
+        <div class="bento-card bento-4">
+          <div class="bento-icon mint2"><i class="bi bi-geo-alt"></i></div>
+          <h3 class="small">Petunjuk Arah Google Maps</h3>
+          <p>Tamu tidak akan tersesat. Terhubung presisi ke Google Maps, Waze, dan petunjuk venue gedung atau kediaman Anda.</p>
+          <a href="#" class="bento-link" style="margin-top:1rem;">Buka Navigasi Langsung <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+
+        <!-- Bento 4: 4 cols -->
+        <div class="bento-card bento-4">
+          <div class="bento-icon blush2"><i class="bi bi-images"></i></div>
+          <h3 class="small">Galeri &amp; Video Sinematik</h3>
+          <p>Pamerkan momen prewedding terbaik dengan lightbox jernih beresolusi tinggi dan integrasi video YouTube/Vimeo lancar.</p>
+          <span class="bento-link" style="margin-top:1rem;">Mendukung hingga 20+ Foto <i class="bi bi-check-circle"></i></span>
+        </div>
+
+        <!-- Bento 5: 4 cols -->
+        <div class="bento-card bento-4">
+          <div class="bento-icon gold2"><i class="bi bi-clock-history"></i></div>
+          <h3 class="small">Timeline Kisah Cinta</h3>
+          <p>Ceritakan perjalanan indah kalian mulai dari pertemuan pertama, proses lamaran, hingga mantap melangkah ke pelaminan.</p>
+          <span class="bento-link" style="margin-top:1rem;">Desain Garis Waktu Cantik <i class="bi bi-book"></i></span>
+        </div>
+
+        <!-- Bento 6: 12 cols dark -->
+        <div class="bento-card bento-12 bento-dark">
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <div class="bento-dark-icon"><i class="bi bi-calendar-event"></i></div>
+            <div>
+              <h4>Simpan ke Google Calendar &amp; Musik Latar Romantis</h4>
+              <p>Tamu dapat menambahkan pengingat otomatis ke smartphone &amp; menikmati koleksi lagu pernikahan romantis resmi tanpa copyright issues.</p>
+            </div>
+          </div>
+          <a href="fitur.html" class="btn" style="flex-shrink:0;margin-top:1rem;">Jelajahi Semua Fitur</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== KATALOG ==================== -->
+  <section class="section section-surface" id="katalog">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Desain Eksklusif Terkini</span>
+        <h2 class="section-title">Ratusan Pilihan Tema Elegan Sesuai Selera &amp; Adat Anda</h2>
+        <p class="section-desc">Dari kemegahan adat nusantara hingga sentuhan minimalis modern bertaraf internasional.</p>
+      </div>
+
+      <div class="filter-chips" role="tablist" aria-label="Filter kategori tema">
+        <button class="chip active" role="tab" aria-selected="true">Semua (48)</button>
+        <button class="chip" role="tab">Adat Nusantara (Jawa, Minang, Sunda, Bali)</button>
+        <button class="chip" role="tab">Minimalis Modern</button>
+        <button class="chip" role="tab">Floral Aesthetic</button>
+        <button class="chip" role="tab">Luxury Gold &amp; Emerald</button>
+        <button class="chip" role="tab">Syar'i / Islami</button>
+      </div>
+
+      <div class="theme-grid" id="contoh">
+        <!-- Card 1 -->
+        <article class="theme-card">
+          <div class="theme-media">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9iAhQ4ZJFxFdPueUQJTsDkLADh8uERsMYxzOLT3HgFfVeiwkX_rg_HXdTgClhhl7n-bKBi7K4dOqJ_WPVkW2z1YPHSNWBpF4TJG-fgL8JXQ2CAs2h7Jb7TzYQCPSIl93JQRjayyb8USZN9Ax_vATYiTfv6GZpHE_RBq_Vf9CwImM3OM13I3GHOG76XmS922A-IAUXuodS4-Bf0yrUnw3_3i0JQ98kiyeNFsxoHUz11rArbIEN4gRD" alt="Preview tema Nusantara Royale dengan ornamen Songket emas dan emerald">
+            <span class="theme-badge populer">Terpopuler</span>
+            <span class="theme-music"><i class="bi bi-music-note-beamed"></i></span>
+          </div>
+          <div class="theme-body">
+            <span class="theme-category">Adat Nusantara</span>
+            <h3 class="theme-title">Nusantara Royale</h3>
+            <p class="theme-desc">Kemegahan ornamen ukiran emas tradisional dipadu tata letak modern berkelas.</p>
+            <div class="theme-actions">
+              <a href="preview.html" class="btn btn-outline-primary btn-small">Live Preview</a>
+              <a href="dashboard.html" class="btn btn-primary btn-small">Pilih</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="theme-card">
+          <div class="theme-media">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcNmFO4VGf5B5GeJTdSXe3aoMfKgry_381IBlQ0u_9DMbFV2ngN_tDomfy7zmDv3pNHCgQmnZlRPU3HtU5gAJZt3J1Xb5Us2BfT6AqZH3K8V3e_Xu08hglC6enfh7Xn0rSxhw-LMAFCmvkcN52iTtHzAYSQV4z7CR-vtNhii1qKM2xHXfvwAqVmO_SVoF1uVaxnDoKOv_Y6UvNPqW9xt0Zsfe8iUOYAreloBI0h_0UwST2NfBjYyOY" alt="Preview tema Botanical Whispers dengan dedaunan eucalyptus">
+            <span class="theme-badge favorit">Favorit Rustic</span>
+            <span class="theme-music"><i class="bi bi-music-note-beamed"></i></span>
+          </div>
+          <div class="theme-body">
+            <span class="theme-category">Floral &amp; Rustic</span>
+            <h3 class="theme-title">Botanical Whispers</h3>
+            <p class="theme-desc">Nuansa hijau dedaunan sage yang sejuk dan menenangkan untuk resepsi outdoor.</p>
+            <div class="theme-actions">
+              <a href="preview.html" class="btn btn-outline-primary btn-small">Live Preview</a>
+              <a href="dashboard.html" class="btn btn-primary btn-small">Pilih</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="theme-card">
+          <div class="theme-media">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBay1xfkxth4RJvny9j2grT96oiGStUAeMdL7sXwrIAxed5yhglYPfGiwvVmpdPAOdPeRRimYHg7DOk6OXV50rM1xKjYU_aCNLkRWay8ED9VWfPFeIE3VjN6Ff18r9R77CrBLF69uhlLfyJgT-Aj9c9b6D4M-Pj7b5jjkBXjFtvd7_47ePx3ZP7SJvk5ivfluNGA5IwAr0Vm_GZEqxlABW7mrf16HSfH-ydwY_VVX5ksuZarQLLTh3z" alt="Preview tema Minimalist Monogram editorial">
+            <span class="theme-badge tren">Tren 2025</span>
+            <span class="theme-music"><i class="bi bi-music-note-beamed"></i></span>
+          </div>
+          <div class="theme-body">
+            <span class="theme-category">Minimalis Modern</span>
+            <h3 class="theme-title">Minimalist Monogram</h3>
+            <p class="theme-desc">Gaya majalah editorial eksklusif dengan fokus pada keindahan tipografi murni.</p>
+            <div class="theme-actions">
+              <a href="preview.html" class="btn btn-outline-primary btn-small">Live Preview</a>
+              <a href="dashboard.html" class="btn btn-primary btn-small">Pilih</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="theme-card">
+          <div class="theme-media">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2tWjcJvwSknvTVAf2zt1e922ZzytwPPtsW08nfuhBOD6on564wGjn59w8uYNUjG7QaFi1UlGC9FGgHfzzH5ruKEbqZreLjMUQ0AfqqBa1IfjnIN89Q2DSqSYwP_ti_Lkc_V88bohGTbhCs7fbCImvb1Ib3AHGFaEDvKZaBrxwHbDHpi9gWE26mR8-REnUDx5YntguXCTejp350hx0lNV1i2DYxdQuGXmxxZbTTnNGZxv3WNejTyWA" alt="Preview tema Golden Jasmine Islami">
+            <span class="theme-badge syari">Syar'i Elegant</span>
+            <span class="theme-music"><i class="bi bi-music-note-beamed"></i></span>
+          </div>
+          <div class="theme-body">
+            <span class="theme-category">Syar'i &amp; Islami</span>
+            <h3 class="theme-title">Golden Jasmine</h3>
+            <p class="theme-desc">Sentuhan melati nan suci dengan doa Ar-Rum dan lantunan nasyid yang syahdu.</p>
+            <div class="theme-actions">
+              <a href="preview.html" class="btn btn-outline-primary btn-small">Live Preview</a>
+              <a href="dashboard.html" class="btn btn-primary btn-small">Pilih</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div style="text-align:center;margin-top:3rem;">
+        <a href="katalog.html" class="btn btn-secondary">
+          <span>Lihat 40+ Koleksi Desain Lainnya</span>
+          <i class="bi bi-grid"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 3 LANGKAH ==================== -->
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Praktis &amp; Anti Ribet</span>
+        <h2 class="section-title">3 Langkah Cepat Menuju Undangan Siap Sebar</h2>
+        <p class="section-desc">Bisa dibuat langsung dari HP tanpa perlu skill desain atau bantuan teknis rumit.</p>
+      </div>
+
+      <div class="steps-wrap">
+        <div class="steps-line" aria-hidden="true"></div>
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Pilih Desain Favorit</h3>
+          <p>Pilih satu dari puluhan tema premium yang paling mewakili konsep pernikahan impian Anda dan pasangan.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Isi Data &amp; Unggah Foto</h3>
+          <p>Lengkapi nama mempelai, tanggal akad &amp; resepsi, lokasi Google Maps, rekening amplop, serta galeri foto prewedding.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Sebarkan via WhatsApp</h3>
+          <p>Undangan Anda langsung online seketika! Bagikan tautan personal ke kerabat dan sahabat tercinta dengan sekali tap.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HARGA ==================== -->
+  <section class="section section-surface" id="harga">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Investasi Kebahagiaan</span>
+        <h2 class="section-title">Pilihan Paket Terjangkau Tanpa Biaya Tersembunyi</h2>
+        <div style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:1rem;padding:0.4rem 1rem;border-radius:9999px;background:rgba(245,235,215,0.6);border:1px solid var(--sand-warm);font-size:12px;font-weight:600;color:var(--on-tertiary-fixed);">
+          <i class="bi bi-check-circle-fill" style="color:var(--status-success);"></i>
+          Bayar Sekali — Aktif Selamanya (Tanpa Biaya Bulanan)
+        </div>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Silver -->
+        <div class="price-card">
+          <div>
+            <span class="price-eyebrow muted">Free Trial</span>
+            <h3 class="price-title">Paket Silver</h3>
+            <p class="price-desc">Coba buat undangan dan tinjau kemudahan sistem kami.</p>
+            <div class="price-main">
+              <span class="price-amount lg">Rp 0</span>
+              <span class="price-note">Masa aktif 3 hari</span>
+            </div>
+            <ul class="price-features">
+              <li><i class="bi bi-check-lg"></i> Template Standar Terpilih</li>
+              <li><i class="bi bi-check-lg"></i> Batas 50 Nama Tamu</li>
+              <li><i class="bi bi-check-lg"></i> Countdown Timer &amp; Lokasi Maps</li>
+              <li class="muted"><i class="bi bi-x-lg"></i> Amplop QRIS &amp; Rekening Bank</li>
+              <li class="muted"><i class="bi bi-x-lg"></i> Bebas Watermark JanjiSuci</li>
+            </ul>
+          </div>
+          <a href="dashboard.html" class="btn btn-outline-primary price-cta">Mulai Uji Coba Gratis</a>
+        </div>
+
+        <!-- Gold -->
+        <div class="price-card featured">
+          <span class="price-badge-top">Paling Populer • Diskon 50%</span>
+          <div>
+            <div class="price-tag">
+              <span class="price-eyebrow accent">Best Value Choice</span>
+              <small>Hemat Rp 100rb</small>
+            </div>
+            <h3 class="price-title">Paket Gold</h3>
+            <p class="price-desc">Solusi lengkap idaman pengantin modern di seluruh nusantara.</p>
+            <div class="price-main">
+              <span class="price-strike">Rp 199.000</span>
+              <span class="price-amount">Rp 99.000</span>
+              <span class="price-note success">Sekali bayar untuk selamanya</span>
+            </div>
+            <ul class="price-features">
+              <li><i class="bi bi-check-circle-fill fill"></i> <strong>Akses Semua Tema Premium</strong></li>
+              <li><i class="bi bi-check-circle-fill fill"></i> <strong>Kirim Tamu Tanpa Batas (Unlimited)</strong></li>
+              <li><i class="bi bi-check-circle-fill fill"></i> Amplop Digital QRIS &amp; Nomor Rekening</li>
+              <li><i class="bi bi-check-circle-fill fill"></i> RSVP &amp; Buku Ucapan Tamu Real-time</li>
+              <li><i class="bi bi-check-circle-fill fill"></i> Galeri Hingga 20 Foto + Video YouTube</li>
+              <li><i class="bi bi-check-circle-fill fill"></i> Background Musik Custom Bebas Pilih</li>
+              <li><i class="bi bi-check-circle-fill fill"></i> Bebas Watermark JanjiSuci</li>
+            </ul>
+          </div>
+          <a href="dashboard.html" class="btn btn-primary price-cta" style="padding-block:1rem;box-shadow:0 4px 16px rgba(27,59,54,0.18);">Pilih Paket Gold Sekarang</a>
+        </div>
+
+        <!-- Platinum -->
+        <div class="price-card">
+          <div>
+            <span class="price-eyebrow ultra">Ultra Eksklusif</span>
+            <h3 class="price-title">Paket Platinum</h3>
+            <p class="price-desc">Untuk resepsi prestisius dengan domain web pribadi Anda.</p>
+            <div class="price-main">
+              <span class="price-strike">Rp 350.000</span>
+              <span class="price-amount">Rp 189.000</span>
+              <span class="price-note success">Sekali bayar + Gratis Domain 1 Tahun</span>
+            </div>
+            <ul class="price-features">
+              <li><i class="bi bi-check-lg"></i> <strong>Semua Fitur Paket Gold Termasuk</strong></li>
+              <li><i class="bi bi-check-lg"></i> <strong>Custom Domain Pribadi (.com / .my.id)</strong></li>
+              <li><i class="bi bi-check-lg"></i> WhatsApp Blaster Terintegrasi (500 Tamu)</li>
+              <li><i class="bi bi-check-lg"></i> Filter Tamu Spesial &amp; Sesi VIP</li>
+              <li><i class="bi bi-check-lg"></i> Priority CS Assistance (Jalur Cepat WhatsApp)</li>
+            </ul>
+          </div>
+          <a href="dashboard.html" class="btn btn-outline-primary price-cta">Pilih Paket Platinum</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONI ==================== -->
+  <section class="section section-cream" id="testimoni">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Kisah Nyata Mempelai</span>
+        <h2 class="section-title">Bahagia Berbagi Bersama JanjiSuci</h2>
+        <p class="section-desc">Ulasan tulus dari para pasangan yang telah menghemat anggaran dan waktu berharga mereka.</p>
+      </div>
+
+      <div class="testimonial-grid">
+        <div class="testi-card">
+          <div>
+            <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+            <p class="testi-quote">“Jujur kami takjub banget! Bikin undangan cuma butuh 10 menit di kamar tidur. Tamu-tamu pada muji desainnya mewah banget, fitur amplop QRIS-nya lancar langsung masuk rekening tanpa potongan!”</p>
+          </div>
+          <div class="testi-foot">
+            <div class="testi-avatar pink">DN</div>
+            <div><p class="testi-name">Dimas &amp; Nadya</p><p class="testi-meta">Menikah di Jakarta • Tema Gold Emerald</p></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div>
+            <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+            <p class="testi-quote">“Keluarga kami adat Jawa Minang, dan tema Nusantara Royale di JanjiSuci mewakili keanggunan adat kami dengan sangat sempurna. Fitur RSVP WhatsApp blaster mempermudah rekap katering!”</p>
+          </div>
+          <div class="testi-foot">
+            <div class="testi-avatar mint">RS</div>
+            <div><p class="testi-name">Reza &amp; Syifa</p><p class="testi-meta">Menikah di Bandung • Tema Nusantara Royale</p></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div>
+            <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+            <p class="testi-quote">“Dengan Rp 99.000 aktif selamanya, ini platform undangan digital paling worth-it di Indonesia. Support CS WhatsApp-nya luar biasa ramah dan responsif membantu edit teks saya jam 11 malam.”</p>
+          </div>
+          <div class="testi-foot">
+            <div class="testi-avatar gold">AK</div>
+            <div><p class="testi-name">Aditya &amp; Karina</p><p class="testi-meta">Menikah di Surabaya • Tema Minimalist Monogram</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FAQ ==================== -->
+  <section class="section section-surface" id="faq">
+    <div class="container faq-wrap">
+      <div class="section-header">
+        <span class="eyebrow">Punya Pertanyaan?</span>
+        <h2 class="section-title">Pertanyaan yang Sering Diajukan (FAQ)</h2>
+        <p class="section-desc">Semua jawaban penting seputar pembuatan undangan digital JanjiSuci.</p>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>Berapa lama proses pembuatan undangan hingga siap disebar? <i class="bi bi-chevron-down"></i></summary>
+          <p class="faq-answer">Hanya butuh waktu sekitar 5 hingga 10 menit! Anda cukup mendaftar, memilih desain tema kesukaan, memasukkan rincian acara (akad/pemberkatan, resepsi, alamat maps), dan undangan otomatis aktif seketika siap dibagikan.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Apakah ada batasan jumlah tamu yang bisa saya kirimkan? <i class="bi bi-chevron-down"></i></summary>
+          <p class="faq-answer">Sama sekali tidak ada batasan kuota untuk Paket Gold &amp; Platinum! Anda bebas mengirimkan undangan ke 100, 1.000, bahkan 5.000+ tamu undangan dengan nama personal masing-masing tanpa biaya tambahan apapun.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Bagaimana cara kerja fitur Amplop Digital &amp; QRIS? <i class="bi bi-chevron-down"></i></summary>
+          <p class="faq-answer">Tamu dapat mentransfer hadiah atau tanda kasih langsung ke nomor rekening mempelai (BCA, Mandiri, BRI, BNI, dll) atau melalui kode QRIS yang Anda unggah. Dana 100% masuk langsung ke rekening Anda tanpa perantara dan tanpa potongan komisi sepeserpun (0% fee).</p>
+        </details>
+        <details class="faq-item">
+          <summary>Apakah saya bisa mengganti lagu atau musik latarnya? <i class="bi bi-chevron-down"></i></summary>
+          <p class="faq-answer">Tentu saja bisa! JanjiSuci menyediakan puluhan katalog lagu romantis berlisensi siap pakai, atau Anda juga dapat mengunggah file audio lagu kenangan favorit Anda berdua secara kustom.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Apakah masa aktif undangan benar-benar selamanya? <i class="bi bi-chevron-down"></i></summary>
+          <p class="faq-answer">Ya! Untuk Paket Gold dan Platinum, tautan website undangan pernikahan Anda akan tetap tersimpan di server kami dan aktif selamanya, sehingga bisa terus dibuka kembali sebagai kenangan manis ulang tahun pernikahan di masa depan.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA BANNER ==================== -->
+  <section class="cta-banner">
+    <div class="cta-glow cta-glow-1" aria-hidden="true"></div>
+    <div class="cta-glow cta-glow-2" aria-hidden="true"></div>
+    <div class="cta-inner">
+      <span class="cta-eyebrow">Wujudkan Pernikahan Idaman</span>
+      <h2 class="cta-title">Siap Buat Momen Pernikahanmu Lebih Berkesan?</h2>
+      <p class="cta-desc">Mulai dalam hitungan menit tanpa ribet. Rasakan kemudahan menyebarkan kebahagiaan dengan standar kemewahan tertinggi.</p>
+      <div class="cta-actions">
+        <a href="dashboard.html" class="btn" style="background:var(--gold-light);color:var(--primary);padding:1rem 2.25rem;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,0.12);">
+          <span>Buat Undangan Sekarang - Gratis</span>
+          <i class="bi bi-arrow-right"></i>
+        </a>
+        <a href="https://wa.me/628123456789" class="btn" style="border:1px solid rgba(245,235,215,0.4);color:var(--gold-light);background:transparent;padding:1rem 2rem;">
+          <i class="bi bi-chat-dots"></i>
+          <span>Konsultasi via WhatsApp</span>
+        </a>
+      </div>
+      <div class="cta-trust">
+        <span><i class="bi bi-lightning-fill"></i> Setup Instan</span>
+        <span><i class="bi bi-credit-card"></i> Tanpa Kartu Kredit</span>
+        <span><i class="bi bi-lock-fill"></i> Server Aman &amp; Cepat</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand">
+            <div class="brand-icon" style="width:36px;height:36px;font-size:1rem;"><i class="bi bi-heart-fill"></i></div>
+            <span class="brand-name" style="font-size:20px;">JanjiSuci</span>
+          </div>
+          <p>Platform pembuatan website undangan pernikahan digital nomor 1 di Indonesia. Menghadirkan perpaduan estetika editorial mewah nusantara dengan kemudahan teknologi RSVP dan amplop digital modern.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+            <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Navigasi</h4>
+            <ul>
+              <li><a href="index.html">Tentang Kami</a></li>
+              <li><a href="katalog.html">Katalog Tema</a></li>
+              <li><a href="fitur.html">Fitur Lengkap</a></li>
+              <li><a href="harga.html">Paket Harga</a></li>
+              <li><a href="contoh.html">Contoh Undangan</a></li>
+              <li><a href="testimoni.html">Testimoni</a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Dukungan &amp; Legal</h4>
+            <ul>
+              <li><a href="#">Syarat &amp; Ketentuan</a></li>
+              <li><a href="#">Kebijakan Privasi</a></li>
+              <li><a href="https://wa.me/628123456789">Hubungi CS WhatsApp</a></li>
+              <li><a href="dashboard.html">Editor Undangan</a></li>
+              <li><a href="preview.html">Live Preview</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Metode Pembayaran</h4>
+            <p>Mendukung semua bank nasional, e-wallet, dan QRIS instan.</p>
+            <div class="pay-pills">
+              <span class="pay-pill navy">BCA</span>
+              <span class="pay-pill navy">Mandiri</span>
+              <span class="pay-pill navy">BNI</span>
+              <span class="pay-pill red">QRIS</span>
+              <span class="pay-pill rs">GoPay</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 JanjiSuci Platform Undangan Pernikahan Digital. Hak cipta dilindungi undang-undang.</p>
+        <small>Dibuat dengan segenap cinta di Indonesia 🇮🇩</small>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const btn = document.getElementById('navToggle');
+    const nav = document.getElementById('mobileNav');
+    btn?.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      btn.innerHTML = open ? '<i class="bi bi-x-lg"></i>' : '<i class="bi bi-list"></i>';
+    });
+    // Close on link click
+    nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      btn.innerHTML = '<i class="bi bi-list"></i>';
+    }));
+    // Active chip toggle (visual only)
+    document.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+        chip.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forms — JanjiSuci DashAdmin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/css/dashadmin.css" rel="stylesheet">
+<link href="assets/css/theme-switcher.css" rel="stylesheet">
+<style>
+/* ===== Custom form widgets — Nusantara Royale Romance ===== */
+.dash-input:disabled,.dash-select:disabled,.dash-textarea:disabled{background:var(--dash-surface);color:var(--dash-outline);cursor:not-allowed;border-style:dashed}
+.dash-input[readonly]{background:var(--dash-gold);border-style:dashed;color:var(--dash-primary)}
+input[type="date"].dash-input,input[type="time"].dash-input{position:relative;color:var(--dash-text)}
+input[type="date"].dash-input::-webkit-calendar-picker-indicator,input[type="time"].dash-input::-webkit-calendar-picker-indicator{background:var(--dash-blush);border:1px solid var(--dash-border);border-radius:8px;padding:4px 6px;cursor:pointer}
+
+/* Input group */
+.fx-input-group{display:flex;align-items:stretch}
+.fx-input-group .pre{display:grid;place-items:center;padding:0 12px;border:1px solid #e5e7eb;border-right:none;border-radius:10px 0 0 10px;background:var(--dash-blush);color:var(--dash-secondary);font-size:15px;flex-shrink:0}
+.fx-input-group .dash-input{border-radius:0 10px 10px 0;min-width:0}
+.fx-input-group .dash-btn{border-radius:0 10px 10px 0;flex-shrink:0}
+.fx-help{font-size:12px;color:var(--dash-outline);margin-top:6px;display:flex;align-items:center;gap:6px}
+.fx-label{display:block;font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--dash-primary);margin-bottom:8px}
+.fx-label .req{color:var(--dash-danger)}
+
+/* Color swatches — Royale palette */
+.fx-swatches{display:flex;flex-wrap:wrap;gap:14px}
+.fx-swatch{cursor:pointer}
+.fx-swatch input{position:absolute;opacity:0;pointer-events:none}
+.fx-swatch .dot{width:46px;height:46px;border-radius:12px;border:2px solid var(--dash-border);transition:all .2s;display:block}
+.fx-swatch .lbl{display:block;text-align:center;font-size:11px;font-weight:600;color:var(--dash-muted);margin-top:6px}
+.fx-swatch:hover .dot{transform:translateY(-2px)}
+.fx-swatch input:checked ~ .dot{border-color:var(--dash-primary-container);box-shadow:0 0 0 3px var(--dash-primary-soft);transform:scale(1.06)}
+.fx-swatch input:checked ~ .lbl{color:var(--dash-primary-container);font-weight:700}
+.fx-swatch input:focus-visible ~ .dot{outline:2px dashed var(--dash-secondary);outline-offset:3px}
+
+/* Tags input mock */
+.fx-tags{display:flex;flex-wrap:wrap;gap:8px;padding:8px 10px;border:1px solid #e5e7eb;background:#fff;border-radius:10px;transition:border-color .2s}
+.fx-tags:focus-within{border-color:var(--dash-primary-container)}
+.fx-tag{display:inline-flex;align-items:center;gap:6px;background:var(--dash-blush);color:var(--dash-secondary);border:1px solid rgba(131,82,61,0.22);padding:4px 10px;border-radius:9999px;font-size:12px;font-weight:600}
+.fx-tag button{border:none;background:transparent;color:inherit;cursor:pointer;padding:0;line-height:1;display:grid;place-items:center;font-size:13px}
+.fx-tag button:hover{color:var(--dash-danger)}
+.fx-tags .tag-in{flex:1;min-width:130px;border:none;outline:none;font-size:13px;padding:4px;background:transparent;color:var(--dash-text)}
+
+/* Upload dropzone */
+.fx-upload{border:2px dashed var(--dash-border);border-radius:14px;background:var(--dash-gold);padding:36px 20px;text-align:center;cursor:pointer;transition:all .25s}
+.fx-upload:hover{border-color:var(--dash-secondary);background:var(--dash-blush)}
+.fx-upload.dragover{border-color:var(--dash-secondary);background:var(--dash-blush);transform:scale(1.01);box-shadow:var(--dash-shadow-lg)}
+.fx-upload i.big{font-size:34px;color:var(--dash-secondary)}
+.fx-upload h4{font-family:'Inter',sans-serif;font-size:16px;color:var(--dash-primary);margin:10px 0 4px}
+.fx-upload p{font-size:12px;color:var(--dash-outline);margin:0}
+.fx-file-list{display:grid;gap:8px;margin-top:12px}
+.fx-file{display:flex;align-items:center;gap:10px;background:var(--dash-surface);border:1px solid var(--dash-border);border-radius:10px;padding:8px 12px;font-size:13px}
+.fx-file i{color:var(--dash-success)}
+.fx-file .size{margin-left:auto;font-size:11px;color:var(--dash-muted)}
+
+/* Range slider */
+.fx-range{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:9999px;outline:none;background:linear-gradient(90deg,var(--dash-primary-container) var(--fill,40%),#f3f4f6 var(--fill,40%));cursor:pointer}
+.fx-range::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--dash-primary-container);box-shadow:0 2px 8px rgba(27,59,54,0.25);cursor:pointer;transition:transform .15s}
+.fx-range::-webkit-slider-thumb:hover{transform:scale(1.15)}
+.fx-range::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--dash-primary-container);cursor:pointer}
+
+/* Toggle switch */
+.fx-switch-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px dashed var(--dash-border)}
+.fx-switch-row:last-child{border-bottom:none}
+.fx-switch-row .info strong{display:block;font-size:14px;color:var(--dash-text)}
+.fx-switch-row .info span{font-size:12px;color:var(--dash-outline)}
+.fx-switch{position:relative;display:inline-block;width:46px;height:25px;flex-shrink:0}
+.fx-switch input{opacity:0;width:0;height:0}
+.fx-switch .track{position:absolute;inset:0;background:#e5e7eb;border:1px solid var(--dash-border);border-radius:9999px;transition:all .25s;cursor:pointer}
+.fx-switch .track::before{content:'';position:absolute;width:19px;height:19px;left:2px;top:50%;transform:translateY(-50%);background:#fff;border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,0.25);transition:all .25s}
+.fx-switch input:checked + .track{background:var(--dash-primary-container);border-color:var(--dash-primary-container)}
+.fx-switch input:checked + .track::before{transform:translateY(-50%) translateX(21px);background:var(--dash-gold)}
+.fx-switch input:focus-visible + .track{outline:2px dashed var(--dash-secondary);outline-offset:3px}
+
+/* Validation states */
+.fx-field{position:relative}
+.fx-field .fx-ico{position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;font-size:15px}
+.fx-field.success .dash-input{border-color:var(--dash-success);box-shadow:0 0 0 3px rgba(45,106,79,0.1);padding-right:36px}
+.fx-field.success .fx-ico{color:var(--dash-success)}
+.fx-field.error .dash-input{border-color:var(--dash-danger);box-shadow:0 0 0 3px rgba(168,56,84,0.1);padding-right:36px}
+.fx-field.error .fx-ico{color:var(--dash-danger)}
+.fx-msg{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;margin-top:6px}
+.fx-msg.error{color:var(--dash-danger)}
+
+/* Password strength */
+.fx-strength{display:flex;gap:6px;margin-top:10px}
+.fx-strength span{height:6px;flex:1;border-radius:9999px;background:#f3f4f6;transition:background .3s}
+.fx-strength.lv1 span:nth-child(1){background:var(--dash-danger)}
+.fx-strength.lv2 span:nth-child(1),.fx-strength.lv2 span:nth-child(2){background:var(--dash-warning)}
+.fx-strength.lv3 span{background:var(--dash-success)}
+.fx-strength-text{font-size:12px;font-weight:700;margin-top:6px}
+
+/* Rich text editor mock */
+.fx-toolbar{display:flex;flex-wrap:wrap;gap:4px;padding:8px;border:1px solid var(--dash-border);border-bottom:none;border-radius:12px 12px 0 0;background:var(--dash-gold)}
+.fx-ed-btn{min-width:34px;height:34px;padding:0 8px;border-radius:8px;border:1px solid transparent;background:transparent;color:var(--dash-primary);font-size:14px;cursor:pointer;display:grid;place-items:center;transition:all .15s}
+.fx-ed-btn:hover{background:#fff;border-color:var(--dash-border)}
+.fx-ed-btn.on{background:var(--dash-primary-container);color:var(--dash-gold)}
+.fx-ed-sep{width:1px;background:var(--dash-border);margin:4px 4px}
+.fx-editor{min-height:170px;max-height:320px;overflow-y:auto;padding:18px;border:1px solid var(--dash-border);border-radius:0 0 12px 12px;background:#fff;font-size:14px;line-height:1.8;outline:none}
+.fx-editor:focus{border-color:var(--dash-primary-container)}
+.fx-editor h2{font-family:'Inter',sans-serif;color:var(--dash-primary);margin:0 0 10px}
+.fx-editor blockquote{margin:10px 0;padding:8px 16px;border-left:3px solid var(--dash-secondary);background:var(--dash-blush);border-radius:0 8px 8px 0;font-style:italic}
+
+/* ===== Horizontal & Vertical Form Layouts — ala AdminLTE ===== */
+.fx-h-form{display:grid;gap:16px}
+.fx-h-row{display:grid;gap:8px;align-items:center}
+@media(min-width:640px){.fx-h-row{grid-template-columns:168px 1fr;gap:14px}}
+.fx-h-label{font-size:13px;font-weight:700;color:var(--dash-primary);line-height:1.3}
+@media(min-width:640px){.fx-h-label{text-align:right;padding-right:14px}}
+.fx-h-label .req{color:var(--dash-danger);margin-left:4px}
+.fx-h-field .fx-help{margin-top:6px}
+.fx-h-field .dash-input,.fx-h-field .dash-select{width:100%}
+.fx-v-form{display:grid;gap:16px}
+.fx-v-field{display:grid;gap:6px}
+.fx-inline-form{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+.fx-inline-form .fx-v-field{flex:1;min-width:180px}
+@media(max-width:640px){.fx-inline-form{flex-direction:column;align-items:stretch}}
+</style>
+</head>
+<body class="dash-body">
+
+<!-- Navbar -->
+<nav class="dash-navbar">
+  <div class="dash-navbar-left">
+    <button class="dash-menu-btn" data-navbar-toggle data-toggle="sidebar" aria-label="Toggle sidebar"><i class="bi bi-list"></i></button>
+    <div class="dash-search">
+      <i class="bi bi-search" style="color:#9aa0a6"></i>
+      <input placeholder="Cari undangan, tamu, tema, transaksi...">
+      <span class="dash-kbd">⌘ K</span>
+    </div>
+  </div>
+  <div class="dash-navbar-right">
+          <div class="dash-dd" id="ddBellWrap">
+        <button class="dash-icon-btn" aria-label="Notifications" data-dd="ddBell"><i class="bi bi-bell"></i><span class="badge">7</span></button>
+        <div class="dash-dd-menu" id="ddBell">
+          <div class="dash-dd-header">Notifikasi <a href="tables.html">Lihat Semua</a></div>
+          <div class="dash-dd-body">
+            <div class="dash-dd-item"><div class="dash-dd-icon emerald"><i class="bi bi-envelope-check"></i></div><div class="dash-dd-text"><p>Pesanan #1284 — Arya &amp; Nabila<span class="dash-dd-time">10 menit lalu • Nusantara Royale</span></p></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><div class="dash-dd-icon rose"><i class="bi bi-people"></i></div><div class="dash-dd-text"><p>RSVP baru: 12 tamu hadir<span class="dash-dd-time">25 menit lalu • Botanical Whispers</span></p></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><div class="dash-dd-icon gold"><i class="bi bi-currency-dollar"></i></div><div class="dash-dd-text"><p>Pembayaran Rp 99.000 diterima<span class="dash-dd-time">1 jam lalu • Reza &amp; Syifa</span></p></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><div class="dash-dd-icon navy"><i class="bi bi-star"></i></div><div class="dash-dd-text"><p>Ulasan 5 bintang dari Dimas &amp; Nadya<span class="dash-dd-time">2 jam lalu • Tema Minimalist</span></p></div><span class="dash-dd-dot read"></span></div>
+          </div>
+          <div class="dash-dd-footer" onclick="dashToast('Semua notifikasi ditandai dibaca')">Tandai semua dibaca</div>
+        </div>
+      </div>
+      <div class="dash-dd" id="ddChatWrap">
+        <button class="dash-icon-btn" aria-label="Messages" data-dd="ddChat"><i class="bi bi-chat-dots"></i><span class="badge" style="background:#2D6A4F">3</span></button>
+        <div class="dash-dd-menu" id="ddChat">
+          <div class="dash-dd-header">Pesan <a href="widgets.html#chat">Buka Chat</a></div>
+          <div class="dash-dd-body">
+            <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=33" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Nabila Saraswati<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Kak, bisa ganti lagunya setelah publish?</span></p><span class="dash-dd-time">5 menit lalu</span></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=26" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Dimas Prasetyo<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Upload galeri prewedding 20 foto ya</span></p><span class="dash-dd-time">32 menit lalu</span></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=14" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Syifa Aulia<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Terima kasih, undangannya cantik banget!</span></p><span class="dash-dd-time">1 jam lalu</span></div><span class="dash-dd-dot read"></span></div>
+          </div>
+          <div class="dash-dd-footer" onclick="location.href='widgets.html#chat'">Lihat semua percakapan</div>
+        </div>
+      </div>
+    <button class="dash-icon-btn" id="dashDarkToggle" aria-label="Toggle dark mode" title="Dark / Light"><i class="bi bi-moon-stars"></i></button>
+    <button class="dash-icon-btn" aria-label="Apps"><i class="bi bi-grid"></i></button>
+        <div class="dash-dd" id="ddProfileWrap">
+      <div class="dash-profile" data-dd="ddProfile" role="button">
+        <img src="https://i.pravatar.cc/100?img=15" alt="Admin">
+        <div class="dash-profile-info">
+          <strong>Admin JanjiSuci</strong><span>Super Admin • Online</span>
+        </div>
+        <i class="bi bi-chevron-down" style="font-size:12px;opacity:0.6"></i>
+      </div>
+      <div class="dash-dd-menu dash-dd-profile-menu" id="ddProfile">
+        <div class="dash-dd-userinfo"><img src="https://i.pravatar.cc/100?img=15"><div><strong>Admin JanjiSuci</strong><span>admin@janjisuci.id</span></div></div>
+        <a class="dash-dd-profile-item" href="profile.html"><i class="bi bi-person"></i> Profil Saya</a>
+        <a class="dash-dd-profile-item" href="profile.html#settings"><i class="bi bi-gear"></i> Pengaturan</a>
+        <a class="dash-dd-profile-item" href="ui-elements.html"><i class="bi bi-layers"></i> Komponen UI</a>
+        <a class="dash-dd-profile-item" href="../index.html"><i class="bi bi-house"></i> Lihat Website</a>
+        <div class="dash-divider" style="margin:6px 0"></div>
+        <a class="dash-dd-profile-item danger" href="../login.html"><i class="bi bi-box-arrow-right"></i> Keluar</a>
+      </div>
+    </div></div>
+</nav>
+
+<!-- Sidebar -->
+<aside class="dash-sidebar" id="dashSidebar">
+  <div class="dash-sidebar-header">
+    <a href="index.html" class="dash-brand">
+      <div class="dash-brand-icon"><i class="bi bi-heart-fill"></i></div>
+      <div class="dash-brand-text">
+        <strong>JanjiSuci</strong><span>Admin Royale</span>
+      </div>
+    </a>
+  </div>
+  <div class="dash-sidebar-scroll">
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Utama</div>
+      <ul class="dash-nav">
+        <li><a href="index.html"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
+        <li><a href="../index.html"><i class="bi bi-house"></i><span>Landing Preview</span><span class="dash-badge gold">Visit</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Manajemen Pernikahan</div>
+      <ul class="dash-nav">
+        <li><a href="widgets.html"><i class="bi bi-collection"></i><span>Widgets & Stats</span><span class="dash-badge success">12</span></a></li>
+        <li><a href="../katalog.html"><i class="bi bi-palette"></i><span>Katalog Tema</span></a></li>
+        <li><a href="../contoh.html"><i class="bi bi-images"></i><span>Contoh Undangan</span></a></li>
+        <li><a href="../dashboard.html"><i class="bi bi-pencil-square"></i><span>Editor Undangan</span></a></li>
+        <li><a href="../preview.html"><i class="bi bi-phone"></i><span>Live Preview</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Komponen — Ala AdminLTE</div>
+      <ul class="dash-nav">
+        <li class="dash-nav-item">
+          <button><i class="bi bi-layers"></i><span>UI Elements</span><i class="bi bi-chevron-right dash-nav-arrow"></i></button>
+          <ul class="dash-subnav">
+            <li><a href="ui-elements.html">General & Cards</a></li>
+            <li><a href="ui-elements.html#buttons">Buttons & Badges</a></li>
+            <li><a href="ui-elements.html#alerts">Alerts & Modals</a></li>
+            <li><a href="ui-elements.html#tabs">Tabs & Timeline</a></li>
+          </ul>
+        </li>
+        <li><a href="forms.html" class="active"><i class="bi bi-input-cursor-text"></i><span>Forms</span></a></li>
+        <li><a href="tables.html"><i class="bi bi-table"></i><span>Tables</span></a></li>
+        <li><a href="charts.html"><i class="bi bi-bar-chart-line"></i><span>Charts</span><span class="dash-badge">3</span></a></li>
+                <li><a href="plugins.html"><i class="bi bi-puzzle"></i><span>Plugins & Addons</span><span class="dash-badge gold">14</span></a></li>
+<li><a href="ui-elements.html#widgets"><i class="bi bi-kanban"></i><span>Kanban & Calendar</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+          <div class="dash-nav-group">
+      <div class="dash-nav-title">Transaksi</div>
+      <ul class="dash-nav">
+        <li><a href="invoice.html"><i class="bi bi-receipt-cutoff"></i><span>Invoice</span><span class="dash-badge success">Baru</span></a></li>
+        <li><a href="tables.html"><i class="bi bi-credit-card"></i><span>Pembayaran</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-title">Halaman</div>
+      <ul class="dash-nav">
+        <li><a href="profile.html"><i class="bi bi-person-circle"></i><span>Profile</span></a></li>
+        <li><a href="../harga.html"><i class="bi bi-credit-card"></i><span>Paket & Harga</span></a></li>
+        <li><a href="../testimoni.html"><i class="bi bi-chat-heart"></i><span>Testimoni</span></a></li>
+        <li><a href="../blog.html"><i class="bi bi-journal-text"></i><span>Blog / Artikel</span></a></li>
+        <li><a href="../login.html"><i class="bi bi-box-arrow-in-right"></i><span>Login</span></a></li>
+        <li><a href="../register.html"><i class="bi bi-person-plus"></i><span>Register</span></a></li>
+        <li><a href="../lupa-password.html"><i class="bi bi-key"></i><span>Lupa Password</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Extras</div>
+      <ul class="dash-nav">
+        <li><a href="ui-elements.html#gallery"><i class="bi bi-image"></i><span>Gallery</span></a></li>
+        <li><a href="ui-elements.html#mailbox"><i class="bi bi-envelope"></i><span>Mailbox</span><span class="dash-badge">5</span></a></li>
+        <li><a href="404.html"><i class="bi bi-exclamation-triangle"></i><span>Error 404</span></a></li>
+        <li><a href="500.html"><i class="bi bi-bug"></i><span>Error 500</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dash-sidebar-footer" style="position:relative;">
+    <button class="dash-user-card" type="button" id="sideUserBtn" aria-expanded="false">
+      <img src="https://i.pravatar.cc/100?img=15" alt="">
+      <div class="dash-user-info"><strong>Admin JanjiSuci</strong><span>admin@janjisuci.id</span></div>
+      <i class="bi bi-chevron-up"></i>
+    </button>
+    <div class="dash-user-menu" id="sideUserMenu">
+      <div class="dash-user-menu-head">
+        <img src="https://i.pravatar.cc/100?img=15" alt="">
+        <div><strong>Admin JanjiSuci</strong><span>Super Admin • Online</span></div>
+      </div>
+      <a class="dash-user-menu-item" href="profile.html"><i class="bi bi-person"></i> Profil Saya</a>
+      <a class="dash-user-menu-item" href="profile.html#settings"><i class="bi bi-gear"></i> Pengaturan Akun</a>
+      <a class="dash-user-menu-item" href="ui-elements.html"><i class="bi bi-layers"></i> Komponen UI</a>
+      <a class="dash-user-menu-item" href="../index.html"><i class="bi bi-house"></i> Lihat Website</a>
+      <div class="dash-divider" style="margin:6px 0"></div>
+      <a class="dash-user-menu-item danger" href="../login.html"><i class="bi bi-box-arrow-right"></i> Keluar</a>
+    </div>
+  </div>
+</aside>
+<div class="dash-overlay" id="dashOverlay"></div>
+
+<!-- Main -->
+<main class="dash-main">
+  <div class="dash-content">
+    <div class="dash-page-header">
+      <div class="dash-title">
+        <div class="dash-breadcrumb"><a href="index.html">Home</a> <i class="bi bi-chevron-right"></i> <span>Forms</span></div>
+        <h1>Forms — Data Undangan</h1>
+        <p>Kumpulan komponen formulir Nusantara Royale Romance untuk mengelola data mempelai, waktu & lokasi acara, hingga validasi input.</p>
+      </div>
+      <div class="dash-actions">
+        <button class="dash-btn dash-btn-primary" onclick="openOrderModal()"><i class="bi bi-plus-lg"></i> Tambah Pesanan</button>
+        <button class="dash-btn dash-btn-secondary" onclick="dashToast('Formulir direset ke data terakhir','info')"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
+        <button class="dash-btn dash-btn-primary" onclick="dashToast('Semua perubahan data undangan disimpan')"><i class="bi bi-check2-circle"></i> Simpan Semua</button>
+      </div>
+    </div>
+
+    <div class="dash-alert info" style="margin-bottom:20px">
+      <i class="bi bi-info-circle-fill"></i>
+      <div><strong>Catatan demo:</strong> seluruh tombol submit pada halaman ini hanya menampilkan notifikasi <code>dashToast</code>. Palet warna mengikuti sistem desain Royale (emerald tua, gold lembut, terracotta).</div>
+    </div>
+
+    <!-- ============ 1. GENERAL ELEMENTS ============ -->
+    <h2 class="dash-section-title" id="general"><i class="bi bi-input-cursor-text" style="color:var(--dash-secondary)"></i> 1. General Elements — Data Mempelai</h2>
+    <div class="dash-card">
+      <div class="dash-card-header"><h3><i class="bi bi-suit-heart-fill"></i> Formulir Data Mempelai</h3><span class="dash-badge info"><i class="bi bi-pencil"></i> Draft</span></div>
+      <div class="dash-card-body">
+        <form onsubmit="return false">
+          <div class="dash-form-grid">
+            <div>
+              <label class="fx-label" for="namaPria">Nama Lengkap Pria <span class="req">*</span></label>
+              <div class="fx-input-group">
+                <span class="pre"><i class="bi bi-person"></i></span>
+                <input type="text" id="namaPria" class="dash-input" placeholder="cth. Raden Mas Arya Wibowo" value="Raden Mas Arya Wibowo">
+              </div>
+              <div class="fx-help"><i class="bi bi-info-circle"></i> Nama lengkap sesuai akad nikah, termasuk gelar bangsawan bila ada.</div>
+            </div>
+            <div>
+              <label class="fx-label" for="namaWanita">Nama Lengkap Wanita <span class="req">*</span></label>
+              <div class="fx-input-group">
+                <span class="pre"><i class="bi bi-person"></i></span>
+                <input type="text" id="namaWanita" class="dash-input" placeholder="cth. Raden Ajeng Nabila Larasati" value="Raden Ajeng Nabila Larasati">
+              </div>
+              <div class="fx-help"><i class="bi bi-info-circle"></i> Gunakan ejaan resmi untuk cetak undangan & buku tamu.</div>
+            </div>
+            <div>
+              <label class="fx-label" for="panggilanPria">Nama Panggilan Pria</label>
+              <input type="text" id="panggilanPria" class="dash-input" placeholder="cth. Arya" value="Arya">
+            </div>
+            <div>
+              <label class="fx-label" for="panggilanWanita">Nama Panggilan Wanita</label>
+              <input type="text" id="panggilanWanita" class="dash-input" placeholder="cth. Nabila" value="Nabila">
+            </div>
+            <div>
+              <label class="fx-label" for="urutanPria">Putra Ke-</label>
+              <select id="urutanPria" class="dash-select">
+                <option selected>Putra pertama</option>
+                <option>Putra kedua</option>
+                <option>Putra ketiga</option>
+                <option>Putra bungsu</option>
+              </select>
+            </div>
+            <div>
+              <label class="fx-label" for="urutanWanita">Putri Ke-</label>
+              <select id="urutanWanita" class="dash-select">
+                <option>Putri pertama</option>
+                <option selected>Putri kedua</option>
+                <option>Putri ketiga</option>
+                <option>Putri bungsu</option>
+              </select>
+            </div>
+            <div>
+              <label class="fx-label" for="ortuPria">Orang Tua Pria <span class="req">*</span></label>
+              <div class="fx-input-group">
+                <span class="pre"><i class="bi bi-people-fill"></i></span>
+                <input type="text" id="ortuPria" class="dash-input" placeholder="Bapak H. Sumarno Wibowo & Ibu Hj. Endang Prasetyowati" value="Bapak H. Sumarno Wibowo & Ibu Hj. Endang Prasetyowati">
+              </div>
+            </div>
+            <div>
+              <label class="fx-label" for="ortuWanita">Orang Tua Wanita <span class="req">*</span></label>
+              <div class="fx-input-group">
+                <span class="pre"><i class="bi bi-people-fill"></i></span>
+                <input type="text" id="ortuWanita" class="dash-input" placeholder="Bapak Drs. Hendra Larasato & Ibu Ratna Dewi, S.E." value="Bapak Drs. Hendra Larasato & Ibu Ratna Dewi, S.E.">
+              </div>
+            </div>
+            <div>
+              <label class="fx-label" for="igPria">Instagram Pria</label>
+              <div class="fx-input-group">
+                <span class="pre"><i class="bi bi-instagram"></i></span>
+                <input type="text" id="igPria" class="dash-input" placeholder="aryawibowo" value="aryawibowo">
+              </div>
+            </div>
+            <div>
+              <label class="fx-label" for="igWanita">Instagram Wanita</label>
+              <div class="fx-input-group">
+                <span class="pre"><i class="bi bi-instagram"></i></span>
+                <input type="text" id="igWanita" class="dash-input" placeholder="nabilalrs" value="nabilalrs">
+                <button type="button" class="dash-btn dash-btn-primary" onclick="dashToast('Memeriksa username @nabilalrs...','info')"><i class="bi bi-check2"></i></button>
+              </div>
+            </div>
+            <div>
+              <label class="fx-label" for="slugUndangan">Slug Undangan (terkunci)</label>
+              <div class="fx-input-group">
+                <span class="pre"><i class="bi bi-link-45deg"></i></span>
+                <input type="text" id="slugUndangan" class="dash-input" value="janjisuci.id/arya-nabila" readonly>
+                <button type="button" class="dash-btn dash-btn-secondary" onclick="dashToast('Slug dapat diubah setelah paket Premium aktif','info')"><i class="bi bi-lock"></i></button>
+              </div>
+              <div class="fx-help"><i class="bi bi-shield-lock"></i> Readonly — slug otomatis dari nama panggilan kedua mempelai.</div>
+            </div>
+            <div>
+              <label class="fx-label" for="noUndangan">Nomor Undangan (otomatis)</label>
+              <input type="text" id="noUndangan" class="dash-input" value="JS-2025-1284-R" disabled>
+              <div class="fx-help"><i class="bi bi-magic"></i> Disabled — dibuat sistem setelah pembayaran terverifikasi.</div>
+            </div>
+            <div style="grid-column:1/-1">
+              <label class="fx-label" for="catatanKeluarga">Catatan untuk Keluarga Besar</label>
+              <textarea id="catatanKeluarga" class="dash-textarea" rows="3" placeholder="cth. Mohon hadir 30 menit sebelum akad, pakaian adat Jawa solo putih...">
+Kedua keluarga memohon kehadiran tepat waktu. Resepsi menggunakan pakaian adat Jawa Solo Putih, sementara akad dengan busana muslim syar'i bernuansa emas.</textarea>
+            </div>
+          </div>
+          <div class="dash-divider"></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+            <button type="button" class="dash-btn dash-btn-secondary" onclick="dashToast('Perubahan data mempelai dibatalkan','info')"><i class="bi bi-x-lg"></i> Batal</button>
+            <button type="button" class="dash-btn dash-btn-primary" onclick="dashToast('Data Mempelai Arya & Nabila tersimpan')"><i class="bi bi-save"></i> Simpan Data Mempelai</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ============ 2. ADVANCED ============ -->
+    <h2 class="dash-section-title" id="advanced" style="margin-top:28px"><i class="bi bi-sliders" style="color:var(--dash-secondary)"></i> 2. Advanced Elements</h2>
+    <div class="dash-grid dash-grid-2">
+      <div class="dash-card">
+        <div class="dash-card-header"><h3><i class="bi bi-calendar-heart"></i> Tanggal, Waktu & Tema Warna</h3></div>
+        <div class="dash-card-body">
+          <div class="dash-form-grid">
+            <div>
+              <label class="fx-label" for="tglAkadAdv">Tanggal Akad</label>
+              <input type="date" id="tglAkadAdv" class="dash-input" value="2025-12-12" min="2025-10-01">
+            </div>
+            <div>
+              <label class="fx-label" for="waktuAkadAdv">Waktu Akad</label>
+              <input type="time" id="waktuAkadAdv" class="dash-input" value="08:00">
+            </div>
+          </div>
+          <div class="dash-divider"></div>
+          <label class="fx-label">Pilih Warna Tema — Palet Royale</label>
+          <div class="fx-swatches" id="fxSwatches">
+            <label class="fx-swatch">
+              <input type="radio" name="temaWarna" value="Royale Emerald" checked>
+              <span class="dot" style="background:#1b3b36"></span>
+              <span class="lbl">Emerald</span>
+            </label>
+            <label class="fx-swatch">
+              <input type="radio" name="temaWarna" value="Gold Royale">
+              <span class="dot" style="background:#F5EBD7"></span>
+              <span class="lbl">Gold</span>
+            </label>
+            <label class="fx-swatch">
+              <input type="radio" name="temaWarna" value="Terracotta Jawa">
+              <span class="dot" style="background:#83523d"></span>
+              <span class="lbl">Terracotta</span>
+            </label>
+            <label class="fx-swatch">
+              <input type="radio" name="temaWarna" value="Blush Melati">
+              <span class="dot" style="background:#F7EDE8"></span>
+              <span class="lbl">Blush</span>
+            </label>
+            <label class="fx-swatch">
+              <input type="radio" name="temaWarna" value="Sand Warm">
+              <span class="dot" style="background:#E8DFD3"></span>
+              <span class="lbl">Sand</span>
+            </label>
+            <label class="fx-swatch">
+              <input type="radio" name="temaWarna" value="Hutan Nusantara">
+              <span class="dot" style="background:#2D6A4F"></span>
+              <span class="lbl">Forest</span>
+            </label>
+            <label class="fx-swatch">
+              <input type="radio" name="temaWarna" value="Rose Kenanga">
+              <span class="dot" style="background:#A83854"></span>
+              <span class="lbl">Rose</span>
+            </label>
+            <label class="fx-swatch">
+              <input type="radio" name="temaWarna" value="Ink Malam">
+              <span class="dot" style="background:#032521"></span>
+              <span class="lbl">Ink</span>
+            </label>
+          </div>
+          <div class="fx-help" style="margin-top:12px"><i class="bi bi-palette"></i> Terpilih: <strong id="swatchLabel" style="color:var(--dash-primary-container)">Royale Emerald</strong></div>
+        </div>
+      </div>
+
+      <div class="dash-card">
+        <div class="dash-card-header"><h3><i class="bi bi-tag"></i> Kategori Tamu — Tags Input</h3></div>
+        <div class="dash-card-body">
+          <label class="fx-label" for="tagInput">Kelompok Tamu</label>
+          <div class="fx-tags" id="fxTags">
+            <span class="fx-tag">Keluarga Besar Pria <button type="button" aria-label="Hapus tag"><i class="bi bi-x"></i></button></span>
+            <span class="fx-tag">Keluarga Besar Wanita <button type="button" aria-label="Hapus tag"><i class="bi bi-x"></i></button></span>
+            <span class="fx-tag">Teman SMA <button type="button" aria-label="Hapus tag"><i class="bi bi-x"></i></button></span>
+            <span class="fx-tag">Rekan Kerja <button type="button" aria-label="Hapus tag"><i class="bi bi-x"></i></button></span>
+            <input type="text" class="tag-in" id="tagInput" placeholder="Ketik kategori lalu tekan Enter...">
+          </div>
+          <div class="fx-help"><i class="bi bi-keyboard"></i> Tekan <span class="dash-kbd">Enter</span> atau <span class="dash-kbd">,</span> untuk menambah, klik <i class="bi bi-x"></i> untuk menghapus.</div>
+        </div>
+      </div>
+
+      <div class="dash-card">
+        <div class="dash-card-header"><h3><i class="bi bi-cloud-arrow-up"></i> Unggah Foto Prewedding</h3><span class="dash-badge warning">Maks 20 MB/foto</span></div>
+        <div class="dash-card-body">
+          <div class="fx-upload" id="fxUpload" role="button" tabindex="0" aria-label="Zona unggah foto">
+            <i class="bi bi-images big"></i>
+            <h4>Tarik & Lepas Foto di Sini</h4>
+            <p>atau <strong style="color:var(--dash-secondary)">klik untuk memilih</strong> — JPG/PNG/WebP, disarankan rasio 3:4</p>
+            <input type="file" id="fxFileInput" accept="image/*" multiple hidden>
+          </div>
+          <div class="fx-file-list" id="fxFileList"></div>
+        </div>
+      </div>
+
+      <div class="dash-card">
+        <div class="dash-card-header"><h3><i class="bi bi-toggles"></i> Preferensi Undangan</h3></div>
+        <div class="dash-card-body" style="padding-top:6px;padding-bottom:6px">
+          <div class="fx-switch-row">
+            <div class="info"><strong>Aktifkan RSVP</strong><span>Tamu dapat konfirmasi kehadiran lewat undangan</span></div>
+            <label class="fx-switch"><input type="checkbox" checked><span class="track"></span></label>
+          </div>
+          <div class="fx-switch-row">
+            <div class="info"><strong>Tampilkan Amplop Digital</strong><span>Rekening & QRIS BOX pengantin di undangan</span></div>
+            <label class="fx-switch"><input type="checkbox" checked><span class="track"></span></label>
+          </div>
+          <div class="fx-switch-row">
+            <div class="info"><strong>Pengingat H-7</strong><span>WhatsApp otomatis ke tamu yang belum konfirmasi</span></div>
+            <label class="fx-switch"><input type="checkbox"><span class="track"></span></label>
+          </div>
+          <div class="fx-switch-row">
+            <div class="info"><strong>Buku Tamu Keluarga</strong><span>Keluarga dapat menambah daftar tamu sendiri</span></div>
+            <label class="fx-switch"><input type="checkbox" checked><span class="track"></span></label>
+          </div>
+          <div class="dash-divider"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <label class="fx-label" style="margin:0" for="fxRange">Progress Pengingat RSVP</label>
+            <strong id="fxRangeVal" style="color:var(--dash-primary-container)">40%</strong>
+          </div>
+          <input type="range" class="fx-range" id="fxRange" min="0" max="100" value="40" style="--fill:40%">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--dash-outline);margin-top:6px"><span>Nonaktif</span><span>Target: 8.420 dari 12.480 tamu</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 3. WAKTU & LOKASI ============ -->
+    <h2 class="dash-section-title" id="waktu-lokasi" style="margin-top:28px"><i class="bi bi-geo-alt" style="color:var(--dash-secondary)"></i> 3. Formulir Waktu & Lokasi</h2>
+    <div class="dash-card">
+      <div class="dash-card-header"><h3><i class="bi bi-calendar2-week"></i> Rangkaian Acara — Arya & Nabila</h3><span class="dash-badge success"><i class="bi bi-check-circle"></i> Terjadwal</span></div>
+      <div class="dash-card-body">
+        <form onsubmit="return false">
+          <div class="dash-form-grid">
+            <div>
+              <label class="fx-label" for="tglAkad">Tanggal Akad <span class="req">*</span></label>
+              <input type="date" id="tglAkad" class="dash-input" value="2025-12-12">
+            </div>
+            <div>
+              <label class="fx-label" for="jamAkad">Jam Akad <span class="req">*</span></label>
+              <input type="time" id="jamAkad" class="dash-input" value="08:00">
+              <div class="fx-help"><i class="bi bi-clock-history"></i> Sesuai jadwal PNN: pukul 08.00 WIB — 10.00 WIB.</div>
+            </div>
+            <div>
+              <label class="fx-label" for="tglResepsi">Tanggal Resepsi <span class="req">*</span></label>
+              <input type="date" id="tglResepsi" class="dash-input" value="2025-12-13">
+            </div>
+            <div>
+              <label class="fx-label" for="jamResepsi">Jam Resepsi</label>
+              <input type="time" id="jamResepsi" class="dash-input" value="11:00">
+            </div>
+            <div>
+              <label class="fx-label" for="venue">Nama Venue <span class="req">*</span></label>
+              <div class="fx-input-group">
+                <span class="pre"><i class="bi bi-buildings"></i></span>
+                <input type="text" id="venue" class="dash-input" placeholder="cth. Ballroom Plataran Menteng" value="Ballroom Plataran Menteng">
+              </div>
+            </div>
+            <div>
+              <label class="fx-label" for="kotaVenue">Kota</label>
+              <select id="kotaVenue" class="dash-select">
+                <option selected>Jakarta Pusat</option>
+                <option>Bandung</option>
+                <option>Yogyakarta</option>
+                <option>Surabaya</option>
+                <option>Solo</option>
+                <option>Bali</option>
+              </select>
+            </div>
+            <div style="grid-column:1/-1">
+              <label class="fx-label" for="alamatVenue">Alamat Lengkap</label>
+              <textarea id="alamatVenue" class="dash-textarea" rows="2" placeholder="Jalan, nomor, kelurahan, kecamatan, kode pos...">Jl. HOS. Cokroaminoto No. 42, Menteng, Jakarta Pusat, DKI Jakarta 10310</textarea>
+            </div>
+            <div style="grid-column:1/-1">
+              <label class="fx-label" for="mapsLink">Link Google Maps <span class="req">*</span></label>
+              <div class="fx-input-group">
+                <span class="pre"><i class="bi bi-map"></i></span>
+                <input type="url" id="mapsLink" class="dash-input" placeholder="https://maps.app.goo.gl/..." value="https://maps.app.goo.gl/plataran-menteng">
+                <button type="button" class="dash-btn dash-btn-primary" onclick="dashToast('Link Maps valid — venue ditemukan','info')"><i class="bi bi-geo"></i> Validasi</button>
+              </div>
+              <div class="fx-help"><i class="bi bi-signpost-split"></i> Link ini muncul sebagai tombol <em>"Petunjuk Arah"</em> di undangan tamu.</div>
+            </div>
+          </div>
+          <div class="dash-divider"></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+            <button type="button" class="dash-btn dash-btn-secondary" onclick="dashToast('Jadwal disalin ke hari resepsi','info')"><i class="bi bi-copy"></i> Salin ke Resepsi</button>
+            <button type="button" class="dash-btn dash-btn-primary" onclick="dashToast('Waktu & lokasi acara tersimpan')"><i class="bi bi-save"></i> Simpan Waktu & Lokasi</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ============ 4. EDITOR ============ -->
+    <h2 class="dash-section-title" id="editor" style="margin-top:28px"><i class="bi bi-textarea-t" style="color:var(--dash-secondary)"></i> 4. Editor — Kotak Cerita Mempelai</h2>
+    <div class="dash-card">
+      <div class="dash-card-header"><h3><i class="bi bi-journal-richtext"></i> Rich Text Editor (Mock)</h3><span class="dash-badge info">Tanpa library eksternal</span></div>
+      <div class="dash-card-body">
+        <label class="fx-label">Cerita Cinta — tampil di section "Perjalanan Kami"</label>
+        <div class="fx-toolbar">
+          <button type="button" class="fx-ed-btn" data-cmd="bold" title="Tebal (Ctrl+B)"><i class="bi bi-type-bold"></i></button>
+          <button type="button" class="fx-ed-btn" data-cmd="italic" title="Miring"><i class="bi bi-type-italic"></i></button>
+          <button type="button" class="fx-ed-btn" data-cmd="underline" title="Garis bawah"><i class="bi bi-type-underline"></i></button>
+          <button type="button" class="fx-ed-btn" data-cmd="strikeThrough" title="Coret"><i class="bi bi-type-strikethrough"></i></button>
+          <span class="fx-ed-sep"></span>
+          <button type="button" class="fx-ed-btn" data-cmd="insertUnorderedList" title="Daftar poin"><i class="bi bi-list-ul"></i></button>
+          <button type="button" class="fx-ed-btn" data-cmd="insertOrderedList" title="Daftar bernomor"><i class="bi bi-list-ol"></i></button>
+          <span class="fx-ed-sep"></span>
+          <button type="button" class="fx-ed-btn" data-cmd="formatBlock" data-val="blockquote" title="Kutipan"><i class="bi bi-quote"></i></button>
+          <button type="button" class="fx-ed-btn" data-cmd="createLink" title="Sisip tautan"><i class="bi bi-link-45deg"></i></button>
+          <button type="button" class="fx-ed-btn" data-cmd="removeFormat" title="Bersihkan format"><i class="bi bi-eraser"></i></button>
+        </div>
+        <div class="fx-editor" id="fxEditor" contenteditable="true" aria-label="Editor cerita mempelai">
+          <h2>Awal Mula Kami</h2>
+          <p>Dipertemukan pada <b>seminar kewirausahaan</b> di Universitas Gadjah Mada, 2019 — Arya tanpa sengaja menumpangkan kopinya di buku catatan <i>Nabila</i>. Dari permintaan maaf sederhana, tumbuh percakapan yang tak pernah usai.</p>
+          <blockquote>"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup." — QS. Ar-Rum: 21</blockquote>
+          <p>Setelah lima tahun saling menguatkan, kami memantapkan hati untuk menyambungkan dua keluarga besar Jawa — Sunda dalam satu rangkaian <u>mahar dan sungkeman</u> penuh makna.</p>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin-top:14px">
+          <button type="button" class="dash-btn dash-btn-secondary" onclick="dashToast('Pratinjau cerita dibuka','info')"><i class="bi bi-eye"></i> Pratinjau</button>
+          <button type="button" class="dash-btn dash-btn-primary" onclick="dashToast('Cerita mempelai dipublikasikan ke undangan')"><i class="bi bi-cloud-check"></i> Terbitkan Cerita</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 5. VALIDATION ============ -->
+    <h2 class="dash-section-title" id="validation" style="margin-top:28px"><i class="bi bi-shield-check" style="color:var(--dash-secondary)"></i> 5. Validation Demo</h2>
+    <div class="dash-card">
+      <div class="dash-card-header"><h3><i class="bi bi-check2-square"></i> Status Field & Kekuatan Password</h3></div>
+      <div class="dash-card-body">
+        <div class="dash-form-grid">
+          <div>
+            <label class="fx-label">Field Sukses</label>
+            <div class="fx-field success">
+              <input type="email" class="dash-input" value="arya.nabila@janjisuci.id" aria-invalid="false">
+              <i class="bi bi-check-circle-fill fx-ico"></i>
+            </div>
+            <div class="fx-msg" style="color:var(--dash-success)"><i class="bi bi-check2"></i> Email koordinator respsi valid & terverifikasi.</div>
+          </div>
+          <div>
+            <label class="fx-label">Field Error</label>
+            <div class="fx-field error">
+              <input type="tel" class="dash-input" value="0812" aria-invalid="true" aria-describedby="errPhone">
+              <i class="bi bi-exclamation-circle-fill fx-ico"></i>
+            </div>
+            <div class="fx-msg error" id="errPhone"><i class="bi bi-x-circle"></i> Nomor WhatsApp koordinator harus 10–13 digit, cth. 081234567890.</div>
+          </div>
+          <div style="grid-column:1/-1">
+            <label class="fx-label" for="pwDemo">Password Admin (demo kekuatan)</label>
+            <div class="fx-field">
+              <input type="password" id="pwDemo" class="dash-input" placeholder="Minimal 8 karakter, kombinasi huruf, angka & simbol" autocomplete="new-password" style="padding-right:40px">
+              <i class="bi bi-eye-slash fx-ico" id="pwToggle" role="button" style="cursor:pointer;color:var(--dash-outline)" title="Tampilkan password"></i>
+            </div>
+            <div class="fx-strength" id="fxStrength" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="fx-strength-text" id="fxStrengthText" style="color:var(--dash-outline)">Kekuatan: —</div>
+            <div class="fx-help"><i class="bi bi-info-circle"></i> Demo: panjang ≥8, huruf besar+kecil, angka, dan simbol menaikkan skor.</div>
+          </div>
+        </div>
+        <div class="dash-divider"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+          <button type="button" class="dash-btn dash-btn-secondary" onclick="dashToast('Validasi diulang — 1 field error ditemukan','info')"><i class="bi bi-arrow-repeat"></i> Validasi Ulang</button>
+          <button type="button" class="dash-btn dash-btn-primary" onclick="dashToast('Form validasi berhasil dikirim')"><i class="bi bi-send-check"></i> Kirim Form</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 6. HORIZONTAL FORM ============ -->
+    <h2 class="dash-section-title" id="horizontal" style="margin-top:28px"><i class="bi bi-layout-text-window-reverse" style="color:var(--dash-secondary)"></i> 6. Horizontal Form — Label di Samping</h2>
+    <div class="dash-alert info" style="margin-bottom:12px">
+      <i class="bi bi-info-circle-fill"></i>
+      <div><strong>Horizontal:</strong> label di kiri (168px) & input di kanan — di layar kecil otomatis jadi vertikal. Cocok untuk form data mempelai yang butuh scan cepat ala AdminLTE.</div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-card-header"><h3><i class="bi bi-text-paragraph"></i> Contoh Horizontal — Data Pengantin</h3><span class="dash-badge info">label 168px</span></div>
+      <div class="dash-card-body">
+        <form onsubmit="return false" class="fx-h-form">
+          <div class="fx-h-row">
+            <label class="fx-h-label" for="hzNama">Nama Lengkap <span class="req">*</span></label>
+            <div class="fx-h-field">
+              <input type="text" id="hzNama" class="dash-input" placeholder="cth. Raden Mas Arya Wibowo" value="Raden Mas Arya Wibowo">
+              <div class="fx-help"><i class="bi bi-info-circle"></i> Nama sesuai akad nikah.</div>
+            </div>
+          </div>
+          <div class="fx-h-row">
+            <label class="fx-h-label" for="hzEmail">Email Koordinator <span class="req">*</span></label>
+            <div class="fx-h-field">
+              <div class="fx-input-group">
+                <span class="pre"><i class="bi bi-envelope"></i></span>
+                <input type="email" id="hzEmail" class="dash-input" placeholder="koordinator@janjisuci.id" value="arya.nabila@janjisuci.id">
+              </div>
+            </div>
+          </div>
+          <div class="fx-h-row">
+            <label class="fx-h-label" for="hzWa">No. WhatsApp</label>
+            <div class="fx-h-field">
+              <div class="fx-input-group">
+                <span class="pre"><i class="bi bi-whatsapp"></i></span>
+                <input type="tel" id="hzWa" class="dash-input" placeholder="0812-3456-7890" value="0812-3456-7890">
+              </div>
+            </div>
+          </div>
+          <div class="fx-h-row">
+            <label class="fx-h-label" for="hzPaket">Paket</label>
+            <div class="fx-h-field">
+              <select id="hzPaket" class="dash-select">
+                <option>Royale Silver — Rp 149.000</option>
+                <option selected>Royale Gold — Rp 249.000</option>
+                <option>Royale Platinum — Rp 349.000</option>
+              </select>
+            </div>
+          </div>
+          <div class="fx-h-row">
+            <label class="fx-h-label">Metode Amplop</label>
+            <div class="fx-h-field" style="display:flex;gap:10px;flex-wrap:wrap;padding-top:4px">
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;cursor:pointer"><input type="radio" name="hzAmplop" checked> Transfer Bank</label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;cursor:pointer"><input type="radio" name="hzAmplop"> QRIS</label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;cursor:pointer"><input type="radio" name="hzAmplop"> E-Wallet</label>
+            </div>
+          </div>
+          <div class="fx-h-row">
+            <label class="fx-h-label" for="hzAlamat">Alamat Venue</label>
+            <div class="fx-h-field">
+              <textarea id="hzAlamat" class="dash-textarea" rows="2" placeholder="Jl. HOS. Cokroaminoto No.42, Menteng, Jakarta Pusat">Jl. HOS. Cokroaminoto No.42, Menteng, Jakarta Pusat 10310</textarea>
+            </div>
+          </div>
+          <div class="fx-h-row">
+            <div></div>
+            <div class="fx-h-field" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-start">
+              <button type="button" class="dash-btn dash-btn-secondary" onclick="dashToast('Form horizontal di-reset','info')"><i class="bi bi-x-lg"></i> Batal</button>
+              <button type="button" class="dash-btn dash-btn-primary" onclick="dashToast('Data horizontal tersimpan')"><i class="bi bi-check2-circle"></i> Simpan Horizontal</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ============ 7. VERTICAL FORM ============ -->
+    <h2 class="dash-section-title" id="vertical" style="margin-top:28px"><i class="bi bi-layout-text-sidebar" style="color:var(--dash-secondary)"></i> 7. Vertical Form — Label di Atas</h2>
+    <div class="dash-alert success" style="margin-bottom:12px">
+      <i class="bi bi-check-circle-fill"></i>
+      <div><strong>Vertical:</strong> label di atas input, paling jelas di mobile. Cocok untuk form panjang seperti RSVP & buku tamu.</div>
+    </div>
+    <div class="dash-grid dash-grid-2">
+      <div class="dash-card">
+        <div class="dash-card-header"><h3><i class="bi bi-person-lines-fill"></i> Vertical — Single Column</h3><span class="dash-badge success">stacked</span></div>
+        <div class="dash-card-body">
+          <form onsubmit="return false" class="fx-v-form">
+            <div class="fx-v-field">
+              <label class="fx-label" for="vtNama">Nama Tamu <span class="req">*</span></label>
+              <input type="text" id="vtNama" class="dash-input" placeholder="cth. Bpk. Hendra & Keluarga">
+            </div>
+            <div class="fx-v-field">
+              <label class="fx-label" for="vtJumlah">Jumlah Tamu</label>
+              <select id="vtJumlah" class="dash-select">
+                <option selected>1 orang</option>
+                <option>2 orang</option>
+                <option>3 orang</option>
+                <option>4 orang</option>
+              </select>
+              <div class="fx-help"><i class="bi bi-people"></i> Termasuk anak-anak.</div>
+            </div>
+            <div class="fx-v-field">
+              <label class="fx-label" for="vtUcapan">Ucapan & Doa</label>
+              <textarea id="vtUcapan" class="dash-textarea" rows="3" placeholder="Tulis ucapan untuk pengantin...">Semoga menjadi keluarga sakinah, mawaddah, warahmah 🤲</textarea>
+            </div>
+            <div class="fx-v-field">
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;cursor:pointer"><input type="checkbox" checked> Saya akan hadir di akad</label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;cursor:pointer"><input type="checkbox"> Kirim pengingat H-1 via WhatsApp</label>
+            </div>
+            <button type="button" class="dash-btn dash-btn-primary" style="width:100%" onclick="dashToast('RSVP vertical terkirim')"><i class="bi bi-send"></i> Konfirmasi Kehadiran</button>
+          </form>
+        </div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-header"><h3><i class="bi bi-grid-1x2"></i> Vertical — Two Columns + Inline</h3><span class="dash-badge warning">grid 2</span></div>
+        <div class="dash-card-body">
+          <form onsubmit="return false" class="fx-v-form">
+            <div class="dash-form-grid">
+              <div class="fx-v-field">
+                <label class="fx-label" for="vtEmail">Email</label>
+                <input type="email" id="vtEmail" class="dash-input" placeholder="tamu@email.com">
+              </div>
+              <div class="fx-v-field">
+                <label class="fx-label" for="vtTelp">Telepon</label>
+                <input type="tel" id="vtTelp" class="dash-input" placeholder="0812-xxxx-xxxx">
+              </div>
+            </div>
+            <div class="fx-v-field">
+              <label class="fx-label" for="vtAlamat2">Alamat</label>
+              <input type="text" id="vtAlamat2" class="dash-input" placeholder="Jl. Melati No.12, Bandung">
+            </div>
+            <div class="fx-v-field">
+              <label class="fx-label">Inline — Cek Ketersediaan Tanggal</label>
+              <div class="fx-inline-form">
+                <div class="fx-v-field">
+                  <input type="date" class="dash-input" value="2025-10-24">
+                </div>
+                <div class="fx-v-field">
+                  <input type="time" class="dash-input" value="11:00">
+                </div>
+                <button type="button" class="dash-btn dash-btn-primary" onclick="dashToast('Tanggal tersedia','info')"><i class="bi bi-search"></i> Cek</button>
+              </div>
+              <div class="fx-help"><i class="bi bi-calendar3"></i> Inline 3 kolom — otomatis stack di HP.</div>
+            </div>
+            <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:4px">
+              <button type="button" class="dash-btn dash-btn-secondary" onclick="dashToast('Form vertical di-reset','info')">Reset</button>
+              <button type="button" class="dash-btn dash-btn-primary" onclick="dashToast('Data vertical tersimpan')"><i class="bi bi-check2"></i> Simpan</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-alert warning" style="margin-top:16px">
+      <i class="bi bi-lightbulb"></i>
+      <div><strong>Tips layout:</strong> pakai <code>.fx-h-form + .fx-h-row</code> untuk horizontal (desktop label 168px, mobile jadi vertical otomatis) dan <code>.fx-v-form + .fx-v-field</code> untuk vertical. Untuk inline (tanggal & jam berdampingan) pakai <code>.fx-inline-form</code> — sudah responsif.</div>
+    </div>
+  </div>
+
+  <footer class="dash-footer">
+    <div>© 2025 JanjiSuci DashAdmin • Nusantara Royale Romance • v1.0.0</div>
+    <div style="display:flex;gap:16px"><a href="../index.html">Landing</a> <a href="profile.html">Profile</a> <span>Dibuat di Indonesia 🇮🇩</span></div>
+  </footer>
+</main>
+
+<button class="dash-scrolltop" id="dashScrollTop"><i class="bi bi-arrow-up"></i></button>
+
+<script src="assets/js/dashadmin.js"></script>
+<script>
+(function(){
+  /* Color swatch picker */
+  const swatches = document.querySelectorAll('#fxSwatches input');
+  const swLabel = document.getElementById('swatchLabel');
+  swatches.forEach(r => r.addEventListener('change', () => { swLabel.textContent = r.value; }));
+
+  /* Tags input mock */
+  const tagsBox = document.getElementById('fxTags');
+  const tagIn = document.getElementById('tagInput');
+  function bindTagRemove(){
+    tagsBox.querySelectorAll('.fx-tag button').forEach(b => {
+      b.onclick = () => b.closest('.fx-tag').remove();
+    });
+  }
+  tagIn.addEventListener('keydown', e => {
+    const val = tagIn.value.trim();
+    if((e.key === 'Enter' || e.key === ',') && val){
+      e.preventDefault();
+      const tag = document.createElement('span');
+      tag.className = 'fx-tag';
+      tag.innerHTML = val + ' <button type="button" aria-label="Hapus tag"><i class="bi bi-x"></i></button>';
+      tagsBox.insertBefore(tag, tagIn);
+      tagIn.value = '';
+      bindTagRemove();
+    }
+  });
+  bindTagRemove();
+
+  /* Upload dropzone */
+  const zone = document.getElementById('fxUpload');
+  const fileInput = document.getElementById('fxFileInput');
+  const fileList = document.getElementById('fxFileList');
+  function addFiles(files){
+    [...files].forEach(f => {
+      const row = document.createElement('div');
+      row.className = 'fx-file';
+      const kb = f.size > 1048576 ? (f.size/1048576).toFixed(1)+' MB' : Math.round(f.size/1024)+' KB';
+      row.innerHTML = '<i class="bi bi-file-earmark-image"></i><span>' + f.name + '</span><span class="size">' + kb + '</span>';
+      fileList.appendChild(row);
+    });
+    if(files.length) dashToast(files.length + ' foto prewedding siap diunggah');
+  }
+  zone.addEventListener('click', () => fileInput.click());
+  zone.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); fileInput.click(); } });
+  fileInput.addEventListener('change', () => addFiles(fileInput.files));
+  ['dragenter','dragover'].forEach(ev => zone.addEventListener(ev, e => { e.preventDefault(); zone.classList.add('dragover'); }));
+  ['dragleave','drop'].forEach(ev => zone.addEventListener(ev, e => { e.preventDefault(); zone.classList.remove('dragover'); }));
+  zone.addEventListener('drop', e => addFiles(e.dataTransfer.files));
+
+  /* Range slider */
+  const range = document.getElementById('fxRange');
+  const rangeVal = document.getElementById('fxRangeVal');
+  range.addEventListener('input', () => {
+    rangeVal.textContent = range.value + '%';
+    range.style.setProperty('--fill', range.value + '%');
+  });
+
+  /* Password strength + toggle */
+  const pw = document.getElementById('pwDemo');
+  const strength = document.getElementById('fxStrength');
+  const strengthText = document.getElementById('fxStrengthText');
+  const pwToggle = document.getElementById('pwToggle');
+  pwToggle.addEventListener('click', () => {
+    const show = pw.type === 'password';
+    pw.type = show ? 'text' : 'password';
+    pwToggle.className = 'fx-ico bi ' + (show ? 'bi-eye' : 'bi-eye-slash');
+  });
+  pw.addEventListener('input', () => {
+    const v = pw.value;
+    let score = 0;
+    if(v.length >= 8) score++;
+    if(/[a-z]/.test(v) && /[A-Z]/.test(v)) score++;
+    if(/[0-9]/.test(v)) score++;
+    if(/[^A-Za-z0-9]/.test(v)) score++;
+    const lvl = score === 0 ? 0 : score <= 2 ? 1 : score === 3 ? 2 : 3;
+    strength.className = 'fx-strength' + (lvl ? ' lv' + lvl : '');
+    const map = ['Kekuatan: —','Lemah','Sedang','Kuat'];
+    const colors = ['var(--dash-outline)','var(--dash-danger)','var(--dash-warning)','var(--dash-success)'];
+    strengthText.textContent = map[lvl] + (v ? ' (' + v.length + ' karakter)' : '');
+    strengthText.style.color = colors[lvl];
+  });
+
+  /* Rich text toolbar mock */
+  const editor = document.getElementById('fxEditor');
+  document.querySelectorAll('.fx-ed-btn[data-cmd]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cmd = btn.dataset.cmd;
+      editor.focus();
+      if(cmd === 'createLink'){
+        const url = prompt('Masukkan URL (cth. https://janjisuci.id):');
+        if(url) document.execCommand(cmd, false, url);
+      } else {
+        document.execCommand(cmd, false, btn.dataset.val || null);
+      }
+      btn.classList.toggle('on');
+    });
+  });
+})();
+</script>
+<script src="assets/js/theme-switcher.js"></script>
+</body>
+</html>

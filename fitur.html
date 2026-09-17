@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitur Lengkap - JanjiSuci Platform Undangan Pernikahan Digital</title>
+  <meta name="description" content="Jelajahi fitur pintar & lengkap JanjiSuci: WhatsApp Blaster, RSVP real-time, amplop digital 0% potongan, galeri sinematik, dan keamanan premium untuk hari paling berharga.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Native CSS -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+    /* ========== FITUR PAGE SPECIFIC ========== */
+    .fitur-hero {
+      position: relative;
+      overflow: hidden;
+      background: var(--cream-bg);
+      padding-top: 3rem;
+      padding-bottom: 5rem;
+      text-align: center;
+    }
+    @media (min-width: 768px) { .fitur-hero { padding-top: 4.5rem; padding-bottom: 6rem; } }
+    .fitur-hero-glow {
+      position: absolute;
+      top: -2rem; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 360px;
+      background: radial-gradient(ellipse at center, rgba(245,235,215,0.55) 0%, rgba(247,237,232,0.25) 45%, transparent 70%);
+      filter: blur(18px);
+      pointer-events: none;
+      border-radius: 50%;
+    }
+    .fitur-hero .container { position: relative; z-index: 1; }
+    .badge-status {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.35rem 0.9rem;
+      background: var(--status-badge);
+      color: #fff;
+      border-radius: 9999px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      box-shadow: var(--shadow-sm);
+    }
+    .badge-blush {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.3rem 0.75rem;
+      background: var(--blush-soft);
+      color: var(--secondary);
+      border: 1px solid var(--sand-warm);
+      border-radius: 9999px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .fitur-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; line-height: 36px; font-weight: 600;
+      color: var(--primary);
+      max-width: 42rem; margin: 1.25rem auto 0;
+      letter-spacing: -0.015em;
+    }
+    @media (min-width: 768px) { .fitur-title { font-size: 38px; line-height: 48px; letter-spacing: -0.01em; } }
+    @media (min-width: 1024px) { .fitur-title { font-size: 44px; line-height: 52px; } }
+    .fitur-subtitle {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px; line-height: 26px; color: var(--on-surface-variant);
+      max-width: 36rem; margin: 1rem auto 0;
+    }
+    @media (min-width: 768px) { .fitur-subtitle { font-size: 18px; line-height: 28px; } }
+    /* Stats grid */
+    .stats-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      max-width: 64rem; margin: 2.5rem auto 0;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--sand-warm);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      box-shadow: 0 4px 20px -2px rgba(43,38,37,0.05);
+    }
+    @media (min-width: 768px) { .stats-card { grid-template-columns: repeat(4,1fr); padding: 1.5rem; } }
+    .stat-item {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 0.75rem;
+      text-align: center;
+      border-right: 1px solid rgba(232,223,211,0.6);
+    }
+    .stat-item:nth-child(2n) { border-right: none; }
+    @media (min-width: 768px) {
+      .stat-item { border-right: 1px solid rgba(232,223,211,0.6); }
+      .stat-item:last-child { border-right: none; }
+      .stat-item:nth-child(2n) { border-right: 1px solid rgba(232,223,211,0.6); }
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-value { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--primary); line-height: 1; }
+    .stat-value.accent { color: var(--secondary); }
+    .stat-value.navy { color: var(--navy-accent); }
+    .stat-label { display: flex; align-items: center; gap: 0.35rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.03em; color: var(--on-surface-variant); margin-top: 0.35rem; }
+    .stat-label i { font-size: 0.95rem; }
+    .stat-label i.success { color: var(--status-success); }
+    .stat-label i.secondary { color: var(--secondary); }
+    .stat-label i.navy { color: var(--navy-accent); }
+
+    /* Feature sections */
+    .feature-section {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+      padding-block: 1rem;
+    }
+    @media (min-width: 960px) {
+      .feature-section { grid-template-columns: 5fr 7fr; gap: 3rem; }
+      .feature-section.reverse { grid-template-columns: 7fr 5fr; }
+      .feature-section.reverse .feature-text { order: 2; }
+      .feature-section.reverse .feature-visual { order: 1; }
+    }
+    .feature-badge { margin-bottom: 0.75rem; }
+    .feature-title-sm {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px; line-height: 34px; font-weight: 600;
+      color: var(--primary);
+    }
+    @media (min-width: 768px) { .feature-title-sm { font-size: 30px; line-height: 38px; } }
+    .feature-desc { font-size: 15px; line-height: 24px; color: var(--on-surface-variant); margin-top: 0.75rem; }
+    .sub-card {
+      background: var(--surface-card);
+      border: 1px solid rgba(232,223,211,0.85);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      transition: border-color 0.2s;
+    }
+    .sub-card:hover { border-color: rgba(131,82,61,0.35); }
+    .sub-card-row { display: flex; align-items: flex-start; gap: 0.75rem; }
+    .sub-card-row i { color: var(--primary); font-size: 1.4rem; margin-top: 2px; flex-shrink: 0; }
+    .sub-card h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; line-height: 22px; font-weight: 700; color: var(--primary); margin-bottom: 0.3rem; }
+    .sub-card p { font-size: 13px; line-height: 20px; color: var(--on-surface-variant); }
+    .sub-card p em { font-style: italic; color: var(--on-surface); }
+    .sub-stack { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 1.25rem; }
+
+    /* Mock cards */
+    .mock-card {
+      background: var(--surface-card);
+      border: 1px solid var(--sand-warm);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 12px 32px -4px rgba(27,59,54,0.09);
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) { .mock-card { padding: 1.75rem; } }
+    .mock-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 1rem; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--sand-warm);
+      gap: 0.75rem; flex-wrap: wrap;
+    }
+    .mock-dots { display: flex; align-items: center; gap: 0.4rem; }
+    .mock-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .mock-dot.red { background: var(--error); }
+    .mock-dot.gold { background: var(--tertiary-fixed-dim); }
+    .mock-dot.green { background: var(--status-success); }
+    .mock-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-surface-variant); margin-left: 0.4rem; }
+    .mock-badge { padding: 0.25rem 0.6rem; border-radius: 9999px; font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; background: rgba(27,59,54,0.08); color: var(--primary); }
+    .mini-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.6rem; margin-bottom: 1.25rem; }
+    .mini-stat { background: var(--cream-bg); border: 1px solid var(--sand-warm); border-radius: 0.6rem; padding: 0.75rem; text-align: center; }
+    .mini-stat span:first-child { display: block; font-size: 12px; color: var(--on-surface-variant); }
+    .mini-stat strong { display: block; font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--primary); margin-top: 2px; }
+    .mini-stat strong.accent { color: var(--secondary); }
+    .mini-stat strong.success { color: var(--status-success); }
+    .guest-preview { display: flex; flex-direction: column; gap: 0.75rem; background: rgba(250,247,242,0.6); border: 1px solid var(--sand-warm); border-radius: 0.75rem; padding: 1rem; }
+    .guest-row { display: flex; align-items: flex-start; gap: 0.75rem; background: var(--surface-card); border: 1px solid rgba(232,223,211,0.6); border-radius: 0.6rem; padding: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .guest-avatar { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .guest-avatar.primary { background: var(--primary); }
+    .guest-avatar.secondary { background: var(--secondary); }
+    .guest-name { font-size: 13px; font-weight: 700; color: var(--primary); }
+    .guest-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--status-success); }
+    .guest-msg { font-size: 13px; line-height: 18px; color: var(--on-surface-variant); margin-top: 0.25rem; }
+
+    /* Bank card */
+    .bank-card {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 55%, var(--surface-tint) 100%);
+      color: #fff;
+      border-radius: 0.85rem;
+      padding: 1.25rem;
+      position: relative; overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    .bank-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; gap: 1rem; }
+    .bank-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--primary-fixed); }
+    .bank-number { font-family: monospace; font-size: 18px; font-weight: 600; letter-spacing: 0.06em; margin-top: 0.25rem; }
+    .bank-card i.card-icon { font-size: 2rem; color: var(--gold-light); opacity: 0.95; }
+    .bank-foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap; }
+    .bank-foot .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--primary-fixed); }
+    .bank-foot .value { font-size: 14px; font-weight: 700; margin-top: 2px; }
+    .btn-copy {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.4rem 0.75rem;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
+      color: #fff; border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 0.45rem; font-size: 12px; font-weight: 600;
+      transition: background 0.2s;
+    }
+    .btn-copy:hover { background: rgba(255,255,255,0.25); }
+    .qris-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .qris-card { display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--cream-bg); border: 1px solid var(--sand-warm); border-radius: 0.75rem; }
+    .qris-card i { font-size: 1.6rem; color: var(--primary); }
+    .qris-card i.secondary { color: var(--secondary); }
+    .qris-card strong { display: block; font-size: 13px; font-weight: 700; color: var(--primary); }
+    .qris-card span { display: block; font-size: 12px; color: var(--on-surface-variant); }
+    .check-list { display: flex; flex-direction: column; gap: 0.85rem; margin-top: 1rem; }
+    .check-list li { display: flex; align-items: flex-start; gap: 0.65rem; font-size: 14px; line-height: 22px; color: var(--on-surface); }
+    .check-list i { color: var(--status-success); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+
+    /* Media showcase */
+    .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin-top: 1rem; }
+    .media-tile { background: var(--surface-card); border: 1px solid var(--sand-warm); border-radius: 0.75rem; padding: 1rem; }
+    .media-tile i { font-size: 1.4rem; color: var(--primary); display: block; margin-bottom: 0.5rem; }
+    .media-tile h4 { font-size: 15px; font-weight: 700; color: var(--primary); }
+    .media-tile p { font-size: 13px; line-height: 18px; color: var(--on-surface-variant); margin-top: 0.3rem; }
+    .media-mock { border-radius: 1rem; overflow: hidden; border: 1px solid var(--sand-warm); box-shadow: 0 24px 48px -8px rgba(20,34,56,0.16); background: var(--surface-card); }
+    .media-image-wrap { position: relative; height: 320px; }
+    @media (min-width: 768px) { .media-image-wrap { height: 380px; } }
+    .media-image-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .media-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(3,37,33,0.78) 0%, transparent 55%, rgba(0,0,0,0.12) 100%); display: flex; flex-direction: column; justify-content: space-between; padding: 1.25rem; }
+    .music-pill { align-self: flex-end; display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border: 1px solid var(--sand-warm); border-radius: 9999px; padding: 0.3rem 0.75rem; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .music-pill i { color: var(--status-success); animation: pulse 1.6s infinite; }
+    .media-caption { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; color: #fff; }
+    .media-caption small { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.25rem; }
+    .media-caption h3 { font-family: 'Playfair Display', serif; font-size: 18px; line-height: 22px; font-weight: 600; color: #fff; }
+    .play-btn { width: 48px; height: 48px; border-radius: 50%; background: var(--surface-card); color: var(--primary); display: grid; place-items: center; font-size: 1.5rem; flex-shrink: 0; box-shadow: 0 4px 16px rgba(0,0,0,0.18); transition: transform 0.2s; cursor: pointer; border: none; }
+    .play-btn:hover { transform: scale(1.07); }
+    .media-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.9rem 1.25rem; background: var(--cream-bg); border-top: 1px solid var(--sand-warm); flex-wrap: wrap; }
+    .media-foot-left { display: flex; align-items: center; gap: 0.5rem; font-size: 13px; font-weight: 600; color: var(--primary); }
+    .media-foot-left i { color: var(--secondary); }
+    .media-foot-right { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-surface-variant); }
+
+    /* Security cards */
+    .security-grid { display: grid; gap: 1rem; }
+    @media (min-width: 640px) { .security-grid { grid-template-columns: 1fr 1fr; } }
+    .sec-card { background: var(--surface-card); border: 1px solid var(--sand-warm); border-radius: 1rem; padding: 1.5rem; box-shadow: var(--shadow-card); transition: box-shadow 0.2s; }
+    .sec-card:hover { box-shadow: var(--shadow-hover); }
+    .sec-icon { width: 40px; height: 40px; border-radius: 0.6rem; background: var(--blush-soft); color: var(--secondary); display: grid; place-items: center; font-size: 1.25rem; margin-bottom: 1rem; }
+    .sec-card h4 { font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
+    .sec-card p { font-size: 13px; line-height: 20px; color: var(--on-surface-variant); }
+    .sec-mono { margin-top: 1rem; padding: 0.5rem 0.75rem; background: var(--cream-bg); border: 1px solid var(--sand-warm); border-radius: 0.45rem; font-family: monospace; font-size: 11px; font-weight: 700; color: var(--primary); text-align: center; }
+    .sec-badge { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 11px; font-weight: 700; color: var(--status-success); margin-top: 1rem; }
+    .sec-wide { grid-column: 1 / -1; display: flex; align-items: flex-start; gap: 1rem; }
+    @media (max-width: 639px) { .sec-wide { flex-direction: column; } }
+    .gold-box { background: var(--gold-light); border: 1px solid var(--sand-warm); border-radius: 0.75rem; padding: 1rem; margin-top: 1rem; }
+    .gold-box strong { display: flex; align-items: center; gap: 0.4rem; font-size: 13px; font-weight: 700; color: var(--primary); }
+    .gold-box i { font-size: 1rem; }
+    .gold-box p { font-size: 13px; line-height: 20px; color: var(--on-surface-variant); margin-top: 0.4rem; }
+
+    /* Comparison */
+    .compare-section { background: var(--surface-card); border-top: 1px solid var(--sand-warm); border-bottom: 1px solid var(--sand-warm); padding: 4rem 0; }
+    .compare-header { text-align: center; max-width: 48rem; margin: 0 auto 2.5rem; }
+    .compare-header .eyebrow { color: var(--secondary); }
+    .compare-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--sand-warm); border-radius: 1rem; box-shadow: var(--shadow-card); }
+    .compare-table { width: 100%; min-width: 640px; border-collapse: collapse; background: var(--surface-card); }
+    .compare-table th { text-align: left; padding: 1rem 1.25rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--on-surface-variant); border-bottom: 1px solid var(--sand-warm); }
+    .compare-table th.highlight { background: var(--cream-bg); color: var(--primary); font-size: 14px; text-transform: none; letter-spacing: 0; border-left: 1px solid var(--sand-warm); border-right: 1px solid var(--sand-warm); border-top: none; }
+    .compare-table th.highlight span.badge-premium { display: inline-block; background: var(--secondary); color: #fff; font-size: 9px; font-weight: 700; letter-spacing: 0.06em; padding: 0.15rem 0.4rem; border-radius: 0.25rem; vertical-align: middle; margin-left: 0.4rem; }
+    .compare-table td { padding: 1rem 1.25rem; font-size: 14px; line-height: 20px; border-bottom: 1px solid rgba(232,223,211,0.6); vertical-align: middle; }
+    .compare-table td:first-child { font-weight: 600; color: var(--primary); }
+    .compare-table td:first-child small { display: block; font-size: 11px; font-weight: 400; color: var(--on-surface-variant); margin-top: 2px; }
+    .compare-table td.col-highlight { background: var(--cream-bg); border-left: 1px solid var(--sand-warm); border-right: 1px solid var(--sand-warm); font-weight: 700; color: var(--status-success); }
+    .compare-table td.col-highlight i { color: var(--status-success); margin-right: 0.4rem; vertical-align: -1px; }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:last-child td.col-highlight { border-radius: 0 0 0.75rem 0.75rem; }
+
+    /* CTA dark */
+    .cta-wrap { padding: 4rem 0; }
+    @media (min-width: 768px) { .cta-wrap { padding: 5rem 0; } }
+    .cta-card-dark {
+      position: relative; overflow: hidden;
+      background: var(--primary-container);
+      color: #fff;
+      border-radius: 1.5rem;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 24px 48px -8px rgba(20,34,56,0.16);
+    }
+    @media (min-width: 768px) { .cta-card-dark { padding: 3.5rem; } }
+    .cta-card-dark::before, .cta-card-dark::after {
+      content: ""; position: absolute; border-radius: 50%; pointer-events: none; filter: blur(24px);
+    }
+    .cta-card-dark::before { top: -6rem; left: -6rem; width: 18rem; height: 18rem; background: rgba(68,100,95,0.22); }
+    .cta-card-dark::after { bottom: -6rem; right: -6rem; width: 18rem; height: 18rem; background: rgba(131,82,61,0.18); }
+    .cta-card-dark .inner { position: relative; z-index: 1; max-width: 36rem; margin-inline: auto; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+    .cta-eyebrow {
+      display: inline-block; padding: 0.3rem 0.75rem;
+      background: rgba(245,235,215,0.15); color: var(--gold-light);
+      border: 1px solid rgba(245,235,215,0.22);
+      border-radius: 9999px; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .cta-title-dark { font-family: 'Playfair Display', serif; font-size: 28px; line-height: 36px; font-weight: 600; color: #fff; }
+    @media (min-width: 768px) { .cta-title-dark { font-size: 38px; line-height: 48px; } }
+    .cta-desc-dark { font-size: 16px; line-height: 26px; color: rgba(255,255,255,0.82); }
+    .cta-actions-dark { display: flex; flex-direction: column; gap: 0.85rem; width: 100%; padding-top: 0.5rem; }
+    @media (min-width: 640px) { .cta-actions-dark { flex-direction: row; justify-content: center; width: auto; } }
+    .cta-actions-dark a { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.9rem 1.75rem; border-radius: 0.6rem; font-size: 14px; font-weight: 700; transition: all 0.2s; text-decoration: none; white-space: nowrap; }
+    .cta-actions-dark a.primary { background: var(--surface-card); color: var(--primary); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+    .cta-actions-dark a.primary:hover { background: var(--cream-bg); }
+    .cta-actions-dark a.ghost { background: transparent; color: #fff; border: 1px solid rgba(232,223,211,0.35); }
+    .cta-actions-dark a.ghost:hover { background: rgba(255,255,255,0.08); }
+    .cta-note { font-size: 12px; color: rgba(255,255,255,0.65); }
+
+    /* Section spacing */
+    .feature-shell { max-width: var(--container-max); margin-inline: auto; padding-inline: 1rem; display: flex; flex-direction: column; gap: 5rem; margin-bottom: 4rem; }
+    @media (min-width: 768px) { .feature-shell { padding-inline: 2rem; gap: 7rem; margin-bottom: 6rem; } }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="JanjiSuci beranda">
+        <div class="brand-icon"><i class="bi bi-heart-fill"></i></div>
+        <div class="brand-text">
+          <span class="brand-name">JanjiSuci</span>
+          <span class="brand-sub">Wedding Invitation</span>
+        </div>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Navigasi utama">
+        <a href="fitur.html" class="nav-link active">Fitur</a>
+        <a href="katalog.html" class="nav-link">Katalog Tema</a>
+        <a href="harga.html" class="nav-link">Harga</a>
+        <a href="contoh.html" class="nav-link">Contoh Undangan</a>
+        <a href="testimoni.html" class="nav-link">Testimoni</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="login.html" class="btn btn-ghost">Masuk</a>
+        <a href="dashboard.html" class="btn btn-primary">
+          <span>Buat Undangan Sekarang</span>
+          <i class="bi bi-arrow-right"></i>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Navigasi mobile">
+      <a href="fitur.html" class="active">Fitur</a>
+      <a href="katalog.html">Katalog Tema</a>
+      <a href="harga.html">Harga</a>
+      <a href="contoh.html">Contoh Undangan</a>
+      <a href="testimoni.html">Testimoni</a>
+      <a href="blog.html">Blog</a>
+      <a href="login.html">Masuk</a>
+    </nav>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="fitur-hero">
+    <div class="fitur-hero-glow" aria-hidden="true"></div>
+    <div class="container">
+      <span class="badge-status"><i class="bi bi-stars"></i> TEKNOLOGI &amp; INOVASI TERKINI</span>
+      <h1 class="fitur-title">Fitur Pintar &amp; Lengkap untuk Hari Paling Berharga</h1>
+      <p class="fitur-subtitle">Jelajahi setiap kapabilitas canggih yang dirancang khusus untuk kenyamanan Anda dan kemudahan para tamu undangan terhormat.</p>
+
+      <div class="stats-card">
+        <div class="stat-item">
+          <span class="stat-value">99.9%</span>
+          <span class="stat-label"><i class="bi bi-cloud-check success"></i> Uptime Server</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value accent">0%</span>
+          <span class="stat-label"><i class="bi bi-credit-card secondary"></i> Potongan Amplop</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">1-Klik</span>
+          <span class="stat-label"><i class="bi bi-chat-dots success"></i> Auto-Sync WhatsApp</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value navy">256-Bit</span>
+          <span class="stat-label"><i class="bi bi-shield-check navy"></i> SSL Enkripsi</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DETAIL SHOWCASE ==================== -->
+  <div class="feature-shell">
+    <!-- Kategori 1 -->
+    <section class="feature-section" aria-labelledby="fitur-distribusi">
+      <div class="feature-text">
+        <div class="feature-badge"><span class="badge-blush"><i class="bi bi-send"></i> Distribusi Efisien</span></div>
+        <h2 id="fitur-distribusi" class="feature-title-sm">Penyebaran Undangan Otomatis &amp; Cerdas</h2>
+        <p class="feature-desc">Ucapkan selamat tinggal pada proses kirim undangan satu per satu yang melelahkan. Sistem cerdas JanjiSuci memastikan setiap tamu menerima salam hangat yang terpersonalisasi secara otomatis.</p>
+        <div class="sub-stack">
+          <div class="sub-card">
+            <div class="sub-card-row">
+              <i class="bi bi-chat-dots"></i>
+              <div>
+                <h4>WhatsApp Blaster 1-Klik Anti Banned</h4>
+                <p>Personalisasi otomatis format resmi: <em>"Kepada Yth. Bapak/Ibu/Saudara/i..."</em>. Atur ritme pengiriman berkala aman dan terjadwal secara mandiri.</p>
+              </div>
+            </div>
+          </div>
+          <div class="sub-card">
+            <div class="sub-card-row">
+              <i class="bi bi-person-check"></i>
+              <div>
+                <h4>Buku Tamu &amp; RSVP Real-Time</h4>
+                <p>Konfirmasi kehadiran instan (Hadir, Ragu-ragu, Tidak Hadir) yang langsung mengalkulasi porsi katering akurat dan notifikasi langsung ke smartphone calon pengantin.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="feature-visual">
+        <div class="mock-card">
+          <div class="mock-header">
+            <div class="mock-dots">
+              <span class="mock-dot red"></span>
+              <span class="mock-dot gold"></span>
+              <span class="mock-dot green"></span>
+              <span class="mock-label">LIVE RSVP &amp; GUEST MONITOR</span>
+            </div>
+            <span class="mock-badge">Sync Online</span>
+          </div>
+          <div class="mini-stats">
+            <div class="mini-stat">
+              <span>Terkonfirmasi</span>
+              <strong>342 Tamu</strong>
+            </div>
+            <div class="mini-stat">
+              <span>Porsi Katering</span>
+              <strong class="accent">520 Pax</strong>
+            </div>
+            <div class="mini-stat">
+              <span>Tingkat Hadir</span>
+              <strong class="success">88.5%</strong>
+            </div>
+          </div>
+          <div class="guest-preview">
+            <div class="guest-row">
+              <div class="guest-avatar primary">BP</div>
+              <div style="flex:1;">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+                  <span class="guest-name">Bpk. Dr. H. Hendra &amp; Istri</span>
+                  <span class="guest-badge">HADIR (2 Orang)</span>
+                </div>
+                <p class="guest-msg">"Selamat untuk Arya &amp; Nabila, semoga samawa berkah selamanya."</p>
+              </div>
+            </div>
+            <div class="guest-row">
+              <div class="guest-avatar secondary">SM</div>
+              <div style="flex:1;">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+                  <span class="guest-name">Sahabat SMA 1 Jakarta</span>
+                  <span class="guest-badge">HADIR (5 Orang)</span>
+                </div>
+                <p class="guest-msg">"Pastikan ada sesi foto bareng alumni yaa! Congratz brother!"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kategori 2 -->
+    <section class="feature-section reverse" aria-labelledby="fitur-amplop">
+      <div class="feature-text">
+        <div class="feature-badge"><span class="badge-blush"><i class="bi bi-piggy-bank"></i> Transparansi Penuh</span></div>
+        <h2 id="fitur-amplop" class="feature-title-sm">Amplop Digital &amp; Kado Cashless (0% Potongan Biaya)</h2>
+        <p class="feature-desc">Memberikan kemudahan bagi para tamu yang ingin menyampaikan tanda kasih secara praktis tanpa perantara biaya admin platform. Hadiah sepenuhnya milik Anda berdua.</p>
+        <ul class="check-list">
+          <li><i class="bi bi-check-circle-fill"></i><span><strong>Multi-Bank &amp; E-Wallet:</strong> Dukungan penuh BCA, Bank Mandiri, BNI, BRI, SeaBank, OVO, GoPay, DANA, dan QRIS Nasional.</span></li>
+          <li><i class="bi bi-check-circle-fill"></i><span><strong>Tombol 1-Tap Copy:</strong> Tamu dapat menyalin nomor rekening dengan sekali sentuh tanpa takut salah ketik.</span></li>
+          <li><i class="bi bi-check-circle-fill"></i><span><strong>Notifikasi Langsung:</strong> Dapatkan ucapan terlampir dan bukti transfer real-time tanpa penundaan pencairan dana.</span></li>
+        </ul>
+      </div>
+      <div class="feature-visual">
+        <div class="mock-card" style="display:flex;flex-direction:column;gap:1rem;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:0.75rem;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:0.65rem;">
+              <i class="bi bi-wallet2" style="font-size:1.5rem;color:var(--secondary);"></i>
+              <h3 style="font-size:16px;font-weight:700;color:var(--primary);">Rekening &amp; QRIS Mempelai</h3>
+            </div>
+            <span style="padding:0.3rem 0.7rem;border-radius:9999px;background:rgba(45,106,79,0.1);color:var(--status-success);font-size:10px;font-weight:700;letter-spacing:0.06em;">100% BEBAS POTONGAN</span>
+          </div>
+          <div class="bank-card">
+            <div class="bank-top">
+              <div>
+                <p class="bank-label">BANK CENTRAL ASIA (BCA)</p>
+                <p class="bank-number">8271 •••• •••• 9920</p>
+              </div>
+              <i class="bi bi-credit-card card-icon"></i>
+            </div>
+            <div class="bank-foot">
+              <div>
+                <p class="label">NAMA REKENING PENERIMA</p>
+                <p class="value">NABILA ANINDITA PUTRI</p>
+              </div>
+              <button class="btn-copy" type="button"><i class="bi bi-copy"></i> Salin Rekening</button>
+            </div>
+          </div>
+          <div class="qris-grid">
+            <div class="qris-card">
+              <i class="bi bi-qr-code-scan"></i>
+              <div>
+                <strong>QRIS Dinamis</strong>
+                <span>Semua e-Wallet &amp; M-Banking</span>
+              </div>
+            </div>
+            <div class="qris-card">
+              <i class="bi bi-gift secondary"></i>
+              <div>
+                <strong>Kirim Kado Fisik</strong>
+                <span>Alamat Pengiriman Aman</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kategori 3 -->
+    <section class="feature-section" aria-labelledby="fitur-media">
+      <div class="feature-text">
+        <div class="feature-badge"><span class="badge-blush"><i class="bi bi-camera-reels"></i> Audio Visual Mewah</span></div>
+        <h2 id="fitur-media" class="feature-title-sm">Media Sinematik &amp; Interaktivitas Elegan</h2>
+        <p class="feature-desc">Sentuhan multimedia premium menyajikan kisah cinta Anda selayaknya pemutaran film romantis berkelas dengan sentuhan budaya yang syahdu.</p>
+        <div class="media-grid">
+          <div class="media-tile">
+            <i class="bi bi-music-note-beamed"></i>
+            <h4>Musik Latar &amp; Gamelan</h4>
+            <p>Lagu romantis pilihan dan alunan gamelan Nusantara bebas royalti hak cipta audio.</p>
+          </div>
+          <div class="media-tile">
+            <i class="bi bi-geo-alt"></i>
+            <h4>Peta Google &amp; Waze</h4>
+            <p>Navigasi titik lokasi akad &amp; resepsi presisi tanpa kebingungan mencari venue.</p>
+          </div>
+          <div class="media-tile">
+            <i class="bi bi-clock"></i>
+            <h4>Countdown Timer</h4>
+            <p>Hitung mundur hari bahagia terintegrasi tombol 'Add to Google Calendar'.</p>
+          </div>
+          <div class="media-tile">
+            <i class="bi bi-images"></i>
+            <h4>Galeri HD Lightbox</h4>
+            <p>Tampilan foto prewedding jernih berkecepatan tinggi dengan player video YouTube &amp; Vimeo.</p>
+          </div>
+        </div>
+      </div>
+      <div class="feature-visual">
+        <div class="media-mock">
+          <div class="media-image-wrap">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4LEDNm_4aDF3vD-pBDHE9TsC0HvJZGRQiPNQKVeZNyqM2tIWLLAyBzIo0iZVOX3jc1kxPGhuHI0D-kazBzw7Z4UGSAoT052o-D7HWcF8iBfVnRDIjsjkOWdGeWLZHMYc4f2rEbnp2-Zycdb_GMsYjzuPm8zbUvtZCw0yKdw2kPorzn2iuiVIrBm2aY_dnY1IvokE2nqdL8OlBwLLd8_lJrf7IXtvbKo7jzJItg0Iv2XKCryYs0mHN" alt="Pasangan pengantin dengan busana adat Jawa emas dan hijau zamrud di taman botani">
+            <div class="media-overlay">
+              <div class="music-pill"><i class="bi bi-soundwave"></i> Playing: Gending Sriwijaya Modern (Acoustic)</div>
+              <div class="media-caption">
+                <div>
+                  <small>Sinema Prewedding</small>
+                  <h3>Arya &amp; Nabila: The Journey of Sacred Vows</h3>
+                </div>
+                <button class="play-btn" aria-label="Putar video"><i class="bi bi-play-fill"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="media-foot">
+            <div class="media-foot-left"><i class="bi bi-image"></i> 18 Foto HD &amp; 2 Video Teaser</div>
+            <span class="media-foot-right">Full Screen Lightbox Support</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kategori 4 -->
+    <section class="feature-section reverse" aria-labelledby="fitur-keamanan">
+      <div class="feature-text">
+        <div class="feature-badge"><span class="badge-blush"><i class="bi bi-shield-lock"></i> Privasi &amp; Eksklusivitas</span></div>
+        <h2 id="fitur-keamanan" class="feature-title-sm">Kustomisasi Eksklusif &amp; Keamanan Tingkat Tinggi</h2>
+        <p class="feature-desc">Pernikahan adalah momentum sakral. Kami memberikan otoritas penuh atas privasi data tamu, branding domain pribadi, serta ketenangan pikiran tanpa batas waktu.</p>
+        <div class="gold-box">
+          <strong><i class="bi bi-patch-check-fill" style="color:var(--status-success);"></i> Sertifikasi Standar Privasi Terjamin</strong>
+          <p>Data nomor telepon dan alamat tamu undangan tidak pernah diperjualbelikan atau disalahgunakan untuk iklan pihak ketiga manapun.</p>
+        </div>
+      </div>
+      <div class="feature-visual">
+        <div class="security-grid">
+          <div class="sec-card">
+            <div class="sec-icon"><i class="bi bi-globe"></i></div>
+            <h4>Custom Domain Pribadi</h4>
+            <p>Gunakan domain unik nama Anda berdua untuk kesan prestisius dan mudah diingat tamu.</p>
+            <div class="sec-mono">arya-nabila.com / .id</div>
+          </div>
+          <div class="sec-card">
+            <div class="sec-icon"><i class="bi bi-lock"></i></div>
+            <h4>Proteksi Sandi VIP</h4>
+            <p>Lindungi privasi acara akad keluarga inti dari akses umum dengan PIN sandi eksklusif.</p>
+            <div class="sec-badge"><i class="bi bi-shield-check"></i> Enkripsi Sesi Tamu</div>
+          </div>
+          <div class="sec-card sec-wide">
+            <div class="sec-icon" style="flex-shrink:0;margin-bottom:0;"><i class="bi bi-infinity"></i></div>
+            <div>
+              <h4>Masa Aktif Selamanya (Eternal Memories)</h4>
+              <p>Tidak ada masa kadaluarsa setelah resepsi selesai. Website Anda tetap hidup selamanya sebagai buku kenangan digital yang bisa dibuka kembali pada perayaan ulang tahun pernikahan.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== COMPARISON ==================== -->
+  <section class="compare-section">
+    <div class="container">
+      <div class="compare-header">
+        <span class="eyebrow">Tabel Komparasi Transparan</span>
+        <h2 class="section-title">Mengapa Fitur JanjiSuci Lebih Unggul Dibanding Undangan Digital Biasa?</h2>
+        <p class="section-desc">Bandingkan perbedaan kualitas, kestabilan sistem, dan komitmen layanan kami untuk hari spesial Anda.</p>
+      </div>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th style="width:40%;">Fitur &amp; Kemampuan</th>
+              <th class="highlight" style="width:30%;"><span style="font-family:'Playfair Display',serif;font-weight:700;">JanjiSuci</span> <span class="badge-premium">PREMIUM</span></th>
+              <th style="width:30%;">Undangan Digital Biasa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Potongan Biaya Amplop Digital<small>Kado cashless langsung ke rekening Anda</small></td>
+              <td class="col-highlight"><i class="bi bi-check-circle-fill"></i> 0% (Bebas Potongan)</td>
+              <td style="color:var(--on-surface-variant);">Dipotong 2.5% - 5% per transaksi</td>
+            </tr>
+            <tr>
+              <td>WhatsApp Blaster Personalisasi<small>Sapa nama tamu tanpa takut banned</small></td>
+              <td class="col-highlight"><i class="bi bi-check-circle-fill"></i> Auto-Blast 1-Klik Resmi</td>
+              <td style="color:var(--on-surface-variant);">Kirim manual satu per satu</td>
+            </tr>
+            <tr>
+              <td>Masa Aktif Website Undangan<small>Penyimpanan memori pernikahan</small></td>
+              <td class="col-highlight"><i class="bi bi-check-circle-fill"></i> Aktif Selamanya (Lifetime)</td>
+              <td style="color:var(--on-surface-variant);">Dihapus setelah 30-90 hari</td>
+            </tr>
+            <tr>
+              <td>Custom Domain Pribadi<small>Domain eksklusif nama pengantin</small></td>
+              <td class="col-highlight"><i class="bi bi-check-circle-fill"></i> Tersedia (.com / .id)</td>
+              <td style="color:var(--on-surface-variant);">Subdomain panjang &amp; iklan bawaan</td>
+            </tr>
+            <tr>
+              <td>Katalog Musik &amp; Gamelan Tradisional<small>Lisensi audio resmi bebas copyright</small></td>
+              <td class="col-highlight"><i class="bi bi-check-circle-fill"></i> 500+ Lagu Bebas Royalti</td>
+              <td style="color:var(--on-surface-variant);">Terbatas / Sering terkena mute</td>
+            </tr>
+            <tr>
+              <td>Buku Tamu &amp; Kalkulator Katering Otomatis<small>Sinkronisasi data riil persiapan acara</small></td>
+              <td class="col-highlight"><i class="bi bi-check-circle-fill"></i> Real-time Dashboard &amp; Excel Export</td>
+              <td style="color:var(--on-surface-variant);">Komentar statis tanpa rekap data</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA ==================== -->
+  <section class="cta-wrap">
+    <div class="container" style="max-width:72rem;">
+      <div class="cta-card-dark">
+        <div class="inner">
+          <span class="cta-eyebrow">Mulai Tanpa Risiko</span>
+          <h2 class="cta-title-dark">Siap Membuat Undangan Digital Impianmu?</h2>
+          <p class="cta-desc-dark">Ciptakan undangan elegan bernuansa modern Nusantara dalam hitungan menit. Uji coba semua fitur premium kami secara gratis sekarang juga.</p>
+          <div class="cta-actions-dark">
+            <a href="dashboard.html" class="primary"><span>Coba Gratis Sekarang</span> <i class="bi bi-arrow-right"></i></a>
+            <a href="https://wa.me/628123456789" class="ghost" target="_blank" rel="noopener"><i class="bi bi-headset"></i> <span>Konsultasi Tim CS</span></a>
+          </div>
+          <p class="cta-note">Tanpa perlu kartu kredit • Aktif instan • Bantuan via WhatsApp 24/7</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand">
+            <div class="brand-icon" style="width:36px;height:36px;font-size:1rem;"><i class="bi bi-heart-fill"></i></div>
+            <span class="brand-name" style="font-size:20px;">JanjiSuci</span>
+          </div>
+          <p>Platform undangan pernikahan digital bernuansa modern Nusantara dengan standar visual editorial tinggi, keandalan tanpa kompromi, dan fitur kado tanpa potongan.</p>
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-top:1rem;color:var(--secondary);font-size:13px;font-weight:600;">
+            <i class="bi bi-heart-fill"></i> Dirancang dengan cinta di Indonesia
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Navigasi Utama</h4>
+            <ul>
+              <li><a href="#">Tentang Kami</a></li>
+              <li><a href="katalog.html">Katalog Tema</a></li>
+              <li><a href="fitur.html" style="font-weight:700;color:var(--primary);">Fitur Lengkap</a></li>
+              <li><a href="harga.html">Paket Harga</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legal &amp; Privasi</h4>
+            <ul>
+              <li><a href="#">Syarat &amp; Ketentuan</a></li>
+              <li><a href="#">Kebijakan Privasi</a></li>
+              <li><a href="#">Keamanan Enkripsi</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Layanan Bantuan</h4>
+            <ul>
+              <li><a href="https://wa.me/628123456789" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:0.35rem;"><i class="bi bi-chat-dots" style="color:var(--status-success);"></i> Hubungi CS WhatsApp</a></li>
+              <li><a href="#">Panduan Penggunaan</a></li>
+              <li><a href="#">FAQ Undangan</a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 JanjiSuci Platform Undangan Pernikahan Digital. Hak cipta dilindungi undang-undang.</p>
+        <div style="display:flex;align-items:center;gap:1.25rem;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--on-surface-variant);">
+          <span>SECURED BY 256-BIT SSL</span>
+          <span>•</span>
+          <span>INDONESIA ARCHIPELAGO CELEBRATION</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('navToggle');
+    const nav = document.getElementById('mobileNav');
+    btn?.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      btn.innerHTML = open ? '<i class="bi bi-x-lg"></i>' : '<i class="bi bi-list"></i>';
+    });
+    nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      btn.innerHTML = '<i class="bi bi-list"></i>';
+    }));
+  </script>
+</body>
+</html>

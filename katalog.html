@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katalog Tema &amp; Desain Lengkap | JanjiSuci Undangan Digital</title>
+  <meta name="description" content="Eksplorasi mahakarya desain digital dari keelokan adat tradisional nusantara hingga kemewahan minimalis kontemporer. 48+ tema siap pakai.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Native CSS -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+    /* ========== KATALOG PAGE SPECIFIC ========== */
+    .katalog-hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(to bottom, var(--surface) 0%, var(--cream-bg) 100%);
+      border-bottom: 1px solid rgba(232,223,211,0.6);
+      padding-top: 3rem;
+      padding-bottom: 2.5rem;
+      text-align: center;
+    }
+    @media (min-width: 768px) { .katalog-hero { padding-top: 4rem; padding-bottom: 3rem; } }
+    .katalog-hero::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: radial-gradient(#C98E75 0.75px, transparent 0.75px);
+      background-size: 24px 24px;
+      opacity: 0.18; pointer-events: none;
+    }
+    .katalog-hero .container { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.35rem 0.75rem;
+      background: var(--surface-card);
+      border: 1px solid var(--sand-warm);
+      border-radius: 9999px;
+      box-shadow: var(--shadow-sm);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--secondary);
+    }
+    .hero-badge .dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--status-success);
+      animation: pulse 1.6s infinite;
+    }
+    .katalog-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; line-height: 36px; font-weight: 600;
+      color: var(--primary);
+      max-width: 42rem; margin: 0.9rem auto 0;
+      letter-spacing: -0.015em;
+    }
+    @media (min-width: 768px) { .katalog-title { font-size: 38px; line-height: 48px; } }
+    .katalog-desc {
+      font-size: 15px; line-height: 26px; color: var(--on-surface-variant);
+      max-width: 36rem; margin: 0.75rem auto 0;
+    }
+    @media (min-width: 768px) { .katalog-desc { font-size: 18px; line-height: 28px; } }
+
+    /* Search */
+    .search-wrap { max-width: 36rem; margin: 1.75rem auto 0; }
+    .search-bar {
+      display: flex; align-items: center;
+      background: var(--surface-card);
+      border: 1px solid var(--sand-warm);
+      border-radius: 0.85rem;
+      padding: 0.45rem 0.45rem 0.45rem 1rem;
+      box-shadow: var(--shadow-card);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      gap: 0.6rem;
+    }
+    .search-bar:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(27,59,54,0.10); }
+    .search-bar i { font-size: 1.25rem; color: var(--outline); flex-shrink: 0; }
+    .search-bar input {
+      flex: 1; border: none; outline: none; background: transparent;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; line-height: 20px;
+      color: var(--on-surface);
+    }
+    .search-bar input::placeholder { color: var(--outline); }
+    .search-bar .btn-search {
+      display: none; align-items: center; justify-content: center;
+      padding: 0.6rem 1.1rem;
+      background: var(--primary-container);
+      color: #fff; border-radius: 0.6rem;
+      font-size: 12px; font-weight: 700;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .search-bar .btn-search:hover { background: var(--primary); }
+    @media (min-width: 640px) { .search-bar .btn-search { display: inline-flex; } }
+
+    /* Filter chips hero */
+    .hero-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; max-width: 60rem; margin: 1.5rem auto 0; }
+    .hero-chip {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.55rem 1rem;
+      border-radius: 9999px;
+      font-size: 13px; font-weight: 600;
+      border: 1px solid var(--sand-warm);
+      background: var(--surface-card);
+      color: var(--on-surface-variant);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .hero-chip:hover { background: var(--surface-container); }
+    .hero-chip.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .hero-chip.active .count { background: rgba(255,255,255,0.18); color: #fff; }
+    .hero-chip .count {
+      background: rgba(232,223,211,0.7);
+      color: var(--on-surface);
+      font-size: 10px; font-weight: 700;
+      padding: 0.15rem 0.4rem; border-radius: 9999px;
+    }
+    .hero-chip i { font-size: 0.95rem; color: var(--secondary); }
+    .hero-chip.active i { color: #fff; }
+
+    /* Toolbar */
+    .toolbar {
+      display: flex; flex-direction: column; gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(232,223,211,0.7);
+    }
+    @media (min-width: 960px) { .toolbar { flex-direction: row; align-items: center; justify-content: space-between; } }
+    .rumpun-wrap { display: flex; align-items: center; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.4rem; scrollbar-width: none; }
+    .rumpun-wrap::-webkit-scrollbar { display: none; }
+    .rumpun-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--outline); white-space: nowrap; margin-right: 0.25rem; }
+    .rumpun-chip {
+      padding: 0.35rem 0.75rem;
+      background: rgba(232,223,211,0.4);
+      color: var(--on-surface);
+      border-radius: 0.4rem;
+      font-size: 13px; font-weight: 500;
+      white-space: nowrap;
+      transition: background 0.2s;
+      border: none; cursor: pointer;
+    }
+    .rumpun-chip:hover { background: var(--sand-warm); }
+    .toolbar-right { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; justify-content: space-between; }
+    @media (min-width: 960px) { .toolbar-right { justify-content: flex-end; } }
+    .color-group { display: flex; align-items: center; gap: 0.5rem; }
+    .color-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--outline); }
+    @media (max-width: 639px) { .color-label { display: none; } }
+    .swatches { display: flex; align-items: center; gap: 0.4rem; }
+    .swatch {
+      width: 24px; height: 24px; border-radius: 50%;
+      border: 2px solid var(--surface-card);
+      box-shadow: 0 0 0 1px var(--sand-warm);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .swatch:hover { transform: scale(1.12); }
+    .sort-group { display: flex; align-items: center; gap: 0.5rem; }
+    .sort-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--outline); }
+    .sort-select-wrap { position: relative; display: inline-block; }
+    .sort-select {
+      appearance: none;
+      background: var(--surface-card);
+      border: 1px solid var(--sand-warm);
+      color: var(--on-surface);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px; font-weight: 600;
+      border-radius: 0.45rem;
+      padding: 0.45rem 2rem 0.45rem 0.75rem;
+      cursor: pointer;
+    }
+    .sort-select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(27,59,54,0.1); }
+    .sort-icon { position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--outline); font-size: 0.9rem; }
+
+    /* Catalog grid */
+    .catalog-grid {
+      display: grid;
+      gap: 1.5rem;
+      padding-top: 1.5rem;
+    }
+    @media (min-width: 640px) { .catalog-grid { grid-template-columns: repeat(2,1fr); gap: 1.5rem; } }
+    @media (min-width: 1024px) { .catalog-grid { grid-template-columns: repeat(4,1fr); gap: 1.75rem; } }
+    .catalog-card {
+      background: var(--surface-card);
+      border: 1px solid rgba(232,223,211,0.8);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 20px -2px rgba(43,38,37,0.05);
+      display: flex; flex-direction: column;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .catalog-card:hover { box-shadow: 0 16px 36px -4px rgba(27,59,54,0.12); transform: translateY(-2px); }
+    .catalog-media { position: relative; aspect-ratio: 3/4; overflow: hidden; background: var(--surface-container); }
+    .catalog-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; display: block; }
+    .catalog-card:hover .catalog-media img { transform: scale(1.05); }
+    .cat-badge-top {
+      position: absolute; top: 12px; left: 12px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.3rem 0.65rem; border-radius: 9999px; color: #fff; box-shadow: var(--shadow-sm);
+    }
+    .cat-badge-top.populer { background: var(--status-badge); }
+    .cat-badge-top.favorit { background: var(--primary); }
+    .cat-badge-top.tren { background: var(--secondary); }
+    .cat-badge-top.bestseller { background: var(--status-badge); }
+    .cat-badge-top.syari { background: var(--status-success); }
+    .cat-badge-top.editor { background: var(--primary-container); color: var(--gold-light); }
+    .cat-badge-top.sunda { background: var(--secondary); }
+    .cat-rating {
+      position: absolute; top: 12px; right: 12px;
+      display: inline-flex; align-items: center; gap: 0.25rem;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(6px);
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.4rem;
+      box-shadow: var(--shadow-sm);
+      font-size: 11px; font-weight: 700; color: var(--on-surface);
+    }
+    .cat-rating i { color: #E8A317; font-size: 0.8rem; }
+    .cat-audio {
+      position: absolute; bottom: 12px; left: 12px;
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--sand-warm);
+      padding: 0.3rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 11px; font-weight: 600; color: var(--on-surface);
+      box-shadow: var(--shadow-sm);
+    }
+    .cat-audio i { color: var(--primary); font-size: 0.85rem; }
+    .catalog-body { padding: 1.1rem; display: flex; flex-direction: column; flex: 1; }
+    .catalog-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.35rem; }
+    .catalog-category { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--secondary); }
+    .catalog-status { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--status-success); }
+    .catalog-title { font-family: 'Playfair Display', serif; font-size: 18px; line-height: 24px; font-weight: 600; color: var(--primary); }
+    .catalog-card:hover .catalog-title { color: var(--secondary); }
+    .catalog-desc { font-size: 13px; line-height: 19px; color: var(--on-surface-variant); margin-top: 0.4rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.9rem; }
+    .tag { background: var(--blush-soft); color: var(--secondary); padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 11px; font-weight: 600; }
+    .catalog-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; padding-top: 0.85rem; margin-top: 0.85rem; border-top: 1px solid rgba(232,223,211,0.6); }
+    .btn-preview {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.3rem;
+      padding: 0.6rem 0.5rem;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      background: transparent;
+      border-radius: 0.5rem;
+      font-size: 12px; font-weight: 700;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .btn-preview:hover { background: rgba(27,59,54,0.06); }
+    .btn-use {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.6rem 0.5rem;
+      background: var(--primary);
+      color: #fff;
+      border: 1px solid var(--primary);
+      border-radius: 0.5rem;
+      font-size: 12px; font-weight: 700;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .btn-use:hover { background: var(--primary-container); }
+
+    /* Pagination */
+    .pagination {
+      display: flex; align-items: center; justify-content: center; gap: 0.45rem;
+      margin-top: 3rem; margin-bottom: 1rem; flex-wrap: wrap;
+    }
+    .page-btn {
+      width: 40px; height: 40px;
+      display: grid; place-items: center;
+      border-radius: 0.55rem;
+      border: 1px solid var(--sand-warm);
+      background: var(--surface-card);
+      color: var(--on-surface-variant);
+      font-size: 13px; font-weight: 700;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .page-btn:hover:not(:disabled):not(.active) { background: var(--surface-container); color: var(--on-surface); }
+    .page-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: var(--shadow-sm); }
+    .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .page-btn.next {
+      width: auto; padding: 0 1rem; gap: 0.25rem;
+      display: inline-flex; align-items: center;
+    }
+    .page-ellipsis { padding: 0 0.4rem; color: var(--outline); font-weight: 700; }
+
+    /* Promo banner */
+    .promo-wrap { padding: 2.5rem 0 1rem; }
+    .promo-banner {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, var(--primary-container) 0%, var(--primary) 55%, var(--navy-accent) 100%);
+      color: #fff;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 12px 32px rgba(20,34,56,0.16);
+    }
+    @media (min-width: 768px) { .promo-banner { padding: 2.75rem; } }
+    .promo-banner::before, .promo-banner::after {
+      content: ""; position: absolute; border-radius: 50%; pointer-events: none; filter: blur(24px);
+    }
+    .promo-banner::before { right: -3rem; bottom: -3rem; width: 16rem; height: 16rem; background: rgba(233,193,118,0.12); }
+    .promo-banner::after { right: 25%; top: -3rem; width: 12rem; height: 12rem; background: rgba(131,82,61,0.18); }
+    .promo-inner { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1.75rem; }
+    @media (min-width: 1024px) { .promo-inner { flex-direction: row; align-items: center; justify-content: space-between; } }
+    .promo-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.3rem 0.75rem;
+      background: rgba(255,255,255,0.10);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 9999px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--gold-light);
+    }
+    .promo-title { font-family: 'Playfair Display', serif; font-size: 26px; line-height: 34px; font-weight: 600; color: #fff; margin-top: 0.6rem; }
+    @media (min-width: 768px) { .promo-title { font-size: 32px; line-height: 42px; } }
+    .promo-desc { font-size: 15px; line-height: 26px; color: rgba(255,255,255,0.88); margin-top: 0.5rem; max-width: 36rem; }
+    .promo-actions { display: flex; flex-direction: column; gap: 0.75rem; flex-shrink: 0; width: 100%; }
+    @media (min-width: 640px) { .promo-actions { flex-direction: row; width: auto; } }
+    .promo-actions a {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.85rem 1.35rem;
+      border-radius: 0.6rem;
+      font-size: 14px; font-weight: 700;
+      text-decoration: none; white-space: nowrap; transition: all 0.2s;
+    }
+    .promo-actions a.primary { background: var(--gold-light); color: var(--primary); box-shadow: 0 4px 16px rgba(0,0,0,0.14); }
+    .promo-actions a.primary:hover { background: var(--tertiary-fixed); }
+    .promo-actions a.ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.28); }
+    .promo-actions a.ghost:hover { background: rgba(255,255,255,0.10); }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="JanjiSuci beranda">
+        <div class="brand-icon"><i class="bi bi-heart-fill"></i></div>
+        <div class="brand-text">
+          <span class="brand-name">JanjiSuci</span>
+          <span class="brand-sub">Wedding Invitation</span>
+        </div>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Navigasi utama">
+        <a href="fitur.html" class="nav-link">Fitur</a>
+        <a href="katalog.html" class="nav-link active">Katalog Tema</a>
+        <a href="harga.html" class="nav-link">Harga</a>
+        <a href="contoh.html" class="nav-link">Contoh Undangan</a>
+        <a href="testimoni.html" class="nav-link">Testimoni</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="login.html" class="btn btn-ghost">Masuk</a>
+        <a href="dashboard.html" class="btn btn-primary">
+          <span>Buat Undangan Sekarang</span>
+          <i class="bi bi-arrow-right" style="display:none;"></i>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav" aria-label="Navigasi mobile">
+      <a href="fitur.html">Fitur</a>
+      <a href="katalog.html" class="active">Katalog Tema</a>
+      <a href="harga.html">Harga</a>
+      <a href="contoh.html">Contoh Undangan</a>
+      <a href="testimoni.html">Testimoni</a>
+      <a href="blog.html">Blog</a>
+      <a href="login.html">Masuk</a>
+    </nav>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="katalog-hero">
+    <div class="container">
+      <div class="hero-badge"><span class="dot"></span> Edisi Koleksi Pernikahan 2025</div>
+      <h1 class="katalog-title">Koleksi Ratusan Tema Undangan Eksklusif</h1>
+      <p class="katalog-desc">Eksplorasi mahakarya desain digital dari keelokan adat tradisional nusantara hingga kemewahan minimalis kontemporer. Siap dibagikan hanya dalam hitungan menit.</p>
+
+      <div class="search-wrap">
+        <label class="search-bar" for="searchTema">
+          <i class="bi bi-search"></i>
+          <input id="searchTema" type="text" placeholder="Cari tema: Adat Minang, Sage Green, Royal Java, Minimalis...">
+          <button class="btn-search" type="button">Cari Tema</button>
+        </label>
+      </div>
+
+      <div class="hero-chips" role="tablist" aria-label="Filter kategori tema">
+        <button class="hero-chip active" role="tab" aria-selected="true">Semua <span class="count">48</span></button>
+        <button class="hero-chip" role="tab"><i class="bi bi-bank"></i> Adat Nusantara</button>
+        <button class="hero-chip" role="tab">Minimalis Modern</button>
+        <button class="hero-chip" role="tab">Floral Aesthetic</button>
+        <button class="hero-chip" role="tab">Luxury Gold &amp; Emerald</button>
+        <button class="hero-chip" role="tab">Syar'i &amp; Islami</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TOOLBAR ==================== -->
+  <div class="container">
+    <div class="toolbar">
+      <div class="rumpun-wrap">
+        <span class="rumpun-label">Rumpun Adat:</span>
+        <button class="rumpun-chip">Jawa</button>
+        <button class="rumpun-chip">Minang</button>
+        <button class="rumpun-chip">Sunda</button>
+        <button class="rumpun-chip">Batak</button>
+        <button class="rumpun-chip">Bali</button>
+      </div>
+      <div class="toolbar-right">
+        <div class="color-group">
+          <span class="color-label">Warna:</span>
+          <div class="swatches" aria-label="Filter warna dominan">
+            <button class="swatch" style="background:#1b3b36;" title="Emerald" aria-label="Emerald"></button>
+            <button class="swatch" style="background:#D4AF37;" title="Gold" aria-label="Gold"></button>
+            <button class="swatch" style="background:#C98E75;" title="Terracotta" aria-label="Terracotta"></button>
+            <button class="swatch" style="background:#8A9A86;" title="Sage" aria-label="Sage"></button>
+            <button class="swatch" style="background:#142238;" title="Navy" aria-label="Navy"></button>
+            <button class="swatch" style="background:#EADBC8;" title="Pastel Warm" aria-label="Pastel Warm"></button>
+          </div>
+        </div>
+        <div class="sort-group">
+          <span class="sort-label">Urutkan:</span>
+          <div class="sort-select-wrap">
+            <select class="sort-select" aria-label="Urutkan katalog">
+              <option>Terpopuler</option>
+              <option>Terbaru</option>
+              <option>Harga: Terendah</option>
+              <option>Harga: Tertinggi</option>
+            </select>
+            <i class="bi bi-chevron-down sort-icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CATALOG GRID ==================== -->
+  <main class="container" style="padding-bottom:1rem;">
+    <div class="catalog-grid">
+
+      <!-- Card 1 -->
+      <article class="catalog-card">
+        <div class="catalog-media">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVVOxxhPn6ozW4LdmZv9iIhGTcpFRJA-PIkffjbnw8DKnwlh5MaAMBad4vo8294i11VymL_o1UydVTCLqZn7IPFh7YcSOZwDS8M-LaQVUx72iYzwCPNA-jzEM3Xv8RPoY1kevCR1141Wxh3-XptsSxH1mdyw_IQ7xvX61Zi4KP4rJkSslR3sUeqYvmZaFira2-MEzm9D3wjV2EVbZFcnPuHWeDMM1W0_bc2J1mqxYaV7kuMM3O8k9c" alt="Mockup undangan digital Nusantara Royale dengan pola songket emas dan aksen merah">
+          <span class="cat-badge-top populer">PALING POPULER</span>
+          <span class="cat-rating"><i class="bi bi-star-fill"></i> 4.9/5</span>
+          <span class="cat-audio"><i class="bi bi-music-note-beamed"></i> Salawat &amp; Akustik Minang</span>
+        </div>
+        <div class="catalog-body">
+          <div class="catalog-meta">
+            <span class="catalog-category">Adat Minang</span>
+            <span class="catalog-status">RESPONSIF HP</span>
+          </div>
+          <h3 class="catalog-title">Nusantara Royale</h3>
+          <p class="catalog-desc">Songket Emas &amp; Ornamen Padang megah berpadu dengan bingkai kaligrafi modern dan aksen kain beludru.</p>
+          <div class="tag-row">
+            <span class="tag">Galeri Foto</span>
+            <span class="tag">Video Sinematik</span>
+            <span class="tag">RSVP Digital</span>
+          </div>
+          <div class="catalog-actions">
+            <a href="preview.html" class="btn-preview"><i class="bi bi-eye"></i> Live Preview</a>
+            <a href="dashboard.html" class="btn-use">Gunakan Tema</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="catalog-card">
+        <div class="catalog-media">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwMv6HoQ9SFNPxTO5_-di02M7YKO9yq3KLxn3AWsCN0MK6BCJfkO9Va9p8byBQUZ-YufW4g-A5dBx1uwp_VuPDNoHAMhXVFVocMdhhbbRotc-UV84dDhFnYw00vG_EbxkkCQMPAE4tR3e_cJRH1o8TEjgxKqEdEIywzNcEecyDYxTPub9tF5khOZiyLOSPONZqx_wEK_eurmCBHrb3KZ9P1ELfI8LAzMpOFnlmxsyhpPvwMlm35AcE" alt="Undangan digital Botanical Whispers dengan dedaunan eucalyptus hijau sage dan tipografi foil emas">
+          <span class="cat-badge-top favorit">FAVORIT RUSTIC</span>
+          <span class="cat-rating"><i class="bi bi-star-fill"></i> 4.8/5</span>
+          <span class="cat-audio"><i class="bi bi-music-note-beamed"></i> Acoustic Instrumental</span>
+        </div>
+        <div class="catalog-body">
+          <div class="catalog-meta">
+            <span class="catalog-category">Floral Aesthetic</span>
+            <span class="catalog-status">AUDIO OTOMATIS</span>
+          </div>
+          <h3 class="catalog-title">Botanical Whispers</h3>
+          <p class="catalog-desc">Sage Floral Eucalyptus yang teduh dan romantis untuk konsep pernikahan outdoor, garden party, &amp; intim.</p>
+          <div class="tag-row">
+            <span class="tag">Amplop Digital</span>
+            <span class="tag">Peta Interaktif</span>
+            <span class="tag">Cerita Cinta</span>
+          </div>
+          <div class="catalog-actions">
+            <a href="preview.html" class="btn-preview"><i class="bi bi-eye"></i> Live Preview</a>
+            <a href="dashboard.html" class="btn-use">Gunakan Tema</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="catalog-card">
+        <div class="catalog-media">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzHGcLSJgKQDBVM6fSXqpZkeFF_VicrOFe-m7nOl1lwgHjFgJf_wZ3lCneCiZ7Nv0ZeHwayUGURGZjQu7bLiYedLn1j9pxekaigmvLwtue6mlESMub_uov6IPMWwe7rLpL27COVsXVcwhNkEPaS23gUlpklFDrW8y1e_jAd0gzFYNPMgGTKN7P7e3h6JNOIao6ymDNIwTsJg72_nRKJ8wXCz7F0np_mbTjv5yD_KAVZMbVU6cFgv9T" alt="Undangan minimalis Monogram dengan warna warm sand dan segel monogram personal">
+          <span class="cat-badge-top tren">TREN 2025</span>
+          <span class="cat-rating"><i class="bi bi-star-fill"></i> 4.9/5</span>
+          <span class="cat-audio"><i class="bi bi-music-note-beamed"></i> Lo-Fi Piano Romance</span>
+        </div>
+        <div class="catalog-body">
+          <div class="catalog-meta">
+            <span class="catalog-category">Minimalis Modern</span>
+            <span class="catalog-status">DESAIN BERSIH</span>
+          </div>
+          <h3 class="catalog-title">Minimalist Monogram</h3>
+          <p class="catalog-desc">Serene Warm Sand bernuansa tenang, monokrom tipografi bergaya Paris chic dengan inisial monogram personal.</p>
+          <div class="tag-row">
+            <span class="tag">QR Check-in</span>
+            <span class="tag">Countdown</span>
+            <span class="tag">Gift Registry</span>
+          </div>
+          <div class="catalog-actions">
+            <a href="preview.html" class="btn-preview"><i class="bi bi-eye"></i> Live Preview</a>
+            <a href="dashboard.html" class="btn-use">Gunakan Tema</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="catalog-card">
+        <div class="catalog-media">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPu7nRMDu0xjcx0uxxtAW-GXKNmd_33KuR_su7RmU2oOoMeiZGNCQFHK0Tlr0FIKi47CUwL_10zNvxBiTLQNpuBj7153N1FmXDKL6DICq9Q9v_DzX6P5XA4jqk9c-0IxWXCDW-Wz2_0XIe85wxTnqFnWhsaK5IzWFJwZ-ROQ6HvGJ3zE54NhuufyTOFdSowIsjKz5U-rB-CQ5xwqV1ctK24EfyNVveyI3g2YXWC8cU7kyY8ZeZnR0p" alt="Undangan Golden Jasmine dengan motif melati emas dan siluet gunungan wayang di atas kertas krem">
+          <span class="cat-badge-top bestseller">BEST SELLER ADAT</span>
+          <span class="cat-rating"><i class="bi bi-star-fill"></i> 5.0/5</span>
+          <span class="cat-audio"><i class="bi bi-music-note-beamed"></i> Gamelan Kebo Giro Moderen</span>
+        </div>
+        <div class="catalog-body">
+          <div class="catalog-meta">
+            <span class="catalog-category">Adat Jawa</span>
+            <span class="catalog-status">ORNAMEN KERATON</span>
+          </div>
+          <h3 class="catalog-title">Golden Jasmine</h3>
+          <p class="catalog-desc">Adat Jawa Keraton Elegan dengan ukiran gunungan wayang emas halus dan hiasan ronce melati puspa suci.</p>
+          <div class="tag-row">
+            <span class="tag">Tuntunan Doa</span>
+            <span class="tag">Streaming Langsung</span>
+            <span class="tag">Buku Tamu</span>
+          </div>
+          <div class="catalog-actions">
+            <a href="preview.html" class="btn-preview"><i class="bi bi-eye"></i> Live Preview</a>
+            <a href="dashboard.html" class="btn-use">Gunakan Tema</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="catalog-card">
+        <div class="catalog-media">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTnt1KOAIduci7iV4mCJ9sIDG4G6U9b-O_wm8aJlm7EPiJgBscF4tITbcL15bDjdByynT3K5fsAHH9c7jWBhgdA0oAMEIx8OHBT3ymjJJ_w_wZcQ3BQHX0HTN_3eKU4cahNraSY3xjVyqtZA58Crau7bpl7xuJfAoX2YJwSb9tEG_6kPqp-7a2U_o_Es_joV140xRnS472jZHn67pEel0NIqUKj2TdyLPQvnUnscB1l1HqimP5dan_" alt="Undangan Serenity White dengan kaligrafi putih, ornamen geometri Arabesque dan pencahayaan champagne">
+          <span class="cat-badge-top syari">SYAR'I KHIDMAT</span>
+          <span class="cat-rating"><i class="bi bi-star-fill"></i> 4.9/5</span>
+          <span class="cat-audio"><i class="bi bi-music-note-beamed"></i> Nasyid Suara Alam Khidmat</span>
+        </div>
+        <div class="catalog-body">
+          <div class="catalog-meta">
+            <span class="catalog-category">Syar'i &amp; Islami</span>
+            <span class="catalog-status">TANPA FOTO WAJAH</span>
+          </div>
+          <h3 class="catalog-title">Serenity White</h3>
+          <p class="catalog-desc">Akad Suci &amp; Syar'i Khidmat dengan tata letak ayat suci Al-Quran, tanpa potret figur wajah, dan pemisahan denah ikhwan/akhwat.</p>
+          <div class="tag-row">
+            <span class="tag">Kutipan Ayat</span>
+            <span class="tag">Denah Ikhwan/Akhwat</span>
+            <span class="tag">Doa Pengantin</span>
+          </div>
+          <div class="catalog-actions">
+            <a href="preview.html" class="btn-preview"><i class="bi bi-eye"></i> Live Preview</a>
+            <a href="dashboard.html" class="btn-use">Gunakan Tema</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="catalog-card">
+        <div class="catalog-media">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3VSHGeKBRg4Tivr_t93ibWq1lWOeTP6HtvVIGLkIucVh2g13e7ex6-2DSVI0oJtAkYfjkGdQ5pBRLioerWowDyo4DmaTnLykjIxZoetlsRvfqYyceEYDOsaCC_3f-l3up1EDyibeFlc0uRjsFs2YnBlwmzs4RXr_oXdtIS9bzyaaf2UEdAuEZM58Xew-T2QIwB7st2JZNsvznKBdH6ElrUuY3_UNEtco-nX_0CQZ7-3-BRhSGk_Tn" alt="Undangan Emerald Heritage dengan latar emerald dan pola batik Parang foil emas">
+          <span class="cat-badge-top editor">PILIHAN EDITOR</span>
+          <span class="cat-rating"><i class="bi bi-star-fill"></i> 4.9/5</span>
+          <span class="cat-audio"><i class="bi bi-music-note-beamed"></i> Orchestral Nusantara</span>
+        </div>
+        <div class="catalog-body">
+          <div class="catalog-meta">
+            <span class="catalog-category">Luxury Gold &amp; Emerald</span>
+            <span class="catalog-status">PREMIUM LOOK</span>
+          </div>
+          <h3 class="catalog-title">Emerald Heritage</h3>
+          <p class="catalog-desc">Ornamen Batik Klasik Modern dengan latar beludru hijau zamrud dan sulaman foil emas murni nan memukau.</p>
+          <div class="tag-row">
+            <span class="tag">Galeri HD</span>
+            <span class="tag">Wishes Wall</span>
+            <span class="tag">Amplop QRIS</span>
+          </div>
+          <div class="catalog-actions">
+            <a href="preview.html" class="btn-preview"><i class="bi bi-eye"></i> Live Preview</a>
+            <a href="dashboard.html" class="btn-use">Gunakan Tema</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 7 -->
+      <article class="catalog-card">
+        <div class="catalog-media">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFaUXb7F3OoBaqpmr_ZzYBwPYEQDSx2OVVxWSumMOvsKLnafIMyUw9JeU76LNZV5ObRsyJo8r48OcJYWvKtGD9Xtqiy4H2yqNRI2DV2RxDrNs7WhO8IvQVIKq1s3NHNqtarKlcTa99HnEm9_4v4t67AF84w-32p5xYbzFFPfKX6PNOfYzys3bACsViyQBNuEOWZfgdQIh2FgCoWp7YpMSoWwZn_dIu_4_BuPgvB3kUc9VKHLcdLzCg" alt="Undangan Nordic Simplicity dengan tipografi editorial hitam di atas layar putih bersih dan ilustrasi garis minimalis">
+          <span class="cat-rating"><i class="bi bi-star-fill"></i> 4.7/5</span>
+          <span class="cat-audio"><i class="bi bi-music-note-beamed"></i> Strings &amp; Cello Solo</span>
+        </div>
+        <div class="catalog-body">
+          <div class="catalog-meta">
+            <span class="catalog-category">Minimalis Modern</span>
+            <span class="catalog-status">SPEED 100%</span>
+          </div>
+          <h3 class="catalog-title">Nordic Simplicity</h3>
+          <p class="catalog-desc">Clean Typographic Wedding mengutamakan keterbacaan tinggi, tata huruf kontemporer Eropa, dan estetika monokrom.</p>
+          <div class="tag-row">
+            <span class="tag">Fast Loading</span>
+            <span class="tag">RSVP Cepat</span>
+            <span class="tag">Google Calendar</span>
+          </div>
+          <div class="catalog-actions">
+            <a href="preview.html" class="btn-preview"><i class="bi bi-eye"></i> Live Preview</a>
+            <a href="dashboard.html" class="btn-use">Gunakan Tema</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 8 -->
+      <article class="catalog-card">
+        <div class="catalog-media">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO-CFVzvXy18h4T1DGqpZ2-NqQBoXiWL0ukgYqJUqcxFhXz2QwZ-YOtLb9JeZni0FO-CyrqT9PnG47mJcqPL7iT3VhnFNSpRfbOaAxIjec94Qws82sDymkFZ96U6QOPz_i8fGo6L0M_VJu_RtM8hmXHdDu4qvYucJ_yAQMmm2t6nijrGAd6tcJmNft8Vz66DitSi6CgQ3UWrjpl08WYN0tyh1WM9fjIim0G_RfCmfNi_rS2lj2lWFy" alt="Tema Sundanese Blossom dengan ilustrasi mahkota Siger emas dan bunga melati putih">
+          <span class="cat-badge-top sunda">ADAT SUNDA</span>
+          <span class="cat-rating"><i class="bi bi-star-fill"></i> 4.9/5</span>
+          <span class="cat-audio"><i class="bi bi-music-note-beamed"></i> Kacapi Suling Romantis</span>
+        </div>
+        <div class="catalog-body">
+          <div class="catalog-meta">
+            <span class="catalog-category">Adat Sunda</span>
+            <span class="catalog-status">ANGGUN SUNDA</span>
+          </div>
+          <h3 class="catalog-title">Sundanese Blossom</h3>
+          <p class="catalog-desc">Siger Sunda &amp; Melati Putih memancarkan aura ayu, santun, dan syahdu dilengkapi latar musik alunan kecapi suling.</p>
+          <div class="tag-row">
+            <span class="tag">Siger Emas</span>
+            <span class="tag">Kirim Ucapan</span>
+            <span class="tag">Live Chat CS</span>
+          </div>
+          <div class="catalog-actions">
+            <a href="preview.html" class="btn-preview"><i class="bi bi-eye"></i> Live Preview</a>
+            <a href="dashboard.html" class="btn-use">Gunakan Tema</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Pagination -->
+    <nav class="pagination" aria-label="Navigasi Halaman Katalog">
+      <button class="page-btn" disabled aria-label="Halaman sebelumnya"><i class="bi bi-chevron-left"></i></button>
+      <button class="page-btn active" aria-current="page">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <span class="page-ellipsis">...</span>
+      <button class="page-btn">8</button>
+      <button class="page-btn next">Selanjutnya <i class="bi bi-chevron-right"></i></button>
+    </nav>
+  </main>
+
+  <!-- ==================== PROMO BANNER ==================== -->
+  <section class="container promo-wrap">
+    <div class="promo-banner">
+      <div class="promo-inner">
+        <div>
+          <div class="promo-badge"><i class="bi bi-palette"></i> Layanan Desain Eksklusif</div>
+          <h2 class="promo-title">Punya Desain Sendiri?</h2>
+          <p class="promo-desc">Tim desainer senior JanjiSuci siap buatkan tema custom khusus pernikahanmu dari sketsa, undangan cetak fisik, maupun ide konsep impianmu!</p>
+        </div>
+        <div class="promo-actions">
+          <a href="https://wa.me/628123456789" target="_blank" rel="noopener" class="primary"><i class="bi bi-chat"></i> Konsultasi Desain Custom</a>
+          <a href="#" class="ghost">Lihat Portofolio Custom</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand">
+            <div class="brand-icon" style="width:36px;height:36px;font-size:1rem;"><i class="bi bi-heart-fill"></i></div>
+            <span class="brand-name" style="font-size:20px;">JanjiSuci</span>
+          </div>
+          <p>Platform pembuatan undangan pernikahan digital interaktif dengan kemewahan desain nusantara dan sentuhan modern. Dipercaya lebih dari 45.000+ pasangan berbahagia di Indonesia.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+            <a href="https://wa.me/628123456789" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Produk &amp; Tema</h4>
+            <ul>
+              <li><a href="katalog.html" style="font-weight:700;color:var(--primary);">Katalog Tema</a></li>
+              <li><a href="fitur.html">Fitur Lengkap</a></li>
+              <li><a href="harga.html">Paket Harga</a></li>
+              <li><a href="#">Tema Custom</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Perusahaan</h4>
+            <ul>
+              <li><a href="#">Tentang Kami</a></li>
+              <li><a href="#">Syarat &amp; Ketentuan</a></li>
+              <li><a href="#">Kebijakan Privasi</a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Bantuan &amp; CS</h4>
+            <ul>
+              <li><a href="https://wa.me/628123456789" target="_blank" rel="noopener" style="font-weight:600;">Hubungi CS WhatsApp</a></li>
+              <li><span style="font-size:13px;color:var(--on-surface-variant);">Senin - Minggu (08.00 - 22.00 WIB)</span></li>
+              <li><span style="font-size:13px;color:var(--on-surface-variant);">support@janjisuci.id</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 JanjiSuci Platform Undangan Pernikahan Digital. Hak cipta dilindungi undang-undang.</p>
+        <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--on-surface-variant);">Pembayaran Resmi &amp; Instan:</span>
+          <span style="padding:0.25rem 0.5rem;background:var(--surface-card);border:1px solid var(--sand-warm);border-radius:0.3rem;font-size:11px;font-weight:700;">QRIS</span>
+          <span style="padding:0.25rem 0.5rem;background:var(--surface-card);border:1px solid var(--sand-warm);border-radius:0.3rem;font-size:11px;font-weight:700;">BCA</span>
+          <span style="padding:0.25rem 0.5rem;background:var(--surface-card);border:1px solid var(--sand-warm);border-radius:0.3rem;font-size:11px;font-weight:700;">Mandiri</span>
+          <span style="padding:0.25rem 0.5rem;background:var(--surface-card);border:1px solid var(--sand-warm);border-radius:0.3rem;font-size:11px;font-weight:700;">GoPay</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('navToggle');
+    const nav = document.getElementById('mobileNav');
+    btn?.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      btn.innerHTML = open ? '<i class="bi bi-x-lg"></i>' : '<i class="bi bi-list"></i>';
+    });
+    nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      btn.innerHTML = '<i class="bi bi-list"></i>';
+    }));
+    // hero chip toggle
+    document.querySelectorAll('.hero-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.hero-chip').forEach(c=>c.classList.remove('active'));
+        chip.classList.add('active');
+      });
+    });
+    // rumpun chip toggle
+    document.querySelectorAll('.rumpun-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        chip.style.background = chip.style.background === 'var(--primary)' ? '' : 'var(--primary)';
+        chip.style.color = chip.style.color === 'rgb(255, 255, 255)' ? '' : '#fff';
+        // simple visual toggle - reset demo: use class
+        chip.classList.toggle('active');
+        if(chip.classList.contains('active')){ chip.style.background='var(--primary)'; chip.style.color='#fff'; }
+        else { chip.style.background=''; chip.style.color=''; }
+      });
+    });
+  </script>
+</body>
+</html>

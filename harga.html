@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paket Harga &amp; Biaya - JanjiSuci Undangan Pernikahan Digital</title>
+  <meta name="description" content="Pilihan paket investasi terbaik untuk momen suci sekali seumur hidup. Cukup satu kali bayar, aktif selamanya dengan fitur terlengkap di Indonesia.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Native CSS -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+    /* ========== HARGA PAGE SPECIFIC ========== */
+    .harga-hero {
+      position: relative;
+      overflow: hidden;
+      background: var(--cream-bg);
+      padding-top: 3.5rem;
+      padding-bottom: 4.5rem;
+      text-align: center;
+    }
+    @media (min-width: 768px) { .harga-hero { padding-top: 4.5rem; padding-bottom: 5.5rem; } }
+    .harga-hero::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(201,142,117,0.12) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+    .harga-hero .container { position: relative; z-index: 1; }
+    .harga-badge {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.35rem 0.9rem;
+      background: rgba(245,235,215,0.6);
+      border: 1px solid var(--sand-warm);
+      border-radius: 9999px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--secondary);
+    }
+    .harga-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; line-height: 36px; font-weight: 600;
+      color: var(--primary); max-width: 48rem; margin: 1rem auto 0;
+      letter-spacing: -0.015em;
+    }
+    @media (min-width: 768px) { .harga-title { font-size: 38px; line-height: 48px; letter-spacing: -0.01em; } }
+    .harga-sub {
+      font-size: 15px; line-height: 26px; color: var(--on-surface-variant);
+      max-width: 38rem; margin: 0.75rem auto 0;
+    }
+    @media (min-width: 768px) { .harga-sub { font-size: 18px; line-height: 28px; } }
+    .billing-wrap { margin-top: 1.75rem; display:flex; flex-direction:column; align-items:center; gap:0.9rem; }
+    .billing-pill {
+      display:inline-flex; align-items:center; flex-wrap:wrap; justify-content:center;
+      gap:0.25rem; padding:0.35rem;
+      background: var(--surface-container); border:1px solid var(--sand-warm);
+      border-radius:9999px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .billing-active {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      padding:0.55rem 1.1rem;
+      background: var(--primary-container); color:#fff;
+      border-radius:9999px; font-size:13px; font-weight:700;
+      box-shadow: var(--shadow-sm);
+    }
+    .badge-mini {
+      background: var(--status-badge); color:#fff;
+      font-size:10px; font-weight:700; letter-spacing:0.06em;
+      padding:0.2rem 0.45rem; border-radius:9999px;
+    }
+    .trust-mini {
+      display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+      gap:0.75rem 1.5rem; font-size:13px; color:var(--outline);
+    }
+    .trust-mini span { display:flex; align-items:center; gap:0.35rem; }
+    .trust-mini i { color:var(--status-success); font-size:0.95rem; }
+    /* Addons */
+    .addons-section { padding:4rem 0; background: var(--cream-bg); border-top:1px solid rgba(232,223,211,0.6); border-bottom:1px solid rgba(232,223,211,0.6); }
+    .addons-header { text-align:center; max-width:48rem; margin:0 auto 2.5rem; }
+    .addons-grid { display:grid; gap:1.5rem; }
+    @media (min-width: 768px) { .addons-grid { grid-template-columns: repeat(3,1fr); } }
+    .addon-card {
+      background: var(--surface-card); border:1px solid var(--sand-warm);
+      border-radius:1rem; padding:1.5rem;
+      display:flex; flex-direction:column; justify-content:space-between;
+      transition:border-color 0.2s, box-shadow 0.2s;
+    }
+    .addon-card:hover { border-color: rgba(131,82,61,0.35); box-shadow: var(--shadow-card); }
+    .addon-top { display:flex; align-items:flex-start; gap:0.9rem; }
+    .addon-icon { width:44px; height:44px; border-radius:0.6rem; display:grid; place-items:center; font-size:1.3rem; flex-shrink:0; }
+    .addon-icon.blush { background:var(--blush-soft); color:var(--secondary); }
+    .addon-icon.gold { background:var(--gold-light); color:var(--secondary); }
+    .addon-icon.mint { background:var(--surface-container-high); color:var(--primary); }
+    .addon-card h4 { font-size:16px; font-weight:700; color:var(--primary); line-height:22px; }
+    .addon-card p { font-size:13px; line-height:20px; color:var(--on-surface-variant); margin-top:0.35rem; }
+    .addon-foot { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-top:1rem; border-top:1px solid rgba(232,223,211,0.6); margin-top:1.25rem; }
+    .addon-price-label { font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--outline); display:block; }
+    .addon-price { font-size:18px; font-weight:700; color:var(--primary); }
+    .btn-addon { padding:0.45rem 0.9rem; border:1px solid var(--sand-warm); border-radius:0.45rem; font-size:12px; font-weight:700; color:var(--primary); background:transparent; transition:all 0.2s; }
+    .btn-addon:hover { background:var(--surface-container); border-color: var(--primary-container); color: var(--primary); }
+    /* Guarantee */
+    .guarantee-section { background: var(--surface); padding:4rem 0; }
+    .guarantee-grid { display:grid; gap:2.5rem; align-items:center; }
+    @media (min-width: 1024px) { .guarantee-grid { grid-template-columns:6fr 6fr; } }
+    .guarantee-card { background: rgba(247,237,232,0.6); border:1px solid rgba(131,82,61,0.2); border-radius:1rem; padding:1.75rem; display:flex; align-items:center; gap:1.25rem; }
+    @media (max-width: 639px) { .guarantee-card { flex-direction:column; text-align:center; } }
+    .guarantee-icon { width:64px; height:64px; border-radius:1rem; background:var(--primary-container); color:var(--gold-light); display:grid; place-items:center; font-size:1.9rem; flex-shrink:0; box-shadow:var(--shadow-sm); }
+    .guarantee-badge { font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--status-badge); display:block; }
+    .guarantee-card h3 { font-family:'Playfair Display',serif; font-size:20px; font-weight:600; color:var(--primary); margin-top:0.2rem; }
+    .guarantee-card p { font-size:13px; line-height:20px; color:var(--on-surface-variant); margin-top:0.5rem; }
+    .pay-eyebrow { font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--outline); display:block; }
+    .pay-header h4 { font-size:18px; font-weight:700; color:var(--primary); margin-top:0.25rem; }
+    .pay-header p { font-size:13px; line-height:20px; color:var(--on-surface-variant); margin-top:0.35rem; }
+    .pay-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0.65rem; margin-top:1rem; }
+    .pay-item { background:var(--surface-card); border:1px solid var(--sand-warm); border-radius:0.6rem; height:48px; display:grid; place-items:center; font-size:12px; font-weight:700; color:var(--primary); box-shadow:var(--shadow-sm); transition:border-color 0.2s; }
+    .pay-item:hover { border-color: var(--secondary); }
+    .pay-item.qris { color: var(--status-badge); }
+    /* CTA dark - reuse style */
+    .cta-wrap-harga { padding:4rem 0; }
+    @media (min-width:768px){ .cta-wrap-harga{ padding:5rem 0; } }
+    .cta-card-dark {
+      position:relative; overflow:hidden;
+      background: var(--primary-container); color:#fff;
+      border-radius:1.5rem; padding:2.5rem 1.5rem;
+      box-shadow:0 24px 48px -8px rgba(20,34,56,0.16);
+      display:flex; flex-direction:column; gap:1.5rem; align-items:center; text-align:center;
+    }
+    @media (min-width:768px){ .cta-card-dark{ padding:3rem; } }
+    @media (min-width:1024px){ .cta-card-dark{ flex-direction:row; text-align:left; justify-content:space-between; } }
+    .cta-card-dark::before, .cta-card-dark::after { content:""; position:absolute; border-radius:50%; pointer-events:none; filter:blur(24px); }
+    .cta-card-dark::before{ top:-6rem; left:-6rem; width:18rem; height:18rem; background:rgba(68,100,95,0.22); }
+    .cta-card-dark::after{ bottom:-6rem; right:-6rem; width:18rem; height:18rem; background:rgba(131,82,61,0.18); }
+    .cta-left { position:relative; z-index:1; max-width:32rem; }
+    .cta-dark-eyebrow { font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold-light); display:block; margin-bottom:0.6rem; }
+    .cta-dark-title { font-family:'Playfair Display',serif; font-size:28px; line-height:36px; font-weight:600; color:#fff; }
+    @media (min-width:768px){ .cta-dark-title{ font-size:38px; line-height:48px; } }
+    .cta-dark-desc { font-size:15px; line-height:26px; color:rgba(255,255,255,0.82); margin-top:0.6rem; }
+    .cta-dark-actions { position:relative; z-index:1; display:flex; flex-direction:column; gap:0.85rem; flex-shrink:0; width:100%; }
+    @media (min-width:640px){ .cta-dark-actions{ flex-direction:row; width:auto; } }
+    .cta-dark-actions a { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.9rem 1.5rem; border-radius:0.6rem; font-size:14px; font-weight:700; transition:all 0.2s; white-space:nowrap; text-decoration:none; }
+    .cta-dark-actions a.primary { background:var(--gold-light); color:var(--primary); box-shadow:0 4px 16px rgba(0,0,0,0.12); }
+    .cta-dark-actions a.primary:hover{ background:var(--tertiary-fixed); }
+    .cta-dark-actions a.ghost { background:transparent; color:#fff; border:1px solid rgba(232,223,211,0.35); }
+    .cta-dark-actions a.ghost:hover{ background:rgba(255,255,255,0.08); }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="JanjiSuci beranda">
+        <div class="brand-icon"><i class="bi bi-heart-fill"></i></div>
+        <div class="brand-text">
+          <span class="brand-name">JanjiSuci</span>
+          <span class="brand-sub">Wedding Invitation</span>
+        </div>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Navigasi utama">
+        <a href="fitur.html" class="nav-link">Fitur</a>
+        <a href="katalog.html" class="nav-link">Katalog Tema</a>
+        <a href="harga.html" class="nav-link active">Harga</a>
+        <a href="contoh.html" class="nav-link">Contoh Undangan</a>
+        <a href="testimoni.html" class="nav-link">Testimoni</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="login.html" class="btn btn-ghost">Masuk</a>
+        <a href="dashboard.html" class="btn btn-primary">
+          <span>Buat Undangan Sekarang</span>
+          <i class="bi bi-arrow-right"></i>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav" aria-label="Navigasi mobile">
+      <a href="fitur.html">Fitur</a>
+      <a href="katalog.html">Katalog Tema</a>
+      <a href="harga.html" class="active">Harga</a>
+      <a href="contoh.html">Contoh Undangan</a>
+      <a href="testimoni.html">Testimoni</a>
+      <a href="blog.html">Blog</a>
+      <a href="login.html">Masuk</a>
+    </nav>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="harga-hero">
+    <div class="container">
+      <div class="harga-badge"><i class="bi bi-patch-check-fill"></i> TRANSPARAN &amp; TANPA BIAYA TERSEMBUNYI</div>
+      <h1 class="harga-title">Pilihan Paket Investasi Terbaik untuk Momen Suci Sekali Seumur Hidup</h1>
+      <p class="harga-sub">Cukup satu kali bayar, nikmati undangan pernikahan digital aktif selamanya dengan fitur terlengkap di Indonesia.</p>
+
+      <div class="billing-wrap">
+        <div class="billing-pill">
+          <span class="billing-active"><i class="bi bi-infinity"></i> Bayar Sekali - Aktif Selamanya <span class="badge-mini">Paling Hemat</span></span>
+        </div>
+        <div class="trust-mini">
+          <span><i class="bi bi-check-circle-fill"></i> Tanpa Biaya Berlangganan</span>
+          <span><i class="bi bi-check-circle-fill"></i> Garansi Server Stabil 99.9%</span>
+          <span><i class="bi bi-check-circle-fill"></i> Pembuatan Cepat 5 Menit</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PRICING GRID ==================== -->
+  <main class="section section-surface" id="pricing-section" style="padding-top:3rem;">
+    <div class="container">
+      <div class="pricing-grid">
+        <!-- Silver -->
+        <div class="price-card">
+          <div>
+            <span class="price-eyebrow muted">Uji Coba</span>
+            <h3 class="price-title">Paket Silver</h3>
+            <p class="price-desc">Coba dan rasakan kemudahan sistem editor JanjiSuci sebelum memutuskan.</p>
+            <div class="price-main">
+              <div style="display:flex;align-items:baseline;gap:0.35rem;">
+                <span class="price-amount lg">Rp 0</span><span style="font-size:13px;color:var(--outline);">/ Gratis</span>
+              </div>
+              <span class="price-note">Masa aktif uji coba selama 3 hari</span>
+            </div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--outline);margin-bottom:0.75rem;">Fitur Termasuk</div>
+            <ul class="price-features" style="border-top:none;padding-top:0;">
+              <li><i class="bi bi-check-lg"></i> 3 Pilihan Template Terpilih</li>
+              <li><i class="bi bi-check-lg"></i> Batas 50 Nama Tamu Undangan</li>
+              <li><i class="bi bi-check-lg"></i> Countdown Timer &amp; Peta Google Maps</li>
+              <li><i class="bi bi-check-lg"></i> Fitur Amplop Digital Standard</li>
+              <li class="muted"><i class="bi bi-info-circle"></i> Tersedia Watermark JanjiSuci</li>
+              <li class="muted"><i class="bi bi-clock"></i> Masa Aktif Terbatas 3 Hari</li>
+            </ul>
+          </div>
+          <a href="dashboard.html" class="btn btn-outline-primary price-cta">Mulai Uji Coba Gratis</a>
+        </div>
+
+        <!-- Gold -->
+        <div class="price-card featured">
+          <span class="price-badge-top"><i class="bi bi-fire" style="margin-right:0.35rem;"></i> PALING POPULER • DISKON 50%</span>
+          <div>
+            <div class="price-tag">
+              <span class="price-eyebrow accent">Best Value • 85% Pasangan</span>
+              <small>Hemat Rp 99rb</small>
+            </div>
+            <h3 class="price-title">Paket Gold</h3>
+            <p class="price-desc">Solusi ideal undangan pengantin modern di seluruh nusantara.</p>
+            <div class="price-main">
+              <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.25rem;">
+                <span class="price-strike" style="margin:0;">Rp 198.000</span>
+                <span style="background:var(--secondary-fixed);color:var(--on-secondary-fixed);padding:0.15rem 0.4rem;border-radius:0.25rem;font-size:11px;font-weight:700;">Hemat Rp 99rb</span>
+              </div>
+              <div style="display:flex;align-items:baseline;gap:0.25rem;">
+                <span class="price-amount">Rp 99.000</span><span style="font-size:13px;color:var(--secondary);font-weight:600;">/ Selamanya</span>
+              </div>
+              <span class="price-note success" style="display:flex;align-items:center;gap:0.3rem;"><i class="bi bi-lock"></i> Bayar Sekali Aktif Selamanya</span>
+            </div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--secondary);margin-bottom:0.75rem;">Fitur Unggulan Lengkap</div>
+            <ul class="price-features" style="border-top:none;padding-top:0;">
+              <li><i class="bi bi-star-fill" style="color:var(--secondary);"></i> <strong>Akses Semua Tema Premium (48+ Tema Adat &amp; Modern)</strong></li>
+              <li><i class="bi bi-check-circle-fill fill"></i> Kirim Tamu Tanpa Batas (Unlimited)</li>
+              <li><i class="bi bi-check-circle-fill fill"></i> Fitur Amplop QRIS &amp; Nomor Rekening Langsung</li>
+              <li><i class="bi bi-check-circle-fill fill"></i> RSVP &amp; Buku Ucapan Tamu Real-time</li>
+              <li><i class="bi bi-check-circle-fill fill"></i> Galeri Hingga 20 Foto HD + Video Prewedding</li>
+              <li><i class="bi bi-check-circle-fill fill"></i> Background Musik Custom Bebas Pilih Lagu</li>
+              <li><i class="bi bi-check-circle-fill fill"></i> <strong>Bebas Watermark JanjiSuci</strong></li>
+              <li><i class="bi bi-check-circle-fill fill"></i> Ekspor Data Tamu ke Excel/PDF</li>
+            </ul>
+          </div>
+          <a href="dashboard.html" class="btn btn-primary price-cta" style="padding-block:1rem;box-shadow:0 4px 16px rgba(27,59,54,0.18);">Pilih Paket Gold Sekarang <i class="bi bi-arrow-right"></i></a>
+        </div>
+
+        <!-- Platinum -->
+        <div class="price-card">
+          <div>
+            <span class="price-eyebrow ultra">ULTRA EKSKLUSIF</span>
+            <h3 class="price-title">Paket Platinum</h3>
+            <p class="price-desc">Pengalaman resepsi paling prestisius dengan domain kustom website pribadi.</p>
+            <div class="price-main">
+              <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.25rem;">
+                <span class="price-strike" style="margin:0;">Rp 350.000</span>
+                <span style="background:var(--blush-soft);color:var(--secondary);padding:0.15rem 0.4rem;border-radius:0.25rem;font-size:11px;font-weight:700;">Hemat Rp 161rb</span>
+              </div>
+              <div style="display:flex;align-items:baseline;gap:0.25rem;">
+                <span class="price-amount">Rp 189.000</span><span style="font-size:13px;color:var(--secondary);font-weight:600;">/ Selamanya</span>
+              </div>
+              <span class="price-note">Domain Kustom + Fitur VIP Lengkap</span>
+            </div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--outline);margin-bottom:0.75rem;">Semua Fitur Gold &amp; VIP Eksklusif</div>
+            <ul class="price-features" style="border-top:none;padding-top:0;">
+              <li><i class="bi bi-gem" style="color:var(--navy-accent);"></i> <strong>Semua Fitur Paket Gold Termasuk</strong></li>
+              <li><i class="bi bi-check-lg"></i> Custom Domain Pribadi (.com / .my.id 1 tahun)</li>
+              <li><i class="bi bi-check-lg"></i> WhatsApp Blaster Otomatis (500 Tamu Sekali Klik)</li>
+              <li><i class="bi bi-check-lg"></i> Fitur Tamu Spesial &amp; Sesi VIP Khusus</li>
+              <li><i class="bi bi-check-lg"></i> Prioritas Bantuan CS 24/7 (Jalur WhatsApp VIP)</li>
+              <li><i class="bi bi-check-lg"></i> Bebas Revisi Data Kapan Saja</li>
+            </ul>
+          </div>
+          <a href="dashboard.html" class="btn price-cta" style="background:var(--navy-accent);color:#fff;">Pilih Paket Platinum</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== ADD-ONS ==================== -->
+  <section class="addons-section">
+    <div class="container">
+      <div class="addons-header">
+        <span class="eyebrow">Fleksibel Sesuai Kebutuhan</span>
+        <h2 class="section-title">Layanan &amp; Add-on Tambahan</h2>
+        <p class="section-desc">Tingkatkan pengalaman resepsi tamu Anda dengan opsi layanan khusus dari tim kreatif JanjiSuci.</p>
+      </div>
+      <div class="addons-grid">
+        <div class="addon-card">
+          <div>
+            <div class="addon-top">
+              <div class="addon-icon blush"><i class="bi bi-palette"></i></div>
+              <div>
+                <h4>Jasa Desain Custom Tema Unik</h4>
+                <p>Desain eksklusif disesuaikan dengan skema warna busana, dekorasi, atau ilustrasi adat khusus kedua mempelai.</p>
+              </div>
+            </div>
+          </div>
+          <div class="addon-foot">
+            <div>
+              <span class="addon-price-label">Mulai Dari</span>
+              <div class="addon-price">+Rp 150.000</div>
+            </div>
+            <a href="dashboard.html" class="btn-addon">Tambah Layanan</a>
+          </div>
+        </div>
+
+        <div class="addon-card">
+          <div>
+            <div class="addon-top">
+              <div class="addon-icon gold"><i class="bi bi-send"></i></div>
+              <div>
+                <h4>Kuota WhatsApp Blaster +500 Tamu</h4>
+                <p>Kirim blast pesan formal otomatis personalisasi nama tamu tanpa risiko banned WhatsApp.</p>
+              </div>
+            </div>
+          </div>
+          <div class="addon-foot">
+            <div>
+              <span class="addon-price-label">Harga Kuota</span>
+              <div class="addon-price">+Rp 35.000</div>
+            </div>
+            <a href="dashboard.html" class="btn-addon">Tambah Layanan</a>
+          </div>
+        </div>
+
+        <div class="addon-card">
+          <div>
+            <div class="addon-top">
+              <div class="addon-icon mint"><i class="bi bi-qr-code-scan"></i></div>
+              <div>
+                <h4>Cetak Fisik QR Check-in Meja</h4>
+                <p>Akrilik elegan berisi QR scanner registrasi tamu di meja resepsi untuk pendataan kehadiran otomatis.</p>
+              </div>
+            </div>
+          </div>
+          <div class="addon-foot">
+            <div>
+              <span class="addon-price-label">Per 2 Pcs Stand</span>
+              <div class="addon-price">+Rp 75.000</div>
+            </div>
+            <a href="dashboard.html" class="btn-addon">Tambah Layanan</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== JAMINAN & PEMBAYARAN ==================== -->
+  <section class="guarantee-section">
+    <div class="container">
+      <div class="guarantee-grid">
+        <div class="guarantee-card">
+          <div class="guarantee-icon"><i class="bi bi-shield-lock-fill"></i></div>
+          <div>
+            <span class="guarantee-badge">Jaminan Kepercayaan Penuh</span>
+            <h3>Garansi 100% Uang Kembali</h3>
+            <p>Jika sistem kami mengalami kendala teknis atau server down di hari pernikahan Anda, dana Anda dikembalikan seutuhnya tanpa potongan.</p>
+          </div>
+        </div>
+        <div>
+          <div class="pay-header">
+            <span class="pay-eyebrow">Metode Pembayaran Instan Resmi</span>
+            <h4>Aktivasi Otomatis 24 Jam Non-Stop</h4>
+            <p>Bayar mudah via QRIS bebas biaya admin atau transfer virtual account perbankan nasional.</p>
+          </div>
+          <div class="pay-grid">
+            <div class="pay-item qris">QRIS</div>
+            <div class="pay-item">BCA</div>
+            <div class="pay-item">Mandiri</div>
+            <div class="pay-item">BNI</div>
+            <div class="pay-item">BRI</div>
+            <div class="pay-item">GoPay</div>
+            <div class="pay-item">OVO</div>
+            <div class="pay-item">ShopeePay</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FAQ ==================== -->
+  <section class="section section-surface">
+    <div class="container faq-wrap">
+      <div class="section-header">
+        <span class="eyebrow">Pertanyaan Populer</span>
+        <h2 class="section-title">FAQ Seputar Biaya &amp; Pembayaran</h2>
+        <p class="section-desc">Temukan kejelasan informasi mengenai lisensi, fitur, dan ketentuan JanjiSuci.</p>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>Apa arti dari 'Bayar Sekali - Aktif Selamanya'? <i class="bi bi-chevron-down"></i></summary>
+          <p class="faq-answer">Anda hanya perlu membayar paket satu kali pada saat pendaftaran. Link undangan digital dan data kenangan momen pernikahan Anda akan terus tersimpan dan dapat diakses selamanya sebagai arsip cinta digital tanpa ada biaya langganan tahunan tersembunyi.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Berapa lama proses aktivasi setelah pembayaran selesai? <i class="bi bi-chevron-down"></i></summary>
+          <p class="faq-answer">Proses verifikasi dan aktivasi berlangsung 100% otomatis secara instan dalam hitungan detik. Segera setelah pembayaran QRIS atau Virtual Account terkonfirmasi, status akun langsung beralih ke Premium dan seluruh fitur terbuka.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Apakah saya bisa upgrade dari Paket Gold ke Paket Platinum nanti? <i class="bi bi-chevron-down"></i></summary>
+          <p class="faq-answer">Tentu saja bisa. Anda cukup membayar selisih harga antara Paket Gold dan Paket Platinum melalui dashboard editor Anda tanpa kehilangan data atau konfigurasi yang telah diisi sebelumnya.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Bagaimana cara klaim custom domain untuk Paket Platinum? <i class="bi bi-chevron-down"></i></summary>
+          <p class="faq-answer">Setelah memilih Paket Platinum, Anda akan diarahkan ke kolom pendaftaran nama domain (contoh: romeo-juliet.com). Tim teknis kami akan mendaftarkan domain Anda dan mengaktifkan SSL HTTPS dalam kurun waktu maksimal 2-4 jam kerja.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Apakah ada batasan jumlah pengiriman nama tamu undangan? <i class="bi bi-chevron-down"></i></summary>
+          <p class="faq-answer">Untuk Paket Gold dan Platinum, jumlah nama tamu tidak dibatasi sama sekali (Unlimited Guests). Anda dapat membuat ratusan hingga ribuan tautan nama unik untuk tamu keluarga, teman kuliah, maupun rekan kantor tanpa biaya tambahan.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA ==================== -->
+  <section class="cta-wrap-harga" style="background:var(--cream-bg); border-top:1px solid rgba(232,223,211,0.6);">
+    <div class="container" style="max-width:1280px;">
+      <div class="cta-card-dark">
+        <div class="cta-left">
+          <span class="cta-dark-eyebrow">Momen Sakral Sekali Seumur Hidup</span>
+          <h2 class="cta-dark-title">Buat Undangan Digital Anda Sekarang</h2>
+          <p class="cta-dark-desc">Hanya butuh 5 menit untuk menyusun undangan yang anggun, interaktif, dan berkesan bagi seluruh keluarga tercinta.</p>
+        </div>
+        <div class="cta-dark-actions">
+          <a href="dashboard.html" class="primary"><span>Pilih Paket Terbaik</span> <i class="bi bi-arrow-right"></i></a>
+          <a href="preview.html" class="ghost"><i class="bi bi-eye"></i> <span>Lihat Demo Undangan</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand">
+            <div class="brand-icon" style="width:36px;height:36px;font-size:1rem;"><i class="bi bi-heart-fill"></i></div>
+            <span class="brand-name" style="font-size:20px;">JanjiSuci</span>
+          </div>
+          <p>Platform pembuatan undangan pernikahan digital modern khas nusantara dengan sentuhan kemewahan editorial dan kemudahan teknologi.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+            <a href="https://wa.me/628123456789" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Navigasi Utama</h4>
+            <ul>
+              <li><a href="fitur.html">Fitur Lengkap</a></li>
+              <li><a href="katalog.html">Katalog Tema</a></li>
+              <li><a href="harga.html" style="font-weight:700;color:var(--primary);">Paket Harga</a></li>
+              <li><a href="contoh.html">Contoh Undangan</a></li>
+              <li><a href="testimoni.html">Testimoni</a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Bantuan &amp; Legal</h4>
+            <ul>
+              <li><a href="#">Syarat &amp; Ketentuan</a></li>
+              <li><a href="#">Kebijakan Privasi</a></li>
+              <li><a href="https://wa.me/628123456789" target="_blank" rel="noopener">Hubungi CS WhatsApp</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Konsultasi Ramah</h4>
+            <p>Butuh bantuan dalam menentukan paket atau custom tema pernikahan keluarga Anda?</p>
+            <a href="https://wa.me/628123456789" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;padding:0.5rem 0.85rem;background:var(--surface-card);border:1px solid var(--sand-warm);border-radius:0.45rem;font-size:12px;font-weight:700;color:var(--primary);text-decoration:none;">
+              <i class="bi bi-chat-dots" style="color:var(--status-success);"></i> Chat CS JanjiSuci
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 JanjiSuci Platform Undangan Pernikahan Digital. Hak cipta dilindungi undang-undang.</p>
+        <small>Dibuat dengan cinta untuk pengantin Indonesia 🇮🇩</small>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('navToggle');
+    const nav = document.getElementById('mobileNav');
+    btn?.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      btn.innerHTML = open ? '<i class="bi bi-x-lg"></i>' : '<i class="bi bi-list"></i>';
+    });
+    nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      btn.innerHTML = '<i class="bi bi-list"></i>';
+    }));
+  </script>
+</body>
+</html>

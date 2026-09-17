@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Preview — Arya &amp; Nabila | JanjiSuci</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/css/style.css" rel="stylesheet">
+<style>
+/* preview specific */
+.preview-toolbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,0.06);border-bottom:1px solid var(--sand-warm);}
+.toolbar-inner{max-width:1280px;margin:0 auto;padding:10px 1rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;}
+@media(min-width:768px){.toolbar-inner{padding:10px 2rem;}}
+.device-switch{display:flex;align-items:center;background:var(--surface-container);border:1px solid var(--sand-warm);border-radius:10px;padding:4px;gap:2px;box-shadow:inset 0 1px 2px rgba(0,0,0,0.04);}
+.device-btn{padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;color:var(--on-surface-variant);display:flex;align-items:center;gap:6px;}
+.device-btn.active{background:var(--primary);color:#fff;box-shadow:0 1px 4px rgba(0,0,0,0.15);}
+.audio-btn{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:var(--gold-light);border:1px solid var(--tertiary-fixed-dim);color:var(--primary);box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.audio-disc{animation:spin 14s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.device-frame{width:100%;max-width:440px;margin:0 auto;background:var(--surface-card);border-radius:38px;box-shadow:0 24px 50px rgba(0,0,0,0.45);border:8px solid #1f2937;overflow:hidden;display:flex;flex-direction:column;position:relative;transition:all .5s ease;}
+.device-speaker{height:28px;background:#1f2937;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.speaker-pill{width:96px;height:16px;background:#000;border-radius:9999px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;}
+.speaker-dot{width:8px;height:8px;border-radius:50%;background:#111827;border:1px solid #374151;}
+.invitation-scroll{height:839px;overflow-y:auto;background:var(--cream-bg);scroll-behavior:smooth;scrollbar-width:thin;position:relative;}
+.invitation-scroll::-webkit-scrollbar{width:6px;}
+.invitation-scroll::-webkit-scrollbar-thumb{background:var(--sand-warm);border-radius:9999px;}
+.invitation-scroll::-webkit-scrollbar-track{background:var(--cream-bg);}
+.cover{position:relative;min-height:839px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;padding:24px;background-size:cover;background-position:center;overflow:hidden;}
+.cover-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(20,34,56,0.6),rgba(27,59,54,0.5),rgba(20,34,56,0.9));backdrop-filter:blur(1px);}
+.cover-glow{position:absolute;inset:0;background:radial-gradient(circle at top,rgba(233,193,118,0.25),transparent 70%);}
+.count-box{background:var(--primary);color:var(--surface);border-radius:1rem;padding:1.25rem;box-shadow:0 8px 24px rgba(27,59,54,0.18);border:1px solid rgba(233,193,118,0.3);}
+.count-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;}
+.count-cell{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(4px);border-radius:12px;padding:10px;}
+.section-dark{background:var(--navy-accent);color:var(--surface);}
+</style>
+</head>
+<body style="background:rgba(20,34,56,0.95);">
+
+<!-- TOOLBAR -->
+<header class="preview-toolbar">
+  <div class="toolbar-inner">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="index.html" style="display:flex;align-items:center;gap:8px;color:var(--primary);">
+        <div style="width:36px;height:36px;border-radius:8px;background:var(--primary);color:var(--surface);display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,0.08);"><i class="bi bi-heart-fill"></i></div>
+        <div><span style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;letter-spacing:-0.02em;display:block;line-height:1;">JanjiSuci</span><span style="font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--secondary);text-transform:uppercase;">Live Demo Studio</span></div>
+      </a>
+      <div style="display:none;width:1px;height:24px;background:var(--sand-warm);" class="hide-sm"></div>
+      <div style="display:flex;align-items:center;gap:8px;background:var(--cream-bg);border:1px solid var(--sand-warm);padding:6px 12px;border-radius:9999px;" class="hide-sm">
+        <span style="width:10px;height:10px;border-radius:50%;background:var(--status-success);animation:pulse 1.6s infinite;"></span>
+        <span style="font-size:12px;font-weight:600;color:var(--primary);">Tema: <span style="color:var(--secondary);font-weight:700;">Nusantara Royale</span></span>
+        <span style="font-size:9px;font-weight:700;letter-spacing:0.06em;background:var(--secondary);color:#fff;padding:2px 6px;border-radius:4px;text-transform:uppercase;">Premium</span>
+      </div>
+    </div>
+
+    <div class="device-switch">
+      <button class="device-btn" id="btn-desktop" onclick="setDevice('desktop')"><i class="bi bi-laptop"></i><span style="display:none;" class="show-md">Desktop</span></button>
+      <button class="device-btn" id="btn-tablet" onclick="setDevice('tablet')"><i class="bi bi-tablet"></i><span style="display:none;" class="show-md">Tablet</span></button>
+      <button class="device-btn active" id="btn-mobile" onclick="setDevice('mobile')"><i class="bi bi-phone"></i> Mobile View</button>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:8px;">
+      <button class="audio-btn" id="audioBtn" onclick="toggleAudio()"><i class="bi bi-music-note-beamed audio-disc" id="musicDisc"></i>
+        <div style="text-align:left;display:none;" class="show-lg"><p style="font-size:9px;font-weight:700;letter-spacing:0.08em;color:var(--secondary);text-transform:uppercase;line-height:1;">Gamelan Modern</p><p id="audioStatus" style="font-size:12px;font-weight:600;color:var(--primary);white-space:nowrap;">Kompilasi Romantis</p></div>
+        <i class="bi bi-volume-up" id="volIcon" style="color:var(--primary);font-size:18px;"></i>
+      </button>
+      <button onclick="copyLink()" style="padding:8px 14px;border-radius:10px;background:var(--surface);border:1px solid var(--sand-warm);font-size:12px;font-weight:600;color:var(--on-surface);display:flex;align-items:center;gap:6px;box-shadow:0 1px 2px rgba(0,0,0,0.04);"><i class="bi bi-share"></i><span style="display:none;" class="show-sm">Bagikan Contoh</span></button>
+      <a href="dashboard.html" style="padding:8px 16px;border-radius:10px;background:var(--primary);color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(27,59,54,0.18);"><i class="bi bi-brush" style="color:var(--primary-fixed);"></i> Gunakan Tema Ini</a>
+    </div>
+  </div>
+</header>
+
+<main style="flex:1;padding:16px 8px 24px;display:flex;justify-content:center;">
+  <div class="device-frame" id="previewContainer">
+    <div class="device-speaker" id="speakerBar"><div class="speaker-pill"><div class="speaker-dot"></div></div></div>
+    <div class="invitation-scroll" id="scrollArea">
+      <!-- COVER -->
+      <section class="cover" id="cover" style="background-image:url('https://lh3.googleusercontent.com/aida-public/AB6AXuDCEFt8TOvNwQiW-t0KG-qMXFhKuXifrdp-yodv6qiu_g65cPtHX4HkkqOmjFOIqEc7oryClk2iVxlcdjnaoPUjwU4QE014S-zfeG1yTQc1QKrEfmVyESZjkwENNhe4_zcqgyiA_s1FVK8ha2StYPsWx0h-lp4u4oESQXLkwq34zA4FZRDi6tc2zto3P7yzR4bOW8FAB4UNWKhpIU5cWMLETXyLqC0-Ywi-rgcserhfBRwFQasyzhzQ')">
+        <div class="cover-overlay"></div><div class="cover-glow"></div>
+        <div style="position:relative;z-index:2;padding-top:16px;">
+          <span style="display:inline-block;padding:4px 16px;border-radius:9999px;background:rgba(245,235,215,0.2);backdrop-filter:blur(8px);border:1px solid rgba(233,193,118,0.4);color:var(--tertiary-fixed);font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;">Walimatul 'Ursy</span>
+          <p style="font-family:'Playfair Display',serif;font-size:13px;color:var(--surface);letter-spacing:0.2em;text-transform:uppercase;font-weight:500;margin-top:12px;">The Wedding Of</p>
+        </div>
+        <div style="position:relative;z-index:2;padding:24px 0;">
+          <div style="width:64px;height:64px;margin:0 auto 16px;border:1px solid rgba(233,193,118,0.5);border-radius:50%;display:grid;place-items:center;background:rgba(233,193,118,0.1);backdrop-filter:blur(8px);"><i class="bi bi-bank" style="color:var(--tertiary-fixed);font-size:28px;"></i></div>
+          <h1 style="font-family:'Playfair Display',serif;font-size:40px;color:var(--gold-light);font-style:italic;font-weight:700;letter-spacing:-0.02em;text-shadow:0 2px 8px rgba(0,0,0,0.2);">Arya &amp; Nabila</h1>
+          <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px;">
+            <div style="height:1px;width:48px;background:rgba(233,193,118,0.6);"></div>
+            <p style="font-size:13px;color:rgba(255,255,255,0.9);letter-spacing:0.08em;">Minggu, 24 Agustus 2025</p>
+            <div style="height:1px;width:48px;background:rgba(233,193,118,0.6);"></div>
+          </div>
+        </div>
+        <div style="position:relative;z-index:2;width:100%;max-width:360px;padding-bottom:24px;">
+          <div style="background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);padding:20px;border-radius:16px;box-shadow:0 12px 32px rgba(0,0,0,0.15);border:1px solid rgba(232,223,211,0.7);">
+            <p style="font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--secondary);text-transform:uppercase;margin-bottom:4px;">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+            <h3 style="font-size:18px;font-weight:700;color:var(--primary);margin-bottom:8px;">Keluarga Besar Sastrowidjoyo</h3>
+            <p style="font-size:12px;color:var(--on-surface-variant);line-height:1.6;margin-bottom:16px;">Tanpa mengurangi rasa hormat, kami bermaksud mengundang Anda untuk hadir dan memberikan doa restu pada hari bahagia kami.</p>
+            <a href="#ayat" onclick="openSound()" style="width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--primary);color:#fff;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:0 4px 12px rgba(27,59,54,0.18);"><i class="bi bi-envelope-paper-heart" style="color:var(--primary-fixed);"></i> Buka Undangan (Open Invitation)</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- AYAT -->
+      <section id="ayat" style="padding:56px 24px;background:var(--cream-bg);text-align:center;border-bottom:1px solid rgba(232,223,211,0.6);">
+        <div style="max-width:480px;margin:0 auto;">
+          <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:24px;"><div style="width:32px;height:1px;background:var(--secondary);"></div><i class="bi bi-stars" style="color:var(--secondary);font-size:20px;"></i><div style="width:32px;height:1px;background:var(--secondary);"></div></div>
+          <p style="font-family:'Playfair Display',serif;font-size:22px;color:var(--primary);margin-bottom:12px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+          <blockquote style="font-size:13px;font-style:italic;color:var(--on-surface-variant);line-height:1.7;margin-bottom:12px;">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."</blockquote>
+          <cite style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:var(--secondary);text-transform:uppercase;">— QS. Ar-Rum Ayat 21</cite>
+        </div>
+      </section>
+
+      <!-- PROFIL -->
+      <section style="padding:64px 24px;background:var(--surface);">
+        <div style="text-align:center;margin-bottom:40px;"><span style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:var(--secondary);text-transform:uppercase;">Mempelai Berbahagia</span><h2 style="font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--primary);margin-top:4px;">Groom &amp; Bride</h2><p style="font-size:12px;color:var(--on-surface-variant);margin-top:8px;">Dengan memohon ridho dan rahmat Allah SWT</p></div>
+        <div style="display:grid;gap:48px;">
+          <div style="text-align:center;background:var(--cream-bg);padding:24px;border-radius:16px;border:1px solid var(--sand-warm);">
+            <div style="width:144px;height:144px;margin:0 auto 16px;border-radius:50%;overflow:hidden;border:4px solid var(--gold-light);box-shadow:0 4px 12px rgba(0,0,0,0.08);"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPKL6rK9rdNfqiJ07BCvNQmXqVlMhEE19cZBNZ2wIc2CFQDSqk6DdLoX0JOYnWi-XXTVyp5AaRGSObCBmOZmE7La6sYuLOPTzZ1LD-regoj1oQgKk1s-85L7KcMX3QF3-IAskjnjfD6KUW-4T9Az34CIPkWP4esmMsobRBRpLcdD5GNfYn725JkEkMu2_rZcAERiIUn1Hy4f5MJdWwiCKtsiu2x9oN6fTF63DDFIQK08j67bUvc_as" style="width:100%;height:100%;object-fit:cover;" alt="Groom"></div>
+            <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--primary);">Arya Wiratama, S.T.</h3>
+            <p style="font-size:12px;color:var(--on-surface-variant);margin-top:4px;line-height:1.6;">Putra Pertama dari<br><strong style="color:var(--on-surface);">Bpk. Ir. Bambang Hermanto</strong> &amp; <strong style="color:var(--on-surface);">Ibu Hj. Sri Rahayu</strong></p>
+            <div style="display:flex;justify-content:center;gap:12px;margin-top:16px;"><a href="#" style="width:32px;height:32px;border-radius:50%;background:var(--surface-container);border:1px solid var(--sand-warm);display:grid;place-items:center;color:var(--primary);"><i class="bi bi-camera"></i></a><a href="#" style="width:32px;height:32px;border-radius:50%;background:var(--surface-container);border:1px solid var(--sand-warm);display:grid;place-items:center;color:var(--primary);"><i class="bi bi-at"></i></a></div>
+          </div>
+          <div style="display:flex;justify-content:center;margin:-24px 0;position:relative;z-index:2;"><div style="width:48px;height:48px;border-radius:50%;background:var(--secondary);color:#fff;display:grid;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,0.15);border:2px solid var(--surface);font-family:'Playfair Display',serif;font-size:18px;font-style:italic;">&amp;</div></div>
+          <div style="text-align:center;background:var(--cream-bg);padding:24px;border-radius:16px;border:1px solid var(--sand-warm);">
+            <div style="width:144px;height:144px;margin:0 auto 16px;border-radius:50%;overflow:hidden;border:4px solid var(--gold-light);box-shadow:0 4px 12px rgba(0,0,0,0.08);"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9BciOyl_Uk0kqzfWm0u9WcTLD45Drnkq9Umyj1xo2nTACTUOVd4l6PEk8OTrNty8uUfgnTHJs4A2ayubI3yCWlULx6pFUmh_k4HWJTDwiz7N1yEY9PBftAAPJJq1K8H8z6kET05hS51opAE--55cgPUJsNO9SRZ-23b5ZHIjRmlMI0ELu-swr5ORt1hEfpi2PSwpRFWDogmHoOI2CFe6Z4FjbCwXNgaBqCr0VM-GQk-643g-78emJ" style="width:100%;height:100%;object-fit:cover;" alt="Bride"></div>
+            <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--primary);">Nabila Putri, M.Ds.</h3>
+            <p style="font-size:12px;color:var(--on-surface-variant);margin-top:4px;line-height:1.6;">Putri Kedua dari<br><strong style="color:var(--on-surface);">Bpk. Dr. Hendra Sastrowidjoyo</strong> &amp; <strong style="color:var(--on-surface);">Ibu Maya Anggraini, S.Pd.</strong></p>
+            <div style="display:flex;justify-content:center;gap:12px;margin-top:16px;"><a href="#" style="width:32px;height:32px;border-radius:50%;background:var(--surface-container);border:1px solid var(--sand-warm);display:grid;place-items:center;color:var(--primary);"><i class="bi bi-camera"></i></a><a href="#" style="width:32px;height:32px;border-radius:50%;background:var(--surface-container);border:1px solid var(--sand-warm);display:grid;place-items:center;color:var(--primary);"><i class="bi bi-at"></i></a></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COUNTDOWN & ACARA -->
+      <section style="padding:64px 24px;background:var(--cream-bg);border-top:1px solid var(--sand-warm);">
+        <div style="text-align:center;margin-bottom:32px;"><span style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:var(--secondary);text-transform:uppercase;">Waktu &amp; Tempat</span><h2 style="font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--primary);margin-top:4px;">Rangkaian Acara</h2></div>
+        <div class="count-box" style="margin-bottom:32px;">
+          <p style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:var(--tertiary-fixed);text-transform:uppercase;text-align:center;margin-bottom:16px;">Menghitung Hari Menuju Hari Bahagia</p>
+          <div class="count-grid"><div class="count-cell"><span style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold-light);display:block;">142</span><span style="font-size:10px;font-weight:700;letter-spacing:0.06em;color:rgba(255,255,255,0.8);text-transform:uppercase;">Hari</span></div><div class="count-cell"><span style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold-light);display:block;">18</span><span style="font-size:10px;font-weight:700;letter-spacing:0.06em;color:rgba(255,255,255,0.8);text-transform:uppercase;">Jam</span></div><div class="count-cell"><span style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold-light);display:block;">45</span><span style="font-size:10px;font-weight:700;letter-spacing:0.06em;color:rgba(255,255,255,0.8);text-transform:uppercase;">Menit</span></div><div class="count-cell"><span style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold-light);display:block;">30</span><span style="font-size:10px;font-weight:700;letter-spacing:0.06em;color:rgba(255,255,255,0.8);text-transform:uppercase;">Detik</span></div></div>
+          <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.15);text-align:center;"><a href="https://calendar.google.com" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--tertiary-fixed);"><i class="bi bi-calendar-event"></i> Simpan ke Google Calendar</a></div>
+        </div>
+        <div style="display:grid;gap:24px;">
+          <div style="background:var(--surface);padding:24px;border-radius:16px;border:1px solid var(--sand-warm);box-shadow:var(--shadow-sm);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><span style="padding:4px 12px;border-radius:9999px;background:var(--blush-soft);color:var(--secondary);font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">Akad Nikah</span><i class="bi bi-heart-fill" style="color:var(--secondary);"></i></div>
+            <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--primary);">Akad Nikah Khidmat</h3>
+            <p style="font-size:13px;font-weight:600;color:var(--secondary);display:flex;align-items:center;gap:6px;margin-top:4px;"><i class="bi bi-clock"></i> 08:00 - 10:00 WIB</p>
+            <div style="font-size:12px;color:var(--on-surface-variant);margin-top:12px;line-height:1.6;"><p style="font-weight:700;color:var(--on-surface);">Masjid Agung Al-Azhar Jakarta</p><p>Jl. Sisingamangaraja No.1, Kebayoran Baru, Jakarta Selatan</p></div>
+            <a href="https://maps.google.com" target="_blank" style="margin-top:16px;display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:10px;border-radius:10px;background:var(--surface-container);border:1px solid var(--sand-warm);color:var(--primary);font-size:12px;font-weight:600;"><i class="bi bi-geo-alt"></i> Petunjuk Arah Google Maps</a>
+          </div>
+          <div style="background:var(--surface);padding:24px;border-radius:16px;border:1px solid var(--sand-warm);box-shadow:var(--shadow-sm);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><span style="padding:4px 12px;border-radius:9999px;background:var(--gold-light);color:var(--primary);font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">Resepsi Pernikahan</span><i class="bi bi-stars" style="color:var(--secondary);"></i></div>
+            <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--primary);">Grand Reception</h3>
+            <p style="font-size:13px;font-weight:600;color:var(--secondary);display:flex;align-items:center;gap:6px;margin-top:4px;"><i class="bi bi-clock"></i> 11:30 - 14:00 WIB</p>
+            <div style="font-size:12px;color:var(--on-surface-variant);margin-top:12px;line-height:1.6;"><p style="font-weight:700;color:var(--on-surface);">Grand Ballroom Hotel Mulia Senayan</p><p>Jl. Asia Afrika, Gelora, Tanah Abang, Jakarta Pusat</p></div>
+            <a href="https://maps.google.com" target="_blank" style="margin-top:16px;display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:10px;border-radius:10px;background:var(--surface-container);border:1px solid var(--sand-warm);color:var(--primary);font-size:12px;font-weight:600;"><i class="bi bi-geo-alt"></i> Petunjuk Arah Google Maps</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- GALERI -->
+      <section style="padding:64px 24px;background:var(--surface);">
+        <div style="text-align:center;margin-bottom:32px;"><span style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:var(--secondary);text-transform:uppercase;">Momen Indah</span><h2 style="font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--primary);margin-top:4px;">Our Love Story</h2></div>
+        <div style="position:relative;padding-left:24px;border-left:2px solid var(--sand-warm);margin-left:12px;display:grid;gap:32px;margin-bottom:40px;">
+          <div style="position:relative;"><div style="position:absolute;left:-33px;top:0;width:16px;height:16px;border-radius:50%;background:var(--secondary);border:4px solid var(--surface);box-shadow:0 1px 4px rgba(0,0,0,0.1);"></div><span style="font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--secondary);">OKTOBER 2021</span><h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--primary);margin-top:2px;">Pertemuan Pertama</h4><p style="font-size:12px;color:var(--on-surface-variant);margin-top:4px;line-height:1.6;">Berjumpa pada konferensi arsitektur dan desain grafis di Bandung. Secangkir kopi hangat menjadi awal kisah.</p></div>
+          <div style="position:relative;"><div style="position:absolute;left:-33px;top:0;width:16px;height:16px;border-radius:50%;background:var(--secondary);border:4px solid var(--surface);box-shadow:0 1px 4px rgba(0,0,0,0.1);"></div><span style="font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--secondary);">DESEMBER 2024</span><h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--primary);margin-top:2px;">Pertunangan &amp; Lamaran</h4><p style="font-size:12px;color:var(--on-surface-variant);margin-top:4px;line-height:1.6;">Di hadapan kedua keluarga besar, Arya mengutarakan niat sucinya untuk mempersunting Nabila.</p></div>
+          <div style="position:relative;"><div style="position:absolute;left:-33px;top:0;width:16px;height:16px;border-radius:50%;background:var(--primary);border:4px solid var(--surface);box-shadow:0 1px 4px rgba(0,0,0,0.1);"></div><span style="font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--primary);">AGUSTUS 2025</span><h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--primary);margin-top:2px;">Menuju Janji Suci</h4><p style="font-size:12px;color:var(--on-surface-variant);margin-top:4px;line-height:1.6;">Hari perayaan ikatan cinta seumur hidup bersama seluruh keluarga tercinta.</p></div>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--primary);text-align:center;margin-bottom:16px;">Galeri Prewedding</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);aspect-ratio:4/5;"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFrJIZC8VYpOSCgmlOMa9wdCdkJT5FNe4J-xms1hy25c2H_O5FvUkjy2w1E3Yd-H6BE25qcY1FfvSJ2gQfppWyzUWmOxpMLPKjnxTUCNaUSC5bO_8KLfUkSp0aKWugW_ISjYPcQJElkJUPiUzR5xL-QZg57Je0112w5zeYUA82uwZ06FhZ3jZfJl0-f8bVml3gRzDWzC0pPjxoDPR87jpNqV50594F3JW3nX4ZjCk2eYPgywxxgVg9" style="width:100%;height:100%;object-fit:cover;" alt="prewed 1"></div>
+          <div style="border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);aspect-ratio:4/5;"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7fdChkAI5gBwY4nwAKePyTx99Uxbn3pTDY6Pm10Jj_U2OzZx_gDFp-jXy8BIMhQzRIznOltyNA_bWesL92UO4YgTHXDS10RJDBpbLFVBvzKVhbsflGRdBIIq4ObUAqlY1CTHtUBra_EYBySu6kA23fhK-UrccFEpoLqDaiwBygGZZr14ACgi7OrwDXX9zn4rqZdlGuIKu0WkO11heBkPEIql0VQhuLy_Aji4aSoIVqXrGz-bl3Ppe" style="width:100%;height:100%;object-fit:cover;" alt="prewed 2"></div>
+          <div style="grid-column:span 2;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);aspect-ratio:16/9;"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfL-58J1FWa7b_i5FbuRYc4nKZho37aKsNyGFYvd3SCv7xz-TelDIx2FV3FwtjaHu9ziBTGAbWTO-tjJ4gbY4MBiv9uDvAgV7WuyZZz79SFaqCiTHPxaXToSe67xwyAgtDhFnHgQMwTvb1NSQL9Zah4OcyMjqUy_G_vJ1qfUHStIcUI1wtIzlPspcdLXAJxdEpJvyYPj6lWz8VpyWUmckP2rJcihtYFiDMDbtV0OxcF2hhDZ4YzF_H" style="width:100%;height:100%;object-fit:cover;" alt="prewed 3"></div>
+        </div>
+      </section>
+
+      <!-- AMPLOP -->
+      <section style="padding:64px 24px;background:var(--cream-bg);border-top:1px solid var(--sand-warm);">
+        <div style="text-align:center;margin-bottom:32px;"><span style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:var(--secondary);text-transform:uppercase;">Tanda Kasih</span><h2 style="font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--primary);margin-top:4px;">Amplop Digital</h2><p style="font-size:12px;color:var(--on-surface-variant);margin-top:8px;line-height:1.6;">Doa restu Anda merupakan karunia terindah bagi kami.</p></div>
+        <div style="display:grid;gap:16px;">
+          <div style="background:var(--surface);padding:20px;border-radius:16px;border:1px solid var(--sand-warm);box-shadow:var(--shadow-sm);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><div style="width:48px;height:24px;background:var(--navy-accent);border-radius:6px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:10px;letter-spacing:0.06em;">BCA</div><i class="bi bi-bank" style="color:var(--secondary);"></i></div>
+            <p style="font-size:10px;letter-spacing:0.08em;color:var(--on-surface-variant);text-transform:uppercase;font-weight:700;">Nomor Rekening</p>
+            <p style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--primary);letter-spacing:0.04em;">5271 8920 14</p>
+            <p style="font-size:12px;color:var(--on-surface-variant);margin-bottom:16px;">a.n Nabila Putri</p>
+            <button onclick="copyToClipboard('5271892014','bca-msg')" style="width:100%;padding:8px;background:var(--surface-container);border:1px solid var(--sand-warm);border-radius:8px;font-size:12px;font-weight:600;color:var(--primary);display:flex;align-items:center;justify-content:center;gap:6px;"><i class="bi bi-copy"></i><span id="bca-msg">Salin Nomor Rekening</span></button>
+          </div>
+          <div style="background:var(--surface);padding:20px;border-radius:16px;border:1px solid var(--sand-warm);box-shadow:var(--shadow-sm);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><div style="width:64px;height:24px;background:var(--secondary);border-radius:6px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:10px;letter-spacing:0.06em;">MANDIRI</div><i class="bi bi-credit-card" style="color:var(--secondary);"></i></div>
+            <p style="font-size:10px;letter-spacing:0.08em;color:var(--on-surface-variant);text-transform:uppercase;font-weight:700;">Nomor Rekening</p>
+            <p style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--primary);letter-spacing:0.04em;">1370 0214 8839 1</p>
+            <p style="font-size:12px;color:var(--on-surface-variant);margin-bottom:16px;">a.n Arya Wiratama</p>
+            <button onclick="copyToClipboard('1370021488391','mandiri-msg')" style="width:100%;padding:8px;background:var(--surface-container);border:1px solid var(--sand-warm);border-radius:8px;font-size:12px;font-weight:600;color:var(--primary);display:flex;align-items:center;justify-content:center;gap:6px;"><i class="bi bi-copy"></i><span id="mandiri-msg">Salin Nomor Rekening</span></button>
+          </div>
+          <div style="background:var(--surface);padding:20px;border-radius:16px;border:1px solid var(--sand-warm);box-shadow:var(--shadow-sm);text-align:center;">
+            <span style="font-size:10px;font-weight:700;letter-spacing:0.08em;color:var(--secondary);text-transform:uppercase;">QRIS Standar Nasional</span>
+            <h4 style="font-size:14px;font-weight:700;color:var(--primary);margin:4px 0 12px;">Scan Barcode Pembayaran Digital</h4>
+            <div style="width:144px;height:144px;margin:0 auto;background:var(--surface-container);padding:8px;border-radius:12px;border:1px solid var(--sand-warm);display:grid;place-items:center;"><div style="width:100%;height:100%;background:var(--cream-bg);border-radius:8px;border:2px dashed rgba(131,82,61,0.4);display:grid;place-items:center;padding:8px;"><i class="bi bi-qr-code" style="font-size:42px;color:var(--primary);"></i><span style="font-size:8px;font-weight:700;letter-spacing:0.06em;color:var(--secondary);margin-top:4px;">QRIS RESMI</span></div></div>
+            <p style="font-size:11px;color:var(--on-surface-variant);margin-top:12px;">Mendukung GoPay, OVO, ShopeePay, DANA &amp; Mobile Banking</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- RSVP -->
+      <section style="padding:64px 24px;background:var(--surface);">
+        <div style="text-align:center;margin-bottom:32px;"><span style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:var(--secondary);text-transform:uppercase;">Konfirmasi Kehadiran</span><h2 style="font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--primary);margin-top:4px;">RSVP &amp; Buku Tamu</h2></div>
+        <form onsubmit="handleRsvp(event)" style="background:var(--cream-bg);padding:24px;border-radius:16px;border:1px solid var(--sand-warm);display:grid;gap:16px;margin-bottom:32px;">
+          <div><label style="display:block;font-size:12px;font-weight:600;color:var(--on-surface);margin-bottom:6px;">Nama Lengkap</label><input id="guestName" required type="text" value="Keluarga Besar Sastrowidjoyo" style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--sand-warm);background:var(--surface);font-size:14px;"></div>
+          <div><label style="display:block;font-size:12px;font-weight:600;color:var(--on-surface);margin-bottom:6px;">Konfirmasi Kehadiran</label><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;"><label style="cursor:pointer;border:1px solid var(--sand-warm);border-radius:10px;padding:8px;text-align:center;background:var(--surface);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:4px;"><input type="radio" name="att" value="Hadir" checked style="display:none;">Hadir</label><label style="cursor:pointer;border:1px solid var(--sand-warm);border-radius:10px;padding:8px;text-align:center;background:var(--surface);font-size:12px;font-weight:600;"><input type="radio" name="att" value="Masih Ragu" style="display:none;">Masih Ragu</label><label style="cursor:pointer;border:1px solid var(--sand-warm);border-radius:10px;padding:8px;text-align:center;background:var(--surface);font-size:12px;font-weight:600;"><input type="radio" name="att" value="Tidak Hadir" style="display:none;">Tidak Hadir</label></div></div>
+          <div><label style="display:block;font-size:12px;font-weight:600;color:var(--on-surface);margin-bottom:6px;">Jumlah Tamu</label><select id="guestCount" style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--sand-warm);background:var(--surface);font-size:14px;"><option value="1">1 Orang</option><option selected value="2">2 Orang (Bersama Pasangan/Keluarga)</option><option value="3">3 Orang</option><option value="4">4 Orang</option></select></div>
+          <div><label style="display:block;font-size:12px;font-weight:600;color:var(--on-surface);margin-bottom:6px;">Ucapan &amp; Doa</label><textarea id="guestMsg" required rows="3" placeholder="Tuliskan ucapan dan doa terbaik Anda..." style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--sand-warm);background:var(--surface);font-size:14px;resize:vertical;"></textarea></div>
+          <button type="submit" style="width:100%;padding:12px;border-radius:10px;background:var(--primary);color:#fff;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 12px rgba(27,59,54,0.18);"><i class="bi bi-send"></i> Kirim Konfirmasi &amp; Ucapan</button>
+        </form>
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><h4 style="font-size:14px;font-weight:700;color:var(--primary);">Ucapan Doa Sahabat (24)</h4><span style="font-size:10px;font-weight:700;letter-spacing:0.06em;color:var(--secondary);">Real-time Feed</span></div>
+          <div id="wishes" style="display:grid;gap:12px;max-height:288px;overflow-y:auto;padding-right:4px;">
+            <div style="background:var(--cream-bg);padding:14px;border-radius:12px;border:1px solid var(--sand-warm);font-size:12px;"><div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-weight:700;color:var(--primary);">Dimas Satria &amp; Istri</span><span style="font-size:10px;background:rgba(45,106,79,0.15);color:var(--status-success);padding:2px 8px;border-radius:9999px;font-weight:600;">Hadir (2 Orang)</span></div><p style="color:var(--on-surface-variant);margin-top:6px;line-height:1.6;">"Barakallahu lakuma wa baraka 'alaikuma wa jama'a bainakuma fii khair Arya &amp; Nabila! Sakinah mawaddah rahmah."</p><span style="font-size:10px;color:var(--outline);display:block;margin-top:6px;">10 menit yang lalu</span></div>
+            <div style="background:var(--cream-bg);padding:14px;border-radius:12px;border:1px solid var(--sand-warm);font-size:12px;"><div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-weight:700;color:var(--primary);">Anindya Wardhani</span><span style="font-size:10px;background:rgba(45,106,79,0.15);color:var(--status-success);padding:2px 8px;border-radius:9999px;font-weight:600;">Hadir (1 Orang)</span></div><p style="color:var(--on-surface-variant);margin-top:6px;line-height:1.6;">"Selamat berbahagia Nabila sayang! Semoga acaranya lancar hingga hari H."</p><span style="font-size:10px;color:var(--outline);display:block;margin-top:6px;">35 menit yang lalu</span></div>
+          </div>
+        </div>
+      </section>
+
+      <footer style="padding:48px 24px;background:var(--navy-accent);color:var(--surface);text-align:center;">
+        <p style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:16px;">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
+        <p style="font-size:11px;letter-spacing:0.12em;color:var(--tertiary-fixed);font-weight:700;text-transform:uppercase;">Kami yang berbahagia</p>
+        <h3 style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gold-light);font-style:italic;font-weight:700;margin-top:4px;">Arya &amp; Nabila</h3>
+        <div style="width:48px;height:1px;background:rgba(233,193,118,0.3);margin:24px auto;"></div>
+        <div style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:9999px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);font-size:11px;color:rgba(255,255,255,0.8);"><span>Dibuat dengan</span><i class="bi bi-heart-fill" style="color:var(--status-badge);font-size:14px;"></i><span>oleh <strong style="color:#fff;">JanjiSuci</strong></span></div>
+        <p style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:12px;">© 2025 JanjiSuci Platform Undangan Digital Indonesia</p>
+      </footer>
+    </div>
+    <button onclick="toggleAudio()" style="position:absolute;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;background:var(--primary);color:var(--tertiary-fixed);display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,0.2);border:2px solid var(--tertiary-fixed-dim);"><i class="bi bi-vinyl" style="animation:spin 4s linear infinite;"></i></button>
+  </div>
+</main>
+
+<footer style="background:var(--cream-bg);border-top:1px solid var(--sand-warm);padding:40px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 1rem;display:flex;flex-direction:column;gap:24px;text-align:center;">
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;"><span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--primary);">JanjiSuci</span></div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;font-size:12px;font-weight:600;"><a href="index.html" style="color:var(--on-surface-variant);">Tentang Kami</a><a href="katalog.html" style="color:var(--primary);font-weight:700;text-decoration:underline;">Katalog Tema</a><a href="fitur.html" style="color:var(--on-surface-variant);">Fitur Lengkap</a><a href="harga.html" style="color:var(--on-surface-variant);">Paket Harga</a><a href="blog.html" style="color:var(--on-surface-variant);">Blog</a><a href="https://wa.me/628123456789" style="color:var(--secondary);">Hubungi CS WhatsApp</a></div>
+    </div>
+    <p style="font-size:12px;color:var(--on-surface-variant);">© 2025 JanjiSuci Platform Undangan Pernikahan Digital. Hak cipta dilindungi undang-undang.</p>
+  </div>
+</footer>
+
+<script>
+let playing=true;
+function setDevice(m){
+  const c=document.getElementById('previewContainer');const s=document.getElementById('speakerBar');
+  const bd=document.getElementById('btn-desktop'),bt=document.getElementById('btn-tablet'),bm=document.getElementById('btn-mobile');
+  [bd,bt,bm].forEach(b=>b.className='device-btn');
+  if(m==='mobile'){c.style.maxWidth='440px';c.style.borderRadius='38px';c.style.borderWidth='8px';s.style.display='flex';bm.className='device-btn active';}
+  else if(m==='tablet'){c.style.maxWidth='768px';c.style.borderRadius='28px';c.style.borderWidth='6px';s.style.display='none';bt.className='device-btn active';}
+  else {c.style.maxWidth='1040px';c.style.borderRadius='16px';c.style.borderWidth='2px';s.style.display='none';bd.className='device-btn active';}
+}
+function toggleAudio(){
+  playing=!playing;
+  const d=document.getElementById('musicDisc'),v=document.getElementById('volIcon'),t=document.getElementById('audioStatus');
+  if(playing){d.classList.add('audio-disc');v.className='bi bi-volume-up';t.textContent='Kompilasi Romantis';}
+  else {d.classList.remove('audio-disc');v.className='bi bi-volume-mute';t.textContent='Dijeda (Muted)';}
+}
+function openSound(){if(!playing)toggleAudio();}
+function copyToClipboard(txt,id){
+  navigator.clipboard.writeText(txt).then(()=>{
+    const el=document.getElementById(id);const o=el.textContent;el.textContent='Tersalin!';setTimeout(()=>el.textContent=o,2000);
+  });
+}
+function copyLink(){navigator.clipboard.writeText(location.href);alert('Tautan preview berhasil disalin!');}
+function handleRsvp(e){
+  e.preventDefault();
+  const n=document.getElementById('guestName').value,m=document.getElementById('guestMsg').value,c=document.getElementById('guestCount').value,a=document.querySelector('input[name="att"]:checked').value;
+  const w=document.getElementById('wishes');
+  const div=document.createElement('div');
+  div.style.cssText='background:var(--cream-bg);padding:14px;border-radius:12px;border:1px solid var(--secondary);font-size:12px;';
+  div.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-weight:700;color:var(--primary);">${n}</span><span style="font-size:10px;background:rgba(45,106,79,0.15);color:var(--status-success);padding:2px 8px;border-radius:9999px;font-weight:600;">${a} (${c} Orang)</span></div><p style="color:var(--on-surface-variant);margin-top:6px;line-height:1.6;">"${m}"</p><span style="font-size:10px;color:var(--secondary);font-weight:600;display:block;margin-top:6px;">Baru saja</span>`;
+  w.prepend(div);document.getElementById('guestMsg').value='';
+}
+</script>
+<style>.hide-sm{display:none;}@media(min-width:640px){.hide-sm{display:flex;}} .show-md{display:none;}@media(min-width:768px){.show-md{display:inline;}} .show-lg{display:none;}@media(min-width:1024px){.show-lg{display:block;}} .show-sm{display:none;}@media(min-width:640px){.show-sm{display:inline;}}</style>
+</body>
+</html>

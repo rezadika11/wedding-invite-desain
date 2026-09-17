@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>500 — Kesalahan Server | JanjiSuci Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/css/dashadmin.css" rel="stylesheet">
+<link href="assets/css/theme-switcher.css" rel="stylesheet">
+<style>
+  body.dash-body{display:flex;flex-direction:column;min-height:100vh;}
+  .err-wrap{
+    flex:1;display:grid;place-items:center;
+    padding:32px 16px;position:relative;overflow:hidden;
+  }
+  .err-wrap::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(520px 320px at 82% 8%, rgba(168,56,84,0.08) 0%, transparent 62%),
+      radial-gradient(460px 380px at 12% 92%, rgba(27,59,54,0.07) 0%, transparent 60%);
+  }
+  .err-card{
+    position:relative;z-index:1;
+    width:100%;max-width:560px;text-align:center;
+    background:#fff;border:1px solid var(--dash-border);
+    border-radius:24px;box-shadow:var(--dash-shadow-lg);
+    padding:48px 28px 40px;
+  }
+  .err-code{
+    font-size:104px;line-height:1;font-weight:800;letter-spacing:-0.05em;
+    background:linear-gradient(135deg, var(--dash-danger) 0%, var(--dash-secondary) 60%, var(--dash-primary-container) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .err-icon{
+    width:64px;height:64px;border-radius:18px;
+    background:rgba(168,56,84,0.1);color:var(--dash-danger);
+    display:grid;place-items:center;font-size:28px;
+    margin:-24px auto 16px;position:relative;
+    border:4px solid #fff;box-shadow:var(--dash-shadow);
+  }
+  .err-card h1{font-size:24px;font-weight:700;color:var(--dash-primary);margin:0 0 8px;}
+  .err-card p{font-size:14px;line-height:22px;color:var(--dash-muted);max-width:26rem;margin:0 auto 24px;}
+  .err-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+  .err-detail{
+    margin-top:24px;text-align:left;
+    background:#0f172a;color:#e2e8f0;
+    border-radius:12px;padding:14px 16px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:12px;line-height:1.7;overflow-x:auto;
+  }
+  .err-detail .ok{color:#6ee7b7;}
+  .err-detail .warn{color:#fcd34d;}
+  .err-hint{margin-top:22px;font-size:12px;color:var(--dash-muted);}
+  .err-hint a{color:var(--dash-primary);font-weight:600;}
+  @media(max-width:480px){
+    .err-code{font-size:76px;}
+    .err-card{padding:36px 20px 32px;}
+    .err-actions .dash-btn{width:100%;}
+  }
+</style>
+</head>
+<body class="dash-body">
+
+  <!-- Navbar ringkas -->
+  <nav class="dash-navbar">
+    <div class="dash-navbar-left">
+      <a href="index.html" class="dash-brand" style="text-decoration:none;color:inherit;">
+        <div class="dash-brand-icon" style="background:var(--dash-primary-container);color:var(--dash-gold);"><i class="bi bi-heart-fill"></i></div>
+        <div class="dash-brand-text" style="margin-left:10px;">
+          <strong style="display:block;">JanjiSuci</strong><span>Admin Royale</span>
+        </div>
+      </a>
+    </div>
+    <div class="dash-navbar-right">
+      <button class="dash-icon-btn" id="dashDarkToggle" aria-label="Toggle dark mode" title="Dark / Light"><i class="bi bi-moon-stars"></i></button>
+      <a href="index.html" class="dash-btn dash-btn-secondary" style="padding:9px 14px;font-size:13px;"><i class="bi bi-house"></i> Dashboard</a>
+    </div>
+  </nav>
+
+  <div class="err-wrap">
+    <div class="err-card">
+      <div class="err-icon"><i class="bi bi-server"></i></div>
+      <div class="err-code">500</div>
+      <h1>Ups, Server Sedang Bermasalah</h1>
+      <p>Terjadi kesalahan internal di server kami. Tim teknis JanjiSuci sudah menerima laporan otomatis dan sedang menanganinya — coba muat ulang atau kembali beberapa saat lagi.</p>
+
+      <div class="err-detail">
+<span class="warn">[ERROR]</span> InternalServerError: failed to render invitation preview<br>
+<span class="warn">[TRACE]</span> app/controllers/OrderController.php:128<br>
+<span class="warn">[REQID]</span> janjisuci-royale-9f3a-2025<br>
+<span class="ok">[STATUS]</span> Laporan otomatis dikirim ke tim infrastruktur
+      </div>
+
+      <div class="err-actions" style="margin-top:22px;">
+        <a href="javascript:location.reload()" class="dash-btn dash-btn-primary"><i class="bi bi-arrow-clockwise"></i> Muat Ulang Halaman</a>
+        <button class="dash-icon-btn" id="dashDarkToggle" aria-label="Toggle dark mode" title="Dark / Light"><i class="bi bi-moon-stars"></i></button>
+      <a href="index.html" class="dash-btn dash-btn-secondary"><i class="bi bi-speedometer2"></i> Kembali ke Dashboard</a>
+        <a href="https://wa.me/628123456789" class="dash-btn dash-btn-secondary"><i class="bi bi-headset"></i> Hubungi CS</a>
+      </div>
+
+      <div class="err-hint">
+        Gangguan berlangsung? <a href="https://wa.me/628123456789">Chat CS JanjiSuci 24/7</a> atau <a href="tables.html">lihat <a href="plugins.html">Plugins & Addons</a> &bull; status pesanan</a>.
+      </div>
+    </div>
+  </div>
+
+  <footer class="dash-footer">
+    <div>&copy; 2025 JanjiSuci DashAdmin &bull; Nusantara Royale Romance</div>
+    <div style="display:flex;gap:16px;"><a href="index.html">Dashboard</a><a href="../index.html">Landing</a></div>
+  </footer>
+
+<script src="assets/js/dashadmin.js"></script>
+<script src="assets/js/theme-switcher.js"></script>
+</body>
+</html>

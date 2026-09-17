@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jurnal & Inspirasi Pernikahan - JanjiSuci</title>
+  <meta name="description" content="Kumpulan artikel inspiratif, tren susunan acara pernikahan adat, tips menyebarkan undangan via WhatsApp yang sopan, hingga checklist persiapan pernikahan.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Native CSS -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+    /* ========== BLOG LIST PAGE SPECIFIC ========== */
+    .blog-hero {
+      position: relative;
+      overflow: hidden;
+      background: var(--cream-bg);
+      border-bottom: 1px solid rgba(232,223,211,0.6);
+      padding: 3rem 0 3rem;
+      text-align: center;
+    }
+    @media (min-width: 768px) { .blog-hero { padding: 3.5rem 0 3.5rem; } }
+    .blog-hero::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: radial-gradient(#E8DFD3 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.40; pointer-events: none;
+    }
+    .blog-hero .container { position: relative; z-index: 1; }
+    .badge-journal {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.35rem 0.9rem;
+      background: rgba(245,235,215,0.65);
+      border: 1px solid var(--sand-warm);
+      border-radius: 9999px;
+      color: var(--secondary);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .badge-journal i { font-size: 0.85rem; }
+    .blog-hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; line-height: 36px; font-weight: 600;
+      color: var(--primary);
+      max-width: 42rem; margin: 1rem auto 0;
+      letter-spacing: -0.015em;
+    }
+    @media (min-width: 768px) { .blog-hero-title { font-size: 44px; line-height: 52px; } }
+    @media (min-width: 1024px) { .blog-hero-title { font-size: 52px; line-height: 62px; letter-spacing: -0.02em; } }
+    .blog-hero-desc {
+      font-size: 15px; line-height: 26px; color: var(--on-surface-variant);
+      max-width: 36rem; margin: 0.85rem auto 0;
+    }
+    @media (min-width: 768px) { .blog-hero-desc { font-size: 18px; line-height: 28px; } }
+
+    /* Search */
+    .blog-search-wrap { max-width: 36rem; margin: 2rem auto 0; }
+    .blog-search {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: var(--surface-card);
+      border: 1px solid var(--sand-warm);
+      border-radius: 0.85rem;
+      padding: 0.35rem 0.35rem 0.35rem 1rem;
+      box-shadow: 0 4px 20px -2px rgba(43,38,37,0.06);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .blog-search:focus-within { border-color: var(--primary-container); box-shadow: 0 0 0 3px rgba(27,59,54,0.10); }
+    .blog-search i { color: var(--outline); font-size: 1.1rem; flex-shrink: 0; }
+    .blog-search input { flex: 1; border: none; outline: none; background: transparent; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: var(--on-surface); }
+    .blog-search input::placeholder { color: rgba(113,121,118,0.7); }
+    .btn-search { display: inline-flex; align-items: center; justify-content: center; padding: 0.65rem 1.25rem; background: var(--primary-container); color: #fff; border-radius: 0.55rem; font-size: 12px; font-weight: 700; transition: opacity 0.2s; white-space: nowrap; }
+    .btn-search:hover { opacity: 0.92; }
+    .btn-search:active { transform: scale(0.98); }
+
+    .trending { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 1rem; font-size: 12px; color: var(--on-surface-variant); }
+    .trending-label { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--secondary); }
+    .trending-label i { font-size: 0.85rem; }
+    .tag-pill { padding: 0.3rem 0.7rem; border-radius: 9999px; background: var(--surface-card); border: 1px solid var(--sand-warm); font-size: 12px; font-weight: 600; color: var(--on-surface-variant); transition: border-color 0.2s, color 0.2s; }
+    .tag-pill:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* Filter tabs */
+    .filter-bar {
+      position: sticky; top: 80px; z-index: 40;
+      background: rgba(250,247,242,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(232,223,211,0.6);
+      padding: 0.85rem 0;
+    }
+    .filter-scroll { display: flex; align-items: center; gap: 0.6rem; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+    .filter-scroll::-webkit-scrollbar { display: none; }
+    .filter-chip {
+      flex-shrink: 0;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.03em;
+      border: 1px solid var(--sand-warm);
+      background: var(--surface-card);
+      color: var(--on-surface-variant);
+      transition: all 0.2s;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .filter-chip:hover { border-color: var(--primary-container); color: var(--primary-container); }
+    .filter-chip.active { background: var(--primary-container); color: #fff; border-color: var(--primary-container); box-shadow: var(--shadow-sm); }
+
+    /* Featured */
+    .featured-wrap { padding: 2.5rem 0 1.5rem; }
+    .featured-card {
+      display: grid;
+      background: var(--surface-card);
+      border: 1px solid var(--sand-warm);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 12px 32px -4px rgba(27,59,54,0.07);
+      transition: box-shadow 0.3s;
+    }
+    .featured-card:hover { box-shadow: 0 16px 40px -6px rgba(27,59,54,0.12); }
+    @media (min-width: 1024px) { .featured-card { grid-template-columns: 7fr 5fr; } }
+    .featured-media { position: relative; height: 280px; overflow: hidden; background: var(--surface-container); }
+    @media (min-width: 640px) { .featured-media { height: 380px; } }
+    @media (min-width: 1024px) { .featured-media { height: auto; min-height: 420px; } }
+    .featured-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .featured-card:hover .featured-media img { transform: scale(1.03); }
+    .badge-editor { position: absolute; top: 14px; left: 14px; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.35rem 0.7rem; border-radius: 9999px; background: var(--status-badge); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: var(--shadow-sm); }
+    .badge-editor i { font-size: 0.75rem; }
+    .featured-body { padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; }
+    @media (min-width: 768px) { .featured-body { padding: 2rem; } }
+    .meta-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .cat-pill { padding: 0.2rem 0.6rem; border-radius: 0.35rem; background: var(--blush-soft); color: var(--secondary); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .meta-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--outline-variant); }
+    .meta-read { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 13px; color: var(--outline); }
+    .meta-read i { font-size: 0.9rem; }
+    .featured-title { font-family: 'Playfair Display', serif; font-size: 22px; line-height: 30px; font-weight: 600; color: var(--primary); transition: color 0.2s; }
+    .featured-title:hover { color: var(--primary-container); }
+    @media (min-width: 768px) { .featured-title { font-size: 26px; line-height: 34px; } }
+    .featured-desc { font-size: 15px; line-height: 24px; color: var(--on-surface-variant); margin-top: 0.75rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .featured-foot { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--sand-warm); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+    .author-mini { display: flex; align-items: center; gap: 0.7rem; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--gold-light); border: 1px solid var(--sand-warm); display: grid; place-items: center; font-size: 13px; font-weight: 700; color: var(--primary); flex-shrink: 0; }
+    .author-name { font-size: 14px; font-weight: 700; color: var(--primary); line-height: 1; }
+    .author-date { font-size: 13px; color: var(--outline); margin-top: 2px; }
+
+    /* Main layout */
+    .blog-layout { display: grid; gap: 2rem; padding: 2rem 0 2rem; }
+    @media (min-width: 1024px) { .blog-layout { grid-template-columns: 8fr 4fr; gap: 2rem; align-items: start; } }
+    .section-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--sand-warm); margin-bottom: 1.5rem; }
+    .section-head h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; }
+    .section-head h3 i { color: var(--secondary); font-size: 1.15rem; }
+    .section-head span { font-size: 13px; color: var(--on-surface-variant); }
+
+    /* Article grid */
+    .post-grid { display: grid; gap: 1.5rem; }
+    @media (min-width: 768px) { .post-grid { grid-template-columns: repeat(2,1fr); } }
+    .post-card {
+      background: var(--surface-card);
+      border: 1px solid var(--sand-warm);
+      border-radius: 1rem;
+      padding: 1rem;
+      display: flex; flex-direction: column;
+      box-shadow: 0 4px 20px -2px rgba(43,38,37,0.05);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .post-card:hover { box-shadow: 0 12px 32px -4px rgba(27,59,54,0.09); transform: translateY(-2px); }
+    .post-media { position: relative; height: 192px; border-radius: 0.75rem; overflow: hidden; background: var(--surface-container); }
+    .post-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .post-card:hover .post-media img { transform: scale(1.05); }
+    .post-cat { position: absolute; top: 10px; left: 10px; padding: 0.25rem 0.55rem; border-radius: 0.4rem; background: rgba(255,255,255,0.92); backdrop-filter: blur(6px); border: 1px solid var(--sand-warm); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--primary-container); }
+    .post-meta { display: flex; align-items: center; gap: 0.45rem; margin: 0.9rem 0 0.4rem; font-size: 12px; color: var(--outline); }
+    .post-meta i { font-size: 0.75rem; }
+    .post-title { font-family: 'Playfair Display', serif; font-size: 18px; line-height: 24px; font-weight: 600; color: var(--primary); transition: color 0.2s; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .post-card:hover .post-title { color: var(--primary-container); }
+    .post-excerpt { font-size: 13px; line-height: 20px; color: var(--on-surface-variant); margin-top: 0.4rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .post-foot { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-top: auto; padding-top: 0.85rem; border-top: 1px solid rgba(232,223,211,0.6); font-size: 12px; }
+    .post-author { color: var(--outline); font-size: 12px; }
+    .post-link { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 12px; font-weight: 700; color: var(--secondary); transition: color 0.2s, gap 0.2s; white-space: nowrap; }
+    .post-link:hover { color: var(--primary); gap: 0.4rem; }
+    .post-link i { font-size: 0.85rem; }
+
+    /* Pagination */
+    .pagination { display: flex; align-items: center; justify-content: center; gap: 0.45rem; margin-top: 2.5rem; flex-wrap: wrap; }
+    .page-btn { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 0.55rem; border: 1px solid var(--sand-warm); background: var(--surface-card); color: var(--on-surface-variant); font-size: 13px; font-weight: 700; transition: all 0.2s; cursor: pointer; }
+    .page-btn:hover:not(:disabled):not(.active) { background: var(--surface-container); color: var(--on-surface); border-color: var(--outline-variant); }
+    .page-btn.active { background: var(--primary-container); color: #fff; border-color: var(--primary-container); box-shadow: var(--shadow-sm); }
+    .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .page-btn.next { width: auto; padding: 0 1rem; gap: 0.25rem; display: inline-flex; align-items: center; }
+    .page-ellipsis { padding: 0 0.3rem; color: var(--outline); font-weight: 700; }
+
+    /* Sidebar */
+    .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+    .newsletter-card {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, var(--primary-container) 0%, var(--primary) 100%);
+      color: #fff;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 12px 32px -4px rgba(27,59,54,0.15);
+    }
+    @media (min-width: 768px) { .newsletter-card { padding: 1.75rem; } }
+    .newsletter-glow { position: absolute; top: -2rem; right: -2rem; width: 8rem; height: 8rem; background: rgba(245,235,215,0.10); border-radius: 50%; filter: blur(20px); pointer-events: none; }
+    .newsletter-icon { width: 48px; height: 48px; border-radius: 0.75rem; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.18); display: grid; place-items: center; font-size: 1.4rem; color: var(--gold-light); margin-bottom: 1rem; }
+    .newsletter-card h4 { font-family: 'Playfair Display', serif; font-size: 19px; line-height: 26px; font-weight: 600; color: #fff; margin-bottom: 0.5rem; }
+    .newsletter-card > p { font-size: 13px; line-height: 20px; color: rgba(255,255,255,0.82); margin-bottom: 1.25rem; }
+    .nl-form { display: flex; flex-direction: column; gap: 0.65rem; }
+    .nl-input { width: 100%; padding: 0.7rem 0.9rem; border-radius: 0.55rem; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.18); color: #fff; font-size: 13px; outline: none; transition: border-color 0.2s, background 0.2s; }
+    .nl-input::placeholder { color: rgba(255,255,255,0.55); }
+    .nl-input:focus { border-color: var(--gold-light); background: rgba(255,255,255,0.16); }
+    .btn-nl { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.8rem; background: var(--secondary); color: #fff; border-radius: 0.55rem; font-size: 13px; font-weight: 700; transition: background 0.2s, transform 0.15s; }
+    .btn-nl:hover { background: #6e4433; }
+    .btn-nl:active { transform: scale(0.98); }
+    .nl-note { font-size: 11px; color: rgba(255,255,255,0.60); text-align: center; margin-top: 0.6rem; }
+
+    .widget-card {
+      background: var(--surface-card);
+      border: 1px solid var(--sand-warm);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px -2px rgba(43,38,37,0.05);
+    }
+    .widget-title { font-size: 16px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--sand-warm); margin-bottom: 0.75rem; }
+    .widget-title i { color: var(--secondary); font-size: 1.1rem; }
+    .cat-list { display: flex; flex-direction: column; gap: 0.35rem; }
+    .cat-item { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.65rem; border-radius: 0.55rem; transition: background 0.2s; }
+    .cat-item:hover { background: var(--cream-bg); }
+    .cat-item-left { display: flex; align-items: center; gap: 0.6rem; font-size: 14px; font-weight: 600; color: var(--on-surface); }
+    .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .dot.adat { background: var(--secondary); }
+    .dot.tips { background: var(--status-success); }
+    .dot.rundown { background: #d9a38c; }
+    .dot.inspirasi { background: var(--status-badge); }
+    .dot.keuangan { background: var(--outline); }
+    .cat-count { padding: 0.15rem 0.5rem; border-radius: 9999px; background: rgba(232,223,211,0.6); font-size: 11px; font-weight: 700; color: var(--primary); }
+
+    .cs-box { background: rgba(247,237,232,0.60); border: 1px solid rgba(232,223,211,0.8); border-radius: 1rem; padding: 1.5rem; }
+    .cs-head { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem; }
+    .cs-head i { font-size: 1.4rem; color: var(--secondary); }
+    .cs-head h4 { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .cs-box p { font-size: 13px; line-height: 20px; color: var(--on-surface-variant); margin-bottom: 1rem; }
+    .btn-cs { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; padding: 0.7rem; background: var(--surface-card); border: 1px solid var(--sand-warm); border-radius: 0.55rem; font-size: 13px; font-weight: 700; color: var(--primary); box-shadow: var(--shadow-sm); transition: border-color 0.2s; }
+    .btn-cs:hover { border-color: var(--primary); }
+    .btn-cs i { color: var(--status-success); font-size: 1.05rem; }
+
+    /* CTA banner */
+    .cta-wrap { padding: 1rem 0 3rem; }
+    .promo-cta {
+      position: relative; overflow: hidden;
+      background: var(--primary-container);
+      border-radius: 1.5rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: #fff;
+      border: 1px solid rgba(232,223,211,0.15);
+      box-shadow: 0 12px 32px rgba(20,34,56,0.12);
+    }
+    @media (min-width: 768px) { .promo-cta { padding: 3rem; } }
+    .promo-cta::before, .promo-cta::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; filter: blur(28px); }
+    .promo-cta::before { left: -3rem; bottom: -3rem; width: 16rem; height: 16rem; background: rgba(245,235,215,0.10); }
+    .promo-cta::after { right: -3rem; top: -3rem; width: 16rem; height: 16rem; background: rgba(131,82,61,0.18); }
+    .promo-cta .inner { position: relative; z-index: 1; max-width: 42rem; margin-inline: auto; }
+    .cta-badge { display: inline-block; padding: 0.3rem 0.75rem; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.15); border-radius: 9999px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.85rem; }
+    .cta-title { font-family: 'Playfair Display', serif; font-size: 24px; line-height: 32px; font-weight: 600; color: #fff; }
+    @media (min-width: 768px) { .cta-title { font-size: 38px; line-height: 48px; letter-spacing: -0.01em; } }
+    .cta-desc { font-size: 15px; line-height: 24px; color: rgba(255,255,255,0.80); margin-top: 0.75rem; }
+    .cta-actions { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.75rem; justify-content: center; }
+    @media (min-width: 640px) { .cta-actions { flex-direction: row; } }
+    .cta-actions a { display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.9rem 1.5rem; border-radius: 0.6rem; font-size: 14px; font-weight: 700; transition: all 0.2s; text-decoration: none; }
+    .cta-actions a.primary { background: var(--surface-card); color: var(--primary); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+    .cta-actions a.primary:hover { background: var(--gold-light); }
+    .cta-actions a.ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.28); }
+    .cta-actions a.ghost:hover { background: rgba(255,255,255,0.10); }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="JanjiSuci beranda">
+        <div class="brand-icon"><i class="bi bi-heart-fill"></i></div>
+        <div class="brand-text">
+          <span class="brand-name">JanjiSuci</span>
+          <span class="brand-sub">Wedding Invitation</span>
+        </div>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Navigasi utama">
+        <a href="fitur.html" class="nav-link">Fitur</a>
+        <a href="katalog.html" class="nav-link">Katalog Tema</a>
+        <a href="harga.html" class="nav-link">Harga</a>
+        <a href="contoh.html" class="nav-link">Contoh Undangan</a>
+        <a href="testimoni.html" class="nav-link">Testimoni</a>
+        <a href="blog.html" class="nav-link active">Blog</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="login.html" class="btn btn-ghost">Masuk</a>
+        <a href="dashboard.html" class="btn btn-primary">
+          <span>Buat Undangan Sekarang</span>
+          <i class="bi bi-arrow-right"></i>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Navigasi mobile">
+      <a href="fitur.html">Fitur</a>
+      <a href="katalog.html">Katalog Tema</a>
+      <a href="harga.html">Harga</a>
+      <a href="contoh.html">Contoh Undangan</a>
+      <a href="testimoni.html">Testimoni</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="login.html">Masuk</a>
+    </nav>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="blog-hero">
+    <div class="container">
+      <span class="badge-journal"><i class="bi bi-journal-text"></i> JURNAL &amp; INSPIRASI PERNIKAHAN</span>
+      <h1 class="blog-hero-title">Panduan, Adat Nusantara, &amp; Tips Hari Bahagia</h1>
+      <p class="blog-hero-desc">Kumpulan artikel inspiratif, tren susunan acara pernikahan adat, tips menyebarkan undangan via WhatsApp yang sopan, hingga checklist persiapan pernikahan.</p>
+
+      <div class="blog-search-wrap">
+        <label class="blog-search" for="blogSearch">
+          <i class="bi bi-search"></i>
+          <input id="blogSearch" type="text" placeholder="Cari etika undangan, rundown akad, lagu romantis, tips budget...">
+          <button class="btn-search" type="button">Cari</button>
+        </label>
+        <div class="trending">
+          <span class="trending-label"><i class="bi bi-graph-up-arrow"></i> Populer:</span>
+          <a href="login.html" class="tag-pill">#PernikahanAdat</a>
+          <a href="login.html" class="tag-pill">#FormatWhatsApp</a>
+          <a href="login.html" class="tag-pill">#RekomendasiLagu</a>
+          <a href="login.html" class="tag-pill">#TipsBudget</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FILTER TABS ==================== -->
+  <section class="filter-bar" aria-label="Filter kategori artikel">
+    <div class="container">
+      <div class="filter-scroll" role="tablist">
+        <button class="filter-chip active" role="tab" aria-selected="true">Semua Artikel (64)</button>
+        <button class="filter-chip" role="tab">Pernikahan Adat &amp; Budaya</button>
+        <button class="filter-chip" role="tab">Tips &amp; Etika Undangan</button>
+        <button class="filter-chip" role="tab">Susunan Acara &amp; Rundown</button>
+        <button class="filter-chip" role="tab">Inspirasi &amp; Tren 2025</button>
+        <button class="filter-chip" role="tab">Keuangan &amp; Vendor</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FEATURED ARTICLE ==================== -->
+  <section class="featured-wrap">
+    <div class="container">
+      <article class="featured-card">
+        <div class="featured-media">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAB1boZsh53U4IbYgwbf4-SUT_RotnwKrZimVVq0PM8jUb0EeaAEg0CQO3r6PGfyzzLLYbSPnwZ4UHz8E3TNRpgR-Q_QczlsDrA32f47o441RPh7Mu-cQ0UgkDTs4Br53td1vtNxJ1aVi8eOPfvuZe1MEm49RAsPgOgiXVfhWEbsFwsDDjxDRyJkvAH33wa1US4Az3JMaJlHmA5aLwDFJkzyS58sDxAoAE4C-Yk2a57z1SBZevJFLURU" alt="Pasangan pengantin Indonesia menampilkan undangan digital mewah di smartphone dengan dekorasi songket dan anggrek">
+          <span class="badge-editor"><i class="bi bi-star-fill"></i> PILIHAN REDAKSI</span>
+        </div>
+        <div class="featured-body">
+          <div>
+            <div class="meta-row">
+              <span class="cat-pill">Tips &amp; Etika Undangan</span>
+              <span class="meta-dot"></span>
+              <span class="meta-read"><i class="bi bi-clock"></i> 5 Menit Baca</span>
+            </div>
+            <h2 class="featured-title"><a href="blog-single.html">Panduan Lengkap Etika &amp; Format Kata-Kata Mengirim Undangan Digital via WhatsApp Agar Sopan dan Berkesan</a></h2>
+            <p class="featured-desc">Hindari kesan 'broadcast massal' tanpa nama. Temukan susunan salam pembuka yang santun untuk keluarga besar, teman sejawat, hingga atasan kerja lengkap dengan template siap salin yang menghormati norma ketimuran.</p>
+          </div>
+          <div class="featured-foot">
+            <div class="author-mini">
+              <div class="author-avatar">JS</div>
+              <div>
+                <p class="author-name">Redaksi JanjiSuci</p>
+                <p class="author-date">24 Feb 2025</p>
+              </div>
+            </div>
+            <a href="blog-single.html" class="btn btn-primary"><span>Baca Selengkapnya</span> <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ==================== GRID + SIDEBAR ==================== -->
+  <section class="container">
+    <div class="blog-layout">
+      <!-- Left: Articles -->
+      <div>
+        <div class="section-head">
+          <h3><i class="bi bi-bookmarks"></i> Artikel Terbaru &amp; Populer</h3>
+          <span>Menampilkan 6 dari 64 artikel</span>
+        </div>
+
+        <div class="post-grid">
+          <!-- Card 1 -->
+          <article class="post-card">
+            <div class="post-media">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2gW9YIU6S97yShqDEVlUB_lLdrhCJBbLWHgeZ8r3yYnhd5UuP7i-DXP5Aqs5vScxKnzbwvgVAO1sMV9SJp-CAakMp3Gy9XF-C87CENfrjboQcVDlzTnD0RBeoV_rtauZLaUe47tHMMke9dyLCArBI4lS21TWFn3xTqwdEMKjNl2TCjasv7e9R19V-ZAaOadEc-2WFcOOo46qUf9PT61hH3KzQgZi7IpNMpEV3Pi9KIqyMGajzSeEg" alt="Pernikahan adat Minangkabau dengan songket merah dan suntiang emas">
+              <span class="post-cat">Pernikahan Adat &amp; Budaya</span>
+            </div>
+            <div class="post-meta"><i class="bi bi-calendar-event"></i> <span>22 Feb 2025</span> <span>•</span> <span>4 Menit Baca</span></div>
+            <h4 class="post-title"><a href="blog-single.html">Makna Sakral Ornamen Pernikahan Adat Minangkabau: Dari Songket Hingga Rumah Gadang</a></h4>
+            <p class="post-excerpt">Menelusuri filosofi mendalam di balik detail kain songket pandai sikek, tanduk suntiang yang megah, serta adaptasinya pada desain undangan modern.</p>
+            <div class="post-foot">
+              <span class="post-author">Oleh Cut Nyak Sarah</span>
+              <a href="blog-single.html" class="post-link">Baca Artikel <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </article>
+          <!-- Card 2 -->
+          <article class="post-card">
+            <div class="post-media">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3kPfbUW7lgFYA9jmfnPnXbxsbuTLKniCY6bf6mc9tTDbpOltEts5klPaPE5rY76GKBzzux35oIz1wNvWDy8OOV5GuuqHhrs-YSKtl88wZuHsjuHH2IXeRTDKCDFDz5hL-BW7ajcy3eXai6hdqdcVen_HKGLjRlndEgH4ZtxJginYMffDvOMysBrq7L90T5p90ABCixyoXEh0v-v9xvOLpmqXI7T0GJDDaLZbg-mNT01JeTcIdjnx0GJDDaLZbg-mNT01JeTcIdjnx0" alt="Alat musik gamelan dan biola dengan bunga melati putih">
+              <span class="post-cat">Inspirasi &amp; Tren 2025</span>
+            </div>
+            <div class="post-meta"><i class="bi bi-calendar-event"></i> <span>20 Feb 2025</span> <span>•</span> <span>6 Menit Baca</span></div>
+            <h4 class="post-title"><a href="blog-single.html">15 Rekomendasi Lagu Gamelan &amp; Akustik Romantis Paling Syahdu untuk Latar Undangan Digital</a></h4>
+            <p class="post-excerpt">Sentuhan aransemen musik tradisional kontemporer yang otomatis membangkitkan suasana haru dan sakral saat tamu membuka tautan undangan Anda.</p>
+            <div class="post-foot">
+              <span class="post-author">Oleh Tim Kreatif Suci</span>
+              <a href="blog-single.html" class="post-link">Baca Artikel <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </article>
+          <!-- Card 3 -->
+          <article class="post-card">
+            <div class="post-media">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpre4BBOJ-43Fi_m-G2jgz9fQl8Tnd-56ejc04bDbM39xs9R7NpMLOjzu4_9rligZ6cNiDgN2N1jXZ3mJZGRe-UIRWappnx_Eid3Tb5_IlO9C3FGnbq7Sf691G7HbNtM2maUgx4j4c5DmWHPyfATeHVYqWRZYFqDy_XPZoKD5LdU88EwBtK5AkmxnWRzleJhf3GD1tCMdop0zdrB8i9zS12LOU73aTGSfLMvERyp6Vw05DGgSAYx4J" alt="Prosesi akad nikah adat Jawa dengan kain basahan dan melati">
+              <span class="post-cat">Susunan Acara &amp; Rundown</span>
+            </div>
+            <div class="post-meta"><i class="bi bi-calendar-event"></i> <span>18 Feb 2025</span> <span>•</span> <span>7 Menit Baca</span></div>
+            <h4 class="post-title"><a href="blog-single.html">Contoh Susunan Acara (Rundown) Akad Nikah &amp; Resepsi Pernikahan Adat Jawa Lengkap Jam per Jam</a></h4>
+            <p class="post-excerpt">Jadwal terinci mulai dari prosesi panggih, balangan suruh, wijidadi, kacar-kucur hingga sesi foto keluarga agar acara berlangsung tepat waktu.</p>
+            <div class="post-foot">
+              <span class="post-author">Oleh Bayu Wicaksono</span>
+              <a href="blog-single.html" class="post-link">Baca Artikel <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </article>
+          <!-- Card 4 -->
+          <article class="post-card">
+            <div class="post-media">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgvWUGKFJWdpTzRDPjK4P3o1JbG-bwObfoxnBqRK59B0FSFtqNSwO-tDkS-vKYhAZTg9ThlBv0aI1L-qJwrFY5H2xTD-7k1VCsFr90aK2Qv5pEPOluSQ1FE1u1PXujLgi_KiWoYs-6kdyY7Q3E_aAsJhl2SR6KS7M9LYvG_zUrfre5I5qD_Dml71FztiBr7BiDA3v5EVqU1VfOA4tbCpZOKmVKhJVtWRYEK1mj2KVLzfg6yFf4xJ3G" alt="Smartphone menampilkan amplop digital QRIS di atas meja marmer">
+              <span class="post-cat">Keuangan &amp; Vendor</span>
+            </div>
+            <div class="post-meta"><i class="bi bi-calendar-event"></i> <span>15 Feb 2025</span> <span>•</span> <span>5 Menit Baca</span></div>
+            <h4 class="post-title"><a href="blog-single.html">Cara Mengatur Amplop Digital &amp; QRIS Pernikahan Agar Masuk Langsung ke Rekening Tanpa Potongan</a></h4>
+            <p class="post-excerpt">Kiat praktis mengaktifkan fitur gift amplop digital, integrasi rekening bank nasional tanpa potongan tersembunyi, serta pencatatan otomatis.</p>
+            <div class="post-foot">
+              <span class="post-author">Oleh Finansial JanjiSuci</span>
+              <a href="blog-single.html" class="post-link">Baca Artikel <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </article>
+          <!-- Card 5 -->
+          <article class="post-card">
+            <div class="post-media">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCM5Z35qhEthlC9Mhfx5ZujdBnAnhT1UpeNnZi8NAghcZcJX4A0iychSj3goq8hhG14FG4M-vZHzXZQooXHA5WnN6nlQvcF3lZSxGTu2lOipNmKmSGEe0MwHWhMxs76sZcFA25pvVvSoVVJzRZsbKjJGBgSnM0MIyFjwGgSZNlMYU2FIOUR-RfkJRYZ9Or0UEv1P3LXXg3OGHEaeX-vONxmFNW5as3KclCiVanptuDVzeFdV-nKge5q" alt="Jurnal planner pernikahan, kotak cincin dan checklist di atas kertas tekstur">
+              <span class="post-cat">Susunan Acara &amp; Rundown</span>
+            </div>
+            <div class="post-meta"><i class="bi bi-calendar-event"></i> <span>12 Feb 2025</span> <span>•</span> <span>8 Menit Baca</span></div>
+            <h4 class="post-title"><a href="blog-single.html">Checklist Persiapan Pernikahan H-6 Bulan: Jangan Sampai Ada Detail yang Terlewat</a></h4>
+            <p class="post-excerpt">Panduan esensial timeline persiapan: booking venue, fitting busana pengantin, pemilihan konsep undangan, pendaftaran KUA, hingga konfirmasi katering.</p>
+            <div class="post-foot">
+              <span class="post-author">Oleh Wedding Organizer Partner</span>
+              <a href="blog-single.html" class="post-link">Baca Artikel <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </article>
+          <!-- Card 6 -->
+          <article class="post-card">
+            <div class="post-media">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwRoHnh4NMHz-SlmK1lDvm-6Gp_XfjdbJMsTUHa0FiwqDCi62czcYn1E-zUoTaSWZx3jXzSgv_AYvblratz8NF9o1eL6RgAWyiRivvEkgFDORqeTFYpHSbL8fwy63twn-TR5T-HJCnzG8WUgyd3ThJ5y30usuKSE9LwA3fvRzaaVVNzGV8VBHHYL0ngTRLpstEhwKHT0MuXPetECEK-gmOCqOKAsFeT7TSVYs_GyA4ioALGMoZuf7-" alt="Dekorasi pernikahan Syar'i minimalis dengan kaligrafi dan mawar putih">
+              <span class="post-cat">Pernikahan Adat &amp; Budaya</span>
+            </div>
+            <div class="post-meta"><i class="bi bi-calendar-event"></i> <span>10 Feb 2025</span> <span>•</span> <span>4 Menit Baca</span></div>
+            <h4 class="post-title"><a href="blog-single.html">Konsep Pernikahan Syar'i Khidmat: Tips Desain Undangan Elegan Tanpa Menampilkan Foto Mempelai</a></h4>
+            <p class="post-excerpt">Ide artistik menggunakan kaligrafi doa pernikahan, motif ornamen floral botanical emas, serta tata bahasa islami yang penuh kekhidmatan.</p>
+            <div class="post-foot">
+              <span class="post-author">Oleh Ustadzah Halimah &amp; Redaksi</span>
+              <a href="blog-single.html" class="post-link">Baca Artikel <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </article>
+        </div>
+
+        <!-- Pagination -->
+        <nav class="pagination" aria-label="Navigasi halaman blog">
+          <button class="page-btn" disabled aria-label="Sebelumnya"><i class="bi bi-chevron-left"></i></button>
+          <button class="page-btn active" aria-current="page">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <span class="page-ellipsis">…</span>
+          <button class="page-btn next">Selanjutnya <i class="bi bi-chevron-right"></i></button>
+        </nav>
+      </div>
+
+      <!-- Right: Sidebar -->
+      <aside class="sidebar">
+        <!-- Newsletter -->
+        <div class="newsletter-card">
+          <div class="newsletter-glow" aria-hidden="true"></div>
+          <div class="newsletter-icon"><i class="bi bi-envelope-paper-heart"></i></div>
+          <h4>Dapatkan Template Rundown Pernikahan Gratis &amp; Checklist Persiapan</h4>
+          <p>Bergabunglah dengan 18.000+ calon pengantin. Dapatkan file spreadsheet siap pakai langsung ke inbox email Anda setiap minggu.</p>
+          <form class="nl-form" onsubmit="event.preventDefault();">
+            <input class="nl-input" type="text" placeholder="Nama Anda & Pasangan" required>
+            <input class="nl-input" type="email" placeholder="Alamat Email Aktif" required>
+            <button class="btn-nl" type="submit"><span>Kirimkan Template Gratis</span> <i class="bi bi-download"></i></button>
+          </form>
+          <p class="nl-note">Kami menjaga privasi Anda. Tanpa spam, berhenti kapan saja.</p>
+        </div>
+
+        <!-- Categories -->
+        <div class="widget-card">
+          <h4 class="widget-title"><i class="bi bi-collection"></i> Kategori Artikel Populer</h4>
+          <div class="cat-list">
+            <a href="#" class="cat-item">
+              <span class="cat-item-left"><span class="dot adat"></span> Pernikahan Adat &amp; Budaya</span>
+              <span class="cat-count">24 artikel</span>
+            </a>
+            <a href="#" class="cat-item">
+              <span class="cat-item-left"><span class="dot tips"></span> Tips &amp; Etika Undangan</span>
+              <span class="cat-count">16 artikel</span>
+            </a>
+            <a href="#" class="cat-item">
+              <span class="cat-item-left"><span class="dot rundown"></span> Susunan Acara &amp; Rundown</span>
+              <span class="cat-count">12 artikel</span>
+            </a>
+            <a href="#" class="cat-item">
+              <span class="cat-item-left"><span class="dot inspirasi"></span> Inspirasi &amp; Tren 2025</span>
+              <span class="cat-count">8 artikel</span>
+            </a>
+            <a href="#" class="cat-item">
+              <span class="cat-item-left"><span class="dot keuangan"></span> Keuangan &amp; Vendor</span>
+              <span class="cat-count">4 artikel</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- CS Box -->
+        <div class="cs-box">
+          <div class="cs-head"><i class="bi bi-headset"></i><h4>Butuh Bantuan Desain Adat?</h4></div>
+          <p>Konsultasikan kebutuhan font aksara Nusantara, tata letak nama gelar kehormatan, hingga lagu adat bersama tim desainer JanjiSuci.</p>
+          <a href="https://wa.me/628123456789" target="_blank" rel="noopener" class="btn-cs"><i class="bi bi-whatsapp"></i> Hubungi CS WhatsApp Gratis</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ==================== CTA BANNER ==================== -->
+  <section class="container cta-wrap">
+    <div class="promo-cta">
+      <div class="inner">
+        <span class="cta-badge">Mulai Tanpa Ribet</span>
+        <h3 class="cta-title">Wujudkan Undangan Digital Pernikahan Mewah yang Berkesan di Hati Tamu</h3>
+        <p class="cta-desc">Pilih tema adat Nusantara atau modern minimalis favoritmu, aktifkan fitur RSVP &amp; amplop digital, dan sebar dalam 5 menit.</p>
+        <div class="cta-actions">
+          <a href="dashboard.html" class="primary">Buat Undangan Sekarang</a>
+          <a href="katalog.html" class="ghost">Lihat Katalog Tema</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand">
+            <div class="brand-icon" style="width:36px;height:36px;font-size:1rem;"><i class="bi bi-heart-fill"></i></div>
+            <span class="brand-name" style="font-size:20px;">JanjiSuci</span>
+          </div>
+          <p>Platform pembuatan website undangan pernikahan digital nomor 1 di Indonesia. Menghadirkan perpaduan estetika editorial mewah nusantara dengan kemudahan teknologi RSVP dan amplop digital modern.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+            <a href="https://wa.me/628123456789" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Navigasi</h4>
+            <ul>
+              <li><a href="katalog.html">Katalog Tema</a></li>
+              <li><a href="fitur.html">Fitur Lengkap</a></li>
+              <li><a href="harga.html">Paket Harga</a></li>
+              <li><a href="blog.html" style="font-weight:700;color:var(--primary);">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Dukungan &amp; Legal</h4>
+            <ul>
+              <li><a href="#">Syarat &amp; Ketentuan</a></li>
+              <li><a href="#">Kebijakan Privasi</a></li>
+              <li><a href="https://wa.me/628123456789" target="_blank" rel="noopener">Hubungi CS WhatsApp</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Metode Pembayaran</h4>
+            <p>Mendukung semua bank nasional, e-wallet, dan QRIS instan.</p>
+            <div class="pay-pills">
+              <span class="pay-pill navy">BCA</span>
+              <span class="pay-pill navy">Mandiri</span>
+              <span class="pay-pill navy">BNI</span>
+              <span class="pay-pill red">QRIS</span>
+              <span class="pay-pill rs">GoPay</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 JanjiSuci Platform Undangan Pernikahan Digital. Hak cipta dilindungi undang-undang.</p>
+        <small>Dibuat dengan segenap cinta di Indonesia 🇮🇩</small>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('navToggle');
+    const nav = document.getElementById('mobileNav');
+    btn?.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      btn.innerHTML = open ? '<i class="bi bi-x-lg"></i>' : '<i class="bi bi-list"></i>';
+    });
+    nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      btn.innerHTML = '<i class="bi bi-list"></i>';
+    }));
+    // Filter chips
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

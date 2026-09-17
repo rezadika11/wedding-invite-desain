@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tables — JanjiSuci DashAdmin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/css/dashadmin.css" rel="stylesheet">
+<link href="assets/css/theme-switcher.css" rel="stylesheet">
+<style>
+  /* ===== Tables specifics ===== */
+  .tl-act{
+    width:32px;height:32px;border-radius:8px;
+    display:inline-grid;place-items:center;
+    border:1px solid var(--dash-border);background:#fff;
+    color:var(--dash-muted);font-size:14px;cursor:pointer;
+    transition:all .18s;
+  }
+  .tl-act:hover{background:var(--dash-gold);color:var(--dash-primary);border-color:var(--dash-warning)}
+  .tl-act.danger:hover{background:rgba(168,56,84,0.12);color:var(--dash-danger);border-color:var(--dash-danger)}
+  .tl-actions{display:flex;gap:6px}
+
+  /* Striped & hover variant */
+  .dash-table.striped tbody tr:nth-child(odd) td{background:rgba(232,223,211,0.35)}
+  .dash-table.striped tbody tr:hover td{background:var(--dash-gold)}
+  .dash-table.striped tbody tr:hover td:first-child{box-shadow:inset 3px 0 0 var(--dash-secondary)}
+
+  /* DataTable toolbar */
+  .tl-toolbar{
+    display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+    padding:16px 18px;border-bottom:1px solid var(--dash-border);
+  }
+  .tl-toolbar .dash-input{width:auto;min-width:180px;padding:9px 12px;font-size:13px}
+  .tl-toolbar .dash-select{width:auto;min-width:180px;padding:9px 38px 9px 12px;font-size:13px}
+  .tl-toolbar .dash-select.dt-length-select{min-width:0;width:78px;padding:7px 32px 7px 12px;font-size:13px}
+  .tl-toolbar .dash-search-mini{position:relative;flex:1;min-width:220px;max-width:320px}
+  .tl-toolbar .dash-search-mini i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#9aa0a6;font-size:14px}
+  .tl-toolbar .dash-search-mini input{padding-left:36px}
+
+  /* Sortable headers */
+  .th-sort{cursor:pointer;user-select:none}
+  .th-sort .sort-i{font-size:10px;margin-left:4px;opacity:.3;transition:opacity .2s}
+  .th-sort:hover .sort-i{opacity:.7}
+  .th-sort.asc .sort-i,.th-sort.desc .sort-i{opacity:1;color:var(--dash-secondary)}
+  .th-sort.sorted{color:var(--dash-primary)}
+
+  /* Pagination */
+  .tl-pagination{
+    display:flex;gap:6px;align-items:center;flex-wrap:wrap;
+    padding:14px 18px;border-top:1px solid var(--dash-border);
+    font-size:12px;color:var(--dash-muted);
+  }
+  .tl-page-btn{
+    min-width:34px;height:34px;padding:0 8px;border-radius:8px;
+    border:1px solid var(--dash-border);background:#fff;
+    font-size:13px;font-weight:600;color:var(--dash-muted);
+    cursor:pointer;transition:all .18s;display:inline-grid;place-items:center;
+  }
+  .tl-page-btn:hover:not(:disabled):not(.active){background:var(--dash-gold);color:var(--dash-primary)}
+  .tl-page-btn.active{background:var(--dash-primary-container);color:#fff;border-color:var(--dash-primary-container)}
+  .tl-page-btn:disabled{opacity:.4;cursor:not-allowed}
+  .tl-page-info{margin-left:auto}
+
+  /* Aksi titik 3 vertikal + dropdown */
+  .tl-actions-dd{position:relative;display:inline-flex;}
+  .tl-act-trigger{
+    width:32px;height:32px;border-radius:8px;
+    border:1px solid transparent;background:transparent;
+    color:var(--dash-muted);display:inline-grid;place-items:center;
+    cursor:pointer;transition:all .18s;font-size:16px;
+  }
+  .tl-act-trigger:hover{background:var(--dash-gold);color:var(--dash-primary);}
+  .tl-act-trigger[aria-expanded="true"]{background:var(--dash-primary-container);color:#fff;}
+  .tl-actions-menu{
+    position:absolute;right:0;top:calc(100% + 6px);z-index:60;
+    min-width:190px;background:#fff;border:1px solid var(--dash-border);
+    border-radius:12px;box-shadow:0 16px 40px -8px rgba(20,34,56,0.2);
+    padding:6px;display:none;text-align:left;
+  }
+  .tl-actions-menu.show{display:block;z-index:3000;}
+  .tl-actions-menu.dropup{top:auto;bottom:calc(100% + 6px);}
+  .tl-actions-menu button, .tl-actions-menu a{
+    display:flex;align-items:center;gap:10px;width:100%;
+    padding:9px 12px;border:none;background:transparent;
+    border-radius:8px;font:inherit;font-size:13px;font-weight:500;
+    color:var(--dash-text);cursor:pointer;text-decoration:none;white-space:nowrap;
+  }
+  .tl-actions-menu button i, .tl-actions-menu a i{width:18px;font-size:15px;color:var(--dash-muted);text-align:center;}
+  .tl-actions-menu button:hover, .tl-actions-menu a:hover{background:#fafaf9;color:var(--dash-primary);}
+  .tl-actions-menu button:hover i, .tl-actions-menu a:hover i{color:var(--dash-secondary);}
+  .tl-actions-menu .dd-danger{color:var(--dash-danger);}
+  .tl-actions-menu .dd-danger i{color:var(--dash-danger);}
+  .tl-actions-menu .dd-danger:hover{background:rgba(168,56,84,0.08);color:var(--dash-danger);}
+  .tl-actions-menu .dd-sep{height:1px;background:var(--dash-border);margin:6px 0;}
+
+  /* Mobile: footer & pagination rapi ter-center */
+  @media(max-width:767.98px){
+    .dt-footer{flex-direction:column !important;align-items:center !important;justify-content:center !important;gap:14px;padding:20px 14px;}
+    .dt-footer .dt-info{width:100%;text-align:center;}
+    .dt-footer .tl-pagination{width:100%;justify-content:center;padding:0;border-top:none;margin:0;}
+    .tl-page-btn{min-width:32px;height:32px;padding:0 6px;font-size:12px;}
+    .tl-page-info{margin-left:0;}
+  }
+
+  /* Editable table */
+  .dash-table.editable td[data-field]{min-width:120px}
+  .tl-edit-input{
+    width:100%;padding:6px 10px;
+    border:1px solid var(--dash-primary-container);border-radius:8px;
+    font:inherit;font-size:13px;background:#fff;color:var(--dash-text);
+  }
+  .tl-edit-input:focus{outline:2px solid rgba(27,59,54,0.15)}
+  tr.editing td{background:rgba(245,235,215,0.45)!important}
+  .tl-act.save{background:var(--dash-success);border-color:var(--dash-success);color:#fff}
+  .tl-act.save:hover{background:#1f5238;color:#fff}
+  .tl-act.cancel{background:var(--dash-danger);border-color:var(--dash-danger);color:#fff}
+  .tl-act.cancel:hover{background:#8c2c45;color:#fff}
+
+  /* Responsive card-list fallback demo (mobile only) */
+  .tl-cardlist{display:grid;gap:12px;padding:16px 18px}
+  .tl-card{
+    border:1px solid var(--dash-border);border-radius:12px;
+    padding:14px;background:#fff;display:grid;gap:8px;
+  }
+  .tl-card-head{display:flex;align-items:center;gap:10px}
+  .tl-card-head strong{font-size:14px;color:var(--dash-primary)}
+  .tl-card-row{display:flex;justify-content:space-between;font-size:12px;color:var(--dash-muted)}
+  @media(min-width:768px){.tl-cardlist{display:none}}
+</style>
+</head>
+<body class="dash-body">
+
+<!-- Navbar -->
+<nav class="dash-navbar">
+  <div class="dash-navbar-left">
+    <button class="dash-menu-btn" data-navbar-toggle data-toggle="sidebar" aria-label="Toggle sidebar"><i class="bi bi-list"></i></button>
+    <div class="dash-search">
+      <i class="bi bi-search" style="color:#9aa0a6"></i>
+      <input placeholder="Cari undangan, tamu, tema, transaksi...">
+      <span class="dash-kbd">⌘ K</span>
+    </div>
+  </div>
+  <div class="dash-navbar-right">
+          <div class="dash-dd" id="ddBellWrap">
+        <button class="dash-icon-btn" aria-label="Notifications" data-dd="ddBell"><i class="bi bi-bell"></i><span class="badge">7</span></button>
+        <div class="dash-dd-menu" id="ddBell">
+          <div class="dash-dd-header">Notifikasi <a href="tables.html">Lihat Semua</a></div>
+          <div class="dash-dd-body">
+            <div class="dash-dd-item"><div class="dash-dd-icon emerald"><i class="bi bi-envelope-check"></i></div><div class="dash-dd-text"><p>Pesanan #1284 — Arya &amp; Nabila<span class="dash-dd-time">10 menit lalu • Nusantara Royale</span></p></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><div class="dash-dd-icon rose"><i class="bi bi-people"></i></div><div class="dash-dd-text"><p>RSVP baru: 12 tamu hadir<span class="dash-dd-time">25 menit lalu • Botanical Whispers</span></p></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><div class="dash-dd-icon gold"><i class="bi bi-currency-dollar"></i></div><div class="dash-dd-text"><p>Pembayaran Rp 99.000 diterima<span class="dash-dd-time">1 jam lalu • Reza &amp; Syifa</span></p></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><div class="dash-dd-icon navy"><i class="bi bi-star"></i></div><div class="dash-dd-text"><p>Ulasan 5 bintang dari Dimas &amp; Nadya<span class="dash-dd-time">2 jam lalu • Tema Minimalist</span></p></div><span class="dash-dd-dot read"></span></div>
+          </div>
+          <div class="dash-dd-footer" onclick="dashToast('Semua notifikasi ditandai dibaca')">Tandai semua dibaca</div>
+        </div>
+      </div>
+      <div class="dash-dd" id="ddChatWrap">
+        <button class="dash-icon-btn" aria-label="Messages" data-dd="ddChat"><i class="bi bi-chat-dots"></i><span class="badge" style="background:#2D6A4F">3</span></button>
+        <div class="dash-dd-menu" id="ddChat">
+          <div class="dash-dd-header">Pesan <a href="widgets.html#chat">Buka Chat</a></div>
+          <div class="dash-dd-body">
+            <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=33" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Nabila Saraswati<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Kak, bisa ganti lagunya setelah publish?</span></p><span class="dash-dd-time">5 menit lalu</span></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=26" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Dimas Prasetyo<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Upload galeri prewedding 20 foto ya</span></p><span class="dash-dd-time">32 menit lalu</span></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=14" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Syifa Aulia<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Terima kasih, undangannya cantik banget!</span></p><span class="dash-dd-time">1 jam lalu</span></div><span class="dash-dd-dot read"></span></div>
+          </div>
+          <div class="dash-dd-footer" onclick="location.href='widgets.html#chat'">Lihat semua percakapan</div>
+        </div>
+      </div>
+    <button class="dash-icon-btn" id="dashDarkToggle" aria-label="Toggle dark mode" title="Dark / Light"><i class="bi bi-moon-stars"></i></button>
+    <button class="dash-icon-btn" aria-label="Apps"><i class="bi bi-grid"></i></button>
+        <div class="dash-dd" id="ddProfileWrap">
+      <div class="dash-profile" data-dd="ddProfile" role="button">
+        <img src="https://i.pravatar.cc/100?img=15" alt="Admin">
+        <div class="dash-profile-info">
+          <strong>Admin JanjiSuci</strong><span>Super Admin • Online</span>
+        </div>
+        <i class="bi bi-chevron-down" style="font-size:12px;opacity:0.6"></i>
+      </div>
+      <div class="dash-dd-menu dash-dd-profile-menu" id="ddProfile">
+        <div class="dash-dd-userinfo"><img src="https://i.pravatar.cc/100?img=15"><div><strong>Admin JanjiSuci</strong><span>admin@janjisuci.id</span></div></div>
+        <a class="dash-dd-profile-item" href="profile.html"><i class="bi bi-person"></i> Profil Saya</a>
+        <a class="dash-dd-profile-item" href="profile.html#settings"><i class="bi bi-gear"></i> Pengaturan</a>
+        <a class="dash-dd-profile-item" href="ui-elements.html"><i class="bi bi-layers"></i> Komponen UI</a>
+        <a class="dash-dd-profile-item" href="../index.html"><i class="bi bi-house"></i> Lihat Website</a>
+        <div class="dash-divider" style="margin:6px 0"></div>
+        <a class="dash-dd-profile-item danger" href="../login.html"><i class="bi bi-box-arrow-right"></i> Keluar</a>
+      </div>
+    </div></div>
+</nav>
+
+<!-- Sidebar -->
+<aside class="dash-sidebar" id="dashSidebar">
+  <div class="dash-sidebar-header">
+    <a href="index.html" class="dash-brand">
+      <div class="dash-brand-icon"><i class="bi bi-heart-fill"></i></div>
+      <div class="dash-brand-text">
+        <strong>JanjiSuci</strong><span>Admin Royale</span>
+      </div>
+    </a>
+  </div>
+  <div class="dash-sidebar-scroll">
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Utama</div>
+      <ul class="dash-nav">
+        <li><a href="index.html"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
+        <li><a href="../index.html"><i class="bi bi-house"></i><span>Landing Preview</span><span class="dash-badge gold">Visit</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Manajemen Pernikahan</div>
+      <ul class="dash-nav">
+        <li><a href="widgets.html"><i class="bi bi-collection"></i><span>Widgets & Stats</span><span class="dash-badge success">12</span></a></li>
+        <li><a href="../katalog.html"><i class="bi bi-palette"></i><span>Katalog Tema</span></a></li>
+        <li><a href="../contoh.html"><i class="bi bi-images"></i><span>Contoh Undangan</span></a></li>
+        <li><a href="../dashboard.html"><i class="bi bi-pencil-square"></i><span>Editor Undangan</span></a></li>
+        <li><a href="../preview.html"><i class="bi bi-phone"></i><span>Live Preview</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Komponen — Ala AdminLTE</div>
+      <ul class="dash-nav">
+        <li class="dash-nav-item open">
+          <button><i class="bi bi-layers"></i><span>UI Elements</span><i class="bi bi-chevron-right dash-nav-arrow"></i></button>
+          <ul class="dash-subnav">
+            <li><a href="ui-elements.html">General & Cards</a></li>
+            <li><a href="ui-elements.html#buttons">Buttons & Badges</a></li>
+            <li><a href="ui-elements.html#alerts">Alerts & Modals</a></li>
+            <li><a href="ui-elements.html#tabs">Tabs & Timeline</a></li>
+          </ul>
+        </li>
+        <li><a href="forms.html"><i class="bi bi-input-cursor-text"></i><span>Forms</span></a></li>
+        <li><a href="tables.html" class="active"><i class="bi bi-table"></i><span>Tables</span></a></li>
+        <li><a href="charts.html"><i class="bi bi-bar-chart-line"></i><span>Charts</span><span class="dash-badge">3</span></a></li>
+                <li><a href="plugins.html"><i class="bi bi-puzzle"></i><span>Plugins & Addons</span><span class="dash-badge gold">14</span></a></li>
+<li><a href="ui-elements.html#widgets"><i class="bi bi-kanban"></i><span>Kanban & Calendar</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+          <div class="dash-nav-group">
+      <div class="dash-nav-title">Transaksi</div>
+      <ul class="dash-nav">
+        <li><a href="invoice.html"><i class="bi bi-receipt-cutoff"></i><span>Invoice</span><span class="dash-badge success">Baru</span></a></li>
+        <li><a href="tables.html"><i class="bi bi-credit-card"></i><span>Pembayaran</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-title">Halaman</div>
+      <ul class="dash-nav">
+        <li><a href="profile.html"><i class="bi bi-person-circle"></i><span>Profile</span></a></li>
+        <li><a href="../harga.html"><i class="bi bi-credit-card"></i><span>Paket & Harga</span></a></li>
+        <li><a href="../testimoni.html"><i class="bi bi-chat-heart"></i><span>Testimoni</span></a></li>
+        <li><a href="../blog.html"><i class="bi bi-journal-text"></i><span>Blog / Artikel</span></a></li>
+        <li><a href="../login.html"><i class="bi bi-box-arrow-in-right"></i><span>Login</span></a></li>
+        <li><a href="../register.html"><i class="bi bi-person-plus"></i><span>Register</span></a></li>
+        <li><a href="../lupa-password.html"><i class="bi bi-key"></i><span>Lupa Password</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Extras</div>
+      <ul class="dash-nav">
+        <li><a href="ui-elements.html#gallery"><i class="bi bi-image"></i><span>Gallery</span></a></li>
+        <li><a href="ui-elements.html#mailbox"><i class="bi bi-envelope"></i><span>Mailbox</span><span class="dash-badge">5</span></a></li>
+        <li><a href="404.html"><i class="bi bi-exclamation-triangle"></i><span>Error 404</span></a></li>
+        <li><a href="500.html"><i class="bi bi-bug"></i><span>Error 500</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dash-sidebar-footer" style="position:relative;">
+    <button class="dash-user-card" type="button" id="sideUserBtn" aria-expanded="false">
+      <img src="https://i.pravatar.cc/100?img=15" alt="">
+      <div class="dash-user-info"><strong>Admin JanjiSuci</strong><span>admin@janjisuci.id</span></div>
+      <i class="bi bi-chevron-up"></i>
+    </button>
+    <div class="dash-user-menu" id="sideUserMenu">
+      <div class="dash-user-menu-head">
+        <img src="https://i.pravatar.cc/100?img=15" alt="">
+        <div><strong>Admin JanjiSuci</strong><span>Super Admin • Online</span></div>
+      </div>
+      <a class="dash-user-menu-item" href="profile.html"><i class="bi bi-person"></i> Profil Saya</a>
+      <a class="dash-user-menu-item" href="profile.html#settings"><i class="bi bi-gear"></i> Pengaturan Akun</a>
+      <a class="dash-user-menu-item" href="ui-elements.html"><i class="bi bi-layers"></i> Komponen UI</a>
+      <a class="dash-user-menu-item" href="../index.html"><i class="bi bi-house"></i> Lihat Website</a>
+      <div class="dash-divider" style="margin:6px 0"></div>
+      <a class="dash-user-menu-item danger" href="../login.html"><i class="bi bi-box-arrow-right"></i> Keluar</a>
+    </div>
+  </div>
+</aside>
+<div class="dash-overlay" id="dashOverlay"></div>
+
+<!-- Main -->
+<main class="dash-main">
+  <div class="dash-content">
+    <div class="dash-page-header">
+      <div class="dash-title">
+        <div class="dash-breadcrumb"><a href="index.html">Home</a> <i class="bi bi-chevron-right"></i> <span>Tables</span></div>
+        <h1>Tables — Manajemen Data</h1>
+        <p>Kelola daftar pesanan undangan, katalog tema, dan data pasangan dengan tabel interaktif: pencarian, sortir, paginasi, hingga sunting langsung.</p>
+      </div>
+      <div class="dash-actions">
+        <button class="dash-btn dash-btn-secondary" onclick="dashToast('Data diekspor ke CSV','info')"><i class="bi bi-download"></i> Ekspor</button>
+        <button class="dash-btn dash-btn-primary" onclick="openOrderModal()"><i class="bi bi-plus-lg"></i> Tambah Pesanan</button>
+      </div>
+    </div>
+
+    <!-- ============ 1. SIMPLE TABLE ============ -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <h3><i class="bi bi-envelope-paper-heart"></i> Daftar Pesanan Undangan</h3>
+        <span style="font-size:11px;color:var(--dash-muted)">6 pesanan terakhir</span>
+      </div>
+      <div class="dash-table-wrap">
+        <table class="dash-table">
+          <thead>
+            <tr><th>Pasangan</th><th>Tema</th><th>Tanggal Acara</th><th>Tamu</th><th>Status</th><th>Harga</th><th>Aksi</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:10px"><img src="https://i.pravatar.cc/100?img=33" class="dash-avatar"><div><strong>Arya & Nabila</strong><div style="font-size:11px;color:var(--dash-muted)">Jakarta Selatan</div></div></div></td>
+              <td>Nusantara Royale</td>
+              <td>24 Agu 2025</td>
+              <td>342</td>
+              <td><span class="dash-badge success"><i class="bi bi-check-circle"></i> Published</span></td>
+              <td><strong>Rp 249.000</strong></td>
+              <td><div class="tl-actions">
+                <button class="tl-act" title="Lihat" onclick="dashToast('Detail Arya & Nabila')"><i class="bi bi-eye"></i></button>
+                <button class="tl-act" title="Sunting" onclick="dashToast('Menyunting Arya & Nabila','info')"><i class="bi bi-pencil"></i></button>
+                <button class="tl-act danger" title="Hapus" onclick="dashToast('Pesanan dihapus','info')"><i class="bi bi-trash"></i></button>
+              </div></td>
+            </tr>
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:10px"><img src="https://i.pravatar.cc/100?img=26" class="dash-avatar"><div><strong>Dimas & Nadya</strong><div style="font-size:11px;color:var(--dash-muted)">Bandung</div></div></div></td>
+              <td>Botanical Whispers</td>
+              <td>18 Sep 2025</td>
+              <td>128</td>
+              <td><span class="dash-badge warning"><i class="bi bi-pencil"></i> Draft</span></td>
+              <td><strong>Rp 189.000</strong></td>
+              <td><div class="tl-actions">
+                <button class="tl-act" title="Lihat" onclick="dashToast('Detail Dimas & Nadya')"><i class="bi bi-eye"></i></button>
+                <button class="tl-act" title="Sunting" onclick="dashToast('Menyunting Dimas & Nadya','info')"><i class="bi bi-pencil"></i></button>
+                <button class="tl-act danger" title="Hapus" onclick="dashToast('Pesanan dihapus','info')"><i class="bi bi-trash"></i></button>
+              </div></td>
+            </tr>
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:10px"><img src="https://i.pravatar.cc/100?img=14" class="dash-avatar"><div><strong>Reza & Syifa</strong><div style="font-size:11px;color:var(--dash-muted)">Surabaya</div></div></div></td>
+              <td>Golden Jasmine</td>
+              <td>02 Okt 2025</td>
+              <td>210</td>
+              <td><span class="dash-badge info"><i class="bi bi-clock"></i> Pending</span></td>
+              <td><strong>Rp 99.000</strong></td>
+              <td><div class="tl-actions">
+                <button class="tl-act" title="Lihat" onclick="dashToast('Detail Reza & Syifa')"><i class="bi bi-eye"></i></button>
+                <button class="tl-act" title="Sunting" onclick="dashToast('Menyunting Reza & Syifa','info')"><i class="bi bi-pencil"></i></button>
+                <button class="tl-act danger" title="Hapus" onclick="dashToast('Pesanan dihapus','info')"><i class="bi bi-trash"></i></button>
+              </div></td>
+            </tr>
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:10px"><img src="https://i.pravatar.cc/100?img=51" class="dash-avatar"><div><strong>Fajar & Lestari</strong><div style="font-size:11px;color:var(--dash-muted)">Yogyakarta</div></div></div></td>
+              <td>Batik Hemat</td>
+              <td>12 Okt 2025</td>
+              <td>456</td>
+              <td><span class="dash-badge success"><i class="bi bi-check-circle"></i> Published</span></td>
+              <td><strong>Rp 349.000</strong></td>
+              <td><div class="tl-actions">
+                <button class="tl-act" title="Lihat" onclick="dashToast('Detail Fajar & Lestari')"><i class="bi bi-eye"></i></button>
+                <button class="tl-act" title="Sunting" onclick="dashToast('Menyunting Fajar & Lestari','info')"><i class="bi bi-pencil"></i></button>
+                <button class="tl-act danger" title="Hapus" onclick="dashToast('Pesanan dihapus','info')"><i class="bi bi-trash"></i></button>
+              </div></td>
+            </tr>
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:10px"><img src="https://i.pravatar.cc/100?img=45" class="dash-avatar"><div><strong>Galih & Rahmi</strong><div style="font-size:11px;color:var(--dash-muted)">Semarang</div></div></div></td>
+              <td>Syar'i Mawaddah</td>
+              <td>25 Okt 2025</td>
+              <td>189</td>
+              <td><span class="dash-badge info"><i class="bi bi-clock"></i> Pending</span></td>
+              <td><strong>Rp 299.000</strong></td>
+              <td><div class="tl-actions">
+                <button class="tl-act" title="Lihat" onclick="dashToast('Detail Galih & Rahmi')"><i class="bi bi-eye"></i></button>
+                <button class="tl-act" title="Sunting" onclick="dashToast('Menyunting Galih & Rahmi','info')"><i class="bi bi-pencil"></i></button>
+                <button class="tl-act danger" title="Hapus" onclick="dashToast('Pesanan dihapus','info')"><i class="bi bi-trash"></i></button>
+              </div></td>
+            </tr>
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:10px"><img src="https://i.pravatar.cc/100?img=9" class="dash-avatar"><div><strong>Bimo & Citra</strong><div style="font-size:11px;color:var(--dash-muted)">Malang</div></div></div></td>
+              <td>Minimalist Cherish</td>
+              <td>08 Nov 2025</td>
+              <td>95</td>
+              <td><span class="dash-badge warning"><i class="bi bi-pencil"></i> Draft</span></td>
+              <td><strong>Rp 149.000</strong></td>
+              <td><div class="tl-actions">
+                <button class="tl-act" title="Lihat" onclick="dashToast('Detail Bimo & Citra')"><i class="bi bi-eye"></i></button>
+                <button class="tl-act" title="Sunting" onclick="dashToast('Menyunting Bimo & Citra','info')"><i class="bi bi-pencil"></i></button>
+                <button class="tl-act danger" title="Hapus" onclick="dashToast('Pesanan dihapus','info')"><i class="bi bi-trash"></i></button>
+              </div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ============ 2. STRIPED & HOVER ============ -->
+    <div class="dash-card" style="margin-top:20px">
+      <div class="dash-card-header">
+        <h3><i class="bi bi-palette"></i> Kategori Tema — Striped & Hover</h3>
+        <div class="dash-tabs"><button class="dash-tab active">Semua</button><button class="dash-tab">Populer</button></div>
+      </div>
+      <div class="dash-table-wrap">
+        <table class="dash-table striped">
+          <thead>
+            <tr><th>Nama Tema</th><th>Kategori</th><th>Penggunaan</th><th>Rating</th><th>Harga</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Nusantara Royale</strong><div style="font-size:11px;color:var(--dash-muted)">Ornamen batik & emas</div></td>
+              <td><span class="dash-badge info">Klasik</span></td>
+              <td>482 undangan</td>
+              <td><i class="bi bi-star-fill" style="color:#c5a059"></i> 4.9</td>
+              <td><strong>Rp 249.000</strong></td>
+              <td><span class="dash-badge success"><i class="bi bi-check-circle"></i> Aktif</span></td>
+            </tr>
+            <tr>
+              <td><strong>Botanical Whispers</strong><div style="font-size:11px;color:var(--dash-muted)">Daun & anggrek lembut</div></td>
+              <td><span class="dash-badge success">Alam</span></td>
+              <td>317 undangan</td>
+              <td><i class="bi bi-star-fill" style="color:#c5a059"></i> 4.8</td>
+              <td><strong>Rp 189.000</strong></td>
+              <td><span class="dash-badge success"><i class="bi bi-check-circle"></i> Aktif</span></td>
+            </tr>
+            <tr>
+              <td><strong>Golden Jasmine</strong><div style="font-size:11px;color:var(--dash-muted)">Melati emas minimalis</div></td>
+              <td><span class="dash-badge warning">Modern</span></td>
+              <td>254 undangan</td>
+              <td><i class="bi bi-star-fill" style="color:#c5a059"></i> 4.7</td>
+              <td><strong>Rp 99.000</strong></td>
+              <td><span class="dash-badge success"><i class="bi bi-check-circle"></i> Aktif</span></td>
+            </tr>
+            <tr>
+              <td><strong>Syar'i Mawaddah</strong><div style="font-size:11px;color:var(--dash-muted)">Kaligrafi & nuansa kalem</div></td>
+              <td><span class="dash-badge info">Syar'i</span></td>
+              <td>198 undangan</td>
+              <td><i class="bi bi-star-fill" style="color:#c5a059"></i> 4.9</td>
+              <td><strong>Rp 299.000</strong></td>
+              <td><span class="dash-badge danger"><i class="bi bi-x-circle"></i> Nonaktif</span></td>
+            </tr>
+            <tr>
+              <td><strong>Batik Hemat</strong><div style="font-size:11px;color:var(--dash-muted)">Motif parang sederhana</div></td>
+              <td><span class="dash-badge info">Klasik</span></td>
+              <td>143 undangan</td>
+              <td><i class="bi bi-star-fill" style="color:#c5a059"></i> 4.5</td>
+              <td><strong>Rp 149.000</strong></td>
+              <td><span class="dash-badge success"><i class="bi bi-check-circle"></i> Aktif</span></td>
+            </tr>
+            <tr>
+              <td><strong>Minimalist Cherish</strong><div style="font-size:11px;color:var(--dash-muted)">Tipografi bersih</div></td>
+              <td><span class="dash-badge warning">Modern</span></td>
+              <td>96 undangan</td>
+              <td><i class="bi bi-star-fill" style="color:#c5a059"></i> 4.6</td>
+              <td><strong>Rp 149.000</strong></td>
+              <td><span class="dash-badge danger"><i class="bi bi-x-circle"></i> Nonaktif</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ============ 3. DATATABLE STYLE ============ -->
+    <div class="dash-card" style="margin-top:20px">
+      <div class="dash-card-header">
+        <h3><i class="bi bi-funnel"></i> Data Pasangan — Pencarian, Sortir & Paginasi</h3>
+        <span style="font-size:11px;color:var(--dash-muted)">100 data pasangan</span>
+      </div>
+      <div class="tl-toolbar" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid var(--dash-border);">
+        <div class="dt-length" style="display:flex;align-items:center;justify-content:flex-start;gap:8px;font-size:13px;color:var(--dash-muted);">
+          <span style="flex-shrink:0;">Menampilkan</span>
+          <select class="dash-select dt-length-select" id="dtLength" style="flex-shrink:0;text-align:left;">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+          <span style="flex-shrink:0;">entri</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <div class="dash-search-mini" style="margin:0;">
+            <i class="bi bi-search"></i>
+            <input type="text" class="dash-input" id="dtSearch" placeholder="Cari pasangan / tema / kota...">
+          </div>
+          <select class="dash-select" id="dtFilter" style="width:auto;">
+            <option value="all">Semua Status</option>
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+            <option value="pending">Pending</option>
+          </select>
+          <button class="dash-btn dash-btn-secondary" id="dtReset" style="padding:9px 14px;font-size:13px"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
+        </div>
+      </div>
+      <div class="dash-table-wrap">
+        <table class="dash-table" id="dtTable">
+          <thead>
+            <tr>
+              <th style="width:44px;">No</th>
+              <th class="th-sort" data-sort="1">Pasangan<i class="bi bi-caret-up-fill sort-i"></i></th>
+              <th class="th-sort" data-sort="2">Tema<i class="bi bi-caret-up-fill sort-i"></i></th>
+              <th class="th-sort" data-sort="3">Kota<i class="bi bi-caret-up-fill sort-i"></i></th>
+              <th class="th-sort" data-sort="4">Tamu<i class="bi bi-caret-up-fill sort-i"></i></th>
+              <th>Status</th>
+              <th class="th-sort" data-sort="6">Harga<i class="bi bi-caret-up-fill sort-i"></i></th>
+              <th style="width:56px;text-align:center;">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="dtBody">
+            <!-- 100 baris digenerate oleh JS -->
+          </tbody>
+        </table>
+      </div>
+      <div class="dt-footer" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:18px;border-top:1px solid var(--dash-border);">
+        <div class="dt-info" id="dtInfo" style="font-size:13px;color:var(--dash-muted);">Menampilkan <strong>1–10</strong> dari <strong>100</strong> pasangan</div>
+        <div class="tl-pagination" id="dtPager" style="margin:0;padding:0;border-top:none;"></div>
+      </div>
+    </div>
+
+    <!-- ============ 4. EDITABLE TABLE ============ -->
+    <div class="dash-card" style="margin-top:20px">
+      <div class="dash-card-header">
+        <h3><i class="bi bi-pencil-square"></i> Editable Table — Sunting Langsung</h3>
+        <span style="font-size:11px;color:var(--dash-muted)">Klik ikon pensil untuk mengubah sel</span>
+      </div>
+      <div class="dash-table-wrap">
+        <table class="dash-table editable" id="editTable">
+          <thead>
+            <tr><th>Pasangan</th><th>Tema</th><th>Kota</th><th>Tamu</th><th>Status</th><th>Aksi</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-field data-type="text">Arya & Nabila</td>
+              <td data-field data-type="select" data-opts="Nusantara Royale|Botanical Whispers|Golden Jasmine|Batik Hemat|Syar'i Mawaddah|Minimalist Cherish">Nusantara Royale</td>
+              <td data-field data-type="text">Jakarta</td>
+              <td data-field data-type="number">342</td>
+              <td data-field data-type="select" data-opts="Published|Draft|Pending">Published</td>
+              <td><div class="tl-actions"><button class="tl-act" title="Sunting" data-edit-row><i class="bi bi-pencil"></i></button></div></td>
+            </tr>
+            <tr>
+              <td data-field data-type="text">Dimas & Nadya</td>
+              <td data-field data-type="select" data-opts="Nusantara Royale|Botanical Whispers|Golden Jasmine|Batik Hemat|Syar'i Mawaddah|Minimalist Cherish">Botanical Whispers</td>
+              <td data-field data-type="text">Bandung</td>
+              <td data-field data-type="number">128</td>
+              <td data-field data-type="select" data-opts="Published|Draft|Pending">Draft</td>
+              <td><div class="tl-actions"><button class="tl-act" title="Sunting" data-edit-row><i class="bi bi-pencil"></i></button></div></td>
+            </tr>
+            <tr>
+              <td data-field data-type="text">Reza & Syifa</td>
+              <td data-field data-type="select" data-opts="Nusantara Royale|Botanical Whispers|Golden Jasmine|Batik Hemat|Syar'i Mawaddah|Minimalist Cherish">Golden Jasmine</td>
+              <td data-field data-type="text">Surabaya</td>
+              <td data-field data-type="number">210</td>
+              <td data-field data-type="select" data-opts="Published|Draft|Pending">Pending</td>
+              <td><div class="tl-actions"><button class="tl-act" title="Sunting" data-edit-row><i class="bi bi-pencil"></i></button></div></td>
+            </tr>
+            <tr>
+              <td data-field data-type="text">Fajar & Lestari</td>
+              <td data-field data-type="select" data-opts="Nusantara Royale|Botanical Whispers|Golden Jasmine|Batik Hemat|Syar'i Mawaddah|Minimalist Cherish">Batik Hemat</td>
+              <td data-field data-type="text">Yogyakarta</td>
+              <td data-field data-type="number">456</td>
+              <td data-field data-type="select" data-opts="Published|Draft|Pending">Published</td>
+              <td><div class="tl-actions"><button class="tl-act" title="Sunting" data-edit-row><i class="bi bi-pencil"></i></button></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ============ 5. RESPONSIVE FALLBACK NOTE ============ -->
+    <div style="margin-top:20px">
+      <div class="dash-alert info">
+        <i class="bi bi-phone"></i>
+        <div>
+          <strong>Fallback responsif untuk layar kecil.</strong> Semua tabel di atas dibungkus <code>.dash-table-wrap</code> sehingga bisa digeser horizontal di ponsel. Untuk data yang panjang, gunakan pola <em>card-list</em> di bawah — otomatis tampil menggantikan tabel pada layar &lt; 768px (sembunyikan tabel dengan kelas <code>d-none d-md-table</code> / media query, tampilkan kartu ringkas per baris).
+        </div>
+      </div>
+      <div class="dash-card" style="margin-top:12px">
+        <div class="dash-card-header"><h3><i class="bi bi-card-list"></i> Contoh Card-List (khusus mobile)</h3></div>
+        <div class="tl-cardlist">
+          <div class="tl-card">
+            <div class="tl-card-head">
+              <img src="https://i.pravatar.cc/100?img=33" class="dash-avatar" alt="">
+              <div><strong>Arya & Nabila</strong><div style="font-size:11px;color:var(--dash-muted)">Nusantara Royale • Jakarta</div></div>
+              <span class="dash-badge success" style="margin-left:auto">Published</span>
+            </div>
+            <div class="tl-card-row"><span>Tanggal Acara</span><strong>24 Agu 2025</strong></div>
+            <div class="tl-card-row"><span>Tamu</span><strong>342</strong></div>
+            <div class="tl-card-row"><span>Harga</span><strong>Rp 249.000</strong></div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-card-head">
+              <img src="https://i.pravatar.cc/100?img=26" class="dash-avatar" alt="">
+              <div><strong>Dimas & Nadya</strong><div style="font-size:11px;color:var(--dash-muted)">Botanical Whispers • Bandung</div></div>
+              <span class="dash-badge warning" style="margin-left:auto">Draft</span>
+            </div>
+            <div class="tl-card-row"><span>Tanggal Acara</span><strong>18 Sep 2025</strong></div>
+            <div class="tl-card-row"><span>Tamu</span><strong>128</strong></div>
+            <div class="tl-card-row"><span>Harga</span><strong>Rp 189.000</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="dash-footer">
+    <div>© 2025 JanjiSuci DashAdmin • Nusantara Royale Romance • v1.0.0</div>
+    <div style="display:flex;gap:16px"><a href="../index.html">Landing</a> <a href="profile.html">Profile</a> <span>Dibuat di Indonesia 🇮🇩</span></div>
+  </footer>
+</main>
+
+<button class="dash-scrolltop" id="dashScrollTop"><i class="bi bi-arrow-up"></i></button>
+
+<script src="assets/js/dashadmin.js"></script>
+<script>
+(function(){
+  /* ===== DataTable: 100 rows generated + search + filter + sort + length + pagination ===== */
+  const table=document.getElementById('dtTable');
+  const tbody=document.getElementById('dtBody');
+  const pager=document.getElementById('dtPager');
+  const infoEl=document.getElementById('dtInfo');
+  const lengthSel=document.getElementById('dtLength');
+
+  // --- Jaga posisi tetap di depan table (anti lompat saat ganti page/entri) ---
+  const dtCard=table.closest('.dash-card');
+  let lastFocusEl=null;
+  function pinToTable(){
+    if(dtCard){
+      const r=dtCard.getBoundingClientRect();
+      const off=80;
+      if(r.top < 0 || r.top > window.innerHeight*0.4){
+        window.scrollTo({top: window.scrollY + r.top - off, behavior:'auto'});
+      }
+    }
+    if(lastFocusEl){ try{ lastFocusEl.focus({preventScroll:true}); }catch(e){} lastFocusEl=null; }
+  }
+  function keepFocus(el){ lastFocusEl=el; }
+
+  // --- Generate 100 data pasangan ---
+  const NAMA_PRIA=['Arya','Dimas','Reza','Fajar','Galih','Bimo','Rangga','Satria','Yoga','Adit','Bagas','Candra','Dewa','Eka','Farhan','Gilang','Hendra','Ilham','Joko','Kevin','Lutfi','Mahesa','Nanda','Oscar','Panji','Rizky','Surya','Teguh','Umar','Vino','Wahyu','Yusuf','Zaki','Alif','Bintang','Danu','Erlangga','Fikri','Gading','Hafiz','Iqbal','Jefri','Krisna','Ludwig','Marvin','Naufal','Omar','Putra','Rio','Sultan'];
+  const NAMA_WANITA=['Nabila','Nadya','Syifa','Lestari','Rahmi','Citra','Amelia','Dewi','Salsabila','Kirana','Tari','Utami','Vania','Wulan','Zahra','Ayu','Bella','Cantika','Dinda','Elsa','Fitri','Gita','Hana','Indah','Jasmine','Karin','Laila','Maya','Nayla','Olivia','Putri','Qonita','Rani','Sabrina','Talita','Ulya','Vira','Winda','Yanti','Zenobia','Anisa','Bunga','Cindy','Dewi','Erika','Fara','Gina','Hesti','Intan','Jihaan'];
+  const TEMA=[['Nusantara Royale','published'],['Botanical Whispers','draft'],['Golden Jasmine','pending'],['Batik Hemat','published'],['Syar\'i Mawaddah','pending'],['Minimalist Cherish','draft'],['Emerald Heritage','published'],['Serenity White','pending'],['Sundanese Blossom','published'],['Nordic Simplicity','draft']];
+  const KOTA=['Jakarta','Bandung','Surabaya','Yogyakarta','Semarang','Malang','Denpasar','Makassar','Medan','Bogor','Bekasi','Tangerang','Depok','Solo','Padang','Palembang','Balikpapan','Banjarmasin','Manado','Jayapura'];
+  const AV='https://i.pravatar.cc/100?img=';
+  const statMap={published:['success','Published'],draft:['warning','Draft'],pending:['info','Pending']};
+
+  function seedRand(i){ const x=Math.sin(i*127.1+311.7)*43758.5453; return x-Math.floor(x); }
+  const data=[];
+  for(let i=0;i<100;i++){
+    const p=NAMA_PRIA[Math.floor(seedRand(i+1)*NAMA_PRIA.length)];
+    const w=NAMA_WANITA[Math.floor(seedRand(i+51)*NAMA_WANITA.length)];
+    const [tema,status]=TEMA[i%TEMA.length];
+    const kota=KOTA[Math.floor(seedRand(i+101)*KOTA.length)];
+    const tamu=60+Math.floor(seedRand(i+151)*540);
+    const harga=(99+Math.floor(seedRand(i+201)*40))*1000;
+    const tanggal=new Date(2025,Math.floor(seedRand(i+251)*12),1+Math.floor(seedRand(i+301)*28));
+    const tglStr=tanggal.toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});
+    data.push({pasangan:`${p} & ${w}`,tema,status,kota,tamu,harga,tanggal:tglStr,avatar:AV+((i%70)+1)});
+  }
+
+  // Build rows
+  data.forEach((d,i)=>{
+    const tr=document.createElement('tr');
+    tr.dataset.status=d.status;
+    const [cls,label]=statMap[d.status];
+    tr.innerHTML=`
+      <td style="color:var(--dash-muted);font-size:12px;">${i+1}</td>
+      <td><div style="display:flex;align-items:center;gap:10px"><img src="${d.avatar}" class="dash-avatar" loading="lazy" alt=""><div><strong>${d.pasangan}</strong><div style="font-size:11px;color:var(--dash-muted)">${d.tanggal}</div></div></div></td>
+      <td>${d.tema}</td>
+      <td>${d.kota}</td>
+      <td data-value="${d.tamu}">${d.tamu}</td>
+      <td><span class="dash-badge ${cls}">${label}</span></td>
+      <td data-value="${d.harga}">Rp ${d.harga.toLocaleString('id-ID')}</td>
+      <td style="text-align:center;">
+        <div class="tl-actions-dd">
+          <button class="tl-act-trigger" type="button" aria-expanded="false" title="Aksi" data-row="${i+1}"><i class="bi bi-three-dots-vertical"></i></button>
+          <div class="tl-actions-menu">
+            <button type="button" data-act="detail" data-row="${i+1}"><i class="bi bi-eye"></i> Lihat Detail</button>
+            <button type="button" data-act="edit" data-row="${i+1}"><i class="bi bi-pencil"></i> Edit Pesanan</button>
+            <a href="../preview.html"><i class="bi bi-phone"></i> Live Preview</a>
+            <div class="dd-sep"></div>
+            <button type="button" class="dd-danger" data-act="hapus" data-row="${i+1}"><i class="bi bi-trash3"></i> Hapus</button>
+          </div>
+        </div>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+
+  const allRows=Array.from(tbody.querySelectorAll('tr'));
+  const state={search:'',status:'all',sortIdx:null,dir:1,page:1,perPage:10};
+
+  function filtered(){
+    let list=allRows.filter(r=>{
+      const okText=r.textContent.toLowerCase().includes(state.search);
+      const okStatus=state.status==='all'||r.dataset.status===state.status;
+      return okText&&okStatus;
+    });
+    if(state.sortIdx!==null){
+      list=list.slice().sort((a,b)=>{
+        const ca=a.children[state.sortIdx], cb=b.children[state.sortIdx];
+        const av=ca.dataset.value!==undefined?ca.dataset.value:ca.textContent.trim();
+        const bv=cb.dataset.value!==undefined?cb.dataset.value:cb.textContent.trim();
+        const an=parseFloat(av), bn=parseFloat(bv);
+        const r=(!isNaN(an)&&!isNaN(bn)) ? an-bn : String(av).localeCompare(String(bv),'id');
+        return r*state.dir;
+      });
+    }
+    return list;
+  }
+
+  function render(){
+    const list=filtered();
+    const perPage=state.perPage;
+    const pages=Math.max(1,Math.ceil(list.length/perPage));
+    if(state.page>pages)state.page=pages;
+    if(state.page<1)state.page=1;
+    const start=(state.page-1)*perPage;
+    allRows.forEach(r=>r.style.display='none');
+    list.slice(start,start+perPage).forEach(r=>r.style.display='');
+
+    // Info ala DataTables: kiri bawah
+    const shown=list.length?`${start+1}–${Math.min(start+perPage,list.length)}`:'0';
+    infoEl.innerHTML=`Menampilkan <strong>${shown}</strong> dari <strong>${list.length}</strong> pasangan${list.length!==100?` (difilter dari 100)`:''}`;
+
+    // Pager super-ringkas: [<] [1] 2 … 10 [>] — first, next-to-edge, current, last
+    pager.innerHTML='';
+    const mk=(html,dis,cb,cls,title)=>{const b=document.createElement('button');b.className='tl-page-btn'+(cls?' '+cls:'');b.innerHTML=html;if(title)b.title=title;if(dis)b.disabled=true;b.addEventListener('click',(e)=>{cb();pinToTable();keepFocus(b);});pager.appendChild(b);};
+    const dots=()=>{const d=document.createElement('span');d.className='tl-page-info';d.textContent='…';pager.appendChild(d);};
+    mk('<i class="bi bi-chevron-left"></i>',state.page===1,()=>{state.page--;render();},'','Sebelumnya');
+    const items=[...new Set([1,state.page===1?2:state.page,state.page===pages?pages-1:state.page,pages])]
+      .filter(n=>n>=1&&n<=pages).sort((a,b)=>a-b);
+    let prev=0;
+    items.forEach(n=>{
+      if(n-prev>1) dots();
+      mk(String(n),false,()=>{state.page=n;render();},n===state.page?'active':'');
+      prev=n;
+    });
+    mk('<i class="bi bi-chevron-right"></i>',state.page===pages,()=>{state.page++;render();},'','Berikutnya');
+  }
+
+  table.querySelectorAll('th.th-sort').forEach(th=>{
+    th.addEventListener('click',()=>{
+      const idx=+th.dataset.sort;
+      if(state.sortIdx===idx) state.dir*=-1;
+      else {state.sortIdx=idx;state.dir=1;}
+      table.querySelectorAll('th.th-sort').forEach(h=>{
+        h.classList.remove('asc','desc','sorted');
+        h.querySelector('.sort-i').className='bi bi-caret-up-fill sort-i';
+      });
+      th.classList.add(state.dir===1?'asc':'desc','sorted');
+      th.querySelector('.sort-i').className='bi '+(state.dir===1?'bi-caret-up-fill':'bi-caret-down-fill')+' sort-i';
+      state.page=1;render();
+    });
+  });
+
+  document.getElementById('dtSearch').addEventListener('input',e=>{state.search=e.target.value.toLowerCase().trim();state.page=1;render();});
+  document.getElementById('dtFilter').addEventListener('change',e=>{state.status=e.target.value;state.page=1;render();pinToTable();});
+  lengthSel.addEventListener('change',e=>{state.perPage=parseInt(e.target.value,10);state.page=1;render();pinToTable();});
+  document.getElementById('dtReset').addEventListener('click',()=>{
+    state.search='';state.status='all';state.sortIdx=null;state.dir=1;state.page=1;state.perPage=10;
+    document.getElementById('dtSearch').value='';
+    document.getElementById('dtFilter').value='all';
+    lengthSel.value='10';
+    table.querySelectorAll('th.th-sort').forEach(h=>{h.classList.remove('asc','desc','sorted');h.querySelector('.sort-i').className='bi bi-caret-up-fill sort-i';});
+    render();dashToast('Filter direset','info');
+  });
+  render();
+
+  /* ===== Aksi titik-3: dropdown di-portal ke <body> (bebas clipping & stacking) ===== */
+  function closeMenu(m){
+    m.classList.remove('show');
+    m.style.position=m.style.top=m.style.right='';
+    const t=m._trig;
+    if(t){ t.setAttribute('aria-expanded','false'); m._trig=null; }
+  }
+  function openMenu(trig){
+    const m=trig._menu;
+    document.querySelectorAll('.tl-actions-menu.show').forEach(closeMenu);
+    if(m.parentElement!==document.body) document.body.appendChild(m); // portal: lolos dari overflow tabel
+    m.style.position='fixed';
+    m.classList.add('show');
+    const r=trig.getBoundingClientRect();
+    const need=m.offsetHeight+12;
+    const openUp=(window.innerHeight-r.bottom)<need && r.top>=need; // auto-flip ke atas bila sempit
+    m.style.top=(openUp?r.top-need+6:r.bottom+6)+'px';
+    m.style.right=Math.max(8,window.innerWidth-r.right)+'px';
+    trig.setAttribute('aria-expanded','true');
+    m._trig=trig;
+  }
+  // hubungkan tiap trigger dengan menunya (menu sudah dipindah-pindah, jadi pakai referensi)
+  tbody.querySelectorAll('.tl-act-trigger').forEach(b=>{ b._menu=b.nextElementSibling; });
+  document.addEventListener('click', (e)=>{
+    const trigger = e.target.closest('.tl-act-trigger');
+    if(trigger){
+      const m=trigger._menu;
+      if(m.classList.contains('show')) closeMenu(m); else openMenu(trigger);
+      e.stopPropagation();
+      return;
+    }
+    const act = e.target.closest('.tl-actions-menu button, .tl-actions-menu a');
+    if(act){
+      closeMenu(act.closest('.tl-actions-menu'));
+      const row = act.dataset.row;
+      const map = {
+        'detail': ()=> dashToast(`Detail pesanan #${row} dibuka`),
+        'edit':   ()=> dashToast(`Edit pesanan #${row}`,'info'),
+        'hapus':  ()=> dashToast(`Pesanan #${row} dihapus`,'info')
+      };
+      map[act.dataset.act]?.();
+      return;
+    }
+    // klik di luar: tutup semua
+    document.querySelectorAll('.tl-actions-menu.show').forEach(closeMenu);
+  });
+  // menu fixed akan salah posisi saat halaman scroll atau resize -> tutup saja
+  ['scroll','resize'].forEach(ev=>window.addEventListener(ev,()=>{
+    document.querySelectorAll('.tl-actions-menu.show').forEach(closeMenu);
+  },{passive:true}));
+
+  /* ===== Editable table ===== */
+  function enterEdit(row){
+    if(row.classList.contains('editing'))return;
+    row.classList.add('editing');
+    row.querySelectorAll('td[data-field]').forEach(cell=>{
+      cell.dataset.orig=cell.innerHTML;
+      const type=cell.dataset.type||'text';
+      const val=cell.textContent.trim();
+      if(type==='select'){
+        const sel=document.createElement('select');sel.className='tl-edit-input';
+        cell.dataset.opts.split('|').forEach(o=>{
+          const op=document.createElement('option');op.value=o;op.textContent=o;
+          if(o===val)op.selected=true;sel.appendChild(op);
+        });
+        cell.textContent='';cell.appendChild(sel);
+      }else{
+        const inp=document.createElement('input');inp.type=type;inp.value=val;inp.className='tl-edit-input';
+        cell.textContent='';cell.appendChild(inp);
+      }
+    });
+    const act=row.querySelector('.tl-actions');
+    act.dataset.orig=act.innerHTML;
+    act.innerHTML='<button class="tl-act save" title="Simpan"><i class="bi bi-check-lg"></i></button><button class="tl-act cancel" title="Batal"><i class="bi bi-x-lg"></i></button>';
+    act.querySelector('.save').addEventListener('click',()=>exitEdit(row,true));
+    act.querySelector('.cancel').addEventListener('click',()=>exitEdit(row,false));
+  }
+  function exitEdit(row,commit){
+    row.classList.remove('editing');
+    if(commit){
+      row.querySelectorAll('td[data-field]').forEach(cell=>{
+        const inp=cell.querySelector('.tl-edit-input');
+        if(inp)cell.textContent=inp.value;
+      });
+      dashToast('Perubahan disimpan');
+    }else{
+      row.querySelectorAll('td[data-field]').forEach(cell=>{cell.innerHTML=cell.dataset.orig;});
+      dashToast('Perubahan dibatalkan','info');
+    }
+    const act=row.querySelector('.tl-actions');
+    act.innerHTML=act.dataset.orig;
+    delete act.dataset.orig;
+    act.querySelector('[data-edit-row]').addEventListener('click',()=>enterEdit(row));
+  }
+  document.querySelectorAll('#editTable [data-edit-row]').forEach(btn=>{
+    btn.addEventListener('click',()=>enterEdit(btn.closest('tr')));
+  });
+})();
+</script>
+<script src="assets/js/theme-switcher.js"></script>
+</body>
+</html>

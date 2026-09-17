@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panduan Format Pesan WhatsApp Undangan Pernikahan Digital - JanjiSuci</title>
+  <meta name="description" content="Panduan lengkap etika & format kata-kata mengirim undangan digital via WhatsApp agar sopan dan berkesan untuk keluarga, sesepuh, dan sahabat.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Native CSS -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+    /* ========== BLOG SINGLE PAGE SPECIFIC ========== */
+    /* Breadcrumb */
+    .breadcrumb-bar { background: var(--surface); border-bottom: 1px solid rgba(232,223,211,0.6); }
+    .breadcrumb-inner { max-width: 896px; margin-inline: auto; padding: 0.85rem 1rem; display: flex; align-items: center; gap: 0.5rem; overflow-x: auto; font-size: 13px; color: var(--on-surface-variant); white-space: nowrap; scrollbar-width: none; }
+    .breadcrumb-inner::-webkit-scrollbar { display: none; }
+    .breadcrumb-inner a { color: var(--on-surface-variant); transition: color 0.2s; display: inline-flex; align-items: center; gap: 0.25rem; }
+    .breadcrumb-inner a:hover { color: var(--primary); }
+    .breadcrumb-inner span.sep { color: var(--outline-variant); font-size: 10px; }
+    .breadcrumb-inner .current { color: var(--primary); font-weight: 600; overflow: hidden; text-overflow: ellipsis; max-width: 260px; }
+    @media (min-width: 768px) { .breadcrumb-inner .current { max-width: none; } }
+
+    /* Article wrapper */
+    .article-wrap { max-width: 896px; margin-inline: auto; padding: 2.5rem 1rem 0; }
+    @media (min-width: 768px) { .article-wrap { padding: 3rem 2rem 0; } }
+
+    /* Category badge row */
+    .cat-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+    .badge-cat { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.85rem; border-radius: 9999px; background: var(--blush-soft); border: 1px solid var(--sand-warm); color: var(--secondary); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .badge-cat .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--secondary); }
+    .verified { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 13px; color: var(--on-surface-variant); }
+    .verified i { color: var(--secondary); font-size: 0.95rem; }
+
+    .article-title { font-family: 'Playfair Display', serif; font-size: 28px; line-height: 36px; font-weight: 600; color: var(--primary); letter-spacing: -0.015em; }
+    @media (min-width: 768px) { .article-title { font-size: 38px; line-height: 48px; letter-spacing: -0.01em; } }
+
+    /* Author row */
+    .author-row { display: flex; flex-direction: column; gap: 1.25rem; padding-bottom: 2rem; border-bottom: 1px solid var(--sand-warm); margin-top: 1.5rem; }
+    @media (min-width: 768px) { .author-row { flex-direction: row; align-items: center; justify-content: space-between; } }
+    .author-left { display: flex; align-items: center; gap: 0.85rem; }
+    .author-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold-light); flex-shrink: 0; }
+    .author-name { font-size: 16px; font-weight: 600; color: var(--primary); }
+    .author-name span { font-weight: 400; font-size: 13px; color: var(--on-surface-variant); }
+    .author-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; font-size: 13px; color: var(--on-surface-variant); margin-top: 2px; }
+    .author-meta i { color: var(--secondary); font-size: 0.9rem; }
+    .share-bar { display: flex; align-items: center; gap: 0.5rem; align-self: flex-start; }
+    @media (min-width: 768px) { .share-bar { align-self: auto; } }
+    .share-label { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--on-surface-variant); margin-right: 0.25rem; }
+    .share-btn { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 0.55rem; background: var(--surface-card); border: 1px solid var(--sand-warm); color: var(--primary); font-size: 1rem; box-shadow: var(--shadow-sm); transition: background 0.2s; cursor: pointer; }
+    .share-btn:hover { background: rgba(245,235,215,0.4); }
+    .share-btn.wa { color: var(--status-success); }
+    .share-btn.fb { color: var(--navy-accent); }
+    .copy-btn { display: inline-flex; align-items: center; gap: 0.35rem; height: 36px; padding: 0 0.85rem; border-radius: 0.55rem; background: var(--surface-card); border: 1px solid var(--sand-warm); color: var(--primary); font-size: 12px; font-weight: 600; box-shadow: var(--shadow-sm); transition: background 0.2s; cursor: pointer; }
+    .copy-btn:hover { background: rgba(245,235,215,0.4); }
+    .copy-btn i { font-size: 0.95rem; }
+
+    /* Hero image */
+    .hero-figure { margin: 2.5rem 0; }
+    .hero-img-wrap { position: relative; border-radius: 1rem; overflow: hidden; border: 1px solid var(--sand-warm); box-shadow: var(--shadow-hover); background: var(--surface); }
+    .hero-img-wrap img { width: 100%; height: 420px; object-fit: cover; display: block; }
+    @media (min-width: 768px) { .hero-img-wrap img { height: 500px; } }
+    .hero-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(3,37,33,0.78) 0%, rgba(3,37,33,0.25) 60%, transparent 100%); padding: 1.25rem; display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; color: #fff; font-size: 12px; }
+    .hero-caption span:first-child { font-weight: 600; color: #fff; max-width: 32rem; line-height: 1.4; }
+    .hero-caption span:last-child { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-light); white-space: nowrap; }
+    @media (max-width: 640px) { .hero-caption span:last-child { display: none; } }
+    .figure-note { text-align: center; font-size: 13px; font-style: italic; color: var(--on-surface-variant); margin-top: 0.6rem; }
+
+    /* TOC */
+    .toc { background: var(--cream-bg); border: 1px solid var(--sand-warm); border-radius: 0.85rem; padding: 1.25rem; margin-bottom: 2rem; }
+    .toc-title { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--secondary); display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.75rem; }
+    .toc-title i { font-size: 1rem; }
+    .toc ol { display: flex; flex-direction: column; gap: 0.5rem; counter-reset: toc; }
+    .toc li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 14px; line-height: 20px; }
+    .toc li span.num { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--primary-container); color: var(--gold-light); display: grid; place-items: center; font-size: 11px; font-weight: 700; }
+    .toc a { color: var(--on-surface); font-weight: 600; }
+    .toc a:hover { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+    .toc small { color: var(--on-surface-variant); font-weight: 400; font-size: 12px; margin-left: 0.25rem; }
+
+    /* Prose */
+    .prose { color: var(--on-surface); }
+    .lead { font-size: 18px; line-height: 28px; color: var(--on-surface-variant); margin-bottom: 2rem; }
+    .lead::first-letter { font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 700; float: left; margin-right: 0.5rem; margin-top: 0.15rem; line-height: 1; color: var(--primary); }
+    .prose p { font-size: 15px; line-height: 26px; color: var(--on-surface); margin-bottom: 1rem; }
+    .prose p.muted { color: var(--on-surface-variant); }
+    .prose strong { color: var(--primary); font-weight: 600; }
+
+    .sec-head { display: flex; align-items: center; gap: 0.75rem; margin: 2.5rem 0 1rem; }
+    .sec-num { width: 32px; height: 32px; border-radius: 50%; background: var(--primary); color: #fff; display: grid; place-items: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+    .sec-title { font-family: 'Playfair Display', serif; font-size: 22px; line-height: 30px; font-weight: 600; color: var(--primary); }
+    @media (min-width: 768px) { .sec-title { font-size: 26px; line-height: 34px; } }
+
+    /* Cards checklist */
+    .check-grid { display: grid; gap: 1rem; margin: 1.25rem 0 2rem; }
+    @media (min-width: 768px) { .check-grid { grid-template-columns: repeat(3,1fr); } }
+    .check-card { background: var(--surface-card); padding: 1.25rem; border-radius: 0.75rem; border: 1px solid var(--sand-warm); box-shadow: var(--shadow-sm); transition: box-shadow 0.2s; }
+    .check-card:hover { box-shadow: var(--shadow-card); }
+    .check-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--blush-soft); color: var(--secondary); display: grid; place-items: center; font-size: 1.05rem; margin-bottom: 0.75rem; }
+    .check-card h3 { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 0.4rem; }
+    .check-card p { font-size: 13px; line-height: 20px; color: var(--on-surface-variant); margin: 0; }
+    .check-card em { font-style: italic; color: var(--secondary); font-weight: 600; }
+
+    /* Callout */
+    .callout { background: var(--surface-card); border: 1px solid rgba(232,223,211,0.6); border-left: 4px solid var(--secondary); border-radius: 0 0.75rem 0.75rem 0; padding: 1.25rem; margin: 2rem 0; box-shadow: var(--shadow-sm); display: flex; gap: 1rem; align-items: flex-start; }
+    .callout-icon { width: 40px; height: 40px; border-radius: 0.55rem; background: var(--gold-light); color: var(--primary); display: grid; place-items: center; font-size: 1.25rem; flex-shrink: 0; }
+    .callout-label { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--secondary); display: block; margin-bottom: 0.3rem; }
+    .callout p { font-size: 14px; line-height: 22px; color: var(--on-surface); margin: 0; }
+    .callout .hl { background: var(--blush-soft); padding: 0.1rem 0.4rem; border-radius: 0.25rem; color: var(--primary); font-weight: 700; font-size: 13px; }
+
+    /* Copyable box */
+    .copy-box { background: var(--surface-card); border: 1px solid var(--sand-warm); border-radius: 0.85rem; overflow: hidden; box-shadow: var(--shadow-sm); margin: 1.25rem 0 2rem; }
+    .copy-head { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; background: var(--cream-bg); padding: 0.75rem 1rem; border-bottom: 1px solid var(--sand-warm); }
+    .copy-head-left { display: flex; align-items: center; gap: 0.5rem; font-size: 13px; font-weight: 700; color: var(--primary); }
+    .copy-head-left i { color: var(--secondary); font-size: 1.05rem; }
+    .btn-copy { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.4rem 0.7rem; border-radius: 0.45rem; background: var(--surface-card); border: 1px solid var(--sand-warm); font-size: 11px; font-weight: 700; color: var(--primary); cursor: pointer; transition: background 0.2s; }
+    .btn-copy:hover { background: rgba(245,235,215,0.5); }
+    .copy-content { padding: 1.25rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; line-height: 22px; color: var(--on-surface); white-space: pre-line; background: rgba(255,255,255,0.4); overflow-x: auto; user-select: all; }
+
+    /* Promo mid */
+    .mid-promo { position: relative; overflow: hidden; border-radius: 1rem; background: var(--primary); color: #fff; padding: 1.75rem; display: flex; flex-direction: column; gap: 1.25rem; box-shadow: 0 12px 32px rgba(20,34,56,0.12); border: 1px solid rgba(245,235,215,0.18); margin: 2.5rem 0; }
+    @media (min-width: 768px) { .mid-promo { flex-direction: row; align-items: center; justify-content: space-between; padding: 2rem; } }
+    .mid-promo::after { content: ""; position: absolute; right: -3rem; top: -3rem; width: 12rem; height: 12rem; background: rgba(131,82,61,0.20); border-radius: 50%; filter: blur(18px); pointer-events: none; }
+    .mid-badge { display: inline-block; padding: 0.25rem 0.6rem; border-radius: 0.35rem; background: var(--secondary); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .mid-promo h3 { font-family: 'Playfair Display', serif; font-size: 19px; line-height: 26px; font-weight: 600; color: #fff; }
+    .mid-promo p { font-size: 13px; line-height: 20px; color: rgba(255,255,255,0.82); margin-top: 0.35rem; }
+    .btn-mid { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.75rem 1.25rem; border-radius: 0.55rem; background: var(--gold-light); color: var(--primary); font-size: 13px; font-weight: 700; white-space: nowrap; flex-shrink: 0; transition: background 0.2s; }
+    .btn-mid:hover { background: #fff; }
+
+    /* Tags */
+    .tag-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--sand-warm); }
+    .tag-label { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--on-surface-variant); margin-right: 0.25rem; }
+    .tag { padding: 0.35rem 0.7rem; border-radius: 9999px; background: var(--surface-card); border: 1px solid var(--sand-warm); font-size: 12px; font-weight: 600; color: var(--on-surface); transition: border-color 0.2s, color 0.2s; }
+    .tag:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* Author bio */
+    .author-bio { margin: 2.5rem 0; padding: 1.5rem; border-radius: 1rem; background: var(--surface-card); border: 1px solid var(--sand-warm); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 1.25rem; }
+    @media (min-width: 640px) { .author-bio { flex-direction: row; align-items: flex-start; text-align: left; } }
+    .author-bio img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--gold-light); flex-shrink: 0; align-self: center; }
+    @media (min-width: 640px) { .author-bio img { align-self: flex-start; } }
+    .bio-main { flex: 1; }
+    .bio-head { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.6rem; }
+    @media (min-width: 640px) { .bio-head { flex-direction: row; align-items: center; justify-content: space-between; } }
+    .bio-name { font-size: 18px; font-weight: 700; color: var(--primary); }
+    .bio-role { font-size: 12px; font-weight: 600; color: var(--secondary); }
+    .bio-link { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 12px; font-weight: 700; color: var(--primary); align-self: center; }
+    .bio-link:hover { color: var(--secondary); }
+    @media (min-width: 640px) { .bio-link { align-self: auto; } }
+    .bio-desc { font-size: 13px; line-height: 20px; color: var(--on-surface-variant); margin-bottom: 0.75rem; }
+    .bio-stats { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; font-size: 12px; color: var(--on-surface-variant); }
+    .bio-stats i { color: var(--secondary); font-size: 0.9rem; }
+
+    /* Related */
+    .related-section { background: var(--surface); border-top: 1px solid var(--sand-warm); padding: 3.5rem 0; margin-top: 3rem; }
+    .related-head { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    @media (min-width: 768px) { .related-head { flex-direction: row; align-items: flex-end; justify-content: space-between; } }
+    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--secondary); display: block; margin-bottom: 0.25rem; }
+    .related-title { font-family: 'Playfair Display', serif; font-size: 26px; line-height: 34px; font-weight: 600; color: var(--primary); }
+    .link-all { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 14px; font-weight: 700; color: var(--primary); }
+    .link-all:hover { color: var(--secondary); }
+    .related-grid { display: grid; gap: 1.5rem; }
+    @media (min-width: 768px) { .related-grid { grid-template-columns: repeat(3,1fr); } }
+    .rel-card { background: var(--surface-card); border: 1px solid rgba(232,223,211,0.8); border-radius: 1rem; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); transition: box-shadow 0.3s, transform 0.3s; }
+    .rel-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+    .rel-media { position: relative; height: 208px; overflow: hidden; background: var(--surface-container); }
+    .rel-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .rel-card:hover .rel-media img { transform: scale(1.05); }
+    .rel-badge { position: absolute; top: 12px; left: 12px; padding: 0.2rem 0.55rem; border-radius: 0.35rem; background: rgba(255,255,255,0.92); backdrop-filter: blur(6px); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--primary); border: 1px solid var(--sand-warm); }
+    .rel-body { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; }
+    .rel-meta { font-size: 12px; color: var(--on-surface-variant); margin-bottom: 0.4rem; }
+    .rel-title { font-family: 'Playfair Display', serif; font-size: 18px; line-height: 24px; font-weight: 600; color: var(--primary); transition: color 0.2s; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .rel-card:hover .rel-title { color: var(--secondary); }
+    .rel-desc { font-size: 13px; line-height: 20px; color: var(--on-surface-variant); margin-top: 0.5rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .rel-link { margin-top: auto; padding-top: 1rem; display: inline-flex; align-items: center; gap: 0.3rem; font-size: 12px; font-weight: 700; color: var(--primary); transition: gap 0.2s; }
+    .rel-link:hover { gap: 0.5rem; color: var(--secondary); }
+
+    /* CTA banner */
+    .cta-single-wrap { background: var(--cream-bg); border-top: 1px solid var(--sand-warm); padding: 3.5rem 0; }
+    .cta-single { max-width: 1280px; margin-inline: auto; padding-inline: 1rem; }
+    @media (min-width: 768px) { .cta-single { padding-inline: 2rem; } }
+    .cta-card {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 55%, var(--surface-tint) 100%);
+      color: #fff; border-radius: 1.5rem; padding: 2rem 1.5rem; text-align: center; box-shadow: 0 12px 32px rgba(20,34,56,0.14); border: 1px solid rgba(245,235,215,0.18);
+    }
+    @media (min-width: 768px) { .cta-card { padding: 3rem; } }
+    .cta-card::before, .cta-card::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; filter: blur(24px); }
+    .cta-card::before { left: -4rem; bottom: -4rem; width: 16rem; height: 16rem; background: rgba(245,235,215,0.10); }
+    .cta-card::after { right: -4rem; top: -4rem; width: 16rem; height: 16rem; background: rgba(131,82,61,0.18); }
+    .cta-inner { position: relative; z-index: 1; max-width: 36rem; margin-inline: auto; }
+    .cta-eyebrow { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.5rem; }
+    .cta-title { font-family: 'Playfair Display', serif; font-size: 26px; line-height: 34px; font-weight: 600; color: #fff; }
+    @media (min-width: 768px) { .cta-title { font-size: 38px; line-height: 48px; } }
+    .cta-desc { font-size: 15px; line-height: 24px; color: rgba(255,255,255,0.82); margin-top: 0.75rem; }
+    .cta-actions { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.75rem; justify-content: center; }
+    @media (min-width: 640px) { .cta-actions { flex-direction: row; } }
+    .cta-actions a { display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.9rem 1.5rem; border-radius: 0.6rem; font-size: 14px; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+    .cta-actions a.primary { background: var(--gold-light); color: var(--primary); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+    .cta-actions a.primary:hover { background: #fff; }
+    .cta-actions a.ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.28); }
+    .cta-actions a.ghost:hover { background: rgba(255,255,255,0.10); }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="JanjiSuci beranda">
+        <div class="brand-icon"><i class="bi bi-heart-fill"></i></div>
+        <div class="brand-text">
+          <span class="brand-name">JanjiSuci</span>
+          <span class="brand-sub">Wedding Invitation</span>
+        </div>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Navigasi utama">
+        <a href="fitur.html" class="nav-link">Fitur</a>
+        <a href="katalog.html" class="nav-link">Katalog Tema</a>
+        <a href="harga.html" class="nav-link">Harga</a>
+        <a href="contoh.html" class="nav-link">Contoh Undangan</a>
+        <a href="testimoni.html" class="nav-link">Testimoni</a>
+        <a href="blog.html" class="nav-link active">Blog</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="login.html" class="btn btn-ghost">Masuk</a>
+        <a href="dashboard.html" class="btn btn-primary">
+          <span>Buat Undangan Sekarang</span>
+          <i class="bi bi-arrow-right"></i>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav" aria-label="Navigasi mobile">
+      <a href="fitur.html">Fitur</a>
+      <a href="katalog.html">Katalog Tema</a>
+      <a href="harga.html">Harga</a>
+      <a href="contoh.html">Contoh Undangan</a>
+      <a href="testimoni.html">Testimoni</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="login.html">Masuk</a>
+    </nav>
+  </header>
+
+  <!-- ==================== BREADCRUMB ==================== -->
+  <div class="breadcrumb-bar">
+    <nav class="breadcrumb-inner" aria-label="Breadcrumb">
+      <a href="index.html"><i class="bi bi-house"></i> Beranda</a>
+      <span class="sep">/</span>
+      <a href="blog.html">Blog</a>
+      <span class="sep">/</span>
+      <a href="blog.html">Tips &amp; Etika Undangan</a>
+      <span class="sep">/</span>
+      <span class="current">Panduan Format Pesan WhatsApp</span>
+    </nav>
+  </div>
+
+  <!-- ==================== ARTICLE HEADER ==================== -->
+  <article class="article-wrap">
+    <div class="cat-row">
+      <span class="badge-cat"><span class="dot"></span> Tips &amp; Etika Undangan</span>
+      <span class="verified"><i class="bi bi-patch-check-fill"></i> Terverifikasi Wedding Specialist</span>
+    </div>
+
+    <h1 class="article-title">Panduan Lengkap Etika &amp; 7 Contoh Format Pesan WhatsApp Undangan Pernikahan Digital Agar Sopan dan Berkesan</h1>
+
+    <div class="author-row">
+      <div class="author-left">
+        <img class="author-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0EyXQkigUYOiyd0g8XcZ6dx985T2muUU0jk98S_FhXoCWbnULl2l1ON2l8FVavXolvn4JAtScDAUk6Rw5dG35EXl696didCD0PHi1BNiLjGVE8yxX08a8s2BxyU9Hq6zgnw8o_QJ4jL0KOTOFsHEnkvq9niE_cctPteIKMk87PEg0cgrmvnnRajsMwGBZ8vn_RPfebTS9rknF7wCbjU8SLvArlebozGD8a8bBs9IBrTP8xmeVS_BZ" alt="Alya Safitri, Wedding Consultant JanjiSuci">
+        <div>
+          <div class="author-name">Alya Safitri, <span>Wedding Consultant JanjiSuci</span></div>
+          <div class="author-meta">
+            <span style="display:inline-flex;align-items:center;gap:0.3rem;"><i class="bi bi-calendar-event"></i> 24 Februari 2025</span>
+            <span>•</span>
+            <span style="display:inline-flex;align-items:center;gap:0.3rem;"><i class="bi bi-clock"></i> 6 Menit Waktu Baca</span>
+            <span>•</span>
+            <span style="display:inline-flex;align-items:center;gap:0.3rem;"><i class="bi bi-eye"></i> 3.4k Dibaca</span>
+          </div>
+        </div>
+      </div>
+      <div class="share-bar">
+        <span class="share-label">Bagikan:</span>
+        <button class="share-btn wa" aria-label="Bagikan ke WhatsApp" onclick="window.open('https://wa.me/?text='+encodeURIComponent(window.location.href),'_blank')"><i class="bi bi-whatsapp"></i></button>
+        <button class="share-btn fb" aria-label="Bagikan" onclick="if(navigator.share){navigator.share({title:document.title,url:window.location.href})}else{copyArticleLink()}"><i class="bi bi-share"></i></button>
+        <button class="copy-btn" id="copyBtn" onclick="copyArticleLink()"><i class="bi bi-link-45deg"></i> <span id="copyBtnText">Salin Tautan</span></button>
+      </div>
+    </div>
+
+    <!-- Hero Image -->
+    <figure class="hero-figure">
+      <div class="hero-img-wrap">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLMrlKOXVVDgHD0h0k2V86W4yiPLwLh050zvVOPSwkcDmxKpy6TiRyvZBMtv4JC4Hhu-BR58e_hA07PYHR1sdCwEauszjs1SkyoQfjEXDShLP-Sd20OQHa1i9u4zY_MEEM2mfhYLQK3gt3JEGS53DZOs-N42tkyMH0fgZSL0nJhRdUq6IP5jZ4TlcK19Gl6vvogWMbRrz4TNqkJl_f7RWTECKGrD9yF8zISlZ4zBPZF-E4mjnixqU7" alt="Tangan elegan memegang smartphone menampilkan undangan digital emas dengan bunga mawar putih dan cincin kawin">
+        <div class="hero-caption">
+          <span>Inspirasi penyampaian undangan santun: Memadukan keindahan visual nusantara dan adab bertutur.</span>
+          <span>JanjiSuci Editorial Series</span>
+        </div>
+      </div>
+      <figcaption class="figure-note">Dokumentasi: Desain Undangan Digital Tema 'Royal Sriwijaya Emas' oleh JanjiSuci Studio.</figcaption>
+    </figure>
+
+    <!-- TOC -->
+    <nav class="toc" aria-label="Daftar isi artikel">
+      <div class="toc-title"><i class="bi bi-list-ul"></i> Daftar Isi Artikel</div>
+      <ol>
+        <li><span class="num">1</span> <a href="#etika-dasar">Etika Dasar Menyebarkan Undangan via WhatsApp <small>— 3 pilar komunikasi nusantara</small></a></li>
+        <li><span class="num">2</span> <a href="#format-keluarga">Rekomendasi Format Pesan: Untuk Keluarga &amp; Sesepuh Adat <small>— template formal khidmat</small></a></li>
+        <li><span class="num">3</span> <a href="#format-sahabat">Format Pesan Santai &amp; Hangat: Untuk Rekan Kerja dan Sahabat</a></li>
+        <li><span class="num">4</span> <a href="#kesimpulan">Kesimpulan: Sentuhan Personal Adalah Kunci</a></li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <div class="prose">
+      <p class="lead">Peralihan tren dari undangan cetak konvensional menuju undangan pernikahan digital kini kian diminati calon pengantin modern di Indonesia. Kepraktisan fitur konfirmasi kehadiran (RSVP instan), integrasi maps lokasi akurat, hingga galeri pre-wedding sinematik menawarkan kemudahan yang tak ternilai. Namun di balik kecanggihan teknologi tersebut, terdapat satu aspek fundamental yang tidak boleh pudar: <strong>tata krama dan adab bertutur luhur</strong> saat mengetuk pintu ruang percakapan keluarga sepuh, paman, bibi, hingga rekan sejawat.</p>
+      <p class="muted">Mengirimkan tautan link tanpa salam pengantar pribadi atau sekadar menyalin pesan massal tanpa nama acap kali menimbulkan kesan terburu-buru dan kurang menghargai penerima. Padahal, sepatah salam yang dirangkai dengan takzim mampu menghantarkan kehangatan doa restu yang tulus layaknya sowan secara tatap muka.</p>
+
+      <!-- Section 1 -->
+      <div id="etika-dasar" class="sec-head">
+        <span class="sec-num">1</span>
+        <h2 class="sec-title">Etika Dasar Menyebarkan Undangan via WhatsApp</h2>
+      </div>
+      <p class="muted">Sebelum mengirimkan pesan tautan undangan Anda, pastikan telah memenuhi tiga pilar etika komunikasi digital nusantara berikut ini agar pesan diterima dengan suka cita:</p>
+
+      <div class="check-grid">
+        <div class="check-card">
+          <div class="check-icon"><i class="bi bi-person-badge"></i></div>
+          <h3>Sapaan Personal Khusus</h3>
+          <p>Hindari menyebarkan pesan "Broadcast" anonim tanpa nama. Selalu cantumkan gelar kehormatan seperti <em>Bapak, Ibu, Uwa,</em> atau <em>Kakanda</em> secara spesifik.</p>
+        </div>
+        <div class="check-card">
+          <div class="check-icon"><i class="bi bi-clock-history"></i></div>
+          <h3>Perhatikan Waktu Kirim</h3>
+          <p>Waktu ideal adalah pukul 09.00 - 11.30 WIB atau sore hari 16.00 - 19.30 WIB. Hindari waktu istirahat malam, jam ibadah salat, maupun akhir pekan pagi saat keluarga sedang berkumpul.</p>
+        </div>
+        <div class="check-card">
+          <div class="check-icon"><i class="bi bi-heart"></i></div>
+          <h3>Kearifan Permohonan Maaf</h3>
+          <p>Selalu sisipkan klausul kerendahan hati: permohonan maaf karena kendala jarak fisik atau waktu sehingga belum berkesempatan sowan mengantarkan undangan secara langsung.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-icon"><i class="bi bi-lightbulb"></i></div>
+        <div>
+          <span class="callout-label">💡 Fitur Unggulan JanjiSuci</span>
+          <p><strong>Tips JanjiSuci:</strong> Gunakan fitur <em>WhatsApp Blaster 1-Klik</em> kami untuk otomatis mengisi sapaan personal seperti <span class="hl">"Kepada Yth. Bapak Hendra &amp; Keluarga"</span> pada setiap pesan tanpa resiko nomor kontak Anda terkena pembatasan spam. Hemat waktu berjam-jam menjelang hari bahagia!</p>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div id="format-keluarga" class="sec-head">
+        <span class="sec-num">2</span>
+        <h2 class="sec-title">Rekomendasi Format Pesan: Untuk Keluarga &amp; Sesepuh Adat</h2>
+      </div>
+      <p class="muted">Format di bawah ini dirancang khusus dengan diksi khidmat, penuh takzim, serta menyertakan rasa hormat mendalam kepada kerabat tua, paman, bibi, dan tokoh sesepuh:</p>
+
+      <div class="copy-box">
+        <div class="copy-head">
+          <div class="copy-head-left"><i class="bi bi-people"></i> Template Formal &amp; Santun (Sesepuh / Tokoh Masyarakat)</div>
+          <button class="btn-copy" onclick="copyToClipboard('formatKeluarga', this)"><i class="bi bi-copy"></i> Salin Format</button>
+        </div>
+        <div class="copy-content" id="formatKeluarga">Assalamu’alaikum Warahmatullahi Wabarakatuh / Salam Sejahtera,
+
+Kepada Yth.
+Bapak/Ibu/Uwa/Paman: [Nama Tamu & Keluarga]
+di Tempat.
+
+Dengan segala kerendahan hati dan rasa hormat yang mendalam, perkenankan kami menghaturkan permohonan maaf yang sebesar-besarnya karena kendala jarak dan waktu, kami belum berkesempatan untuk sowan bersilaturahmi secara langsung ke kediaman Bapak/Ibu sekalian.
+
+Tanpa mengurangi rasa takzim kami, melalui perantara pesan ini kami bermaksud mengabarkan kabar bahagia serta memohon doa restu atas pernikahan putra-putri kami:
+
+[Nama Mempelai Wanita] & [Nama Mempelai Pria]
+
+Adapun rangkaian acara akad dan resepsi pernikahan insya Allah akan diselenggarakan pada tautan digital resmi berikut ini:
+👉 https://janjisuci.com/undangan/[link-mempelai]?to=[Nama-Tamu]
+
+Merupakan suatu kehormatan dan kebahagiaan yang tak terhingga bagi kami sekeluarga apabila Bapak/Ibu/Saudara/i berkenan hadir serta melimpahkan doa restu bagi kedua mempelai dalam mengarungi bahtera rumah tangga.
+
+Atas perhatian, doa restu, serta keikhlasan Bapak/Ibu, kami haturkan terima kasih yang tulus.
+
+Wassalamu’alaikum Warahmatullahi Wabarakatuh,
+
+Hormat kami yang berbahagia,
+Kel. Besar [Keluarga Mempelai Pria] & Kel. Besar [Keluarga Mempelai Wanita]</div>
+      </div>
+
+      <!-- Section 3 -->
+      <div id="format-sahabat" class="sec-head">
+        <span class="sec-num">3</span>
+        <h2 class="sec-title">Format Pesan Santai &amp; Hangat: Untuk Rekan Kerja dan Sahabat</h2>
+      </div>
+      <p class="muted">Bagi rekan kantor satu divisi, sahabat semasa kuliah, atau teman komunitas sebaya, gunakan narasi hangat tanpa menghilangkan esensi kesopanan:</p>
+
+      <div class="copy-box">
+        <div class="copy-head">
+          <div class="copy-head-left"><i class="bi bi-people-fill"></i> Template Hangat &amp; Akrab (Sahabat &amp; Rekan Kerja)</div>
+          <button class="btn-copy" onclick="copyToClipboard('formatSahabat', this)"><i class="bi bi-copy"></i> Salin Format</button>
+        </div>
+        <div class="copy-content" id="formatSahabat">Halo [Nama Sahabat/Rekan Kerja]! Semoga senantiasa sehat dan bahagia ya. ✨
+
+Setelah perjalanan panjang yang penuh cerita, atas izin Tuhan Yang Maha Esa, kami ingin berbagi kabar bahagia bahwa kami akan melangsungkan pernikahan:
+
+💍 [Nama Panggilan Wanita] & [Nama Panggilan Pria] 💍
+
+Kami sangat berharap kamu bisa hadir dan merayakan momen sakral penuh kebahagiaan ini bersama kami. Informasi detail jadwal, navigasi maps lokasi, dan live streaming dapat dilihat melalui undangan digital berikut:
+👉 https://janjisuci.com/undangan/[link-kamu]?to=[Nama-Tamu]
+
+Kehadiran dan doa restu hangat dari kamu akan menjadi kado terindah bagi lembaran baru hidup kami. Sampai jumpa di hari H ya!
+
+Warm regards,
+[Nama Panggilan Kedua Mempelai]</div>
+      </div>
+
+      <div class="mid-promo">
+        <div style="position:relative;z-index:1;max-width:32rem;">
+          <span class="mid-badge">Eksklusif JanjiSuci</span>
+          <h3>Buat Undangan Pernikahan Digital dengan Musik Tradisional &amp; Amplop QRIS dalam 5 Menit.</h3>
+          <p>Tersedia lebih dari 120+ katalog tema adat nusantara (Jawa, Sunda, Minang, Bali) hingga Modern European Luxe.</p>
+        </div>
+        <a href="dashboard.html" class="btn-mid" style="position:relative;z-index:1;">Mulai Coba Gratis <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <!-- Section 4 -->
+      <div id="kesimpulan" class="sec-head">
+        <span class="sec-num">4</span>
+        <h2 class="sec-title">Kesimpulan: Sentuhan Personal Adalah Kunci</h2>
+      </div>
+      <p>Secanggih apapun platform undangan pernikahan yang Anda gunakan, keramahan dan ketulusan personal adalah jiwa dari setiap kabar gembira. Mengetik nama calon tamu dengan benar, menyisipkan doa keberkahan, serta memberikan penjelasan singkat tentang cara mengisi formulir kehadiran digital (RSVP) akan membuat para tamu merasa sangat dihargai dan antusias untuk hadir memenuhi undangan Anda.</p>
+      <p>Persiapkan daftar nama tamu Anda dari sekarang, kelompokkan berdasarkan kategori lingkaran pertemanan maupun kerabat sesepuh, dan manfaatkan template di atas sebagai pijakan silaturahmi yang menyejukkan hati.</p>
+
+      <div class="tag-row">
+        <span class="tag-label">Tags Terkait:</span>
+        <a href="blog.html" class="tag">#FormatWhatsApp</a>
+        <a href="blog.html" class="tag">#EtikaUndangan</a>
+        <a href="blog.html" class="tag">#PernikahanAdat</a>
+        <a href="blog.html" class="tag">#UndanganDigital</a>
+      </div>
+    </div>
+
+    <!-- Author Bio -->
+    <div class="author-bio">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6sis3bJU4Ho0oXZHsacMaQwYXNXT0nFSSMhihZTzR6Bk14UlvMAWL886yhFxprfZTX6ilpzUB1wU7vocYxQFV8HQDALR0GnbFsxz213MQhapMAORF3kon49wf74jB2J47tW01AuX0yTe1IFyla1iwsjkwtMR-57XBsIF1KWf2UBeUD9QmERivdvR7yoC38_ZXguG3wFtEOSSpUk7eKEbWYnrdpi-UETWKCSXTPTEe78FVctzF-wMx" alt="Alya Safitri">
+      <div class="bio-main">
+        <div class="bio-head">
+          <div>
+            <div class="bio-name">Alya Safitri</div>
+            <div class="bio-role">Senior Wedding Consultant &amp; Protocol Specialist di JanjiSuci</div>
+          </div>
+          <a href="https://wa.me/628123456789" target="_blank" rel="noopener" class="bio-link">Konsultasi Gratis via WA <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+        <p class="bio-desc">Telah mendampingi lebih dari 450+ pasangan pengantin dalam merancang konsep pernikahan adat nusantara dan etika sebar undangan digital yang elegan, santun, dan bebas repot sejak tahun 2021.</p>
+        <div class="bio-stats">
+          <span style="display:inline-flex;align-items:center;gap:0.3rem;"><i class="bi bi-file-earmark-text"></i> 42 Artikel Diterbitkan</span>
+          <span>•</span>
+          <span style="display:inline-flex;align-items:center;gap:0.3rem;"><i class="bi bi-hand-thumbs-up"></i> 98% Kepuasan Pasangan</span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== RELATED ==================== -->
+  <section class="related-section">
+    <div class="container" style="max-width:1280px;">
+      <div class="related-head">
+        <div>
+          <span class="eyebrow">Rekomendasi Editor</span>
+          <h2 class="related-title">Artikel Terkait Untuk Anda</h2>
+        </div>
+        <a href="blog.html" class="link-all">Lihat Semua Artikel Blog <i class="bi bi-chevron-right"></i></a>
+      </div>
+
+      <div class="related-grid">
+        <!-- Rel 1 -->
+        <article class="rel-card">
+          <div class="rel-media">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaKQHsqfemSW5H-AX1ypYpQxCMINsw4CwkbECkkzOxIBPsGea89ItJWDMaVhRSasmlmQxqWj43a-E8AKJSf6sIqUHbWN_DGOnI32PycQCTMcfA3KJrqh9O2T1KJOM-yiIyg9XI2VRCkV8SKt1GiKesPVFJ3xkvMCq0qTLMlWuW1qVupwjEpaGrVAzKfNKYKPpm7Rv6_mQedfI2VeXCIr5MtqQNclzPqbD37lAyowI3dOdEZfhY9XO2" alt="Detail kain songket Minangkabau emas">
+            <span class="rel-badge">Filosofi &amp; Budaya</span>
+          </div>
+          <div class="rel-body">
+            <span class="rel-meta">18 Februari 2025 • 5 mnt baca</span>
+            <h3 class="rel-title"><a href="blog.html">Makna Sakral di Balik Ornamen Minang pada Undangan Digital Modern</a></h3>
+            <p class="rel-desc">Membedah filosofi ukiran Pucuak Rabuang dan Siriah Gadang yang melambangkan kesuburan dan doa restu abadi.</p>
+            <a href="blog.html" class="rel-link">Baca Selengkapnya <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
+        <!-- Rel 2 -->
+        <article class="rel-card">
+          <div class="rel-media">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHqkRcnhFhXRAAGtsZOnY7lmB48NzuYul_jrTAlLlQW8ZOWWZ99jBvQ9xBhmm38hYzRQdcTojwkRvaa6-4Y4BRqw0tFSpjIdGeEMEvFc1lurkBrEDiQ2Nqe94Y5_71zbQmwejbV0mk7gbCgGTsc34NYiQpCuxLRsCKBwsKDnok1W5AzIXdmLvItPqiPNBPsYNarNzjOlLMr_fLzlSIKU9iXNcBvC2pxgU-tFFVQrvVlHaV36d9--yt" alt="Instrumen gamelan di joglo kayu">
+            <span class="rel-badge">Musik &amp; Audio</span>
+          </div>
+          <div class="rel-body">
+            <span class="rel-meta">14 Februari 2025 • 7 mnt baca</span>
+            <h3 class="rel-title"><a href="blog.html">15 Rekomendasi Lagu Gamelan Romantis untuk Backsound Undangan Pernikahan</a></h3>
+            <p class="rel-desc">Daftar gending Jawa dan degung Sunda syahdu yang membuat tamu undangan tersentuh saat pertama kali membuka tautan.</p>
+            <a href="blog.html" class="rel-link">Baca Selengkapnya <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
+        <!-- Rel 3 -->
+        <article class="rel-card">
+          <div class="rel-media">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFcsEDi-tMkWtJpWmUMVD2cUbk4d9JpT8CWbBip0wmNGD8K606hdiRyP7ateMfJG_IqF4M4XfrpbOQBPG5xs7lr_WJb6XhggExX4eoQ5GuzT2Lu9we7J1auikzQQoSk7insGBB1rI5yWn5zYdqmTcRvM9xnBNMDlQPDd4yDYOD8QOjZc7-f_2YPhpWlPcIS3_oSBPXZoqlE8H17rTmj3MSsGGldWjqwLPZXQxW62ZwvWD_ul--gZ_q" alt="Workspace planner pernikahan minimalis">
+            <span class="rel-badge">Checklist Nikah</span>
+          </div>
+          <div class="rel-body">
+            <span class="rel-meta">09 Februari 2025 • 8 mnt baca</span>
+            <h3 class="rel-title"><a href="blog.html">Checklist Pernikahan H-6 Bulan: Kapan Waktu Paling Pas Buat Undangan Digital?</a></h3>
+            <p class="rel-desc">Panduan timeline krusial agar pengumpulan data RSVP, penyesuaian porsi katering, dan denah tempat duduk berjalan tanpa stres.</p>
+            <a href="blog.html" class="rel-link">Baca Selengkapnya <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA ==================== -->
+  <section class="cta-single-wrap">
+    <div class="cta-single">
+      <div class="cta-card">
+        <div class="cta-inner">
+          <span class="cta-eyebrow">Mulai Langkah Sakral Anda</span>
+          <h2 class="cta-title">Hadirkan Keanggunan Pernikahan Nusantara dalam Sentuhan Digital</h2>
+          <p class="cta-desc">Lebih dari 30.000+ pasangan pengantin telah mempercayakan momen sakral mereka bersama JanjiSuci. Coba seluruh fitur premium tanpa biaya awal.</p>
+          <div class="cta-actions">
+            <a href="dashboard.html" class="primary">Buat Undangan Sekarang</a>
+            <a href="katalog.html" class="ghost">Jelajahi Tema Lainnya</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand">
+            <div class="brand-icon" style="width:36px;height:36px;font-size:1rem;"><i class="bi bi-heart-fill"></i></div>
+            <span class="brand-name" style="font-size:20px;">JanjiSuci</span>
+          </div>
+          <p>Platform pembuatan undangan pernikahan digital bernuansa nusantara luhur dan modern luxury. Praktis, santun, dan sarat makna kebahagiaan.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+            <a href="https://wa.me/628123456789" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Navigasi</h4>
+            <ul>
+              <li><a href="katalog.html">Katalog Tema</a></li>
+              <li><a href="fitur.html">Fitur Lengkap</a></li>
+              <li><a href="harga.html">Paket Harga</a></li>
+              <li><a href="blog.html" style="font-weight:700;color:var(--primary);">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legalitas</h4>
+            <ul>
+              <li><a href="#">Syarat &amp; Ketentuan</a></li>
+              <li><a href="#">Kebijakan Privasi</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Bantuan Pelanggan</h4>
+            <p>Punya pertanyaan seputar kustomisasi tema?</p>
+            <a href="https://wa.me/628123456789" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:0.6rem 1rem;font-size:13px;"><i class="bi bi-whatsapp" style="color:var(--status-success);"></i> Hubungi CS WhatsApp</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 JanjiSuci Platform Undangan Pernikahan Digital. Hak cipta dilindungi undang-undang.</p>
+        <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--on-surface-variant);">
+          <span>INDONESIAN HERITAGE EDITION</span>
+          <span>•</span>
+          <span>ENCRYPTED &amp; SECURE</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('navToggle');
+    const nav = document.getElementById('mobileNav');
+    btn?.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      btn.innerHTML = open ? '<i class="bi bi-x-lg"></i>' : '<i class="bi bi-list"></i>';
+    });
+    nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      btn.innerHTML = '<i class="bi bi-list"></i>';
+    }));
+    function copyToClipboard(elementId, buttonElement) {
+      const textToCopy = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalHtml = buttonElement.innerHTML;
+        buttonElement.innerHTML = '<i class="bi bi-check-lg" style="color:var(--status-success)"></i><span style="color:var(--status-success)">Tersalin!</span>';
+        setTimeout(() => { buttonElement.innerHTML = originalHtml; }, 2200);
+      });
+    }
+    function copyArticleLink() {
+      const url = window.location.href;
+      navigator.clipboard.writeText(url).then(() => {
+        const textSpan = document.getElementById('copyBtnText');
+        const oldText = textSpan.innerText;
+        textSpan.innerText = 'Tersalin!';
+        setTimeout(() => { textSpan.innerText = oldText; }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

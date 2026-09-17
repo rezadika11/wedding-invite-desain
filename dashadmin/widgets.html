@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Widgets &amp; Stats — JanjiSuci Nusantara Royale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/css/dashadmin.css" rel="stylesheet">
+<link href="assets/css/theme-switcher.css" rel="stylesheet">
+<style>
+/* ===== Widgets specific — Nusantara Royale Romance ===== */
+
+/* Small boxes (AdminLTE small-box) */
+.wgt-small-box{
+  position:relative;
+  border-radius:16px;
+  padding:20px 18px 44px;
+  color:#fff;
+  overflow:hidden;
+  box-shadow:var(--dash-shadow-lg);
+  display:block;
+  text-decoration:none;
+}
+.wgt-small-box h4{
+  margin:0 0 6px;
+  font-size:12px;font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:rgba(255,255,255,0.85);
+}
+.wgt-small-box .num{
+  font-family:'Inter',sans-serif;
+  font-size:34px;font-weight:700;line-height:1;letter-spacing:-0.02em;
+}
+.wgt-small-box .sub{
+  margin-top:8px;font-size:12px;font-weight:600;
+  display:flex;align-items:center;gap:4px;color:rgba(255,255,255,0.85);
+}
+.wgt-small-box .icon{
+  position:absolute;right:12px;top:6px;
+  font-size:74px;line-height:1;
+  color:rgba(255,255,255,0.16);
+  transition:transform .3s;
+}
+.wgt-small-box:hover .icon{transform:scale(1.12);}
+.wgt-small-box .go{
+  position:absolute;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,0.14);
+  padding:8px 16px;font-size:13px;font-weight:700;
+  display:flex;align-items:center;gap:6px;
+  transition:padding .2s;
+}
+.wgt-small-box:hover .go{padding-left:22px;}
+.wgt-small-box .go i{margin-left:auto;transition:transform .2s;}
+.wgt-small-box:hover .go i{transform:translateX(4px);}
+.wgt-sb-emerald{background:linear-gradient(135deg,#1b3b36 0%,#2d5a50 100%);}
+.wgt-sb-rose{background:linear-gradient(135deg,#83523d 0%,#C98E75 100%);}
+.wgt-sb-gold{background:linear-gradient(135deg,#a8842f 0%,#c5a059 60%,#e0c184 100%);}
+.wgt-sb-navy{background:linear-gradient(135deg,#142238 0%,#2c3e5c 100%);}
+
+/* Info boxes (AdminLTE info-box) */
+.wgt-info-box{
+  display:flex;align-items:center;gap:0;
+  background:var(--dash-card);
+  border:1px solid var(--dash-border);
+  border-radius:14px;
+  box-shadow:var(--dash-shadow);
+  overflow:hidden;
+}
+.wgt-info-icon{
+  width:64px;align-self:stretch;flex-shrink:0;
+  display:grid;place-items:center;
+  font-size:26px;color:#fff;
+}
+.wgt-info-icon.emerald{background:var(--dash-primary-container);}
+.wgt-info-icon.rose{background:var(--dash-secondary);}
+.wgt-info-icon.gold{background:var(--dash-warning);}
+.wgt-info-icon.navy{background:#142238;}
+.wgt-info-body{flex:1;padding:12px 14px;min-width:0;}
+.wgt-info-body .label{
+  font-size:11px;font-weight:700;letter-spacing:0.07em;
+  text-transform:uppercase;color:var(--dash-muted);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.wgt-info-body .num{
+  font-family:'Inter',sans-serif;
+  font-size:22px;font-weight:700;color:var(--dash-primary);line-height:1.15;
+}
+.wgt-info-body .num small{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:11px;font-weight:700;color:var(--dash-success);
+  margin-left:6px;
+}
+.wgt-info-progress{display:flex;align-items:center;gap:8px;margin-top:8px;}
+.wgt-info-progress .dash-progress{flex:1;height:5px;}
+.wgt-info-progress span{font-size:11px;font-weight:700;color:var(--dash-muted);white-space:nowrap;}
+
+/* Card product stat (AdminLTE box) */
+.wgt-product{
+  display:flex;gap:12px;align-items:center;
+  padding:12px 0;border-bottom:1px solid #f3f4f6;
+}
+.wgt-product:last-child{border-bottom:none;padding-bottom:0;}
+.wgt-product:first-of-type{padding-top:0;}
+.wgt-thumb{
+  width:46px;height:46px;border-radius:12px;flex-shrink:0;
+  display:grid;place-items:center;font-size:20px;
+  background:var(--dash-surface);border:1px solid var(--dash-border);color:var(--dash-secondary);
+}
+.wgt-product .name{font-size:13px;font-weight:700;color:var(--dash-primary);line-height:1.3;}
+.wgt-product .meta{font-size:11px;color:var(--dash-muted);margin-top:2px;display:flex;align-items:center;gap:6px;}
+.wgt-product .num{
+  margin-left:auto;text-align:right;flex-shrink:0;
+  font-family:'Inter',sans-serif;font-size:17px;font-weight:700;color:var(--dash-primary);
+}
+.wgt-product .num em{
+  display:block;font-family:'Plus Jakarta Sans',sans-serif;font-style:normal;
+  font-size:11px;font-weight:600;color:var(--dash-success);
+}
+
+/* Todo list */
+.wgt-todo{list-style:none;margin:0;padding:0;display:grid;}
+.wgt-todo li{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 0;border-bottom:1px dashed var(--dash-border);
+}
+.wgt-todo li:last-child{border-bottom:none;}
+.wgt-todo input{
+  appearance:none;-webkit-appearance:none;
+  width:20px;height:20px;margin-top:2px;flex-shrink:0;
+  border:2px solid var(--dash-border);border-radius:7px;
+  background:#fff;cursor:pointer;position:relative;
+  transition:all .2s;
+}
+.wgt-todo input:hover{border-color:var(--dash-primary-container);}
+.wgt-todo input:checked{
+  background:var(--dash-primary-container);border-color:var(--dash-primary-container);
+}
+.wgt-todo input:checked::after{
+  content:"";position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23F5EBD7'%3E%3Cpath d='M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.75 3.75a.75.75 0 0 1-1.08-.02L5.3 7.77a.75.75 0 0 1 1.06-1.06l.97.98 2.47-2.47a.75.75 0 0 1 .17-.25z'/%3E%3C/svg%3E") center/14px no-repeat;
+}
+.wgt-todo .txt{flex:1;font-size:13px;font-weight:600;color:var(--dash-text);line-height:1.45;}
+.wgt-todo li.done .txt{
+  text-decoration:line-through;color:var(--dash-muted);font-weight:500;
+}
+.wgt-todo .meta{
+  display:flex;gap:8px;align-items:center;margin-top:4px;
+  font-size:11px;color:var(--dash-muted);font-weight:500;
+}
+.wgt-todo .handle{color:var(--dash-border);font-size:14px;cursor:grab;flex-shrink:0;margin-top:4px;}
+
+/* Direct chat (AdminLTE direct-chat) */
+.wgt-chat-contacts{
+  border-bottom:1px solid var(--dash-border);
+  display:flex;gap:8px;overflow-x:auto;padding:10px 14px;
+  scrollbar-width:thin;
+}
+.wgt-chat-contact{
+  display:flex;align-items:center;gap:8px;flex-shrink:0;
+  padding:6px 10px;border-radius:9999px;cursor:pointer;
+  border:1px solid transparent;font-size:12px;font-weight:600;color:var(--dash-muted);
+  transition:all .2s;background:transparent;
+}
+.wgt-chat-contact:hover{background:var(--dash-surface);}
+.wgt-chat-contact.active{background:var(--dash-primary-container);color:#fff;}
+.wgt-chat-contact img{width:26px;height:26px;border-radius:50%;object-fit:cover;}
+.wgt-chat-msgs{
+  height:300px;overflow-y:auto;padding:16px;
+  display:flex;flex-direction:column;gap:12px;
+  background:
+    radial-gradient(320px 180px at 85% -10%, rgba(197,160,89,0.10) 0%, transparent 60%),
+    radial-gradient(360px 220px at 0% 110%, rgba(27,59,54,0.06) 0%, transparent 55%),
+    var(--dash-surface);
+}
+.wgt-msg{display:flex;gap:10px;max-width:82%;}
+.wgt-msg img{width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.wgt-msg .bubble{
+  padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.5;
+  border:1px solid var(--dash-border);background:#fff;
+}
+.wgt-msg .bubble strong{color:var(--dash-primary);font-size:11px;display:block;margin-bottom:2px;}
+.wgt-msg .time{font-size:10px;color:var(--dash-muted);margin-top:4px;display:block;}
+.wgt-msg.right{align-self:flex-end;flex-direction:row-reverse;}
+.wgt-msg.right .bubble{
+  background:var(--dash-primary-container);color:#fff;border-color:var(--dash-primary-container);
+  border-bottom-right-radius:4px;
+}
+.wgt-msg.right .bubble strong{color:var(--dash-gold);}
+.wgt-msg.right .time{color:rgba(255,255,255,0.55);}
+.wgt-msg:not(.right) .bubble{border-bottom-left-radius:4px;}
+.wgt-chat-input{
+  display:flex;gap:8px;padding:12px 14px;
+  border-top:1px solid var(--dash-border);background:#fff;
+}
+.wgt-chat-input input{
+  flex:1;border:1px solid #e5e7eb;border-radius:9999px;
+  padding:10px 16px;font-size:13px;outline:none;
+  transition:border-color .2s;
+}
+.wgt-chat-input input:focus{border-color:var(--dash-primary-container);}
+.wgt-chat-send{
+  width:42px;height:42px;border-radius:50%;border:none;flex-shrink:0;
+  background:var(--dash-primary-container);color:var(--dash-gold);
+  font-size:16px;cursor:pointer;display:grid;place-items:center;
+  transition:background .2s,transform .2s;
+}
+.wgt-chat-send:hover{background:var(--dash-primary);transform:scale(1.05);}
+
+/* Order mini rows */
+.wgt-order{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 0;border-bottom:1px solid #f3f4f6;font-size:13px;
+}
+.wgt-order:last-child{border-bottom:none;}
+.wgt-order .id{font-weight:700;color:var(--dash-primary);width:56px;flex-shrink:0;}
+.wgt-order .who{flex:1;min-width:0;}
+.wgt-order .who strong{display:block;font-size:13px;color:var(--dash-text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.wgt-order .who span{font-size:11px;color:var(--dash-muted);}
+.wgt-order .amt{font-weight:700;color:var(--dash-primary);white-space:nowrap;font-size:13px;}
+
+/* Widget rows responsive */
+.wgt-two-col, .wgt-three-col{display:grid;gap:16px;}
+@media(min-width:1024px){.wgt-two-col{grid-template-columns:1fr 1fr;}}
+@media(min-width:1024px){.wgt-three-col{grid-template-columns:1.2fr 1fr 1fr;}}
+@media(min-width:640px) and (max-width:1023px){.wgt-three-col{grid-template-columns:1fr 1fr;}}
+
+/* Progress vertical widget */
+.wgt-goal{
+  display:grid;gap:14px;
+}
+.wgt-goal-head{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.wgt-goal-head .t{font-size:13px;font-weight:700;color:var(--dash-primary);}
+.wgt-goal .foot{display:flex;justify-content:space-between;font-size:11px;color:var(--dash-muted);}
+
+@media(max-width:640px){
+  .wgt-small-box .num{font-size:28px;}
+  .wgt-small-box .icon{font-size:58px;}
+  .wgt-chat-msgs{height:260px;}
+}
+</style>
+</head>
+<body class="dash-body">
+
+<!-- Navbar -->
+<nav class="dash-navbar">
+  <div class="dash-navbar-left">
+    <button class="dash-menu-btn" data-navbar-toggle data-toggle="sidebar" aria-label="Toggle sidebar"><i class="bi bi-list"></i></button>
+    <div class="dash-search">
+      <i class="bi bi-search" style="color:#9aa0a6"></i>
+      <input placeholder="Cari undangan, tamu, tema, transaksi...">
+      <span class="dash-kbd">⌘ K</span>
+    </div>
+  </div>
+  <div class="dash-navbar-right">
+          <div class="dash-dd" id="ddBellWrap">
+        <button class="dash-icon-btn" aria-label="Notifications" data-dd="ddBell"><i class="bi bi-bell"></i><span class="badge">7</span></button>
+        <div class="dash-dd-menu" id="ddBell">
+          <div class="dash-dd-header">Notifikasi <a href="tables.html">Lihat Semua</a></div>
+          <div class="dash-dd-body">
+            <div class="dash-dd-item"><div class="dash-dd-icon emerald"><i class="bi bi-envelope-check"></i></div><div class="dash-dd-text"><p>Pesanan #1284 — Arya &amp; Nabila<span class="dash-dd-time">10 menit lalu • Nusantara Royale</span></p></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><div class="dash-dd-icon rose"><i class="bi bi-people"></i></div><div class="dash-dd-text"><p>RSVP baru: 12 tamu hadir<span class="dash-dd-time">25 menit lalu • Botanical Whispers</span></p></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><div class="dash-dd-icon gold"><i class="bi bi-currency-dollar"></i></div><div class="dash-dd-text"><p>Pembayaran Rp 99.000 diterima<span class="dash-dd-time">1 jam lalu • Reza &amp; Syifa</span></p></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><div class="dash-dd-icon navy"><i class="bi bi-star"></i></div><div class="dash-dd-text"><p>Ulasan 5 bintang dari Dimas &amp; Nadya<span class="dash-dd-time">2 jam lalu • Tema Minimalist</span></p></div><span class="dash-dd-dot read"></span></div>
+          </div>
+          <div class="dash-dd-footer" onclick="dashToast('Semua notifikasi ditandai dibaca')">Tandai semua dibaca</div>
+        </div>
+      </div>
+      <div class="dash-dd" id="ddChatWrap">
+        <button class="dash-icon-btn" aria-label="Messages" data-dd="ddChat"><i class="bi bi-chat-dots"></i><span class="badge" style="background:#2D6A4F">3</span></button>
+        <div class="dash-dd-menu" id="ddChat">
+          <div class="dash-dd-header">Pesan <a href="widgets.html#chat">Buka Chat</a></div>
+          <div class="dash-dd-body">
+            <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=33" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Nabila Saraswati<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Kak, bisa ganti lagunya setelah publish?</span></p><span class="dash-dd-time">5 menit lalu</span></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=26" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Dimas Prasetyo<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Upload galeri prewedding 20 foto ya</span></p><span class="dash-dd-time">32 menit lalu</span></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=14" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Syifa Aulia<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Terima kasih, undangannya cantik banget!</span></p><span class="dash-dd-time">1 jam lalu</span></div><span class="dash-dd-dot read"></span></div>
+          </div>
+          <div class="dash-dd-footer" onclick="location.href='widgets.html#chat'">Lihat semua percakapan</div>
+        </div>
+      </div>
+    <button class="dash-icon-btn" id="dashDarkToggle" aria-label="Toggle dark mode" title="Dark / Light"><i class="bi bi-moon-stars"></i></button>
+    <button class="dash-icon-btn" aria-label="Apps"><i class="bi bi-grid"></i></button>
+        <div class="dash-dd" id="ddProfileWrap">
+      <div class="dash-profile" data-dd="ddProfile" role="button">
+        <img src="https://i.pravatar.cc/100?img=15" alt="Admin">
+        <div class="dash-profile-info">
+          <strong>Admin JanjiSuci</strong><span>Super Admin • Online</span>
+        </div>
+        <i class="bi bi-chevron-down" style="font-size:12px;opacity:0.6"></i>
+      </div>
+      <div class="dash-dd-menu dash-dd-profile-menu" id="ddProfile">
+        <div class="dash-dd-userinfo"><img src="https://i.pravatar.cc/100?img=15"><div><strong>Admin JanjiSuci</strong><span>admin@janjisuci.id</span></div></div>
+        <a class="dash-dd-profile-item" href="profile.html"><i class="bi bi-person"></i> Profil Saya</a>
+        <a class="dash-dd-profile-item" href="profile.html#settings"><i class="bi bi-gear"></i> Pengaturan</a>
+        <a class="dash-dd-profile-item" href="ui-elements.html"><i class="bi bi-layers"></i> Komponen UI</a>
+        <a class="dash-dd-profile-item" href="../index.html"><i class="bi bi-house"></i> Lihat Website</a>
+        <div class="dash-divider" style="margin:6px 0"></div>
+        <a class="dash-dd-profile-item danger" href="../login.html"><i class="bi bi-box-arrow-right"></i> Keluar</a>
+      </div>
+    </div></div>
+</nav>
+
+<!-- Sidebar -->
+<aside class="dash-sidebar" id="dashSidebar">
+  <div class="dash-sidebar-header">
+    <a href="index.html" class="dash-brand">
+      <div class="dash-brand-icon"><i class="bi bi-heart-fill"></i></div>
+      <div class="dash-brand-text">
+        <strong>JanjiSuci</strong><span>Admin Royale</span>
+      </div>
+    </a>
+  </div>
+  <div class="dash-sidebar-scroll">
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Utama</div>
+      <ul class="dash-nav">
+        <li><a href="index.html"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
+        <li><a href="../index.html"><i class="bi bi-house"></i><span>Landing Preview</span><span class="dash-badge gold">Visit</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Manajemen Pernikahan</div>
+      <ul class="dash-nav">
+        <li><a href="widgets.html" class="active"><i class="bi bi-collection"></i><span>Widgets &amp; Stats</span><span class="dash-badge success">12</span></a></li>
+        <li><a href="../katalog.html"><i class="bi bi-palette"></i><span>Katalog Tema</span></a></li>
+        <li><a href="../contoh.html"><i class="bi bi-images"></i><span>Contoh Undangan</span></a></li>
+        <li><a href="../dashboard.html"><i class="bi bi-pencil-square"></i><span>Editor Undangan</span></a></li>
+        <li><a href="../preview.html"><i class="bi bi-phone"></i><span>Live Preview</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Komponen — Ala AdminLTE</div>
+      <ul class="dash-nav">
+        <li class="dash-nav-item">
+          <button><i class="bi bi-layers"></i><span>UI Elements</span><i class="bi bi-chevron-right dash-nav-arrow"></i></button>
+          <ul class="dash-subnav">
+            <li><a href="ui-elements.html">General &amp; Cards</a></li>
+            <li><a href="ui-elements.html#buttons">Buttons &amp; Badges</a></li>
+            <li><a href="ui-elements.html#alerts">Alerts &amp; Modals</a></li>
+            <li><a href="ui-elements.html#tabs">Tabs &amp; Timeline</a></li>
+          </ul>
+        </li>
+        <li><a href="forms.html"><i class="bi bi-input-cursor-text"></i><span>Forms</span></a></li>
+        <li><a href="tables.html"><i class="bi bi-table"></i><span>Tables</span></a></li>
+        <li><a href="charts.html"><i class="bi bi-bar-chart-line"></i><span>Charts</span><span class="dash-badge">3</span></a></li>
+                <li><a href="plugins.html"><i class="bi bi-puzzle"></i><span>Plugins & Addons</span><span class="dash-badge gold">14</span></a></li>
+<li><a href="ui-elements.html#widgets"><i class="bi bi-kanban"></i><span>Kanban &amp; Calendar</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+          <div class="dash-nav-group">
+      <div class="dash-nav-title">Transaksi</div>
+      <ul class="dash-nav">
+        <li><a href="invoice.html"><i class="bi bi-receipt-cutoff"></i><span>Invoice</span><span class="dash-badge success">Baru</span></a></li>
+        <li><a href="tables.html"><i class="bi bi-credit-card"></i><span>Pembayaran</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-title">Halaman</div>
+      <ul class="dash-nav">
+        <li><a href="profile.html"><i class="bi bi-person-circle"></i><span>Profile</span></a></li>
+        <li><a href="../harga.html"><i class="bi bi-credit-card"></i><span>Paket &amp; Harga</span></a></li>
+        <li><a href="../testimoni.html"><i class="bi bi-chat-heart"></i><span>Testimoni</span></a></li>
+        <li><a href="../blog.html"><i class="bi bi-journal-text"></i><span>Blog / Artikel</span></a></li>
+        <li><a href="../login.html"><i class="bi bi-box-arrow-in-right"></i><span>Login</span></a></li>
+        <li><a href="../register.html"><i class="bi bi-person-plus"></i><span>Register</span></a></li>
+        <li><a href="../lupa-password.html"><i class="bi bi-key"></i><span>Lupa Password</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Extras</div>
+      <ul class="dash-nav">
+        <li><a href="ui-elements.html#gallery"><i class="bi bi-image"></i><span>Gallery</span></a></li>
+        <li><a href="ui-elements.html#mailbox"><i class="bi bi-envelope"></i><span>Mailbox</span><span class="dash-badge">5</span></a></li>
+        <li><a href="404.html"><i class="bi bi-exclamation-triangle"></i><span>Error 404</span></a></li>
+        <li><a href="500.html"><i class="bi bi-bug"></i><span>Error 500</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dash-sidebar-footer" style="position:relative;">
+    <button class="dash-user-card" type="button" id="sideUserBtn" aria-expanded="false">
+      <img src="https://i.pravatar.cc/100?img=15" alt="">
+      <div class="dash-user-info"><strong>Admin JanjiSuci</strong><span>admin@janjisuci.id</span></div>
+      <i class="bi bi-chevron-up"></i>
+    </button>
+    <div class="dash-user-menu" id="sideUserMenu">
+      <div class="dash-user-menu-head">
+        <img src="https://i.pravatar.cc/100?img=15" alt="">
+        <div><strong>Admin JanjiSuci</strong><span>Super Admin • Online</span></div>
+      </div>
+      <a class="dash-user-menu-item" href="profile.html"><i class="bi bi-person"></i> Profil Saya</a>
+      <a class="dash-user-menu-item" href="profile.html#settings"><i class="bi bi-gear"></i> Pengaturan Akun</a>
+      <a class="dash-user-menu-item" href="ui-elements.html"><i class="bi bi-layers"></i> Komponen UI</a>
+      <a class="dash-user-menu-item" href="../index.html"><i class="bi bi-house"></i> Lihat Website</a>
+      <div class="dash-divider" style="margin:6px 0"></div>
+      <a class="dash-user-menu-item danger" href="../login.html"><i class="bi bi-box-arrow-right"></i> Keluar</a>
+    </div>
+  </div>
+</aside>
+<div class="dash-overlay" id="dashOverlay"></div>
+
+<!-- Main -->
+<main class="dash-main">
+  <div class="dash-content">
+    <div class="dash-page-header">
+      <div class="dash-title">
+        <div class="dash-breadcrumb"><a href="index.html">Home</a> <i class="bi bi-chevron-right"></i> <span>Widgets &amp; Stats</span></div>
+        <h1>Widgets &amp; Stats — Royale Collection</h1>
+        <p>Koleksi widget ala AdminLTE dalam balutan Nusantara Royale Romance: small box, info box, progress, todo list persiapan pernikahan, direct chat support, dan ringkasan pesanan terbaru.</p>
+      </div>
+      <div class="dash-actions">
+        <button class="dash-btn dash-btn-primary" onclick="openOrderModal()"><i class="bi bi-plus-lg"></i> Tambah Pesanan</button>
+        <button class="dash-btn dash-btn-secondary" onclick="dashToast('Layout widget diatur ulang')"><i class="bi bi-arrow-counterclockwise"></i> Reset Layout</button>
+        <a href="charts.html" class="dash-btn dash-btn-primary"><i class="bi bi-bar-chart-line"></i> Lihat Charts</a>
+      </div>
+    </div>
+
+    <!-- Small Boxes -->
+    <div class="dash-grid dash-grid-4">
+      <a href="tables.html" class="wgt-small-box wgt-sb-emerald">
+        <h4>Undangan Aktif</h4>
+        <div class="num">1,284</div>
+        <div class="sub"><i class="bi bi-arrow-up-short"></i> +12.5% bulan ini</div>
+        <div class="icon"><i class="bi bi-envelope-paper-heart"></i></div>
+        <div class="go">Selengkapnya <i class="bi bi-arrow-right"></i></div>
+      </a>
+      <a href="tables.html" class="wgt-small-box wgt-sb-rose">
+        <h4>Tamu Terkonfirmasi</h4>
+        <div class="num">8,420</div>
+        <div class="sub"><i class="bi bi-arrow-up-short"></i> +8.2% RSVP mingguan</div>
+        <div class="icon"><i class="bi bi-people"></i></div>
+        <div class="go">Selengkapnya <i class="bi bi-arrow-right"></i></div>
+      </a>
+      <a href="charts.html" class="wgt-small-box wgt-sb-gold">
+        <h4>Pendapatan Bulan</h4>
+        <div class="num">Rp 84,2jt</div>
+        <div class="sub"><i class="bi bi-arrow-up-short"></i> +15% vs bulan lalu</div>
+        <div class="icon"><i class="bi bi-cash-coin"></i></div>
+        <div class="go">Selengkapnya <i class="bi bi-arrow-right"></i></div>
+      </a>
+      <a href="../katalog.html" class="wgt-small-box wgt-sb-navy">
+        <h4>Tema Terjual</h4>
+        <div class="num">2,190</div>
+        <div class="sub"><i class="bi bi-heart-fill"></i> Royale #1 • 4.9/5</div>
+        <div class="icon"><i class="bi bi-palette2"></i></div>
+        <div class="go">Selengkapnya <i class="bi bi-arrow-right"></i></div>
+      </a>
+    </div>
+
+    <!-- Info Boxes -->
+    <div class="dash-grid dash-grid-3" style="margin-top:16px">
+      <div class="wgt-info-box">
+        <div class="wgt-info-icon emerald"><i class="bi bi-envelope-paper-heart"></i></div>
+        <div class="wgt-info-body">
+          <div class="label">Undangan Published</div>
+          <div class="num">1,184 <small><i class="bi bi-arrow-up-short"></i>92%</small></div>
+          <div class="wgt-info-progress"><div class="dash-progress"><div class="dash-progress-bar emerald" style="width:92%"></div></div><span>92%</span></div>
+        </div>
+      </div>
+      <div class="wgt-info-box">
+        <div class="wgt-info-icon rose"><i class="bi bi-chat-heart"></i></div>
+        <div class="wgt-info-body">
+          <div class="label">RSVP Dibalas</div>
+          <div class="num">7,410 <small><i class="bi bi-arrow-up-short"></i>88%</small></div>
+          <div class="wgt-info-progress"><div class="dash-progress"><div class="dash-progress-bar rose" style="width:88%"></div></div><span>88%</span></div>
+        </div>
+      </div>
+      <div class="wgt-info-box">
+        <div class="wgt-info-icon gold"><i class="bi bi-star-fill"></i></div>
+        <div class="wgt-info-body">
+          <div class="label">Kepuasan Pengantin</div>
+          <div class="num">4.9 / 5.0 <small>482 ulasan</small></div>
+          <div class="wgt-info-progress"><div class="dash-progress"><div class="dash-progress-bar gold" style="width:96%"></div></div><span>96%</span></div>
+        </div>
+      </div>
+      <div class="wgt-info-box">
+        <div class="wgt-info-icon navy"><i class="bi bi-credit-card"></i></div>
+        <div class="wgt-info-body">
+          <div class="label">Amplop Digital Aktif</div>
+          <div class="num">964 <small><i class="bi bi-arrow-up-short"></i>75%</small></div>
+          <div class="wgt-info-progress"><div class="dash-progress"><div class="dash-progress-bar navy" style="width:75%"></div></div><span>75%</span></div>
+        </div>
+      </div>
+      <div class="wgt-info-box">
+        <div class="wgt-info-icon emerald"><i class="bi bi-shield-check"></i></div>
+        <div class="wgt-info-body">
+          <div class="label">Uptime Server</div>
+          <div class="num">99.9% <small>0 downtime</small></div>
+          <div class="wgt-info-progress"><div class="dash-progress"><div class="dash-progress-bar emerald" style="width:99%"></div></div><span>99.9%</span></div>
+        </div>
+      </div>
+      <div class="wgt-info-box">
+        <div class="wgt-info-icon rose"><i class="bi bi-headset"></i></div>
+        <div class="wgt-info-body">
+          <div class="label">Tiket Bantuan</div>
+          <div class="num">37 <small>3 pending</small></div>
+          <div class="wgt-info-progress"><div class="dash-progress"><div class="dash-progress-bar rose" style="width:75%"></div></div><span>Selesai 92%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Todo + Chat -->
+    <div class="dash-grid" style="margin-top:16px">
+      <div class="wgt-two-col">
+        <!-- Todo List -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3><i class="bi bi-check2-square"></i> Todo List — Persiapan Pernikahan</h3>
+            <span class="dash-badge info"><i class="bi bi-list-check"></i> 4 / 7 selesai</span>
+          </div>
+          <div class="dash-card-body">
+            <ul class="wgt-todo" id="wgtTodo">
+              <li>
+                <span class="handle"><i class="bi bi-grip-vertical"></i></span>
+                <input type="checkbox" id="todo1" checked>
+                <label class="txt" for="todo1">Finalisasi undangan digital Arya &amp; Nabila — tema Nusantara Royale
+                  <span class="meta"><i class="bi bi-calendar3"></i> 24 Agu 2025 <span class="dash-badge success" style="padding:2px 7px;font-size:10px">Published</span></span>
+                </label>
+              </li>
+              <li>
+                <span class="handle"><i class="bi bi-grip-vertical"></i></span>
+                <input type="checkbox" id="todo2" checked>
+                <label class="txt" for="todo2">Review galeri prewedding Dimas &amp; Nadya (12 foto kurasi)
+                  <span class="meta"><i class="bi bi-image"></i> Botanical Whispers <span class="dash-badge warning" style="padding:2px 7px;font-size:10px">QC lulus</span></span>
+                </label>
+              </li>
+              <li>
+                <span class="handle"><i class="bi bi-grip-vertical"></i></span>
+                <input type="checkbox" id="todo3">
+                <label class="txt" for="todo3">Setup amplop digital BCA &amp; QRIS untuk Reza &amp; Syifa
+                  <span class="meta"><i class="bi bi-wallet2"></i> Golden Jasmine <span class="dash-badge info" style="padding:2px 7px;font-size:10px">Menunggu</span></span>
+                </label>
+              </li>
+              <li>
+                <span class="handle"><i class="bi bi-grip-vertical"></i></span>
+                <input type="checkbox" id="todo4" checked>
+                <label class="txt" for="todo4">Moderasi 12 testimoni baru pengantin bulan Agustus
+                  <span class="meta"><i class="bi bi-chat-heart"></i> 5★ rata-rata</span>
+                </label>
+              </li>
+              <li>
+                <span class="handle"><i class="bi bi-grip-vertical"></i></span>
+                <input type="checkbox" id="todo5">
+                <label class="txt" for="todo5">Publish tema baru — Royale Heritage Edition (varian emas)
+                  <span class="meta"><i class="bi bi-stars"></i> Target minggu ini <span class="dash-badge gold" style="padding:2px 7px;font-size:10px;background:var(--dash-gold);color:var(--dash-primary)">Prioritas</span></span>
+                </label>
+              </li>
+              <li>
+                <span class="handle"><i class="bi bi-grip-vertical"></i></span>
+                <input type="checkbox" id="todo6">
+                <label class="txt" for="todo6">Balas 3 tiket bantuan terkait custom domain .janjisuci.id
+                  <span class="meta"><i class="bi bi-headset"></i> SLA balasan &lt; 8 menit</span>
+                </label>
+              </li>
+              <li>
+                <span class="handle"><i class="bi bi-grip-vertical"></i></span>
+                <input type="checkbox" id="todo7">
+                <label class="txt" for="todo7">Backup mingguan storage foto prewedding (42 GB)
+                  <span class="meta"><i class="bi bi-cloud-arrow-up"></i> Jadwal Sabtu 02:00 WIB</span>
+                </label>
+              </li>
+            </ul>
+            <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+              <button class="dash-btn dash-btn-secondary" style="flex:1" onclick="dashToast('Tugas baru ditambahkan ke todo list')"><i class="bi bi-plus-lg"></i> Tambah Tugas</button>
+              <button class="dash-btn dash-btn-primary" style="flex:1" onclick="dashToast('Todo list disinkronkan ke tim Royale')"><i class="bi bi-cloud-check"></i> Sinkron Tim</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Direct Chat -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3><i class="bi bi-chat-dots"></i> Direct Chat — Support Pengantin</h3>
+            <div class="dash-tabs">
+              <button class="dash-tab active"><i class="bi bi-chat-left-text" style="margin-right:4px"></i> Chat</button>
+              <button class="dash-tab" onclick="dashToast('14 pesan belum dibaca')"><i class="bi bi-envelope"></i> 14</button>
+            </div>
+          </div>
+          <div class="wgt-chat-contacts">
+            <button class="wgt-chat-contact active"><img src="https://i.pravatar.cc/100?img=33" alt=""> Arya &amp; Nabila</button>
+            <button class="wgt-chat-contact"><img src="https://i.pravatar.cc/100?img=26" alt=""> Dimas &amp; Nadya</button>
+            <button class="wgt-chat-contact"><img src="https://i.pravatar.cc/100?img=14" alt=""> Reza &amp; Syifa</button>
+            <button class="wgt-chat-contact"><img src="https://i.pravatar.cc/100?img=47" alt=""> Sinta &amp; Bagas</button>
+            <button class="wgt-chat-contact"><img src="https://i.pravatar.cc/100?img=68" alt=""> Fajar &amp; Dewi</button>
+          </div>
+          <div class="wgt-chat-msgs" id="wgtChatMsgs">
+            <div class="wgt-msg">
+              <img src="https://i.pravatar.cc/100?img=33" alt="Nabila">
+              <div>
+                <div class="bubble"><strong>Nabila — Arya &amp; Nabila</strong>Kak, undangan kami sudah published ya? tadi cek link janjisuci.id/arya-nabila sudah bisa dibuka 🥰<span class="time">09:12 WIB</span></div>
+              </div>
+            </div>
+            <div class="wgt-msg right">
+              <img src="https://i.pravatar.cc/100?img=15" alt="Admin">
+              <div>
+                <div class="bubble"><strong>Admin JanjiSuci</strong>Betul kak, sudah aktif sejak pagi. Tema Nusantara Royale dengan palet cream &amp; gold, RSVP sudah terbuka untuk 342 tamu ✨<span class="time">09:14 WIB</span></div>
+              </div>
+            </div>
+            <div class="wgt-msg">
+              <img src="https://i.pravatar.cc/100?img=33" alt="Nabila">
+              <div>
+                <div class="bubble"><strong>Nabila</strong>Sip! Terus kalau mau ganti musik background sendiri, uploadnya di mana ya Kak?<span class="time">09:15 WIB</span></div>
+              </div>
+            </div>
+            <div class="wgt-msg right">
+              <img src="https://i.pravatar.cc/100?img=15" alt="Admin">
+              <div>
+                <div class="bubble"><strong>Admin JanjiSuci</strong>Buka Editor Undangan → tab Musik. Format MP3 maks 5 MB. Kalau ingin pakai lagu berlisensi dari kurasi Royale, tinggal pilih dari daftar ya Kak 🎶<span class="time">09:17 WIB</span></div>
+              </div>
+            </div>
+            <div class="wgt-msg">
+              <img src="https://i.pravatar.cc/100?img=33" alt="Nabila">
+              <div>
+                <div class="bubble"><strong>Nabila</strong>Sip kak, langsung coba. Makasih responnya cepat banget! 💐<span class="time">09:18 WIB</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="wgt-chat-input">
+            <input type="text" id="wgtChatInput" placeholder="Tulis balasan untuk pengantin..." onkeydown="if(event.key==='Enter')wgtSendMsg()">
+            <button class="wgt-chat-send" onclick="wgtSendMsg()" aria-label="Kirim"><i class="bi bi-send-fill"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Orders Mini + Product Stats + Progress Goals -->
+    <div class="dash-grid" style="margin-top:16px">
+      <div class="wgt-three-col">
+        <!-- Recent orders mini -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3><i class="bi bi-bag-check"></i> Pesanan Terbaru</h3>
+            <a href="tables.html" style="font-size:12px;font-weight:700;color:var(--dash-primary)">Lihat semua →</a>
+          </div>
+          <div class="dash-card-body">
+            <div class="wgt-order">
+              <span class="id">#1284</span>
+              <img src="https://i.pravatar.cc/100?img=33" class="dash-avatar" style="width:32px;height:32px" alt="">
+              <div class="who"><strong>Reza &amp; Syifa</strong><span>Golden Jasmine • 02 Okt 2025</span></div>
+              <span class="dash-badge info"><i class="bi bi-clock"></i> Pending</span>
+              <span class="amt">Rp 99.000</span>
+            </div>
+            <div class="wgt-order">
+              <span class="id">#1283</span>
+              <img src="https://i.pravatar.cc/100?img=26" class="dash-avatar" style="width:32px;height:32px" alt="">
+              <div class="who"><strong>Dimas &amp; Nadya</strong><span>Botanical Whispers • 18 Sep 2025</span></div>
+              <span class="dash-badge warning"><i class="bi bi-pencil"></i> Draft</span>
+              <span class="amt">Rp 149.000</span>
+            </div>
+            <div class="wgt-order">
+              <span class="id">#1282</span>
+              <img src="https://i.pravatar.cc/100?img=47" class="dash-avatar" style="width:32px;height:32px" alt="">
+              <div class="who"><strong>Sinta &amp; Bagas</strong><span>Nusantara Royale • 30 Agu 2025</span></div>
+              <span class="dash-badge success"><i class="bi bi-check-circle"></i> Lunas</span>
+              <span class="amt">Rp 249.000</span>
+            </div>
+            <div class="wgt-order">
+              <span class="id">#1281</span>
+              <img src="https://i.pravatar.cc/100?img=68" class="dash-avatar" style="width:32px;height:32px" alt="">
+              <div class="who"><strong>Fajar &amp; Dewi</strong><span>Royale Syar'i • 07 Sep 2025</span></div>
+              <span class="dash-badge success"><i class="bi bi-check-circle"></i> Lunas</span>
+              <span class="amt">Rp 199.000</span>
+            </div>
+            <div class="wgt-order">
+              <span class="id">#1280</span>
+              <img src="https://i.pravatar.cc/100?img=12" class="dash-avatar" style="width:32px;height:32px" alt="">
+              <div class="who"><strong>Bayu &amp; Kirana</strong><span>Minimalist Cream • 21 Sep 2025</span></div>
+              <span class="dash-badge success"><i class="bi bi-check-circle"></i> Lunas</span>
+              <span class="amt">Rp 99.000</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product stats card -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3><i class="bi bi-palette2"></i> Statistik Tema Terjual</h3>
+            <button class="dash-icon-btn" style="width:32px;height:32px" onclick="dashToast('Detail tema dibuka')"><i class="bi bi-three-dots"></i></button>
+          </div>
+          <div class="dash-card-body">
+            <div class="wgt-product">
+              <div class="wgt-thumb"><i class="bi bi-gem"></i></div>
+              <div><div class="name">Nusantara Royale</div><div class="meta"><i class="bi bi-star-fill" style="color:#c5a059"></i> 4.9 • 35% market share</div></div>
+              <div class="num">766<em>+42 minggu ini</em></div>
+            </div>
+            <div class="wgt-product">
+              <div class="wgt-thumb"><i class="bi bi-flower1"></i></div>
+              <div><div class="name">Botanical Whispers</div><div class="meta"><i class="bi bi-star-fill" style="color:#c5a059"></i> 4.8 • 25% market share</div></div>
+              <div class="num">548<em>+28 minggu ini</em></div>
+            </div>
+            <div class="wgt-product">
+              <div class="wgt-thumb"><i class="bi bi-moon-stars"></i></div>
+              <div><div class="name">Royale Syar'i</div><div class="meta"><i class="bi bi-star-fill" style="color:#c5a059"></i> 4.9 • 20% market share</div></div>
+              <div class="num">438<em>+19 minggu ini</em></div>
+            </div>
+            <div class="wgt-product">
+              <div class="wgt-thumb"><i class="bi bi-brightness-high"></i></div>
+              <div><div class="name">Golden Jasmine</div><div class="meta"><i class="bi bi-star-fill" style="color:#c5a059"></i> 4.8 • 12% market share</div></div>
+              <div class="num">262<em>+14 minggu ini</em></div>
+            </div>
+            <div class="wgt-product">
+              <div class="wgt-thumb"><i class="bi bi-square"></i></div>
+              <div><div class="name">Minimalist Cream</div><div class="meta"><i class="bi bi-star-fill" style="color:#c5a059"></i> 4.7 • 8% market share</div></div>
+              <div class="num">176<em>+9 minggu ini</em></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress goals -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3><i class="bi bi-bullseye"></i> Target Bulan Ini</h3>
+            <span class="dash-badge warning"><i class="bi bi-calendar3"></i> Sep 2025</span>
+          </div>
+          <div class="dash-card-body wgt-goal">
+            <div>
+              <div class="wgt-goal-head"><span class="t">Undangan Baru</span><span class="dash-badge success">84%</span></div>
+              <div class="dash-progress" style="margin-top:8px"><div class="dash-progress-bar emerald" style="width:84%"></div></div>
+              <div class="foot"><span>1.260 / 1.500 target</span><span>15 hari tersisa</span></div>
+            </div>
+            <div class="dash-divider"></div>
+            <div>
+              <div class="wgt-goal-head"><span class="t">Pendapatan</span><span class="dash-badge warning">70%</span></div>
+              <div class="dash-progress" style="margin-top:8px"><div class="dash-progress-bar gold" style="width:70%"></div></div>
+              <div class="foot"><span>Rp 84,2jt / Rp 120jt target</span><span>on track</span></div>
+            </div>
+            <div class="dash-divider"></div>
+            <div>
+              <div class="wgt-goal-head"><span class="t">Tema Baru Dirilis</span><span class="dash-badge info">67%</span></div>
+              <div class="dash-progress" style="margin-top:8px"><div class="dash-progress-bar rose" style="width:67%"></div></div>
+              <div class="foot"><span>2 / 3 tema</span><span>Royale Heritage menunggu</span></div>
+            </div>
+            <div class="dash-divider"></div>
+            <div>
+              <div class="wgt-goal-head"><span class="t">Rating Support</span><span class="dash-badge success">98%</span></div>
+              <div class="dash-progress" style="margin-top:8px"><div class="dash-progress-bar emerald" style="width:98%"></div></div>
+              <div class="foot"><span>8 menit avg. reply</span><span>SLA 99.9%</span></div>
+            </div>
+            <button class="dash-btn dash-btn-secondary" style="width:100%" onclick="dashToast('Laporan target diunduh (PDF)')"><i class="bi bi-download"></i> Unduh Laporan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="dash-footer">
+    <div>© 2025 JanjiSuci DashAdmin • Nusantara Royale Romance • v1.0.0</div>
+    <div style="display:flex;gap:16px"><a href="../index.html">Landing</a> <a href="profile.html">Profile</a> <span>Dibuat di Indonesia 🇮🇩</span></div>
+  </footer>
+</main>
+
+<button class="dash-scrolltop" id="dashScrollTop"><i class="bi bi-arrow-up"></i></button>
+
+<script src="assets/js/dashadmin.js"></script>
+<script>
+(function(){
+  // Todo toggle
+  const todo = document.getElementById('wgtTodo');
+  if(todo){
+    todo.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+      const sync = ()=> cb.closest('li').classList.toggle('done', cb.checked);
+      cb.addEventListener('change', ()=>{
+        sync();
+        const done = todo.querySelectorAll('input:checked').length;
+        dashToast(cb.checked ? 'Tugas ditandai selesai ✓' : 'Tugas dibuka kembali', cb.checked ? 'success' : 'info');
+        const badge = todo.closest('.dash-card').querySelector('.dash-badge.info');
+        if(badge) badge.innerHTML = '<i class="bi bi-list-check"></i> ' + done + ' / 7 selesai';
+      });
+      sync();
+    });
+  }
+
+  // Chat contacts
+  document.querySelectorAll('.wgt-chat-contact').forEach(c=>{
+    c.addEventListener('click', ()=>{
+      document.querySelectorAll('.wgt-chat-contact').forEach(x=>x.classList.remove('active'));
+      c.classList.add('active');
+      dashToast('Obrolan dengan ' + c.textContent.trim() + ' dibuka', 'info');
+    });
+  });
+
+  // Send message
+  window.wgtSendMsg = function(){
+    const input = document.getElementById('wgtChatInput');
+    const box = document.getElementById('wgtChatMsgs');
+    if(!input || !box || !input.value.trim()) return;
+    const div = document.createElement('div');
+    div.className = 'wgt-msg right';
+    const now = new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'});
+    div.innerHTML = '<img src="https://i.pravatar.cc/100?img=15" alt="Admin"><div><div class="bubble"><strong>Admin JanjiSuci</strong>' +
+      input.value.replace(/</g,'&lt;').replace(/>/g,'&gt;') +
+      '<span class="time">' + now + ' WIB</span></div></div>';
+    box.appendChild(div);
+    input.value = '';
+    box.scrollTop = box.scrollHeight;
+    dashToast('Pesan terkirim ke pengantin');
+  };
+  const msgs = document.getElementById('wgtChatMsgs');
+  if(msgs) msgs.scrollTop = msgs.scrollHeight;
+})();
+</script>
+<script src="assets/js/theme-switcher.js"></script>
+</body>
+</html>

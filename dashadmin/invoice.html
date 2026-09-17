@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice — Velzon Style • JanjiSuci</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/css/dashadmin.css" rel="stylesheet">
+<link href="assets/css/theme-switcher.css" rel="stylesheet">
+<style>
+  /* Velzon Invoice — clean, airy, card + table ala Velzon */
+  .vz-invoice{max-width:900px;margin:0 auto}
+  .vz-card{background:#fff;border:1px solid #e9ebec;border-radius:10px;box-shadow:0 1px 2px rgba(56,65,74,0.08);overflow:hidden}
+  .vz-head{padding:22px 24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:flex-start;border-bottom:1px solid #e9ebec;background:#fff}
+  .vz-logo{display:flex;gap:12px;align-items:center}
+  .vz-logo-icon{width:40px;height:40px;border-radius:8px;background:#405189;color:#fff;display:grid;place-items:center;font-size:18px}
+  .vz-logo strong{font-family:'Inter',sans-serif;font-size:15px;font-weight:800;color:#212529;display:block;line-height:1}
+  .vz-logo span{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#878a99;font-weight:700}
+  .vz-logo small{font-size:11px;color:#878a99;display:block;margin-top:2px}
+  .vz-meta{text-align:right;min-width:240px}
+  .vz-meta h2{font-size:16px;font-weight:700;color:#212529;margin:0;letter-spacing:0.02em}
+  .vz-meta .no{font-size:12px;color:#878a99;margin-top:4px}
+  .vz-meta .amount{margin-top:10px;display:inline-flex;flex-direction:column;align-items:flex-end;background:#f3f6f9;border:1px solid #e9ebec;border-radius:8px;padding:10px 14px}
+  .vz-meta .amount em{font-style:normal;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:#878a99;font-weight:700}
+  .vz-meta .amount strong{font-size:18px;font-weight:800;color:#405189;line-height:1;margin-top:2px}
+  .vz-grid{display:grid;gap:18px;padding:20px 24px}
+  @media(min-width:700px){.vz-grid{grid-template-columns:1fr 1fr 1fr 1fr}}
+  .vz-col h5{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#878a99;margin:0 0 8px;font-weight:700;display:flex;align-items:center;gap:6px}
+  .vz-col h5 i{color:#405189}
+  .vz-col p{font-size:12.5px;line-height:1.6;color:#212529;margin:0}
+  .vz-col p.muted{color:#878a99}
+  .vz-col .name{font-weight:700;color:#212529}
+  .vz-table-wrap{padding:0 24px}
+  .vz-table{width:100%;border-collapse:collapse;min-width:620px}
+  .vz-table th{font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#878a99;font-weight:700;padding:11px 12px;background:#f3f6f9;border-bottom:1px solid #e9ebec;text-align:left;white-space:nowrap}
+  .vz-table th.right,.vz-table td.right{text-align:right}
+  .vz-table th.center,.vz-table td.center{text-align:center}
+  .vz-table td{padding:14px 12px;border-bottom:1px solid #f3f6f9;font-size:13px;color:#212529;vertical-align:middle}
+  .vz-table tr:last-child td{border-bottom:none}
+  .vz-prod{display:flex;gap:10px;align-items:center}
+  .vz-thumb{width:38px;height:38px;border-radius:8px;background:#f3f6f9;border:1px solid #e9ebec;display:grid;place-items:center;color:#405189;flex-shrink:0;font-size:16px}
+  .vz-prod strong{font-size:13px;font-weight:700;display:block;line-height:1.2}
+  .vz-prod span{font-size:11px;color:#878a99}
+  .vz-rate{font-weight:600}
+  .vz-qty{display:inline-flex;align-items:center;justify-content:center;min-width:32px;padding:4px 8px;border-radius:6px;background:#f3f6f9;border:1px solid #e9ebec;font-size:12px;font-weight:700}
+  .vz-summary{display:grid;gap:16px;padding:20px 24px;border-top:1px solid #e9ebec;background:#fff}
+  @media(min-width:700px){.vz-summary{grid-template-columns:1.2fr 380px}}
+  .vz-pay h5{font-size:12px;font-weight:700;color:#212529;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+  .vz-pay .pay-card{display:flex;gap:12px;align-items:center;padding:12px;border:1px solid #e9ebec;border-radius:8px;background:#fff;margin-bottom:10px}
+  .vz-pay .pay-card i{width:40px;height:40px;border-radius:8px;background:#f3f6f9;border:1px solid #e9ebec;display:grid;place-items:center;color:#405189;flex-shrink:0}
+  .vz-pay .pay-card strong{font-size:12px;display:block}
+  .vz-pay .pay-card span{font-size:11px;color:#878a99}
+  .vz-totals{background:#f3f6f9;border:1px solid #e9ebec;border-radius:8px;padding:14px}
+  .vz-totals .row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;font-size:13px;color:#212529}
+  .vz-totals .row.muted{color:#878a99}
+  .vz-totals .row.total{border-top:1px solid #e9ebec;margin-top:6px;padding-top:12px;font-weight:800;font-size:15px;color:#212529}
+  .vz-totals .row.total strong{color:#405189}
+  .vz-note{margin:16px 24px 20px;display:flex;gap:12px;padding:14px 16px;border-radius:8px;background:#e8f3ec;border:1px solid #c7e0c9;font-size:12px;line-height:1.6;color:#0a3622}
+  .vz-note i{color:#0a3622;font-size:16px;margin-top:1px}
+  .vz-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;margin-top:16px}
+  .vz-stamp{display:flex;gap:10px;align-items:center;justify-content:flex-end;margin-top:14px;padding-top:14px;border-top:1px dashed #e9ebec;font-size:11px;color:#878a99}
+  .vz-stamp .sig{font-family:'Inter',sans-serif;font-weight:800;color:#212529}
+  @media print{
+    .dash-navbar,.dash-sidebar,.dash-overlay,.dash-footer,.dash-scrolltop,.vz-actions{display:none!important}
+    .dash-main{margin:0!important}
+    .dash-content{padding:0!important;max-width:none!important}
+    .vz-card{box-shadow:none!important;border:1px solid #e9ebec!important}
+    body.dash-body{background:#fff!important}
+  }
+  /* Velzon status badge */
+  .vz-badge{padding:5px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:0.03em;display:inline-flex;align-items:center;gap:6px;border:1px solid}
+  .vz-badge.paid{background:#daf4f0;color:#0a3622;border-color:#b6e0d8}
+  .vz-badge.unpaid{background:#fef4e4;color:#664d03;border-color:#fbe8b8}
+</style>
+</head>
+<body class="dash-body">
+
+<nav class="dash-navbar">
+  <div class="dash-navbar-left">
+    <button class="dash-menu-btn" data-navbar-toggle data-toggle="sidebar" aria-label="Toggle sidebar"><i class="bi bi-list"></i></button>
+    <div class="dash-search"><i class="bi bi-search" style="color:#9aa0a6"></i><input placeholder="Cari undangan, tamu, tema, transaksi..."><span class="dash-kbd">⌘ K</span></div>
+  </div>
+  <div class="dash-navbar-right">
+    <div class="dash-dd" id="ddBellWrap">
+      <button class="dash-icon-btn" aria-label="Notifications" data-dd="ddBell"><i class="bi bi-bell"></i><span class="badge">7</span></button>
+      <div class="dash-dd-menu" id="ddBell">
+        <div class="dash-dd-header">Notifikasi <a href="tables.html">Lihat Semua</a></div>
+        <div class="dash-dd-body">
+          <div class="dash-dd-item"><div class="dash-dd-icon emerald"><i class="bi bi-envelope-check"></i></div><div class="dash-dd-text"><p>Pesanan #1284 — Arya &amp; Nabila<span class="dash-dd-time">10 menit lalu</span></p></div><span class="dash-dd-dot"></span></div>
+        </div>
+        <div class="dash-dd-footer" onclick="dashToast('Semua notifikasi ditandai dibaca')">Tandai semua dibaca</div>
+      </div>
+    </div>
+    <button class="dash-icon-btn" id="dashDarkToggle" aria-label="Toggle dark mode" title="Dark / Light"><i class="bi bi-moon-stars"></i></button>
+    <div class="dash-dd" id="ddProfileWrap">
+      <div class="dash-profile" data-dd="ddProfile" role="button">
+        <img src="https://i.pravatar.cc/100?img=15" alt="Admin"><div class="dash-profile-info"><strong>Admin JanjiSuci</strong><span>Super Admin • Online</span></div><i class="bi bi-chevron-down" style="font-size:12px;opacity:0.6"></i>
+      </div>
+      <div class="dash-dd-menu dash-dd-profile-menu" id="ddProfile">
+        <div class="dash-dd-userinfo"><img src="https://i.pravatar.cc/100?img=15"><div><strong>Admin JanjiSuci</strong><span>admin@janjisuci.id</span></div></div>
+        <a class="dash-dd-profile-item" href="profile.html"><i class="bi bi-person"></i> Profil Saya</a>
+        <a class="dash-dd-profile-item" href="invoice.html"><i class="bi bi-receipt"></i> Invoice</a>
+        <div class="dash-divider" style="margin:6px 0"></div>
+        <a class="dash-dd-profile-item danger" href="../login.html"><i class="bi bi-box-arrow-right"></i> Keluar</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<aside class="dash-sidebar" id="dashSidebar">
+  <div class="dash-sidebar-header">
+    <a href="index.html" class="dash-brand"><div class="dash-brand-icon"><i class="bi bi-heart-fill"></i></div><div class="dash-brand-text"><strong>JanjiSuci</strong><span>Admin Royale</span></div></a>
+  </div>
+  <div class="dash-sidebar-scroll">
+    <div class="dash-nav-group"><div class="dash-nav-title">Utama</div><ul class="dash-nav"><li><a href="index.html"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li><li><a href="../index.html"><i class="bi bi-house"></i><span>Landing Preview</span><span class="dash-badge gold">Visit</span></a></li></ul></div>
+    <div class="dash-nav-group"><div class="dash-nav-title">Manajemen Pernikahan</div><ul class="dash-nav"><li><a href="widgets.html"><i class="bi bi-collection"></i><span>Widgets & Stats</span><span class="dash-badge success">12</span></a></li><li><a href="../katalog.html"><i class="bi bi-palette"></i><span>Katalog Tema</span></a></li><li><a href="../dashboard.html"><i class="bi bi-pencil-square"></i><span>Editor Undangan</span></a></li><li><a href="../preview.html"><i class="bi bi-phone"></i><span>Live Preview</span></a></li></ul></div>
+    <div class="dash-nav-group"><div class="dash-nav-title">Komponen — Ala AdminLTE</div><ul class="dash-nav"><li class="dash-nav-item"><button><i class="bi bi-layers"></i><span>UI Elements</span><i class="bi bi-chevron-right dash-nav-arrow"></i></button><ul class="dash-subnav"><li><a href="ui-elements.html">General & Cards</a></li><li><a href="ui-elements.html#buttons">Buttons & Badges</a></li><li><a href="ui-elements.html#alerts">Alerts & Modals</a></li></ul></li><li><a href="forms.html"><i class="bi bi-input-cursor-text"></i><span>Forms</span></a></li><li><a href="tables.html"><i class="bi bi-table"></i><span>Tables</span></a></li><li><a href="charts.html"><i class="bi bi-bar-chart-line"></i><span>Charts</span><span class="dash-badge">3</span></a></li><li><a href="plugins.html"><i class="bi bi-puzzle"></i><span>Plugins & Addons</span><span class="dash-badge gold">15</span></a></li></ul></div>
+    <div class="dash-nav-group"><div class="dash-nav-title">Transaksi</div><ul class="dash-nav"><li><a href="invoice.html" class="active"><i class="bi bi-receipt-cutoff"></i><span>Invoice</span><span class="dash-badge success">Baru</span></a></li><li><a href="tables.html"><i class="bi bi-credit-card"></i><span>Pembayaran</span></a></li></ul></div>
+    <div class="dash-nav-group"><div class="dash-nav-title">Halaman</div><ul class="dash-nav"><li><a href="profile.html"><i class="bi bi-person-circle"></i><span>Profile</span></a></li><li><a href="../harga.html"><i class="bi bi-tag"></i><span>Paket & Harga</span></a></li><li><a href="404.html"><i class="bi bi-exclamation-triangle"></i><span>Error 404</span></a></li></ul></div>
+  </div>
+  <div class="dash-sidebar-footer" style="position:relative;">
+    <button class="dash-user-card" type="button" id="sideUserBtn" aria-expanded="false">
+      <img src="https://i.pravatar.cc/100?img=15" alt=""><div class="dash-user-info"><strong>Admin JanjiSuci</strong><span>admin@janjisuci.id</span></div><i class="bi bi-chevron-up"></i>
+    </button>
+    <div class="dash-user-menu" id="sideUserMenu">
+      <a class="dash-user-menu-item" href="invoice.html"><i class="bi bi-receipt"></i> Invoice</a>
+      <div class="dash-divider" style="margin:6px 0"></div>
+      <a class="dash-user-menu-item danger" href="../login.html"><i class="bi bi-box-arrow-right"></i> Keluar</a>
+    </div>
+  </div>
+</aside>
+<div class="dash-overlay" id="dashOverlay"></div>
+
+<main class="dash-main">
+  <div class="dash-content">
+    <div class="dash-page-header">
+      <div class="dash-title">
+        <div class="dash-breadcrumb"><a href="index.html">Home</a> <i class="bi bi-chevron-right"></i> <span>Invoice</span></div>
+        <h1>Invoice — Velzon Style</h1>
+        <p>Desain invoice ala Velzon — clean, kartu putih, tabel rapi, ringkasan di kanan. Tetap nuansa JanjiSuci (emerald/gold) bila diperlukan.</p>
+      </div>
+      <div class="dash-actions">
+        <button class="dash-btn dash-btn-secondary" onclick="window.print()"><i class="bi bi-printer"></i> Cetak</button>
+        <button class="dash-btn dash-btn-secondary" onclick="dashToast('PDF invoice diunduh','info')"><i class="bi bi-download"></i> Unduh PDF</button>
+        <button class="dash-btn dash-btn-primary" onclick="dashToast('Link invoice disalin')"><i class="bi bi-send"></i> Kirim Invoice</button>
+      </div>
+    </div>
+
+    <div class="vz-invoice">
+      <div class="vz-card" id="invoiceCard">
+        <!-- Head Velzon: logo + invoice meta -->
+        <div class="vz-head">
+          <div class="vz-logo">
+            <div class="vz-logo-icon"><i class="bi bi-heart-fill"></i></div>
+            <div>
+              <strong>JanjiSuci</strong><span>Nusantara Royale • janjisuci.id</span>
+              <small>Jl. Kemang Raya No.21, Jakarta Selatan • hello@janjisuci.id • 0812-3456-7890</small>
+              <small>NPWP 12.345.678.9-012.345</small>
+            </div>
+          </div>
+          <div class="vz-meta">
+            <h2>INVOICE #JS-2025-1284</h2>
+            <div class="no">Gold Package — Nusantara Royale</div>
+            <div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap">
+              <span class="vz-badge paid"><i class="bi bi-check-circle-fill"></i> Paid</span>
+              <span class="vz-badge unpaid" style="background:#fff;color:#405189;border-color:#e9ebec"><i class="bi bi-clock"></i> Due 22 Sep 2025</span>
+            </div>
+            <div class="amount">
+              <em>Amount Due</em>
+              <strong>Rp 323.512</strong>
+              <span style="font-size:11px;color:#878a99">Lunas 15 Sep 2025 14:22 WIB • TRX-JS1284</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid 4 kolom ala Velzon: billing / shipping / payment / shipping -->
+        <div class="vz-grid">
+          <div class="vz-col">
+            <h5><i class="bi bi-person-lines-fill"></i> Billing Address</h5>
+            <p class="name">Arya & Nabila</p>
+            <p>arya.nabila@email.com<br>0812-3456-7891<br>Plataran Menteng, Jakarta<br>Akad: 24 Okt 2025</p>
+            <p class="muted"><i class="bi bi-link-45deg"></i> janjisuci.id/arya-nabila • 342 tamu</p>
+          </div>
+          <div class="vz-col">
+            <h5><i class="bi bi-truck"></i> Shipping Address</h5>
+            <p class="name">Undangan Digital — Live</p>
+            <p>Domain: aryanabila.janjisuci.id<br>Server: SG-1 • SSL Aktif<br>Support 8-menit • 0812-3456-7890</p>
+            <p class="muted">Link aktif setelah pelunasan</p>
+          </div>
+          <div class="vz-col">
+            <h5><i class="bi bi-credit-card"></i> Payment Method</h5>
+            <p><strong>BCA 880 123 4567</strong><br>a.n. PT JanjiSuci Nusantara<br>QRIS ID: JS-QRIS-1284<br><span style="display:inline-flex;gap:6px;margin-top:6px"><span class="dash-badge success" style="font-size:10px"><i class="bi bi-shield-check"></i> Verified</span></span></p>
+          </div>
+          <div class="vz-col">
+            <h5><i class="bi bi-calendar-week"></i> Order Details</h5>
+            <p><span class="muted">Order Date:</span> <strong>15 Sep 2025</strong><br><span class="muted">Order No:</span> <strong>#1284</strong><br><span class="muted">Order Status:</span> <span class="vz-badge paid" style="font-size:10px;padding:3px 8px">Paid</span></p>
+            <p class="muted" style="margin-top:6px">Invoice by JanjiSuci Admin Royale</p>
+          </div>
+        </div>
+
+        <!-- Table ala Velzon -->
+        <div class="vz-table-wrap">
+          <table class="vz-table">
+            <thead>
+              <tr>
+                <th style="width:36px">#</th>
+                <th>Product Details</th>
+                <th>Rate</th>
+                <th class="center">Quantity</th>
+                <th class="right">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>01</td>
+                <td>
+                  <div class="vz-prod">
+                    <div class="vz-thumb"><i class="bi bi-gem"></i></div>
+                    <div>
+                      <strong>Paket Gold — Nusantara Royale</strong>
+                      <span>Domain custom, RSVP tanpa batas, galeri 200 foto, live preview • Tema Royale</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="vz-rate">Rp 249.000</td>
+                <td class="center"><span class="vz-qty">1</span></td>
+                <td class="right"><strong>Rp 249.000</strong></td>
+              </tr>
+              <tr>
+                <td>02</td>
+                <td>
+                  <div class="vz-prod">
+                    <div class="vz-thumb" style="background:#daf4f0;color:#0a3622;border-color:#b6e0d8"><i class="bi bi-globe"></i></div>
+                    <div>
+                      <strong>Custom Domain</strong>
+                      <span>aryanabila.janjisuci.id — gratis paket Gold 12 bulan</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="vz-rate"><s style="color:#878a99">Rp 99.000</s></td>
+                <td class="center"><span class="vz-qty">1</span></td>
+                <td class="right">Rp 0</td>
+              </tr>
+              <tr>
+                <td>03</td>
+                <td>
+                  <div class="vz-prod">
+                    <div class="vz-thumb" style="background:#fef4e4;color:#664d03;border-color:#fbe8b8"><i class="bi bi-images"></i></div>
+                    <div>
+                      <strong>Tambahan Kapasitas Foto</strong>
+                      <span>+50 foto galeri prewedding (200 → 250)</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="vz-rate">Rp 49.000</td>
+                <td class="center"><span class="vz-qty">1</span></td>
+                <td class="right"><strong>Rp 49.000</strong></td>
+              </tr>
+              <tr>
+                <td>04</td>
+                <td>
+                  <div class="vz-prod">
+                    <div class="vz-thumb" style="background:#e8edf5;color:#405189;border-color:#d6ddea"><i class="bi bi-wallet2"></i></div>
+                    <div>
+                      <strong>Amplop Digital Pro</strong>
+                      <span>BCA + BNI + QRIS otomatis, rekap dana real-time</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="vz-rate">Rp 29.000</td>
+                <td class="center"><span class="vz-qty">1</span></td>
+                <td class="right"><strong>Rp 29.000</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Summary ala Velzon: kiri payment note, kanan totals -->
+        <div class="vz-summary">
+          <div class="vz-pay">
+            <h5><i class="bi bi-info-circle"></i> Payment Details</h5>
+            <div class="pay-card">
+              <i class="bi bi-bank"></i>
+              <div><strong>BCA — 880 123 4567 a.n. PT JanjiSuci</strong><span>Konfirmasi WA 0812-3456-7890 • TRX-JS1284-9F3A</span></div>
+            </div>
+            <div class="pay-card">
+              <i class="bi bi-qr-code"></i>
+              <div><strong>QRIS — JanjiSuci</strong><span>Scan via mobile banking / e-wallet — ID: JS-QRIS-1284</span></div>
+            </div>
+            <div style="font-size:11px;color:#878a99;margin-top:8px"><i class="bi bi-shield-check" style="color:#0a3622"></i> Pembayaran terverifikasi 15 Sep 2025 14:22 WIB • BCA</div>
+          </div>
+          <div class="vz-totals">
+            <div class="row"><span>Sub Total (4 items)</span><strong>Rp 327.000</strong></div>
+            <div class="row muted"><span>Discount (Gold 15%)</span><span style="color:#0a3622">- Rp 37.350</span></div>
+            <div class="row muted"><span>Shipping Charge</span><span>Rp 0</span></div>
+            <div class="row muted"><span>Estimated Tax (11%)</span><span>Rp 31.862</span></div>
+            <div class="row"><span>Biaya Layanan</span><span>Rp 2.000</span></div>
+            <div class="row total"><span>Total Amount</span><strong>Rp 323.512</strong></div>
+            <div style="font-size:11px;color:#878a99;margin-top:8px">Sudah termasuk domain 1 tahun & support 8-menit. Velzon style totals di kanan.</div>
+          </div>
+        </div>
+
+        <div class="vz-note">
+          <i class="bi bi-heart-fill"></i>
+          <div><strong>Terima kasih, Arya & Nabila!</strong> Undangan <strong>janjisuci.id/arya-nabila</strong> sudah aktif. Butuh bantuan? Chat admin <strong>0812-3456-7890 (WA)</strong> — respon &lt; 8 menit. Simpan invoice ini sebagai bukti pembayaran resmi ala Velzon.</div>
+        </div>
+
+        <div class="vz-stamp">
+          <span>Generated by JanjiSuci Admin Royale • 15 Sep 2025 14:22 WIB • Terms: domain aktif 12 bulan, refund 100% sebelum preview disetujui</span>
+          <span style="margin-left:auto;text-align:right">
+            <div class="sig" style="font-family:'Inter',sans-serif">JanjiSuci</div>
+            <div>Authorized Signature</div>
+          </span>
+        </div>
+      </div>
+
+      <div class="vz-actions">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a href="tables.html" class="dash-btn dash-btn-secondary"><i class="bi bi-arrow-left"></i> Kembali</a>
+          <button class="dash-btn dash-btn-secondary" onclick="dashToast('Invoice dikirim ke email')"><i class="bi bi-envelope"></i> Kirim Email</button>
+          <button class="dash-btn dash-btn-secondary" onclick="dashToast('Link WA dibuka')"><i class="bi bi-whatsapp"></i> Kirim WA</button>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="dash-btn dash-btn-secondary" onclick="window.print()"><i class="bi bi-printer"></i> Cetak / PDF</button>
+          <button class="dash-btn dash-btn-primary" onclick="dashToast('Invoice #JS-1284 disalin')"><i class="bi bi-clipboard-check"></i> Salin Invoice</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="dash-footer">
+    <div>© 2025 JanjiSuci DashAdmin • Velzon Invoice • #JS-1284</div>
+    <div style="display:flex;gap:16px"><a href="tables.html">Pembayaran</a><span>Dibuat di Indonesia 🇮🇩</span></div>
+  </footer>
+</main>
+
+<button class="dash-scrolltop" id="dashScrollTop"><i class="bi bi-arrow-up"></i></button>
+<script src="assets/js/dashadmin.js"></script>
+<script src="assets/js/theme-switcher.js"></script>
+</body>
+</html>

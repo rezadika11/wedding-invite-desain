@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile — JanjiSuci Nusantara Royale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/css/dashadmin.css" rel="stylesheet">
+<link href="assets/css/theme-switcher.css" rel="stylesheet">
+<style>
+/* Profile specific — Nusantara Royale Romance */
+.profile-cover{
+  height:184px;
+  background:
+    radial-gradient(420px 220px at 20% 20%, rgba(245,235,215,0.85) 0%, transparent 60%),
+    radial-gradient(560px 260px at 90% 10%, rgba(171,206,198,0.35) 0%, transparent 65%),
+    linear-gradient(135deg, #0f2e2a 0%, #1b3b36 55%, #2d4c47 100%);
+  position:relative;
+  overflow:hidden;
+}
+.profile-cover::after{
+  content:"";
+  position:absolute;inset:0;
+  background: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&q=80') center/cover no-repeat;
+  opacity:0.18;
+  mix-blend-mode: soft-light;
+}
+.profile-cover-pattern{
+  position:absolute;inset:0;
+  background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size:22px 22px;
+  opacity:0.5;
+}
+.profile-header-body{
+  padding:0 20px 18px;
+  position:relative;
+}
+.profile-avatar-row{
+  display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px;
+  margin-top:-52px;
+  position:relative;z-index:1;
+}
+.profile-avatar{
+  width:108px;height:108px;border-radius:22px;
+  border:4px solid #fff;
+  box-shadow:0 8px 24px rgba(3,37,33,0.18);
+  object-fit:cover;background:#fff;
+}
+.profile-avatar-badge{
+  position:absolute;bottom:6px;right:6px;
+  width:28px;height:28px;border-radius:50%;
+  background:var(--dash-success);color:#fff;
+  border:3px solid #fff;
+  display:grid;place-items:center;font-size:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.15);
+}
+.profile-name h2{
+  font-family:'Inter',sans-serif;
+  font-size:22px;line-height:1.1;font-weight:700;
+  color:var(--dash-primary);letter-spacing:-0.02em;
+}
+.profile-name h2 span{color:var(--dash-secondary);font-style:italic;font-weight:600}
+.profile-meta{
+  display:flex;flex-wrap:wrap;gap:8px 14px;
+  font-size:12px;color:var(--dash-muted);margin-top:6px;
+}
+.profile-meta span{display:inline-flex;align-items:center;gap:6px}
+.profile-meta i{color:var(--dash-secondary)}
+.profile-bio{
+  margin-top:10px;font-size:13px;line-height:20px;color:var(--dash-muted);max-width:56rem;
+}
+.profile-actions{
+  margin-left:auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+}
+.profile-stats-bar{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:10px;
+  margin-top:16px;
+  padding-top:16px;border-top:1px solid var(--dash-border);
+}
+@media(min-width:640px){.profile-stats-bar{grid-template-columns:repeat(4,1fr);}}
+.stat-mini{
+  background:var(--dash-surface);border:1px solid var(--dash-border);
+  border-radius:12px;padding:12px 14px;text-align:center;
+}
+.stat-mini strong{
+  font-family:'Inter',sans-serif;font-size:20px;font-weight:700;color:var(--dash-primary);display:block;line-height:1;
+}
+.stat-mini span{font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--dash-muted);margin-top:4px;display:block}
+.stat-mini em{font-size:11px;color:var(--dash-success);font-style:normal;font-weight:600;display:block;margin-top:2px}
+
+/* Layout */
+.profile-layout{
+  display:grid;gap:16px;margin-top:16px;
+}
+@media(min-width:1024px){.profile-layout{grid-template-columns:360px 1fr;align-items:start;}}
+.profile-left{ display:grid;gap:16px; }
+.profile-right{display:grid;gap:16px;}
+
+/* About */
+.about-list{ display:grid;gap:12px; }
+.about-item{display:flex;gap:12px;align-items:flex-start;font-size:13px}
+.about-item i{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;background:var(--dash-surface);border:1px solid var(--dash-border);color:var(--dash-primary);flex-shrink:0}
+.about-item strong{color:var(--dash-primary);font-size:13px}
+.about-item span{color:var(--dash-muted);font-size:12px;display:block;margin-top:2px}
+.skill-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.skill-pill{padding:6px 10px;border-radius:9999px;background:var(--dash-surface);border:1px solid var(--dash-border);font-size:11px;font-weight:700;color:var(--dash-primary);display:inline-flex;align-items:center;gap:6px}
+.skill-pill i{color:var(--dash-secondary)}
+
+/* Timeline */
+.timeline{position:relative;padding-left:22px;display:grid;gap:0}
+.timeline::before{
+  content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--dash-border);border-radius:9999px;
+}
+.tl-item{position:relative;padding:14px 0 14px 14px;display:flex;gap:12px}
+.tl-item:last-child{padding-bottom:0}
+.tl-dot{
+  position:absolute;left:-22px;top:18px;
+  width:16px;height:16px;border-radius:50%;
+  border:3px solid #fff;box-shadow:0 0 0 2px var(--dash-border);
+  display:grid;place-items:center;font-size:8px;
+}
+.tl-dot.success{background:var(--dash-success);box-shadow:0 0 0 2px rgba(45,106,79,0.18)}
+.tl-dot.gold{background:var(--dash-warning);box-shadow:0 0 0 2px rgba(197,160,89,0.22)}
+.tl-dot.rose{background:var(--dash-secondary);box-shadow:0 0 0 2px rgba(131,82,61,0.18)}
+.tl-dot.navy{background:var(--dash-primary-container);box-shadow:0 0 0 2px rgba(27,59,54,0.18)}
+.tl-card{flex:1;background:var(--dash-surface);border:1px solid var(--dash-border);border-radius:12px;padding:12px 14px}
+.tl-card-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.tl-card-head strong{font-size:13px;color:var(--dash-primary)}
+.tl-time{font-size:11px;color:var(--dash-muted);white-space:nowrap}
+.tl-desc{font-size:12px;color:var(--dash-muted);margin-top:4px;line-height:18px}
+.tl-tag{margin-top:8px;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:4px 8px;border-radius:9999px;border:1px solid}
+
+/* Settings form */
+.dash-form-label{font-size:12px;font-weight:700;color:var(--dash-primary);margin-bottom:6px;display:block}
+.dash-form-hint{font-size:11px;color:var(--dash-muted);margin-top:6px}
+.dash-form-grid-2{display:grid;gap:14px}
+@media(min-width:640px){.dash-form-grid-2{grid-template-columns:1fr 1fr}}
+.dash-divider-soft{height:1px;background:var(--dash-border);margin:18px 0}
+
+/* Footer profile mini */
+.footer-profile-grid{display:grid;gap:16px}
+@media(min-width:768px){.footer-profile-grid{grid-template-columns:1.2fr 1fr 1fr}}
+
+/* Tabs pane */
+.dash-tab-pane{display:none}
+.dash-tab-pane.active{display:block}
+
+/* Responsive header */
+@media(max-width:640px){
+  .profile-header-body{padding:0 16px 16px}
+  .profile-actions{width:100%;margin-left:0}
+  .profile-actions .dash-btn{flex:1}
+  .profile-name h2{font-size:20px}
+}
+</style>
+</head>
+<body class="dash-body">
+
+<!-- Navbar -->
+<nav class="dash-navbar">
+  <div class="dash-navbar-left">
+    <button class="dash-menu-btn" data-navbar-toggle data-toggle="sidebar" aria-label="Toggle sidebar"><i class="bi bi-list"></i></button>
+    <div class="dash-search">
+      <i class="bi bi-search" style="color:#9aa0a6"></i>
+      <input placeholder="Cari undangan, tamu, tema, transaksi...">
+      <span class="dash-kbd">⌘ K</span>
+    </div>
+  </div>
+  <div class="dash-navbar-right">
+          <div class="dash-dd" id="ddBellWrap">
+        <button class="dash-icon-btn" aria-label="Notifications" data-dd="ddBell"><i class="bi bi-bell"></i><span class="badge">7</span></button>
+        <div class="dash-dd-menu" id="ddBell">
+          <div class="dash-dd-header">Notifikasi <a href="tables.html">Lihat Semua</a></div>
+          <div class="dash-dd-body">
+            <div class="dash-dd-item"><div class="dash-dd-icon emerald"><i class="bi bi-envelope-check"></i></div><div class="dash-dd-text"><p>Pesanan #1284 — Arya &amp; Nabila<span class="dash-dd-time">10 menit lalu • Nusantara Royale</span></p></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><div class="dash-dd-icon rose"><i class="bi bi-people"></i></div><div class="dash-dd-text"><p>RSVP baru: 12 tamu hadir<span class="dash-dd-time">25 menit lalu • Botanical Whispers</span></p></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><div class="dash-dd-icon gold"><i class="bi bi-currency-dollar"></i></div><div class="dash-dd-text"><p>Pembayaran Rp 99.000 diterima<span class="dash-dd-time">1 jam lalu • Reza &amp; Syifa</span></p></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><div class="dash-dd-icon navy"><i class="bi bi-star"></i></div><div class="dash-dd-text"><p>Ulasan 5 bintang dari Dimas &amp; Nadya<span class="dash-dd-time">2 jam lalu • Tema Minimalist</span></p></div><span class="dash-dd-dot read"></span></div>
+          </div>
+          <div class="dash-dd-footer" onclick="dashToast('Semua notifikasi ditandai dibaca')">Tandai semua dibaca</div>
+        </div>
+      </div>
+      <div class="dash-dd" id="ddChatWrap">
+        <button class="dash-icon-btn" aria-label="Messages" data-dd="ddChat"><i class="bi bi-chat-dots"></i><span class="badge" style="background:#2D6A4F">3</span></button>
+        <div class="dash-dd-menu" id="ddChat">
+          <div class="dash-dd-header">Pesan <a href="widgets.html#chat">Buka Chat</a></div>
+          <div class="dash-dd-body">
+            <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=33" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Nabila Saraswati<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Kak, bisa ganti lagunya setelah publish?</span></p><span class="dash-dd-time">5 menit lalu</span></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=26" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Dimas Prasetyo<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Upload galeri prewedding 20 foto ya</span></p><span class="dash-dd-time">32 menit lalu</span></div><span class="dash-dd-dot"></span></div>
+            <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=14" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Syifa Aulia<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Terima kasih, undangannya cantik banget!</span></p><span class="dash-dd-time">1 jam lalu</span></div><span class="dash-dd-dot read"></span></div>
+          </div>
+          <div class="dash-dd-footer" onclick="location.href='widgets.html#chat'">Lihat semua percakapan</div>
+        </div>
+      </div>
+    <button class="dash-icon-btn" id="dashDarkToggle" aria-label="Toggle dark mode" title="Dark / Light"><i class="bi bi-moon-stars"></i></button>
+    <button class="dash-icon-btn" aria-label="Apps"><i class="bi bi-grid"></i></button>
+        <div class="dash-dd" id="ddProfileWrap">
+      <div class="dash-profile" data-dd="ddProfile" role="button">
+        <img src="https://i.pravatar.cc/100?img=15" alt="Admin">
+        <div class="dash-profile-info">
+          <strong>Admin JanjiSuci</strong><span>Super Admin • Online</span>
+        </div>
+        <i class="bi bi-chevron-down" style="font-size:12px;opacity:0.6"></i>
+      </div>
+      <div class="dash-dd-menu dash-dd-profile-menu" id="ddProfile">
+        <div class="dash-dd-userinfo"><img src="https://i.pravatar.cc/100?img=15"><div><strong>Admin JanjiSuci</strong><span>admin@janjisuci.id</span></div></div>
+        <a class="dash-dd-profile-item" href="profile.html"><i class="bi bi-person"></i> Profil Saya</a>
+        <a class="dash-dd-profile-item" href="profile.html#settings"><i class="bi bi-gear"></i> Pengaturan</a>
+        <a class="dash-dd-profile-item" href="ui-elements.html"><i class="bi bi-layers"></i> Komponen UI</a>
+        <a class="dash-dd-profile-item" href="../index.html"><i class="bi bi-house"></i> Lihat Website</a>
+        <div class="dash-divider" style="margin:6px 0"></div>
+        <a class="dash-dd-profile-item danger" href="../login.html"><i class="bi bi-box-arrow-right"></i> Keluar</a>
+      </div>
+    </div></div>
+</nav>
+
+<!-- Sidebar -->
+<aside class="dash-sidebar" id="dashSidebar">
+  <div class="dash-sidebar-header">
+    <a href="index.html" class="dash-brand">
+      <div class="dash-brand-icon"><i class="bi bi-heart-fill"></i></div>
+      <div class="dash-brand-text">
+        <strong>JanjiSuci</strong><span>Admin Royale</span>
+      </div>
+    </a>
+  </div>
+  <div class="dash-sidebar-scroll">
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Utama</div>
+      <ul class="dash-nav">
+        <li><a href="index.html"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
+        <li><a href="../index.html"><i class="bi bi-house"></i><span>Landing Preview</span><span class="dash-badge gold">Visit</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Manajemen Pernikahan</div>
+      <ul class="dash-nav">
+        <li><a href="widgets.html"><i class="bi bi-collection"></i><span>Widgets & Stats</span><span class="dash-badge success">12</span></a></li>
+        <li><a href="../katalog.html"><i class="bi bi-palette"></i><span>Katalog Tema</span></a></li>
+        <li><a href="../contoh.html"><i class="bi bi-images"></i><span>Contoh Undangan</span></a></li>
+        <li><a href="../dashboard.html"><i class="bi bi-pencil-square"></i><span>Editor Undangan</span></a></li>
+        <li><a href="../preview.html"><i class="bi bi-phone"></i><span>Live Preview</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Komponen — Ala AdminLTE</div>
+      <ul class="dash-nav">
+        <li class="dash-nav-item">
+          <button><i class="bi bi-layers"></i><span>UI Elements</span><i class="bi bi-chevron-right dash-nav-arrow"></i></button>
+          <ul class="dash-subnav">
+            <li><a href="ui-elements.html">General & Cards</a></li>
+            <li><a href="ui-elements.html#buttons">Buttons & Badges</a></li>
+            <li><a href="ui-elements.html#alerts">Alerts & Modals</a></li>
+            <li><a href="ui-elements.html#tabs">Tabs & Timeline</a></li>
+          </ul>
+        </li>
+        <li><a href="forms.html"><i class="bi bi-input-cursor-text"></i><span>Forms</span></a></li>
+        <li><a href="tables.html"><i class="bi bi-table"></i><span>Tables</span></a></li>
+        <li><a href="charts.html"><i class="bi bi-bar-chart-line"></i><span>Charts</span><span class="dash-badge">3</span></a></li>
+                <li><a href="plugins.html"><i class="bi bi-puzzle"></i><span>Plugins & Addons</span><span class="dash-badge gold">14</span></a></li>
+<li><a href="ui-elements.html#widgets"><i class="bi bi-kanban"></i><span>Kanban & Calendar</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+          <div class="dash-nav-group">
+      <div class="dash-nav-title">Transaksi</div>
+      <ul class="dash-nav">
+        <li><a href="invoice.html"><i class="bi bi-receipt-cutoff"></i><span>Invoice</span><span class="dash-badge success">Baru</span></a></li>
+        <li><a href="tables.html"><i class="bi bi-credit-card"></i><span>Pembayaran</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-title">Halaman</div>
+      <ul class="dash-nav">
+        <li><a href="profile.html" class="active"><i class="bi bi-person-circle"></i><span>Profile</span></a></li>
+        <li><a href="../harga.html"><i class="bi bi-credit-card"></i><span>Paket & Harga</span></a></li>
+        <li><a href="../testimoni.html"><i class="bi bi-chat-heart"></i><span>Testimoni</span></a></li>
+        <li><a href="../blog.html"><i class="bi bi-journal-text"></i><span>Blog / Artikel</span></a></li>
+        <li><a href="../login.html"><i class="bi bi-box-arrow-in-right"></i><span>Login</span></a></li>
+        <li><a href="../register.html"><i class="bi bi-person-plus"></i><span>Register</span></a></li>
+        <li><a href="../lupa-password.html"><i class="bi bi-key"></i><span>Lupa Password</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Extras</div>
+      <ul class="dash-nav">
+        <li><a href="ui-elements.html#gallery"><i class="bi bi-image"></i><span>Gallery</span></a></li>
+        <li><a href="ui-elements.html#mailbox"><i class="bi bi-envelope"></i><span>Mailbox</span><span class="dash-badge">5</span></a></li>
+        <li><a href="404.html"><i class="bi bi-exclamation-triangle"></i><span>Error 404</span></a></li>
+        <li><a href="500.html"><i class="bi bi-bug"></i><span>Error 500</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dash-sidebar-footer" style="position:relative;">
+    <button class="dash-user-card" type="button" id="sideUserBtn" aria-expanded="false">
+      <img src="https://i.pravatar.cc/100?img=15" alt="">
+      <div class="dash-user-info"><strong>Admin JanjiSuci</strong><span>admin@janjisuci.id</span></div>
+      <i class="bi bi-chevron-up"></i>
+    </button>
+    <div class="dash-user-menu" id="sideUserMenu">
+      <div class="dash-user-menu-head">
+        <img src="https://i.pravatar.cc/100?img=15" alt="">
+        <div><strong>Admin JanjiSuci</strong><span>Super Admin • Online</span></div>
+      </div>
+      <a class="dash-user-menu-item" href="profile.html"><i class="bi bi-person"></i> Profil Saya</a>
+      <a class="dash-user-menu-item" href="profile.html#settings"><i class="bi bi-gear"></i> Pengaturan Akun</a>
+      <a class="dash-user-menu-item" href="ui-elements.html"><i class="bi bi-layers"></i> Komponen UI</a>
+      <a class="dash-user-menu-item" href="../index.html"><i class="bi bi-house"></i> Lihat Website</a>
+      <div class="dash-divider" style="margin:6px 0"></div>
+      <a class="dash-user-menu-item danger" href="../login.html"><i class="bi bi-box-arrow-right"></i> Keluar</a>
+    </div>
+  </div>
+</aside>
+<div class="dash-overlay" id="dashOverlay"></div>
+
+<!-- Main -->
+<main class="dash-main">
+  <div class="dash-content">
+    <div class="dash-page-header">
+      <div class="dash-title">
+        <div class="dash-breadcrumb"><a href="index.html">Home</a> <i class="bi bi-chevron-right"></i> <span>Profile</span></div>
+        <h1>Profile — Admin JanjiSuci</h1>
+        <p>Kelola identitas admin, reputasi Nusantara Royale, dan aktivitas pengelolaan ribuan undangan digital pengantin Indonesia.</p>
+      </div>
+      <div class="dash-actions">
+        <button class="dash-btn dash-btn-primary" onclick="openOrderModal()"><i class="bi bi-plus-lg"></i> Tambah Pesanan</button>
+        <button class="dash-btn dash-btn-secondary" onclick="dashToast('Link profil disalin')"><i class="bi bi-link-45deg"></i> Bagikan Profil</button>
+        <button class="dash-btn dash-btn-primary" onclick="document.getElementById('settingsPane')?.scrollIntoView({behavior:'smooth'})"><i class="bi bi-pencil-square"></i> Edit Profile</button>
+      </div>
+    </div>
+
+    <!-- Profile Header Card -->
+    <div class="dash-card" style="padding:0;overflow:hidden">
+      <div class="profile-cover">
+        <div class="profile-cover-pattern"></div>
+        <div style="position:absolute;inset:auto 20px 16px 20px;display:flex;justify-content:space-between;align-items:center;z-index:1;color:#fff">
+          <div style="display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600">
+            <span style="background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.18);padding:6px 10px;border-radius:9999px;backdrop-filter:blur(8px)"><i class="bi bi-patch-check-fill" style="color:var(--dash-gold)"></i> Akun Terverifikasi</span>
+            <span style="display:none;align-items:center;gap:6px;background:#fff;color:var(--dash-primary-container);padding:6px 10px;border-radius:9999px;font-weight:700" class="hide-mobile"><i class="bi bi-stars" style="color:var(--dash-secondary)"></i> Nusantara Royale • Admin</span>
+          </div>
+          <div style="display:flex;gap:8px">
+            <span style="background:rgba(255,255,255,0.96);color:var(--dash-primary);padding:6px 12px;border-radius:9999px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:var(--dash-success);display:inline-block"></span> Online</span>
+          </div>
+        </div>
+      </div>
+      <div class="profile-header-body">
+        <div class="profile-avatar-row">
+          <div style="position:relative">
+            <img src="https://i.pravatar.cc/200?img=15" alt="Admin JanjiSuci" class="profile-avatar">
+            <span class="profile-avatar-badge"><i class="bi bi-check-lg"></i></span>
+          </div>
+          <div class="profile-name" style="flex:1;min-width:240px;padding-bottom:4px">
+            <h2>Admin JanjiSuci <span>Royale</span> <span style="display:inline-flex;vertical-align:middle;margin-left:6px;background:var(--dash-gold);color:var(--dash-primary);font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.07em;text-transform:uppercase;padding:4px 7px;border-radius:9999px;font-style:normal">Super Admin</span></h2>
+            <div class="profile-meta">
+              <span><i class="bi bi-geo-alt"></i> Jakarta Selatan, Indonesia</span>
+              <span><i class="bi bi-briefcase"></i> Pengelola Undangan Digital</span>
+              <span><i class="bi bi-calendar3"></i> Bergabung 12 Jan 2023</span>
+              <span><i class="bi bi-envelope"></i> admin@janjisuci.id</span>
+            </div>
+            <div class="profile-bio">
+              Kurator utama ekosistem <strong style="color:var(--dash-primary)">JanjiSuci</strong> — merawat 1.284+ undangan aktif, mengkurasi tema <em>Nusantara Royale</em>, dan mendampingi pengantin dari preview hingga hari-H. Fokus pada editorial mewah, RSVP akurat, dan layanan 8-menit response.
+            </div>
+          </div>
+          <div class="profile-actions">
+            <button class="dash-btn dash-btn-secondary" onclick="dashToast('Pesan terkirim ke Admin')"><i class="bi bi-chat-dots"></i> Message</button>
+            <button class="dash-btn dash-btn-primary" onclick="dashToast('Mengikuti Admin JanjiSuci')"><i class="bi bi-person-plus"></i> Follow</button>
+            <button class="dash-icon-btn" aria-label="More" onclick="dashToast('Opsi lainnya')"><i class="bi bi-three-dots"></i></button>
+          </div>
+        </div>
+
+        <div class="profile-stats-bar">
+          <div class="stat-mini">
+            <strong>1,284</strong>
+            <span>Undangan Dikelola</span>
+            <em><i class="bi bi-arrow-up-short"></i> +42 minggu ini</em>
+          </div>
+          <div class="stat-mini">
+            <strong>8,420</strong>
+            <span>Tamu Terkonfirmasi</span>
+            <em> RSVP • 96% hadir</em>
+          </div>
+          <div class="stat-mini">
+            <strong>4.9/5</strong>
+            <span>Rating Kepuasan</span>
+            <em><i class="bi bi-star-fill" style="color:#c5a059"></i> 482 ulasan</em>
+          </div>
+          <div class="stat-mini">
+            <strong>37</strong>
+            <span>Tema Disetujui</span>
+            <em> 3 tema baru Jun</em>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:16px">
+          <a href="tables.html" class="dash-btn dash-btn-secondary" style="padding:8px 12px;font-size:13px"><i class="bi bi-envelope-paper-heart"></i> Lihat Undangan</a>
+          <a href="../katalog.html" class="dash-btn dash-btn-secondary" style="padding:8px 12px;font-size:13px"><i class="bi bi-palette"></i> Katalog Tema</a>
+          <a href="../testimoni.html" class="dash-btn dash-btn-secondary" style="padding:8px 12px;font-size:13px"><i class="bi bi-chat-heart"></i> Testimoni</a>
+          <span style="margin-left:auto;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dash-muted)"><i class="bi bi-shield-check" style="color:var(--dash-success)"></i> Terakhir aktif: hari ini 09:42 WIB</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-layout">
+      <!-- LEFT -->
+      <div class="profile-left">
+        <!-- About Me -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3><i class="bi bi-person-vcard"></i> About Me</h3>
+            <span class="dash-badge info"><i class="bi bi-patch-check"></i> Verified</span>
+          </div>
+          <div class="dash-card-body" style="display:grid;gap:16px">
+            <div class="about-list">
+              <div class="about-item">
+                <i class="bi bi-building"></i>
+                <div><strong>JanjiSuci — Nusantara Royale Romance</strong><span>Super Admin • Kurator Tema & Operasional Undangan</span></div>
+              </div>
+              <div class="about-item">
+                <i class="bi bi-geo-alt"></i>
+                <div><strong>Jakarta Selatan, DKI Jakarta</strong><span>Kantor pusat • Remote editorial team</span></div>
+              </div>
+              <div class="about-item">
+                <i class="bi bi-envelope"></i>
+                <div><strong>admin@janjisuci.id</strong><span>Email utama • Balasan &lt; 8 menit</span></div>
+              </div>
+              <div class="about-item">
+                <i class="bi bi-telephone"></i>
+                <div><strong>+62 812-3456-7890</strong><span>WhatsApp Business • 09:00–21:00 WIB</span></div>
+              </div>
+              <div class="about-item">
+                <i class="bi bi-translate"></i>
+                <div><strong>Indonesia, English</strong><span>Bahasa layanan pengantin</span></div>
+              </div>
+              <div class="about-item">
+                <i class="bi bi-award"></i>
+                <div><strong>3 Tahun • 1.2k+ pernikahan</strong><span>Spesialis: Royale, Botanical, Syar'i</span></div>
+              </div>
+            </div>
+            <div class="dash-divider"></div>
+            <div>
+              <div style="font-size:12px;font-weight:800;letter-spacing:0.07em;text-transform:uppercase;color:var(--dash-muted);margin-bottom:8px">Bio Editorial</div>
+              <p style="font-size:13px;line-height:20px;color:var(--dash-muted)">Merawat setiap janji suci dengan sentuhan editorial mewah — dari palet <em style="color:var(--dash-primary);font-weight:600">cream #FAF7F2</em>, <em style="color:var(--dash-secondary);font-weight:600">sand #83523d</em>, hingga tipografi Playfair. Tugas harian: moderasi tema, QC undangan, RSVP & amplop digital, serta kurasi blog inspirasi.</p>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:800;letter-spacing:0.07em;text-transform:uppercase;color:var(--dash-muted)">Keahlian</div>
+              <div class="skill-pills">
+                <span class="skill-pill"><i class="bi bi-envelope-paper-heart"></i> Manajemen Undangan</span>
+                <span class="skill-pill"><i class="bi bi-palette2"></i> Kurasi Tema</span>
+                <span class="skill-pill"><i class="bi bi-people"></i> RSVP & Buku Tamu</span>
+                <span class="skill-pill"><i class="bi bi-wallet2"></i> Amplop Digital</span>
+                <span class="skill-pill"><i class="bi bi-music-note-beamed"></i> Live Preview</span>
+                <span class="skill-pill"><i class="bi bi-headset"></i> Support 8 Menit</span>
+              </div>
+            </div>
+            <div class="dash-divider"></div>
+            <div style="display:flex;gap:8px">
+              <a href="https://instagram.com" target="_blank" rel="noopener" class="dash-icon-btn" style="width:36px;height:36px" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+              <a href="https://wa.me/628123456789" class="dash-icon-btn" style="width:36px;height:36px;color:var(--dash-success)" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+              <a href="mailto:admin@janjisuci.id" class="dash-icon-btn" style="width:36px;height:36px" aria-label="Email"><i class="bi bi-envelope"></i></a>
+              <a href="../index.html" class="dash-icon-btn" style="width:36px;height:36px" aria-label="Website"><i class="bi bi-globe"></i></a>
+              <span style="margin-left:auto;font-size:11px;color:var(--dash-muted);align-self:center"><i class="bi bi-dot" style="color:var(--dash-success)"></i> Online</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portfolio / Stats detail -->
+        <div class="dash-card">
+          <div class="dash-card-header"><h3><i class="bi bi-bar-chart"></i> Ringkasan Operasional</h3><button class="dash-icon-btn" style="width:32px;height:32px" onclick="dashToast('Detail statistik')"><i class="bi bi-three-dots"></i></button></div>
+          <div class="dash-card-body" style="display:grid;gap:14px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="font-size:13px;font-weight:700;color:var(--dash-primary)">Kepuasan Pasangan</div><span class="dash-badge success">4.9 / 5.0</span>
+            </div>
+            <div class="dash-progress"><div class="dash-progress-bar emerald" style="width:96%"></div></div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--dash-muted)"><span>482 ulasan</span><span>96% bintang 5</span></div>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
+              <div style="font-size:13px;font-weight:700;color:var(--dash-primary)">Undangan Published</div><span style="font-size:11px;color:var(--dash-muted)">1,184 / 1,284</span>
+            </div>
+            <div class="dash-progress"><div class="dash-progress-bar gold" style="width:92%"></div></div>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
+              <div style="font-size:13px;font-weight:700;color:var(--dash-primary)">RSVP Dibalas</div><span class="dash-badge warning">3 pending</span>
+            </div>
+            <div class="dash-progress"><div class="dash-progress-bar rose" style="width:88%"></div></div>
+            <div style="font-size:11px;color:var(--dash-muted)">Rata-rata balasan 8 menit • SLA 99.9%</div>
+
+            <div class="dash-divider"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div style="background:var(--dash-surface);border:1px solid var(--dash-border);border-radius:10px;padding:12px;text-align:center">
+                <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--dash-muted)">Tema Royale</div>
+                <div style="font-family:'Inter',sans-serif;font-size:18px;font-weight:700;color:var(--dash-primary)">35%</div>
+                <div style="font-size:11px;color:var(--dash-muted)">Terpopuler</div>
+              </div>
+              <div style="background:var(--dash-primary-container);color:#fff;border-radius:10px;padding:12px;text-align:center">
+                <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;opacity:0.8">Pendapatan Bulan</div>
+                <div style="font-family:'Inter',sans-serif;font-size:18px;font-weight:700;color:var(--dash-gold)">Rp 84,2jt</div>
+                <div style="font-size:11px;opacity:0.7">+15% vs lalu</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Profile Info (as requested) -->
+        <div class="dash-card" style="background:var(--dash-primary-container);color:#fff;border-color:var(--dash-primary-container)">
+          <div class="dash-card-body">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.14);display:grid;place-items:center;color:var(--dash-gold)"><i class="bi bi-info-circle"></i></div>
+              <div>
+                <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700">Footer Profile</div>
+                <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;opacity:0.7">Informasi admin • Kontak resmi</div>
+              </div>
+            </div>
+            <div style="display:grid;gap:10px;font-size:12px;line-height:18px;color:rgba(255,255,255,0.86)">
+              <div style="display:flex;gap:10px"><i class="bi bi-geo-alt" style="color:var(--dash-gold);margin-top:2px"></i><span><strong style="color:#fff">Kantor:</strong> Jl. Kemang Raya No. 21, Jakarta Selatan 12130 • Studio Nusantara Royale</span></div>
+              <div style="display:flex;gap:10px"><i class="bi bi-clock" style="color:var(--dash-gold);margin-top:2px"></i><span><strong style="color:#fff">Jam layanan:</strong> Senin–Minggu 09:00–21:00 WIB • Response &lt; 8 menit</span></div>
+              <div style="display:flex;gap:10px"><i class="bi bi-shield-lock" style="color:var(--dash-gold);margin-top:2px"></i><span><strong style="color:#fff">Keamanan:</strong> 2FA aktif • Login terakhir: Chrome • Jakarta (IP 103.xxx)</span></div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:14px">
+              <a href="mailto:admin@janjisuci.id" class="dash-btn" style="flex:1;background:#fff;color:var(--dash-primary-container);padding:10px 12px;font-size:13px"><i class="bi bi-envelope"></i> Email Admin</a>
+              <a href="https://wa.me/628123456789" class="dash-btn" style="flex:1;background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.22);padding:10px 12px;font-size:13px"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+            </div>
+            <div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.1);font-size:11px;color:rgba(255,255,255,0.6);display:flex;justify-content:space-between;gap:10px">
+              <span>© 2025 JanjiSuci</span><span>Nusantara Royale v1.0.0</span><span>Dibuat di Indonesia 🇮🇩</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="profile-right">
+        <!-- Tabs -->
+        <div class="dash-card">
+          <div class="dash-card-header" style="flex-wrap:wrap">
+            <div class="dash-tabs" role="tablist" id="profileTabs">
+              <button class="dash-tab active" data-tab="activity" role="tab" aria-selected="true"><i class="bi bi-lightning" style="margin-right:6px"></i> Activity</button>
+              <button class="dash-tab" data-tab="timeline" role="tab" aria-selected="false"><i class="bi bi-clock-history" style="margin-right:6px"></i> Timeline</button>
+              <button class="dash-tab" data-tab="settings" role="tab" aria-selected="false"><i class="bi bi-gear" style="margin-right:6px"></i> Settings</button>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <span style="font-size:11px;color:var(--dash-muted)" class="hide-mobile">JanjiSuci • Wedding ops</span>
+              <button class="dash-icon-btn" style="width:32px;height:32px" onclick="dashToast('Filter aktivitas')"><i class="bi bi-funnel"></i></button>
+            </div>
+          </div>
+
+          <!-- Activity Pane -->
+          <div class="dash-card-body dash-tab-pane active" id="pane-activity">
+            <div class="dash-alert success" style="margin-bottom:16px">
+              <i class="bi bi-check-circle-fill"></i>
+              <div><strong>Rekap hari ini:</strong> 3 undangan dipublish, 12 RSVP baru, 2 tema dikurasi. Semua sistem <em>operational</em> — uptime 99.9%.</div>
+            </div>
+
+            <div style="display:grid;gap:12px">
+              <!-- Post-like activity -->
+              <div style="display:flex;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--dash-border)">
+                <img src="https://i.pravatar.cc/100?img=15" style="width:40px;height:40px;border-radius:50%;flex-shrink:0">
+                <div style="flex:1">
+                  <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+                    <strong style="font-size:14px;color:var(--dash-primary)">Admin JanjiSuci</strong>
+                    <span class="dash-badge success" style="font-size:10px"><i class="bi bi-patch-check-fill"></i> Admin</span>
+                    <span style="font-size:11px;color:var(--dash-muted)">• 10 menit lalu</span>
+                    <span style="margin-left:auto;font-size:11px;color:var(--dash-muted)"><i class="bi bi-globe"></i> Public</span>
+                  </div>
+                  <p style="font-size:13px;line-height:20px;color:var(--dash-text);margin-top:6px">Menyetujui & mempublish <strong>“Arya & Nabila — Nusantara Royale”</strong> untuk 24 Agustus 2025 (Jakarta). Tema Royale dengan palet cream & gold, RSVP dibuka, amplop digital BCA & QRIS aktif. <a href="../preview.html" style="color:var(--dash-secondary);font-weight:700;text-decoration:none">Lihat preview →</a></p>
+                  <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+                    <span class="dash-badge success"><i class="bi bi-check-circle"></i> Published</span>
+                    <span class="dash-badge info"><i class="bi bi-people"></i> 342 tamu</span>
+                    <span class="dash-badge warning"><i class="bi bi-star"></i> Royale #1</span>
+                  </div>
+                  <div style="display:flex;gap:16px;margin-top:12px;font-size:12px;color:var(--dash-muted)">
+                    <span style="display:flex;align-items:center;gap:6px"><i class="bi bi-heart"></i> 24</span>
+                    <span style="display:flex;align-items:center;gap:6px"><i class="bi bi-chat"></i> 8 komentar</span>
+                    <span style="display:flex;align-items:center;gap:6px"><i class="bi bi-share"></i> Bagikan</span>
+                    <span style="margin-left:auto;display:flex;align-items:center;gap:6px"><i class="bi bi-eye"></i> 1.2k views</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display:flex;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--dash-border)">
+                <img src="https://i.pravatar.cc/100?img=68" style="width:40px;height:40px;border-radius:50%;flex-shrink:0">
+                <div style="flex:1">
+                  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                    <strong style="font-size:14px;color:var(--dash-primary)">Tiket Bantuan #1284</strong>
+                    <span class="dash-badge warning"><i class="bi bi-clock"></i> Pending → Done</span>
+                    <span style="font-size:11px;color:var(--dash-muted)">35 menit lalu • Reza & Syifa</span>
+                  </div>
+                  <p style="font-size:13px;line-height:20px;color:var(--dash-muted);margin-top:6px">Membalas pertanyaan amplop digital & revisi nama orang tua. Status tiket diubah ke <strong style="color:var(--dash-success)">Selesai</strong> — pengantin konfirmasi pembayaran Rp 99.000.</p>
+                  <div style="margin-top:10px;display:flex;gap:8px">
+                    <button class="dash-btn dash-btn-secondary" style="padding:6px 10px;font-size:12px" onclick="dashToast('Membuka tiket #1284')"><i class="bi bi-envelope-open"></i> Buka tiket</button>
+                    <button class="dash-btn dash-btn-secondary" style="padding:6px 10px;font-size:12px" onclick="dashToast('WhatsApp pengantin')"><i class="bi bi-whatsapp"></i> WhatsApp</button>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display:flex;gap:12px">
+                <img src="https://i.pravatar.cc/100?img=14" style="width:40px;height:40px;border-radius:50%;flex-shrink:0">
+                <div style="flex:1">
+                  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                    <strong style="font-size:14px;color:var(--dash-primary)">Kurasi Tema — Botanical Whispers</strong>
+                    <span class="dash-badge info"><i class="bi bi-palette"></i> Review</span>
+                    <span style="font-size:11px;color:var(--dash-muted)">1 jam lalu</span>
+                  </div>
+                  <p style="font-size:13px;line-height:20px;color:var(--dash-muted);margin-top:6px">Preview tema <em>Botanical Whispers</em> naik 42x hari ini. Menambahkan varian cover krem keemasan & animasi daun untuk preview mobile.</p>
+                  <div style="margin-top:10px;border:1px solid var(--dash-border);border-radius:10px;overflow:hidden;display:flex">
+                    <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=300&q=80" style="width:96px;height:72px;object-fit:cover">
+                    <div style="padding:10px 12px;flex:1">
+                      <div style="font-size:12px;font-weight:700;color:var(--dash-primary)">Botanical Whispers — Minimalis</div>
+                      <div style="font-size:11px;color:var(--dash-muted)">420 undangan memakai tema ini • Rating 4.8</div>
+                      <div style="margin-top:6px;display:flex;gap:6px"><span class="dash-badge success" style="padding:2px 6px;font-size:10px">Trending</span><span class="dash-badge info" style="padding:2px 6px;font-size:10px">Katalog</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:16px;display:flex;gap:10px">
+              <button class="dash-btn dash-btn-secondary" style="flex:1" onclick="dashToast('Memuat aktivitas lebih lama')"><i class="bi bi-clock-history"></i> Muat lebih banyak</button>
+              <button class="dash-btn dash-btn-primary" style="flex:1" onclick="document.querySelector('[data-tab=timeline]')?.click()"><i class="bi bi-arrow-right"></i> Lihat Timeline</button>
+            </div>
+          </div>
+
+          <!-- Timeline Pane -->
+          <div class="dash-card-body dash-tab-pane" id="pane-timeline">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+              <h4 style="font-size:14px;font-weight:800;color:var(--dash-primary);display:flex;align-items:center;gap:8px"><i class="bi bi-calendar-event" style="color:var(--dash-secondary)"></i> Aktivitas Admin — 7 Hari Terakhir</h4>
+              <span style="font-size:11px;color:var(--dash-muted)">WIB • Real-time</span>
+            </div>
+            <div class="timeline">
+              <div class="tl-item">
+                <span class="tl-dot success"></span>
+                <div class="tl-card">
+                  <div class="tl-card-head"><strong>Mempublish undangan Arya & Nabila</strong><span class="tl-time">Hari ini • 09:22</span></div>
+                  <div class="tl-desc">Tema Nusantara Royale • Lokasi Jakarta • 342 tamu diundang • Status <span class="dash-badge success" style="padding:2px 6px;font-size:10px">Published</span> setelah QC font & foto.</div>
+                  <div style="margin-top:8px;display:flex;gap:6px"><span class="tl-tag" style="background:rgba(45,106,79,0.08);border-color:rgba(45,106,79,0.18);color:var(--dash-success)"><i class="bi bi-check2-circle"></i> QC passed</span><span class="tl-tag" style="background:var(--dash-surface);border-color:var(--dash-border);color:var(--dash-muted)"><i class="bi bi-link-45deg"></i> janjisuci.id/arya-nabila</span></div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <span class="tl-dot gold"></span>
+                <div class="tl-card">
+                  <div class="tl-card-head"><strong>Menjawab RSVP Dimas • 2 tamu konfirmasi</strong><span class="tl-time">Hari ini • 08:40</span></div>
+                  <div class="tl-desc">Botanical Whispers — Bandung. Tamu menambah +2 kursi, catatan: alergi seafood, request kursi dekat pelaminan.</div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <span class="tl-dot navy"></span>
+                <div class="tl-card">
+                  <div class="tl-card-head"><strong>Update katalog: Golden Jasmine diterbitkan ulang</strong><span class="tl-time">Kemarin • 16:15</span></div>
+                  <div class="tl-desc">Revisi copy paket harga & badge Syar'i. Preview meningkat 18% setelah update thumbnail.</div>
+                  <div style="margin-top:8px"><span class="tl-tag" style="background:rgba(68,100,95,0.08);border-color:rgba(68,100,95,0.18);color:var(--dash-info)"><i class="bi bi-graph-up"></i> +18% preview</span></div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <span class="tl-dot rose"></span>
+                <div class="tl-card">
+                  <div class="tl-card-head"><strong>Moderasi testimoni — Sinta & Bagas</strong><span class="tl-time">2 hari lalu • 11:02</span></div>
+                  <div class="tl-desc">Testimoni 5★ disetujui & tampil di landing. Quote: “Undangan JanjiSuci bikin tamu auto hadir, RSVP gampang!”</div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <span class="tl-dot success"></span>
+                <div class="tl-card">
+                  <div class="tl-card-head"><strong>Backup & security patch</strong><span class="tl-time">3 hari lalu • 02:00</span></div>
+                  <div class="tl-desc">Auto backup 42GB storage (foto prewedding) & patch keamanan. Uptime tetap 99.9%, 0 downtime.</div>
+                  <div style="margin-top:8px;display:flex;gap:6px;align-items:center">
+                    <div class="dash-progress" style="flex:1"><div class="dash-progress-bar emerald" style="width:99%"></div></div><span style="font-size:11px;font-weight:700;color:var(--dash-success)">99.9%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <span class="tl-dot gold"></span>
+                <div class="tl-card">
+                  <div class="tl-card-head"><strong>Menulis artikel blog: Etika sebar WA undangan</strong><span class="tl-time">5 hari lalu • 10:30</span></div>
+                  <div class="tl-desc">Publish di <a href="../blog.html" style="color:var(--dash-secondary);font-weight:700">Blog JanjiSuci</a> — sudah 1.8k pembaca, jadi referensi pengantin.</div>
+                </div>
+              </div>
+            </div>
+            <button class="dash-btn dash-btn-secondary" style="width:100%;margin-top:16px" onclick="dashToast('Timeline lengkap dibuka')"><i class="bi bi-calendar3"></i> Lihat arsip 30 hari</button>
+          </div>
+
+          <!-- Settings Pane -->
+          <div class="dash-card-body dash-tab-pane" id="pane-settings">
+            <div id="settingsPane"></div>
+            <div class="dash-alert info" style="margin-bottom:16px">
+              <i class="bi bi-shield-lock"></i>
+              <div><strong>Keamanan Nusantara Royale:</strong> 2FA aktif • Password terakhir diubah 12 hari lalu. Gunakan kombinasi unik & simpan di password manager.</div>
+            </div>
+
+            <!-- Update Profile -->
+            <div>
+              <h4 style="font-family:'Inter',sans-serif;font-size:16px;font-weight:700;color:var(--dash-primary);display:flex;align-items:center;gap:8px"><i class="bi bi-person-gear" style="color:var(--dash-secondary)"></i> Update Profile</h4>
+              <p style="font-size:12px;color:var(--dash-muted);margin-top:4px">Perbarui identitas admin yang tampil di undangan, email notifikasi, dan footer profil. Perubahan akan sinkron ke seluruh dashboard.</p>
+
+              <form onsubmit="event.preventDefault(); dashToast('Profile berhasil diperbarui ✨');" style="margin-top:16px;display:grid;gap:14px">
+                <div style="display:flex;gap:14px;align-items:center;padding:12px;background:var(--dash-surface);border:1px solid var(--dash-border);border-radius:12px">
+                  <img src="https://i.pravatar.cc/100?img=15" style="width:56px;height:56px;border-radius:14px;object-fit:cover;border:2px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,0.08)">
+                  <div style="flex:1">
+                    <div style="font-size:12px;font-weight:700;color:var(--dash-primary)">Foto Profil Admin</div>
+                    <div style="font-size:11px;color:var(--dash-muted)">JPG/PNG max 2MB • Rekomendasi 400×400 • Tampil di navbar & header</div>
+                  </div>
+                  <label class="dash-btn dash-btn-secondary" style="padding:8px 12px;font-size:12px;cursor:pointer"><i class="bi bi-upload"></i> Ganti foto<input type="file" accept="image/*" hidden onchange="dashToast('Foto dipilih: '+ (this.files[0]?.name||''))"></label>
+                </div>
+
+                <div class="dash-form-grid-2">
+                  <div>
+                    <label class="dash-form-label">Nama Lengkap *</label>
+                    <input class="dash-input" value="Admin JanjiSuci" placeholder="Nama admin">
+                  </div>
+                  <div>
+                    <label class="dash-form-label">Nama Tampilan</label>
+                    <input class="dash-input" value="Admin Royale" placeholder="Nama singkat">
+                  </div>
+                </div>
+                <div class="dash-form-grid-2">
+                  <div>
+                    <label class="dash-form-label">Email *</label>
+                    <div style="position:relative">
+                      <i class="bi bi-envelope" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--dash-muted)"></i>
+                      <input class="dash-input" style="padding-left:36px" value="admin@janjisuci.id" type="email">
+                    </div>
+                    <div class="dash-form-hint">Email untuk notifikasi RSVP & tiket bantuan</div>
+                  </div>
+                  <div>
+                    <label class="dash-form-label">No. WhatsApp</label>
+                    <div style="position:relative">
+                      <i class="bi bi-telephone" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--dash-muted)"></i>
+                      <input class="dash-input" style="padding-left:36px" value="+62 812-3456-7890">
+                    </div>
+                  </div>
+                </div>
+                <div class="dash-form-grid-2">
+                  <div>
+                    <label class="dash-form-label">Lokasi</label>
+                    <input class="dash-input" value="Jakarta Selatan, Indonesia">
+                  </div>
+                  <div>
+                    <label class="dash-form-label">Peran / Jabatan</label>
+                    <select class="dash-select">
+                      <option selected>Super Admin — Full Access</option>
+                      <option>Admin Tema</option>
+                      <option>Support RSVP</option>
+                      <option>Finance</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label class="dash-form-label">Bio Singkat</label>
+                  <textarea class="dash-textarea" rows="3" placeholder="Ceritakan peran admin...">Kurator utama ekosistem JanjiSuci — merawat 1.284+ undangan aktif, mengkurasi tema Nusantara Royale, dan mendampingi pengantin dari preview hingga hari-H. Fokus pada editorial mewah, RSVP akurat, dan layanan 8-menit response.</textarea>
+                  <div class="dash-form-hint">Maks 220 karakter • Tampil di header profile & footer</div>
+                </div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap">
+                  <button type="submit" class="dash-btn dash-btn-primary"><i class="bi bi-check-lg"></i> Simpan Perubahan</button>
+                  <button type="reset" class="dash-btn dash-btn-secondary" onclick="dashToast('Form direset')"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
+                  <span style="margin-left:auto;font-size:11px;color:var(--dash-muted);align-self:center"><i class="bi bi-info-circle"></i> Perubahan tersimpan otomatis ke cloud</span>
+                </div>
+              </form>
+            </div>
+
+            <div class="dash-divider-soft"></div>
+
+            <!-- Change Password -->
+            <div>
+              <h4 style="font-family:'Inter',sans-serif;font-size:16px;font-weight:700;color:var(--dash-primary);display:flex;align-items:center;gap:8px"><i class="bi bi-key" style="color:var(--dash-secondary)"></i> Ganti Password</h4>
+              <p style="font-size:12px;color:var(--dash-muted);margin-top:4px">Gunakan password kuat minimal 8 karakter dengan kombinasi huruf, angka & simbol. Saran: update tiap 90 hari.</p>
+
+              <form onsubmit="event.preventDefault(); dashToast('Password berhasil diubah — silakan login ulang');" style="margin-top:16px;display:grid;gap:14px">
+                <div>
+                  <label class="dash-form-label">Password Saat Ini *</label>
+                  <div style="position:relative">
+                    <i class="bi bi-lock" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--dash-muted)"></i>
+                    <input class="dash-input" style="padding-left:36px;padding-right:36px" type="password" id="curPass" placeholder="••••••••">
+                    <button type="button" onclick="togglePass('curPass', this)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);width:32px;height:32px;display:grid;place-items:center;border-radius:8px;color:var(--dash-muted);background:transparent;border:none"><i class="bi bi-eye"></i></button>
+                  </div>
+                  <div style="text-align:right;margin-top:6px"><a href="../lupa-password.html" style="font-size:11px;font-weight:700;color:var(--dash-secondary);text-decoration:none">Lupa password?</a></div>
+                </div>
+                <div class="dash-form-grid-2">
+                  <div>
+                    <label class="dash-form-label">Password Baru *</label>
+                    <div style="position:relative">
+                      <i class="bi bi-shield-lock" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--dash-muted)"></i>
+                      <input class="dash-input" style="padding-left:36px;padding-right:36px" type="password" id="newPass" placeholder="Minimal 8 karakter" oninput="checkStrength(this.value)">
+                      <button type="button" onclick="togglePass('newPass', this)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);width:32px;height:32px;display:grid;place-items:center;border-radius:8px;color:var(--dash-muted);background:transparent;border:none"><i class="bi bi-eye"></i></button>
+                    </div>
+                    <div class="dash-progress" style="margin-top:8px;height:4px"><div id="strengthBar" class="dash-progress-bar emerald" style="width:0%"></div></div>
+                    <div id="strengthText" style="font-size:11px;color:var(--dash-muted);margin-top:4px">Kekuatan: —</div>
+                  </div>
+                  <div>
+                    <label class="dash-form-label">Konfirmasi Password *</label>
+                    <div style="position:relative">
+                      <i class="bi bi-check2-square" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--dash-muted)"></i>
+                      <input class="dash-input" style="padding-left:36px" type="password" id="confPass" placeholder="Ulangi password baru">
+                    </div>
+                  </div>
+                </div>
+
+                <div style="background:var(--dash-surface);border:1px solid var(--dash-border);border-radius:10px;padding:12px;display:flex;gap:10px;align-items:flex-start">
+                  <i class="bi bi-lightbulb" style="color:var(--dash-warning);margin-top:2px"></i>
+                  <div style="font-size:11px;line-height:16px;color:var(--dash-muted)"><strong style="color:var(--dash-primary)">Tips:</strong> Hindari pakai tanggal lahir. Aktifkan 2FA di pengaturan keamanan untuk proteksi ekstra akun Super Admin.</div>
+                </div>
+
+                <div style="display:flex;gap:10px;flex-wrap:wrap">
+                  <button type="submit" class="dash-btn dash-btn-primary"><i class="bi bi-shield-check"></i> Update Password</button>
+                  <button type="button" class="dash-btn dash-btn-secondary" onclick="dashToast('Keluar dari semua perangkat')"><i class="bi bi-box-arrow-right"></i> Logout semua device</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="dash-divider-soft"></div>
+
+            <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center">
+              <div style="font-size:11px;color:var(--dash-muted)"><i class="bi bi-info-circle"></i> Butuh bantuan? Hubungi <a href="mailto:support@janjisuci.id" style="color:var(--dash-primary);font-weight:700;text-decoration:none">support@janjisuci.id</a> atau <a href="https://wa.me/628123456789" style="color:var(--dash-success);font-weight:700">WhatsApp</a></div>
+              <button class="dash-btn dash-btn-secondary" style="padding:8px 12px;font-size:12px;color:var(--dash-danger);border-color:rgba(168,56,84,0.18)" onclick="dashToast('Permintaan hapus akun dikirim — admin akan review','info')"><i class="bi bi-trash"></i> Ajukan hapus akun</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick footer profile duplicate for responsiveness (visible on desktop right) -->
+        <div class="dash-card" style="background:var(--dash-surface)">
+          <div class="dash-card-body" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:12px">
+              <img src="https://i.pravatar.cc/100?img=15" style="width:40px;height:40px;border-radius:50%">
+              <div>
+                <div style="font-size:13px;font-weight:700;color:var(--dash-primary)">Admin JanjiSuci • Super Admin</div>
+                <div style="font-size:11px;color:var(--dash-muted)">admin@janjisuci.id • +62 812-3456-7890 • Jakarta</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <a href="../index.html" class="dash-btn dash-btn-secondary" style="padding:8px 12px;font-size:12px"><i class="bi bi-house"></i> Landing</a>
+              <a href="index.html" class="dash-btn dash-btn-primary" style="padding:8px 12px;font-size:12px"><i class="bi bi-speedometer2"></i> Dashboard</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Extra: Wedding context stats row -->
+    <div class="dash-grid dash-grid-3" style="margin-top:16px">
+      <div class="dash-card">
+        <div class="dash-card-body" style="display:flex;gap:12px;align-items:center">
+          <div class="dash-stat-icon emerald"><i class="bi bi-envelope-paper-heart"></i></div>
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--dash-muted)">Kontribusi Admin</div>
+            <div style="font-family:'Inter',sans-serif;font-size:16px;font-weight:700;color:var(--dash-primary)">+12% undangan bulan ini</div>
+            <div style="font-size:11px;color:var(--dash-muted)">42 undangan baru dipublish minggu ini</div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-body" style="display:flex;gap:12px;align-items:center">
+          <div class="dash-stat-icon gold"><i class="bi bi-stars"></i></div>
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--dash-muted)">Kepercayaan Pengantin</div>
+            <div style="font-family:'Inter',sans-serif;font-size:16px;font-weight:700;color:var(--dash-primary)">482 testimoni 5★</div>
+            <div style="font-size:11px;color:var(--dash-muted)">Rating 4.9/5 • Kurator pilihan</div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-body" style="display:flex;gap:12px;align-items:center">
+          <div class="dash-stat-icon rose"><i class="bi bi-headset"></i></div>
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--dash-muted)">Support Performance</div>
+            <div style="font-family:'Inter',sans-serif;font-size:16px;font-weight:700;color:var(--dash-primary)">8 menit avg. reply</div>
+            <div style="font-size:11px;color:var(--dash-muted)">3 tiket pending • SLA 99.9%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="dash-footer">
+    <div>© 2025 JanjiSuci DashAdmin • Nusantara Royale Romance • v1.0.0</div>
+    <div style="display:flex;gap:16px"><a href="../index.html">Landing</a> <a href="profile.html">Profile</a> <span>Dibuat di Indonesia 🇮🇩</span></div>
+  </footer>
+</main>
+
+<button class="dash-scrolltop" id="dashScrollTop"><i class="bi bi-arrow-up"></i></button>
+
+<script src="assets/js/dashadmin.js"></script>
+<script>
+(function(){
+  // Profile tabs
+  const tabs = document.querySelectorAll('#profileTabs .dash-tab');
+  const panes = {
+    activity: document.getElementById('pane-activity'),
+    timeline: document.getElementById('pane-timeline'),
+    settings: document.getElementById('pane-settings')
+  };
+  tabs.forEach(t=>{
+    t.addEventListener('click', ()=>{
+      tabs.forEach(x=>{x.classList.remove('active'); x.setAttribute('aria-selected','false')});
+      t.classList.add('active'); t.setAttribute('aria-selected','true');
+      const key = t.dataset.tab;
+      Object.keys(panes).forEach(k=>{
+        if(panes[k]) panes[k].classList.toggle('active', k===key);
+      });
+      // scroll to content on mobile
+      if(window.innerWidth<768) {
+        panes[key]?.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
+
+  // deep link via hash
+  const hash = location.hash.replace('#','');
+  if(hash && panes[hash]) {
+    document.querySelector(`[data-tab="${hash}"]`)?.click();
+  }
+})();
+
+function togglePass(id, btn){
+  const inp = document.getElementById(id);
+  if(!inp) return;
+  const isText = inp.type === 'text';
+  inp.type = isText ? 'password' : 'text';
+  const icon = btn.querySelector('i');
+  if(icon) icon.className = isText ? 'bi bi-eye' : 'bi bi-eye-slash';
+}
+
+function checkStrength(val){
+  const bar = document.getElementById('strengthBar');
+  const txt = document.getElementById('strengthText');
+  if(!bar||!txt) return;
+  let score = 0;
+  if(val.length>=8) score++;
+  if(/[A-Z]/.test(val) && /[a-z]/.test(val)) score++;
+  if(/[0-9]/.test(val)) score++;
+  if(/[^A-Za-z0-9]/.test(val)) score++;
+  const pct = [0,25,50,75,100][score];
+  const labels = ['—','Lemah','Cukup','Kuat','Sangat Kuat'];
+  const colors = ['#e5e7eb','#A83854','#c5a059','#2D6A4F','#1b3b36'];
+  bar.style.width = pct+'%';
+  bar.style.background = colors[score];
+  txt.textContent = 'Kekuatan: ' + labels[score];
+  txt.style.color = score>=3 ? 'var(--dash-success)' : score>=2 ? '#7a5a12' : 'var(--dash-danger)';
+}
+</script>
+<script src="assets/js/theme-switcher.js"></script>
+</body>
+</html>

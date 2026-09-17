@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plugins & Addons — DashAdmin JanjiSuci</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/css/dashadmin.css" rel="stylesheet">
+<link href="assets/css/theme-switcher.css" rel="stylesheet">
+<!-- ====== Extra Plugins CSS (ala AdminKit Pro) ====== -->
+<link href="assets/plugins/vendor/flatpickr/flatpickr.min.css" rel="stylesheet">
+<link href="assets/plugins/vendor/choices/choices.min.css" rel="stylesheet">
+<link href="assets/plugins/vendor/toastr/toastr.min.css" rel="stylesheet">
+<link href="assets/plugins/vendor/leaflet/leaflet.css" rel="stylesheet">
+<link href="assets/plugins/vendor/quill/quill.snow.css" rel="stylesheet">
+<link href="assets/plugins/vendor/dropzone/dropzone.min.css" rel="stylesheet">
+<link href="assets/plugins/vendor/nouislider/nouislider.min.css" rel="stylesheet">
+<link href="assets/plugins/vendor/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="assets/plugins/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+<link href="assets/plugins/vendor/datatables/jquery.dataTables.min.css" rel="stylesheet">
+<link href="assets/plugins/vendor/jsvectormap/jsvectormap.min.css" rel="stylesheet">
+<link href="assets/plugins/vendor/pickr/classic.min.css" rel="stylesheet">
+<link href="assets/plugins/vendor/plyr/plyr.css" rel="stylesheet">
+<link href="assets/plugins/vendor/bs-stepper/bs-stepper.min.css" rel="stylesheet">
+<link href="assets/plugins/vendor/intl-tel-input/intlTelInput.css" rel="stylesheet">
+<link href="assets/plugins/vendor/prism/prism.css" rel="stylesheet">
+<link href="assets/plugins/css/plugins.css" rel="stylesheet">
+</head>
+<body class="dash-body">
+
+<!-- Navbar -->
+<nav class="dash-navbar">
+  <div class="dash-navbar-left">
+    <button class="dash-menu-btn" data-navbar-toggle data-toggle="sidebar" aria-label="Toggle sidebar"><i class="bi bi-list"></i></button>
+    <div class="dash-search">
+      <i class="bi bi-search" style="color:#9aa0a6"></i>
+      <input placeholder="Cari undangan, tamu, tema, transaksi...">
+      <span class="dash-kbd">⌘ K</span>
+    </div>
+  </div>
+  <div class="dash-navbar-right">
+    <div class="dash-dd" id="ddBellWrap">
+      <button class="dash-icon-btn" aria-label="Notifications" data-dd="ddBell"><i class="bi bi-bell"></i><span class="badge">7</span></button>
+      <div class="dash-dd-menu" id="ddBell">
+        <div class="dash-dd-header">Notifikasi <a href="tables.html">Lihat Semua</a></div>
+        <div class="dash-dd-body">
+          <div class="dash-dd-item"><div class="dash-dd-icon emerald"><i class="bi bi-envelope-check"></i></div><div class="dash-dd-text"><p>Pesanan #1284 — Arya &amp; Nabila<span class="dash-dd-time">10 menit lalu • Nusantara Royale</span></p></div><span class="dash-dd-dot"></span></div>
+          <div class="dash-dd-item"><div class="dash-dd-icon rose"><i class="bi bi-people"></i></div><div class="dash-dd-text"><p>RSVP baru: 12 tamu hadir<span class="dash-dd-time">25 menit lalu • Botanical Whispers</span></p></div><span class="dash-dd-dot"></span></div>
+          <div class="dash-dd-item"><div class="dash-dd-icon gold"><i class="bi bi-currency-dollar"></i></div><div class="dash-dd-text"><p>Pembayaran Rp 99.000 diterima<span class="dash-dd-time">1 jam lalu • Reza &amp; Syifa</span></p></div><span class="dash-dd-dot"></span></div>
+        </div>
+        <div class="dash-dd-footer" onclick="dashToast('Semua notifikasi ditandai dibaca')">Tandai semua dibaca</div>
+      </div>
+    </div>
+    <div class="dash-dd" id="ddChatWrap">
+      <button class="dash-icon-btn" aria-label="Messages" data-dd="ddChat"><i class="bi bi-chat-dots"></i><span class="badge" style="background:#2D6A4F">3</span></button>
+      <div class="dash-dd-menu" id="ddChat">
+        <div class="dash-dd-header">Pesan <a href="widgets.html#chat">Buka Chat</a></div>
+        <div class="dash-dd-body">
+          <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=33" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Nabila Saraswati<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Kak, bisa ganti lagunya setelah publish?</span></p><span class="dash-dd-time">5 menit lalu</span></div><span class="dash-dd-dot"></span></div>
+          <div class="dash-dd-item"><img src="https://i.pravatar.cc/100?img=14" class="dash-dd-msg-avatar"><div class="dash-dd-text"><p>Syifa Aulia<span style="display:block;font-weight:500;color:var(--dash-muted);font-size:12px">Terima kasih, undangannya cantik!</span></p><span class="dash-dd-time">1 jam lalu</span></div><span class="dash-dd-dot read"></span></div>
+        </div>
+        <div class="dash-dd-footer" onclick="location.href='widgets.html#chat'">Lihat semua percakapan</div>
+      </div>
+    </div>
+    <button class="dash-icon-btn" id="dashDarkToggle" aria-label="Toggle dark mode" title="Dark / Light"><i class="bi bi-moon-stars"></i></button>
+    <button class="dash-icon-btn" aria-label="Apps"><i class="bi bi-grid"></i></button>
+    <div class="dash-dd" id="ddProfileWrap">
+      <div class="dash-profile" data-dd="ddProfile" role="button">
+        <img src="https://i.pravatar.cc/100?img=15" alt="Admin">
+        <div class="dash-profile-info">
+          <strong>Admin JanjiSuci</strong><span>Super Admin • Online</span>
+        </div>
+        <i class="bi bi-chevron-down" style="font-size:12px;opacity:0.6"></i>
+      </div>
+      <div class="dash-dd-menu dash-dd-profile-menu" id="ddProfile">
+        <div class="dash-dd-userinfo"><img src="https://i.pravatar.cc/100?img=15"><div><strong>Admin JanjiSuci</strong><span>admin@janjisuci.id</span></div></div>
+        <a class="dash-dd-profile-item" href="profile.html"><i class="bi bi-person"></i> Profil Saya</a>
+        <a class="dash-dd-profile-item" href="profile.html#settings"><i class="bi bi-gear"></i> Pengaturan</a>
+        <a class="dash-dd-profile-item" href="ui-elements.html"><i class="bi bi-layers"></i> Komponen UI</a>
+        <a class="dash-dd-profile-item" href="../index.html"><i class="bi bi-house"></i> Lihat Website</a>
+        <div class="dash-divider" style="margin:6px 0"></div>
+        <a class="dash-dd-profile-item danger" href="../login.html"><i class="bi bi-box-arrow-right"></i> Keluar</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Sidebar -->
+<aside class="dash-sidebar" id="dashSidebar">
+  <div class="dash-sidebar-header">
+    <a href="index.html" class="dash-brand">
+      <div class="dash-brand-icon"><i class="bi bi-heart-fill"></i></div>
+      <div class="dash-brand-text">
+        <strong>JanjiSuci</strong><span>Admin Royale</span>
+      </div>
+    </a>
+  </div>
+  <div class="dash-sidebar-scroll">
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Utama</div>
+      <ul class="dash-nav">
+        <li><a href="index.html"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
+        <li><a href="../index.html"><i class="bi bi-house"></i><span>Landing Preview</span><span class="dash-badge gold">Visit</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Manajemen Pernikahan</div>
+      <ul class="dash-nav">
+        <li><a href="widgets.html"><i class="bi bi-collection"></i><span>Widgets & Stats</span><span class="dash-badge success">12</span></a></li>
+        <li><a href="../katalog.html"><i class="bi bi-palette"></i><span>Katalog Tema</span></a></li>
+        <li><a href="../dashboard.html"><i class="bi bi-pencil-square"></i><span>Editor Undangan</span></a></li>
+        <li><a href="../preview.html"><i class="bi bi-phone"></i><span>Live Preview</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Komponen — Ala AdminLTE</div>
+      <ul class="dash-nav">
+        <li class="dash-nav-item">
+          <button><i class="bi bi-layers"></i><span>UI Elements</span><i class="bi bi-chevron-right dash-nav-arrow"></i></button>
+          <ul class="dash-subnav">
+            <li><a href="ui-elements.html">General & Cards</a></li>
+            <li><a href="ui-elements.html#buttons">Buttons & Badges</a></li>
+            <li><a href="ui-elements.html#alerts">Alerts & Modals</a></li>
+            <li><a href="ui-elements.html#tabs">Tabs & Timeline</a></li>
+          </ul>
+        </li>
+        <li><a href="forms.html"><i class="bi bi-input-cursor-text"></i><span>Forms</span></a></li>
+        <li><a href="tables.html"><i class="bi bi-table"></i><span>Tables</span></a></li>
+        <li><a href="charts.html"><i class="bi bi-bar-chart-line"></i><span>Charts</span><span class="dash-badge">3</span></a></li>
+        <li><a href="plugins.html" class="active"><i class="bi bi-puzzle"></i><span>Plugins & Addons</span><span class="dash-badge gold">25</span></a></li>
+        <li><a href="ui-elements.html#widgets"><i class="bi bi-kanban"></i><span>Kanban & Calendar</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+          <div class="dash-nav-group">
+      <div class="dash-nav-title">Transaksi</div>
+      <ul class="dash-nav">
+        <li><a href="invoice.html"><i class="bi bi-receipt-cutoff"></i><span>Invoice</span><span class="dash-badge success">Baru</span></a></li>
+        <li><a href="tables.html"><i class="bi bi-credit-card"></i><span>Pembayaran</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-title">Halaman</div>
+      <ul class="dash-nav">
+        <li><a href="profile.html"><i class="bi bi-person-circle"></i><span>Profile</span></a></li>
+        <li><a href="../harga.html"><i class="bi bi-credit-card"></i><span>Paket & Harga</span></a></li>
+        <li><a href="../testimoni.html"><i class="bi bi-chat-heart"></i><span>Testimoni</span></a></li>
+        <li><a href="../blog.html"><i class="bi bi-journal-text"></i><span>Blog / Artikel</span></a></li>
+        <li><a href="../login.html"><i class="bi bi-box-arrow-in-right"></i><span>Login</span></a></li>
+        <li><a href="../register.html"><i class="bi bi-person-plus"></i><span>Register</span></a></li>
+        <li><a href="../lupa-password.html"><i class="bi bi-key"></i><span>Lupa Password</span></a></li>
+      </ul>
+    </div>
+    <div class="dash-nav-group">
+      <div class="dash-nav-title">Extras</div>
+      <ul class="dash-nav">
+        <li><a href="ui-elements.html#gallery"><i class="bi bi-image"></i><span>Gallery</span></a></li>
+        <li><a href="ui-elements.html#mailbox"><i class="bi bi-envelope"></i><span>Mailbox</span><span class="dash-badge">5</span></a></li>
+        <li><a href="addons.html"><i class="bi bi-plug"></i><span>Extra Plugins (alias)</span></a></li>
+        <li><a href="404.html"><i class="bi bi-exclamation-triangle"></i><span>Error 404</span></a></li>
+        <li><a href="500.html"><i class="bi bi-bug"></i><span>Error 500</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dash-sidebar-footer" style="position:relative;">
+    <button class="dash-user-card" type="button" id="sideUserBtn" aria-expanded="false">
+      <img src="https://i.pravatar.cc/100?img=15" alt="">
+      <div class="dash-user-info"><strong>Admin JanjiSuci</strong><span>admin@janjisuci.id</span></div>
+      <i class="bi bi-chevron-up"></i>
+    </button>
+    <div class="dash-user-menu" id="sideUserMenu">
+      <div class="dash-user-menu-head">
+        <img src="https://i.pravatar.cc/100?img=15" alt="">
+        <div><strong>Admin JanjiSuci</strong><span>Super Admin • Online</span></div>
+      </div>
+      <a class="dash-user-menu-item" href="profile.html"><i class="bi bi-person"></i> Profil Saya</a>
+      <a class="dash-user-menu-item" href="profile.html#settings"><i class="bi bi-gear"></i> Pengaturan Akun</a>
+      <a class="dash-user-menu-item" href="plugins.html"><i class="bi bi-puzzle"></i> Plugins & Addons</a>
+      <a class="dash-user-menu-item" href="../index.html"><i class="bi bi-house"></i> Lihat Website</a>
+      <div class="dash-divider" style="margin:6px 0"></div>
+      <a class="dash-user-menu-item danger" href="../login.html"><i class="bi bi-box-arrow-right"></i> Keluar</a>
+    </div>
+  </div>
+</aside>
+<div class="dash-overlay" id="dashOverlay"></div>
+
+<!-- Main -->
+<main class="dash-main">
+  <div class="dash-content">
+    <div class="dash-page-header">
+      <div class="dash-title">
+        <div class="dash-breadcrumb"><a href="index.html">Home</a> <i class="bi bi-chevron-right"></i> <span>Plugins & Addons</span></div>
+        <h1>Plugins &amp; Addons — Royale Edition</h1>
+        <p>Koleksi plugin premium ala <strong>AdminKit</strong>, <strong>Velzon</strong> & <strong>AdminLTE 3</strong> — sudah dikurasi untuk kebutuhan undangan Nusantara Royale. 25 plugin via vendor lokal jsDelivr, tanpa build step, siap pakai.</p>
+      </div>
+      <div class="dash-actions">
+        <span class="plugin-chip gold"><i class="bi bi-puzzle-fill"></i> 25 Plugin Aktif</span>
+        <span class="plugin-chip"><i class="bi bi-cloud-arrow-down-fill"></i> CDN jsDelivr</span>
+        <button class="dash-btn dash-btn-primary" onclick="dashToast('Semua plugin dimuat ulang')"><i class="bi bi-arrow-clockwise"></i> Refresh</button>
+      </div>
+    </div>
+
+    <!-- Hero stats — ala Velzon cards -->
+    <div class="plugin-hero-grid">
+      <div class="plugin-hero">
+        <div class="ico emerald"><i class="bi bi-puzzle"></i></div>
+        <div><strong>25</strong><span class="lbl">Plugin Terintegrasi</span><span class="trend"><i class="bi bi-check-circle-fill"></i> siap pakai • no npm needed</span></div>
+      </div>
+      <div class="plugin-hero">
+        <div class="ico gold"><i class="bi bi-lightning-charge"></i></div>
+        <div><strong>100%</strong><span class="lbl">CDN Ready</span><span class="trend"><i class="bi bi-cloud-check"></i> jsDelivr + fallback lokal</span></div>
+      </div>
+      <div class="plugin-hero">
+        <div class="ico rose"><i class="bi bi-brush"></i></div>
+        <div><strong>9</strong><span class="lbl">Kategori</span><span class="trend"><i class="bi bi-collection"></i> Form • Media • Charts</span></div>
+      </div>
+      <div class="plugin-hero">
+        <div class="ico navy"><i class="bi bi-journal-code"></i></div>
+        <div><strong>Docs</strong><span class="lbl">Terintegrasi</span><span class="trend"><i class="bi bi-box-arrow-up-right"></i> link resmi tiap plugin</span></div>
+      </div>
+    </div>
+
+    <!-- Toolbar filter + search — ala AdminLTE -->
+    <div class="plugin-toolbar">
+      <div class="plugin-search">
+        <i class="bi bi-search"></i>
+        <input id="pluginSearch" placeholder="Cari plugin... cth: calendar, editor, upload, chart">
+      </div>
+      <div class="plugin-pills" id="pluginPills">
+        <button class="plugin-pill active" data-filter="all">Semua</button>
+        <button class="plugin-pill" data-filter="notif">Notifikasi</button>
+        <button class="plugin-pill" data-filter="form">Form & Picker</button>
+        <button class="plugin-pill" data-filter="editor">Editor</button>
+        <button class="plugin-pill" data-filter="upload">Upload</button>
+        <button class="plugin-pill" data-filter="slider">Slider</button>
+        <button class="plugin-pill" data-filter="interact">Drag & Drop</button>
+        <button class="plugin-pill" data-filter="media">Media</button>
+        <button class="plugin-pill" data-filter="utility">Utility</button>
+        <button class="plugin-pill" data-filter="calendar">Calendar</button>
+        <button class="plugin-pill" data-filter="maps">Maps</button>
+        <button class="plugin-pill" data-filter="carousel">Slider Geser</button>
+        <button class="plugin-pill" data-filter="table">DataTables</button>
+        <button class="plugin-pill" data-filter="maps">Vector Maps</button>
+        <button class="plugin-pill" data-filter="picker">ColorPicker</button>
+        <button class="plugin-pill" data-filter="qrcode">QRCode</button>
+        <button class="plugin-pill" data-filter="media">Plyr</button>
+        <button class="plugin-pill" data-filter="stepper">Stepper</button>
+        <button class="plugin-pill" data-filter="phone">TelInput</button>
+        <button class="plugin-pill" data-filter="rating">Rating</button>
+        <button class="plugin-pill" data-filter="code">Prism</button>
+        <button class="plugin-pill" data-filter="chart">Charts</button>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="dash-btn dash-btn-secondary" style="padding:8px 12px;font-size:12px" onclick="dashToast('Petunjuk instalasi disalin','info')" id="btnCopyAllCdn"><i class="bi bi-clipboard"></i> Salin CDN Bundle</button>
+        <a href="#pluginTable" class="dash-btn dash-btn-secondary" style="padding:8px 12px;font-size:12px"><i class="bi bi-table"></i> Lihat Tabel</a>
+      </div>
+    </div>
+
+    <!-- Quick catalog — ala Velzon plugin logos grid -->
+    <div class="plugin-catalog" id="pluginCatalog">
+      <div class="plugin-tile active" data-plugin="sweetalert" data-cat="notif" onclick="scrollToPlugin('card-sweetalert')">
+        <div class="plugin-tile-ico" style="background:#fef3f2;border-color:#fecdd3;color:#a83854"><i class="bi bi-bell-fill"></i></div>
+        <div><div class="plugin-tile-title">SweetAlert2</div><div class="plugin-tile-meta"><span class="dot" style="background:#a83854"></span> v11 • Notifikasi <span class="addon-note" style="padding:1px 6px;font-size:10px">PRO</span></div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="flatpickr" data-cat="form" onclick="scrollToPlugin('card-flatpickr')">
+        <div class="plugin-tile-ico"><i class="bi bi-calendar-event-fill"></i></div>
+        <div><div class="plugin-tile-title">Flatpickr</div><div class="plugin-tile-meta"><span class="dot"></span> v4.6 • Form Picker</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="choices" data-cat="form" onclick="scrollToPlugin('card-choices')">
+        <div class="plugin-tile-ico"><i class="bi bi-chevron-bar-expand"></i></div>
+        <div><div class="plugin-tile-title">Choices.js</div><div class="plugin-tile-meta"><span class="dot"></span> v10.2 • Select Modern</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="toastr" data-cat="notif" onclick="scrollToPlugin('card-toastr')">
+        <div class="plugin-tile-ico" style="background:#e6f4ef;border-color:#abcec6;color:#2D6A4F"><i class="bi bi-app-indicator"></i></div>
+        <div><div class="plugin-tile-title">Toastr</div><div class="plugin-tile-meta"><span class="dot" style="background:#2D6A4F"></span> v2.1 • Toast Notif</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="imask" data-cat="form" onclick="scrollToPlugin('card-imask')">
+        <div class="plugin-tile-ico"><i class="bi bi-123"></i></div>
+        <div><div class="plugin-tile-title">IMask</div><div class="plugin-tile-meta"><span class="dot"></span> v7 • Input Mask</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="quill" data-cat="editor" onclick="scrollToPlugin('card-quill')">
+        <div class="plugin-tile-ico" style="background:#F7EDE8;border-color:#E8DFD3;color:#83523d"><i class="bi bi-textarea-t"></i></div>
+        <div><div class="plugin-tile-title">Quill Editor</div><div class="plugin-tile-meta"><span class="dot" style="background:#83523d"></span> v2 • Rich Text</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="dropzone" data-cat="upload" onclick="scrollToPlugin('card-dropzone')">
+        <div class="plugin-tile-ico"><i class="bi bi-cloud-arrow-up-fill"></i></div>
+        <div><div class="plugin-tile-title">Dropzone</div><div class="plugin-tile-meta"><span class="dot"></span> v5.9 • File Upload</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="nouislider" data-cat="slider" onclick="scrollToPlugin('card-nouislider')">
+        <div class="plugin-tile-ico"><i class="bi bi-sliders"></i></div>
+        <div><div class="plugin-tile-title">noUiSlider</div><div class="plugin-tile-meta"><span class="dot" style="background:#c5a059"></span> v15 • Range</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="sortable" data-cat="interact" onclick="scrollToPlugin('card-sortable')">
+        <div class="plugin-tile-ico"><i class="bi bi-arrows-move"></i></div>
+        <div><div class="plugin-tile-title">SortableJS</div><div class="plugin-tile-meta"><span class="dot" style="background:#142238"></span> v1.15 • Drag & Drop</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="glightbox" data-cat="media" onclick="scrollToPlugin('card-glightbox')">
+        <div class="plugin-tile-ico"><i class="bi bi-images"></i></div>
+        <div><div class="plugin-tile-title">GLightbox</div><div class="plugin-tile-meta"><span class="dot"></span> v3.3 • Gallery</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="clipboard" data-cat="utility" onclick="scrollToPlugin('card-clipboard')">
+        <div class="plugin-tile-ico"><i class="bi bi-clipboard-check"></i></div>
+        <div><div class="plugin-tile-title">ClipboardJS</div><div class="plugin-tile-meta"><span class="dot"></span> v2 • Copy Link</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="apexcharts" data-cat="chart" onclick="scrollToPlugin('card-apexcharts')">
+        <div class="plugin-tile-ico" style="background:#F5EBD7;border-color:#E8DFD3;color:#7a5a12"><i class="bi bi-graph-up-arrow"></i></div>
+        <div><div class="plugin-tile-title">ApexCharts</div><div class="plugin-tile-meta"><span class="dot" style="background:#c5a059"></span> v3.54 • Charts</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="fullcalendar" data-cat="calendar" onclick="scrollToPlugin('card-fullcalendar')">
+        <div class="plugin-tile-ico" style="background:#e8edf5;border-color:#d6ddea;color:#142238"><i class="bi bi-calendar-week"></i></div>
+        <div><div class="plugin-tile-title">FullCalendar</div><div class="plugin-tile-meta"><span class="dot" style="background:#142238"></span> v6.1 • Calendar</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="leaflet" data-cat="maps" onclick="scrollToPlugin('card-leaflet')">
+        <div class="plugin-tile-ico" style="background:#F7EDE8;border-color:#E8DFD3;color:#83523d"><i class="bi bi-geo-alt-fill"></i></div>
+        <div><div class="plugin-tile-title">Leaflet Maps</div><div class="plugin-tile-meta"><span class="dot" style="background:#83523d"></span> v1.9 • Maps</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="swiper" data-cat="carousel" onclick="scrollToPlugin('card-swiper')">
+        <div class="plugin-tile-ico" style="background:#fef3f2;border-color:#fecdd3;color:#a83854"><i class="bi bi-images"></i></div>
+        <div><div class="plugin-tile-title">Swiper Slider</div><div class="plugin-tile-meta"><span class="dot" style="background:#a83854"></span> v11 • Slider Geser</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="chartjs" data-cat="chart" onclick="scrollToPlugin('card-chartjs')">
+        <div class="plugin-tile-ico" style="background:#fff;border-color:#e9ebec;color:#1b3b36"><i class="bi bi-bar-chart"></i></div>
+        <div><div class="plugin-tile-title">Chart.js</div><div class="plugin-tile-meta"><span class="dot" style="background:#1b3b36"></span> v4.4 • Charts</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="datatables" data-cat="table" onclick="scrollToPlugin('card-datatables')">
+        <div class="plugin-tile-ico" style="background:#e8edf5;border-color:#d6ddea;color:#405189"><i class="bi bi-table"></i></div>
+        <div><div class="plugin-tile-title">DataTables</div><div class="plugin-tile-meta"><span class="dot" style="background:#405189"></span> BS5 • Table</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="jsvectormap" data-cat="maps" onclick="scrollToPlugin('card-jsvectormap')">
+        <div class="plugin-tile-ico" style="background:#e8f3ec;border-color:#b6e0d8;color:#0a3622"><i class="bi bi-globe-asia-australia"></i></div>
+        <div><div class="plugin-tile-title">jsVectorMap</div><div class="plugin-tile-meta"><span class="dot" style="background:#0a3622"></span> v1.5 • Vector Maps</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="pickr" data-cat="picker" onclick="scrollToPlugin('card-pickr')">
+        <div class="plugin-tile-ico" style="background:#fef4e4;border-color:#fbe8b8;color:#664d03"><i class="bi bi-palette"></i></div>
+        <div><div class="plugin-tile-title">Pickr ColorPicker</div><div class="plugin-tile-meta"><span class="dot" style="background:#c5a059"></span> v1.8 • ColorPicker</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="qrcode" data-cat="qrcode" onclick="scrollToPlugin('card-qrcode')">
+        <div class="plugin-tile-ico" style="background:#f3f6f9;border-color:#e9ebec;color:#212529"><i class="bi bi-qr-code"></i></div>
+        <div><div class="plugin-tile-title">QRCode.js</div><div class="plugin-tile-meta"><span class="dot"></span> v1.0 • QRCode</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="plyr" data-cat="media" onclick="scrollToPlugin('card-plyr')">
+        <div class="plugin-tile-ico" style="background:#fef3f2;border-color:#fecdd3;color:#a83854"><i class="bi bi-music-note-beamed"></i></div>
+        <div><div class="plugin-tile-title">Plyr</div><div class="plugin-tile-meta"><span class="dot" style="background:#a83854"></span> v3.7 • Audio Player</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="stepper" data-cat="stepper" onclick="scrollToPlugin('card-stepper')">
+        <div class="plugin-tile-ico" style="background:#e8edf5;border-color:#d6ddea;color:#405189"><i class="bi bi-signpost-split"></i></div>
+        <div><div class="plugin-tile-title">bs-Steppers</div><div class="plugin-tile-meta"><span class="dot" style="background:#405189"></span> v1.7 • Wizard</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="tel" data-cat="phone" onclick="scrollToPlugin('card-tel')">
+        <div class="plugin-tile-ico" style="background:#e8f3ec;border-color:#b6e0d8;color:#0a3622"><i class="bi bi-telephone"></i></div>
+        <div><div class="plugin-tile-title">intl-tel-input</div><div class="plugin-tile-meta"><span class="dot" style="background:#0a3622"></span> v18 • Phone Input</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="rater" data-cat="rating" onclick="scrollToPlugin('card-rater')">
+        <div class="plugin-tile-ico" style="background:#fef4e4;border-color:#fbe8b8;color:#664d03"><i class="bi bi-star-fill"></i></div>
+        <div><div class="plugin-tile-title">Rater.js</div><div class="plugin-tile-meta"><span class="dot" style="background:#c5a059"></span> v1.0 • Rating</div></div>
+      </div>
+      <div class="plugin-tile" data-plugin="prism" data-cat="code" onclick="scrollToPlugin('card-prism')">
+        <div class="plugin-tile-ico" style="background:#f3f6f9;border-color:#e9ebec;color:#212529"><i class="bi bi-code-slash"></i></div>
+        <div><div class="plugin-tile-title">Prism.js</div><div class="plugin-tile-meta"><span class="dot"></span> v1.29 • Syntax Highlight</div></div>
+      </div>
+    </div>
+
+    <!-- Info bar — ala AdminKit callout -->
+    <div class="dash-alert info" style="margin-bottom:14px">
+      <i class="bi bi-info-circle-fill"></i>
+      <div><strong>Pakai langsung tanpa build:</strong> semua plugin dimuat via <code>jsDelivr CDN</code> di bawah. Tema warna otomatis mengikuti variabel <code>--dash-primary-container</code> & <code>--dash-gold</code> Royale — tak perlu override manual. Klik <em>tile</em> di atas untuk loncat ke demo.</div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px">
+      <span class="plugin-chip"><i class="bi bi-bell-fill"></i> SweetAlert2</span>
+      <span class="plugin-chip"><i class="bi bi-calendar-event-fill"></i> Flatpickr</span>
+      <span class="plugin-chip"><i class="bi bi-chevron-bar-expand"></i> Choices.js</span>
+      <span class="plugin-chip"><i class="bi bi-app-indicator"></i> Toastr</span>
+      <span class="plugin-chip"><i class="bi bi-123"></i> IMask</span>
+      <span class="plugin-chip"><i class="bi bi-textarea-t"></i> Quill</span>
+      <span class="plugin-chip"><i class="bi bi-cloud-arrow-up-fill"></i> Dropzone</span>
+      <span class="plugin-chip"><i class="bi bi-sliders"></i> noUiSlider</span>
+      <span class="plugin-chip"><i class="bi bi-arrows-move"></i> SortableJS</span>
+      <span class="plugin-chip"><i class="bi bi-images"></i> GLightbox</span>
+      <span class="plugin-chip"><i class="bi bi-clipboard-check"></i> ClipboardJS</span>
+      <span class="plugin-chip"><i class="bi bi-graph-up-arrow"></i> ApexCharts</span>
+      <span class="plugin-chip"><i class="bi bi-calendar-week"></i> FullCalendar</span>
+      <span class="plugin-chip"><i class="bi bi-geo-alt-fill"></i> Leaflet</span>
+      <span class="plugin-chip"><i class="bi bi-collection-play"></i> Swiper</span>
+      <span class="plugin-chip"><i class="bi bi-bar-chart"></i> Chart.js</span>
+      <span class="plugin-chip"><i class="bi bi-table"></i> DataTables</span>
+      <span class="plugin-chip"><i class="bi bi-globe-asia-australia"></i> jsVectorMap</span>
+      <span class="plugin-chip"><i class="bi bi-palette"></i> Pickr</span>
+      <span class="plugin-chip"><i class="bi bi-qr-code"></i> QRCode</span>
+      <span class="plugin-chip"><i class="bi bi-music-note-beamed"></i> Plyr</span>
+      <span class="plugin-chip"><i class="bi bi-signpost-split"></i> Stepper</span>
+      <span class="plugin-chip"><i class="bi bi-telephone"></i> TelInput</span>
+      <span class="plugin-chip"><i class="bi bi-star-fill"></i> Rater</span>
+      <span class="plugin-chip"><i class="bi bi-code-slash"></i> Prism</span>
+    </div>
+
+    <div class="addon-grid" id="addonGrid">
+
+      <!-- SweetAlert2 -->
+      <div class="dash-card addon-card" id="card-sweetalert" data-cat="notif">
+        <div class="dash-card-header"><h3><i class="bi bi-bell-fill"></i> SweetAlert2</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag form">Notifikasi</span><span class="addon-note"><i class="bi bi-box-seam"></i> sweetalert2@11</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 14px">Alert &amp; konfirmasi premium — pengganti <code>confirm()</code> bawaan browser. Dipakai untuk hapus pesanan, konfirmasi publish, dsb.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <button class="dash-btn dash-btn-primary" id="swalBasic"><i class="bi bi-check-circle"></i> Sukses</button>
+            <button class="dash-btn dash-btn-secondary" id="swalConfirm" style="color:var(--dash-danger)"><i class="bi bi-trash3"></i> Konfirmasi Hapus</button>
+            <button class="dash-btn dash-btn-secondary" id="swalInput"><i class="bi bi-pencil"></i> Input Nama</button>
+            <button class="dash-btn dash-btn-secondary" id="swalToast"><i class="bi bi-lightning"></i> Toast</button>
+          </div>
+          <div class="code-box"><code>npm i sweetalert2 &nbsp; // CDN: sweetalert2@11</code><button class="code-copy" onclick="copyCode('npm i sweetalert2',this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+            <a class="plugin-docs-link" href="https://sweetalert2.github.io/" target="_blank" rel="noopener">Docs resmi <i class="bi bi-box-arrow-up-right"></i></a>
+            <span style="font-size:11px;color:var(--dash-muted)">• Dipakai di: konfirmasi hapus pesanan & toast publish</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toastr (tambahan selain SweetAlert — ala AdminKit) -->
+      <div class="dash-card addon-card" id="card-toastr" data-cat="notif">
+        <div class="dash-card-header"><h3><i class="bi bi-app-indicator"></i> Toastr</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag form">Notifikasi</span><span class="addon-note"><i class="bi bi-box-seam"></i> toastr@2 + jQuery</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 12px">Toast notifikasi non-blocking ala AdminKit — untuk feedback ringan (tersimpan, RSVP masuk). Berjalan bersama SweetAlert.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <button class="dash-btn dash-btn-primary" id="toastrSuccess" style="background:#2D6A4F"><i class="bi bi-check-circle"></i> Success</button>
+            <button class="dash-btn dash-btn-secondary" id="toastrInfo"><i class="bi bi-info-circle"></i> Info</button>
+            <button class="dash-btn dash-btn-secondary" id="toastrWarning" style="color:#7a5a12"><i class="bi bi-exclamation-triangle"></i> Warning</button>
+            <button class="dash-btn dash-btn-secondary" id="toastrError" style="color:var(--dash-danger)"><i class="bi bi-x-circle"></i> Error</button>
+            <button class="dash-btn dash-btn-secondary" id="toastrClear"><i class="bi bi-trash"></i> Clear All</button>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+            <label style="font-size:12px;font-weight:600">Posisi:</label>
+            <select id="toastrPos" class="dash-select" style="width:auto;padding:6px 32px 6px 10px;font-size:12px">
+              <option value="toast-top-right" selected>Top Right</option>
+              <option value="toast-top-center">Top Center</option>
+              <option value="toast-bottom-right">Bottom Right</option>
+              <option value="toast-top-left">Top Left</option>
+            </select>
+            <label style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600"><input type="checkbox" id="toastrProgress" checked> progressBar</label>
+            <label style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600"><input type="checkbox" id="toastrClose" checked> closeButton</label>
+          </div>
+          <div class="code-box"><code>toastr.success('RSVP tersimpan!')</code><button class="code-copy" onclick="copyCode(&quot;toastr.success('RSVP tersimpan!')&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://codeseven.github.io/toastr/" target="_blank" rel="noopener">Docs Toastr <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Flatpickr -->
+      <div class="dash-card addon-card" id="card-flatpickr" data-cat="form">
+        <div class="dash-card-header"><h3><i class="bi bi-calendar-event-fill"></i> Flatpickr</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag form">Form</span><span class="addon-note"><i class="bi bi-box-seam"></i> flatpickr@4 + locale id</span></span></div>
+        <div class="dash-card-body" style="display:grid;gap:12px">
+          <div><label style="font-size:12px;font-weight:700">Tanggal Pernikahan</label><input id="pickDate" class="dash-input" placeholder="Pilih tanggal..." style="width:100%;margin-top:6px"></div>
+          <div><label style="font-size:12px;font-weight:700">Akad &amp; Resepsi (Range)</label><input id="pickRange" class="dash-input" placeholder="Rentang tanggal..." style="width:100%;margin-top:6px"></div>
+          <div><label style="font-size:12px;font-weight:700">Jam Akad</label><input id="pickTime" class="dash-input" placeholder="Pilih jam..." style="width:100%;margin-top:6px"></div>
+          <div class="code-box"><code>flatpickr('#pickDate',{locale:'id', dateFormat:'d F Y'})</code><button class="code-copy" onclick="copyCode(&quot;flatpickr('#pickDate',{locale:'id'})&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://flatpickr.js.org/" target="_blank" rel="noopener">Docs flatpickr <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Choices.js (pengganti Select2 — vanilla, tanpa jQuery) -->
+      <div class="dash-card addon-card" id="card-choices" data-cat="form">
+        <div class="dash-card-header"><h3><i class="bi bi-chevron-bar-expand"></i> Choices.js</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag form">Form</span><span class="addon-note"><i class="bi bi-box-seam"></i> choices.js@10</span></span></div>
+        <div class="dash-card-body" style="display:grid;gap:14px">
+          <div>
+            <label style="font-size:12px;font-weight:700">Tema Undangan (searchable, ala AdminKit)</label>
+            <select id="choiceTema" placeholder="Cari & pilih tema...">
+              <option value="">Cari & pilih tema...</option>
+              <option value="Nusantara Royale">Nusantara Royale — Best Seller</option>
+              <option value="Botanical Whispers">Botanical Whispers</option>
+              <option value="Golden Jasmine">Golden Jasmine</option>
+              <option value="Syar'i Mawaddah">Syar'i Mawaddah</option>
+              <option value="Minimalist Cherish">Minimalist Cherish</option>
+              <option value="Emerald Heritage">Emerald Heritage</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:12px;font-weight:700">Tags Tamu VIP (multiple + remove button)</label>
+            <select id="choiceTags" multiple>
+              <option value="Keluarga">Keluarga</option>
+              <option value="Rekan Kerja">Rekan Kerja</option>
+              <option value="Sahabat">Sahabat</option>
+              <option value="Tetangga">Tetangga</option>
+              <option value="Alumni">Alumni</option>
+            </select>
+          </div>
+          <div class="code-box"><code>new Choices('#choiceTema',{searchEnabled:true, itemSelectText:''})</code><button class="code-copy" onclick="copyCode(&quot;new Choices('#choiceTema',{searchEnabled:true})&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://choices-js.github.io/Choices/" target="_blank" rel="noopener">Docs Choices.js <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- IMask -->
+      <div class="dash-card addon-card" id="card-imask" data-cat="form">
+        <div class="dash-card-header"><h3><i class="bi bi-123"></i> IMask — Input Mask</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag form">Form</span><span class="addon-note"><i class="bi bi-box-seam"></i> imask@7</span></span></div>
+        <div class="dash-card-body" style="display:grid;gap:12px">
+          <div><label style="font-size:12px;font-weight:700">No. WhatsApp</label><input id="maskPhone" class="dash-input" placeholder="0812-3456-7890" style="width:100%;margin-top:6px"></div>
+          <div><label style="font-size:12px;font-weight:700">Budget (Rp)</label><input id="maskRupiah" class="dash-input" placeholder="Rp 0" style="width:100%;margin-top:6px"></div>
+          <div><label style="font-size:12px;font-weight:700">Kartu Kredit</label><input id="maskCard" class="dash-input" placeholder="0000 0000 0000 0000" style="width:100%;margin-top:6px"></div>
+          <div class="code-box"><code>IMask(el,{mask:'0000-0000-0000'})</code><button class="code-copy" onclick="copyCode(&quot;IMask(el,{mask:'0000-0000-0000'})&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://imask.js.org/" target="_blank" rel="noopener">Docs IMask <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Quill -->
+      <div class="dash-card addon-card" id="card-quill" data-cat="editor">
+        <div class="dash-card-header"><h3><i class="bi bi-textarea-t"></i> Quill — Rich Text Editor</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag editor">Editor</span><span class="addon-note"><i class="bi bi-box-seam"></i> quill@2 (snow)</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 12px">Editor cerita prewedding / catatan admin — toolbar Royale.</p>
+          <div id="quillEditor"></div>
+          <div class="code-box"><code>new Quill('#quillEditor',{theme:'snow'})</code><button class="code-copy" onclick="copyCode(&quot;new Quill('#quillEditor',{theme:'snow'})&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://quilljs.com/" target="_blank" rel="noopener">Docs Quill <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Dropzone -->
+      <div class="dash-card addon-card" id="card-dropzone" data-cat="upload">
+        <div class="dash-card-header"><h3><i class="bi bi-cloud-arrow-up-fill"></i> Dropzone — Upload Foto</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag editor">Upload</span><span class="addon-note"><i class="bi bi-box-seam"></i> dropzone@5</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 12px">Drag &amp; drop galeri prewedding (maks 5 file, 2MB) — preview langsung.</p>
+          <form id="weddingDropzone" class="dropzone dash-dz"></form>
+          <div class="code-box"><code>new Dropzone('#weddingDropzone',{maxFiles:5})</code><button class="code-copy" onclick="copyCode(&quot;new Dropzone('#weddingDropzone',{maxFiles:5})&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://docs.dropzone.dev/" target="_blank" rel="noopener">Docs Dropzone <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- noUiSlider -->
+      <div class="dash-card addon-card" id="card-nouislider" data-cat="slider">
+        <div class="dash-card-header"><h3><i class="bi bi-sliders"></i> noUiSlider — Range Budget</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag form">Slider</span><span class="addon-note"><i class="bi bi-box-seam"></i> nouislider@15</span></span></div>
+        <div class="dash-card-body">
+          <div id="budgetSlider"></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700">
+            <span id="budgetMin" style="color:var(--dash-primary-container)">Rp 500.000</span>
+            <span id="budgetMax" style="color:var(--dash-gold)">Rp 1.500.000</span>
+          </div>
+          <div class="code-box"><code>noUiSlider.create(el,{start:[500000,1500000], connect:true})</code><button class="code-copy" onclick="copyCode(&quot;noUiSlider.create(el,{start:[500000,1500000]})&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://refreshless.com/nouislider/" target="_blank" rel="noopener">Docs noUiSlider <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- SortableJS -->
+      <div class="dash-card addon-card" id="card-sortable" data-cat="interact">
+        <div class="dash-card-header"><h3><i class="bi bi-arrows-move"></i> SortableJS — Drag &amp; Drop</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag interact">Interact</span><span class="addon-note"><i class="bi bi-box-seam"></i> sortablejs@1</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 12px">Susun urutan agenda acara — tarik &amp; lepas. Sinkron otomatis via <code>onEnd</code>.</p>
+          <ul class="sort-list" id="agendaList">
+            <li><i class="bi bi-grip-vertical"></i> Akad Nikah <small>08.00 — 10.00 WIB</small></li>
+            <li><i class="bi bi-grip-vertical"></i> Resepsi &amp; Ramah Tamah <small>11.00 — 14.00 WIB</small></li>
+            <li><i class="bi bi-grip-vertical"></i> Photo Session <small>14.00 — 15.30 WIB</small></li>
+            <li><i class="bi bi-grip-vertical"></i> Panggung Hiburan <small>19.00 — 21.00 WIB</small></li>
+          </ul>
+          <div class="code-box"><code>new Sortable(list,{animation:180, ghostClass:'ghost'})</code><button class="code-copy" onclick="copyCode(&quot;new Sortable(list,{animation:180})&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://github.com/SortableJS/Sortable" target="_blank" rel="noopener">Docs SortableJS <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- GLightbox -->
+      <div class="dash-card addon-card" id="card-glightbox" data-cat="media">
+        <div class="dash-card-header"><h3><i class="bi bi-images"></i> GLightbox — Gallery Lightbox</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag media">Media</span><span class="addon-note"><i class="bi bi-box-seam"></i> glightbox@3</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 12px">Klik foto untuk membuka lightbox galeri — support swipe & zoom.</p>
+          <div class="addon-gallery">
+            <a href="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&q=80" class="glightbox" data-gallery="wedding"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&q=80" alt="Pernikahan 1" loading="lazy"></a>
+            <a href="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&q=80" class="glightbox" data-gallery="wedding"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=400&q=80" alt="Pernikahan 2" loading="lazy"></a>
+            <a href="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1200&q=80" class="glightbox" data-gallery="wedding"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&q=80" alt="Pernikahan 3" loading="lazy"></a>
+            <a href="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1200&q=80" class="glightbox" data-gallery="wedding"><img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=400&q=80" alt="Pernikahan 4" loading="lazy"></a>
+          </div>
+          <div class="code-box"><code>GLightbox({selector:'glightbox', loop:true})</code><button class="code-copy" onclick="copyCode(&quot;GLightbox({selector:'glightbox'})&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://biati-digital.github.io/glightbox/" target="_blank" rel="noopener">Docs GLightbox <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- ClipboardJS -->
+      <div class="dash-card addon-card" id="card-clipboard" data-cat="utility">
+        <div class="dash-card-header"><h3><i class="bi bi-clipboard-check"></i> ClipboardJS — Copy Link</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag interact">Utility</span><span class="addon-note"><i class="bi bi-box-seam"></i> clipboard@2</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 12px">Salin tautan undangan tamu dengan sekali klik — tanpa Flash.</p>
+          <div style="display:flex;gap:8px">
+            <input id="inviteLink" class="dash-input" style="flex:1" readonly value="https://janjisuci.id/arya-nabila?to=tamu-vip">
+            <button class="dash-btn dash-btn-primary" id="btnCopy" data-clipboard-target="#inviteLink"><i class="bi bi-clipboard"></i> Copy</button>
+          </div>
+          <div class="code-box"><code>new ClipboardJS('#btnCopy')</code><button class="code-copy" onclick="copyCode(&quot;new ClipboardJS('#btnCopy')&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://clipboardjs.com/" target="_blank" rel="noopener">Docs ClipboardJS <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+
+      <!-- Swiper — Slider Geser (baru) -->
+      <div class="dash-card addon-card" id="card-swiper" data-cat="carousel">
+        <div class="dash-card-header"><h3><i class="bi bi-collection-play"></i> Swiper — Slider Geser</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag media">Slider</span><span class="addon-note"><i class="bi bi-box-seam"></i> swiper@11</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 10px">Slider geser modern ala Velzon — untuk galeri tema, testimoni & katalog. Support loop, autoplay, pagination & navigation.</p>
+          <div class="swiper mySwiper" style="--swiper-theme-color:var(--dash-primary-container)">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=80" alt="Slide 1" style="width:100%;height:180px;object-fit:cover;border-radius:10px"><div style="position:absolute;left:12px;bottom:12px;background:rgba(27,59,54,0.85);color:#fff;padding:6px 10px;border-radius:9999px;font-size:11px;font-weight:700"><i class="bi bi-gem"></i> Nusantara Royale</div></div>
+              <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&q=80" alt="Slide 2" style="width:100%;height:180px;object-fit:cover;border-radius:10px"><div style="position:absolute;left:12px;bottom:12px;background:rgba(131,82,61,0.85);color:#fff;padding:6px 10px;border-radius:9999px;font-size:11px;font-weight:700"><i class="bi bi-flower1"></i> Botanical Whispers</div></div>
+              <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80" alt="Slide 3" style="width:100%;height:180px;object-fit:cover;border-radius:10px"><div style="position:absolute;left:12px;bottom:12px;background:rgba(197,160,89,0.88);color:#fff;padding:6px 10px;border-radius:9999px;font-size:11px;font-weight:700"><i class="bi bi-brightness-high"></i> Golden Jasmine</div></div>
+              <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=600&q=80" alt="Slide 4" style="width:100%;height:180px;object-fit:cover;border-radius:10px"><div style="position:absolute;left:12px;bottom:12px;background:rgba(20,34,56,0.85);color:#fff;padding:6px 10px;border-radius:9999px;font-size:11px;font-weight:700"><i class="bi bi-square"></i> Minimalist Cream</div></div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+            <button class="dash-btn dash-btn-secondary" style="padding:6px 10px;font-size:12px" id="swiperPrev"><i class="bi bi-chevron-left"></i> Prev</button>
+            <button class="dash-btn dash-btn-secondary" style="padding:6px 10px;font-size:12px" id="swiperNext">Next <i class="bi bi-chevron-right"></i></button>
+            <button class="dash-btn dash-btn-secondary" style="padding:6px 10px;font-size:12px" id="swiperToggle"><i class="bi bi-pause"></i> Pause</button>
+            <span style="font-size:11px;color:var(--dash-muted);align-self:center"><i class="bi bi-info-circle"></i> Geser / drag di HP</span>
+          </div>
+          <div class="code-box"><code>new Swiper('.mySwiper',{loop:true, autoplay:{delay:2500}})</code><button class="code-copy" onclick="copyCode(&quot;new Swiper('.mySwiper',{loop:true})&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://swiperjs.com/get-started" target="_blank" rel="noopener">Docs Swiper <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+
+      <!-- Chart.js -->
+      <div class="dash-card addon-card" id="card-chartjs" data-cat="chart">
+        <div class="dash-card-header"><h3><i class="bi bi-bar-chart"></i> Chart.js — Charts</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag chart">Charts</span><span class="addon-note"><i class="bi bi-box-seam"></i> chart.js@4</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 10px">Chart.js vanilla — line, bar & doughnut untuk dashboard. Alternatif ApexCharts, lebih ringan.</p>
+          <div style="height:220px;position:relative"><canvas id="demoChartjsLine"></canvas></div>
+          <div class="code-box"><code>new Chart(el,{type:'line', data:{...}})</code><button class="code-copy" onclick="copyCode(&quot;new Chart(el,{type:'line'})&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://www.chartjs.org/docs/latest/" target="_blank" rel="noopener">Docs Chart.js <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- DataTables -->
+      <div class="dash-card addon-card" id="card-datatables" data-cat="table" style="grid-column:1/-1">
+        <div class="dash-card-header"><h3><i class="bi bi-table"></i> DataTables — Tabel Interaktif</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag form" style="background:#e8edf5;border-color:#d6ddea;color:#405189">Table</span><span class="addon-note"><i class="bi bi-box-seam"></i> datatables@1.13 + BS5</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 10px">Tabel pintar ala AdminLTE — search, sort, paginasi, tanpa coding manual.</p>
+          <div class="dash-table-wrap">
+            <table id="demoDataTable" class="dash-table" style="width:100%">
+              <thead><tr><th>Pasangan</th><th>Tema</th><th>Kota</th><th>Tamu</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>Arya & Nabila</td><td>Nusantara Royale</td><td>Jakarta</td><td>342</td><td><span class="badge bg-success">Lunas</span></td></tr>
+                <tr><td>Dimas & Nadya</td><td>Botanical Whispers</td><td>Bandung</td><td>128</td><td><span class="badge bg-warning text-dark">Draft</span></td></tr>
+                <tr><td>Reza & Syifa</td><td>Golden Jasmine</td><td>Surabaya</td><td>210</td><td><span class="badge bg-info">Pending</span></td></tr>
+                <tr><td>Sinta & Bagas</td><td>Emerald Heritage</td><td>Yogya</td><td>189</td><td><span class="badge bg-success">Lunas</span></td></tr>
+                <tr><td>Fajar & Dewi</td><td>Minimalist Cream</td><td>Malang</td><td>95</td><td><span class="badge bg-secondary">Selesai</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="code-box"><code>$('#demoDataTable').DataTable({pageLength:5})</code><button class="code-copy" onclick="copyCode(&quot;$('#demoDataTable').DataTable()&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://datatables.net/" target="_blank" rel="noopener">Docs DataTables <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- jsVectorMap -->
+      <div class="dash-card addon-card" id="card-jsvectormap" data-cat="maps">
+        <div class="dash-card-header"><h3><i class="bi bi-globe-asia-australia"></i> jsVectorMap — Peta Persebaran</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag media" style="background:#e8f3ec;border-color:#b6e0d8;color:#0a3622">Maps</span><span class="addon-note"><i class="bi bi-box-seam"></i> jsvectormap@1.5</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 10px">Vector map dunia / Indonesia — cocok untuk heatmap tamu per kota (Jakarta, Bandung, Surabaya).</p>
+          <div id="demoVectorMap" style="height:220px;border:1px solid var(--dash-border);border-radius:12px;background:#f3f6f9"></div>
+          <div class="code-box"><code>new jsVectorMap({selector:'#demoVectorMap', map:'world'})</code><button class="code-copy" onclick="copyCode(&quot;new jsVectorMap({selector:'#demoVectorMap', map:'world'})&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://jvm-docs.vercel.app/" target="_blank" rel="noopener">Docs jsVectorMap <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Pickr ColorPicker -->
+      <div class="dash-card addon-card" id="card-pickr" data-cat="picker">
+        <div class="dash-card-header"><h3><i class="bi bi-palette"></i> Pickr — ColorPicker</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag form" style="background:#fef4e4;border-color:#fbe8b8;color:#664d03">Picker</span><span class="addon-note"><i class="bi bi-box-seam"></i> pickr@1.8</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 10px">Picker warna tema undangan — pilih emerald, gold, terracotta langsung preview.</p>
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+            <div id="demoPickr"></div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <span id="pickrValue" style="padding:6px 10px;border-radius:8px;border:1px solid var(--dash-border);background:#fff;font-size:12px;font-weight:700;color:var(--dash-primary)">#1b3b36</span>
+              <div id="pickrPreview" style="width:36px;height:36px;border-radius:8px;border:1px solid var(--dash-border);background:#1b3b36"></div>
+              <button class="dash-btn dash-btn-secondary" style="padding:6px 10px;font-size:12px" onclick="dashToast('Warna tema disalin','info')"><i class="bi bi-clipboard"></i> Copy HEX</button>
+            </div>
+          </div>
+          <div class="code-box"><code>Pickr.create({el:'#demoPickr', theme:'classic'})</code><button class="code-copy" onclick="copyCode(&quot;Pickr.create({el:'#demoPickr'})&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://github.com/Simonwep/pickr" target="_blank" rel="noopener">Docs Pickr <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- QRCode -->
+      <div class="dash-card addon-card" id="card-qrcode" data-cat="qrcode">
+        <div class="dash-card-header"><h3><i class="bi bi-qr-code"></i> QRCode.js — QR Undangan</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag interact">Utility</span><span class="addon-note"><i class="bi bi-box-seam"></i> qrcode@1.0</span></span></div>
+        <div class="dash-card-body" style="text-align:center">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 10px;text-align:left">Generate QR untuk link undangan — tamu scan langsung buka `janjisuci.id/arya-nabila`.</p>
+          <div id="demoQR" style="display:inline-block;padding:12px;background:#fff;border:1px solid var(--dash-border);border-radius:12px"></div>
+          <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+            <input id="qrInput" class="dash-input" style="max-width:280px" value="https://janjisuci.id/arya-nabila">
+            <button class="dash-btn dash-btn-primary" style="padding:8px 12px;font-size:12px" id="qrGen"><i class="bi bi-qr-code"></i> Generate</button>
+            <button class="dash-btn dash-btn-secondary" style="padding:8px 12px;font-size:12px" id="qrDownload"><i class="bi bi-download"></i> Download PNG</button>
+          </div>
+          <div class="code-box" style="text-align:left"><code>new QRCode(el,{text:'https://janjisuci.id/arya-nabila'})</code><button class="code-copy" onclick="copyCode(&quot;new QRCode(el,{text:'https://janjisuci.id/arya-nabila'})&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://github.com/davidshimjs/qrcodejs" target="_blank" rel="noopener">Docs QRCode.js <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+
+      <!-- Plyr Audio Player -->
+      <div class="dash-card addon-card" id="card-plyr" data-cat="media">
+        <div class="dash-card-header"><h3><i class="bi bi-music-note-beamed"></i> Plyr — Audio Player</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag media">Media</span><span class="addon-note"><i class="bi bi-box-seam"></i> plyr@3.7</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 10px">Player musik undangan — preview lagu akad/resepsi dengan skin Royale.</p>
+          <audio id="demoPlyr" controls crossorigin playsinline>
+            <source src="https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.mp3" type="audio/mp3">
+          </audio>
+          <div class="code-box"><code>new Plyr('#demoPlyr')</code><button class="code-copy" onclick="copyCode(&quot;new Plyr('#demoPlyr')&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://github.com/sampotts/plyr" target="_blank" rel="noopener">Docs Plyr <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- bs-stepper Wizard -->
+      <div class="dash-card addon-card" id="card-stepper" data-cat="stepper">
+        <div class="dash-card-header"><h3><i class="bi bi-signpost-split"></i> bs-stepper — Wizard</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag form">Wizard</span><span class="addon-note"><i class="bi bi-box-seam"></i> stepper@1.7</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 10px">Wizard 5 langkah pembuatan undangan — seperti dashboard.html langkah 2/5.</p>
+          <div id="demoStepper" class="bs-stepper">
+            <div class="bs-stepper-header" role="tablist">
+              <div class="step active" data-target="#step1"><button class="step-trigger"><span class="bs-stepper-circle">1</span><span class="bs-stepper-label">Tema</span></button></div>
+              <div class="line"></div>
+              <div class="step" data-target="#step2"><button class="step-trigger"><span class="bs-stepper-circle">2</span><span class="bs-stepper-label">Data</span></button></div>
+              <div class="line"></div>
+              <div class="step" data-target="#step3"><button class="step-trigger"><span class="bs-stepper-circle">3</span><span class="bs-stepper-label">Acara</span></button></div>
+            </div>
+            <div class="bs-stepper-content">
+              <div id="step1" class="content active"><p style="font-size:13px">Pilih tema Nusantara Royale</p><button class="dash-btn dash-btn-primary" onclick="stepper.next()">Next <i class="bi bi-arrow-right"></i></button></div>
+              <div id="step2" class="content"><p style="font-size:13px">Isi data mempelai</p><div style="display:flex;gap:8px"><button class="dash-btn dash-btn-secondary" onclick="stepper.previous()">Prev</button><button class="dash-btn dash-btn-primary" onclick="stepper.next()">Next</button></div></div>
+              <div id="step3" class="content"><p style="font-size:13px">Waktu & lokasi • Selesai!</p><button class="dash-btn dash-btn-secondary" onclick="stepper.previous()">Prev</button></div>
+            </div>
+          </div>
+          <div class="code-box"><code>new Stepper(document.querySelector('#demoStepper'))</code><button class="code-copy" onclick="copyCode(&quot;new Stepper('#demoStepper')&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://github.com/Johann-S/bs-stepper" target="_blank" rel="noopener">Docs Stepper <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- intl-tel-input -->
+      <div class="dash-card addon-card" id="card-tel" data-cat="phone">
+        <div class="dash-card-header"><h3><i class="bi bi-telephone"></i> intl-tel-input — Phone Input</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag form">Form</span><span class="addon-note"><i class="bi bi-box-seam"></i> intl-tel@18</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 10px">Input WA dengan bendera negara — validasi nomor internasional.</p>
+          <input id="demoTel" type="tel" class="dash-input" style="width:100%">
+          <div style="margin-top:8px;display:flex;gap:8px"><button class="dash-btn dash-btn-secondary" style="padding:6px 10px;font-size:12px" id="telGet">Get Number</button><span id="telValid" style="font-size:12px;color:var(--dash-muted);align-self:center"></span></div>
+          <div class="code-box"><code>window.intlTelInput(input,{utilsScript:'utils.js'})</code><button class="code-copy" onclick="copyCode(&quot;intlTelInput(input)&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://github.com/jackocnr/intl-tel-input" target="_blank" rel="noopener">Docs TelInput <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Rater.js -->
+      <div class="dash-card addon-card" id="card-rater" data-cat="rating">
+        <div class="dash-card-header"><h3><i class="bi bi-star-fill"></i> Rater.js — Rating</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag form" style="background:#fef4e4;border-color:#fbe8b8;color:#664d03">Rating</span><span class="addon-note"><i class="bi bi-box-seam"></i> rater@1.0</span></span></div>
+        <div class="dash-card-body" style="text-align:center">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 10px;text-align:left">Rating testimoni pengantin — 5 bintang interaktif.</p>
+          <div id="demoRater" style="display:flex;justify-content:center;gap:4px;font-size:28px;color:#e9c176"></div>
+          <div style="margin-top:8px;font-size:12px;color:var(--dash-muted)">Rating: <strong id="raterValue" style="color:var(--dash-primary)">4.5 / 5</strong> • Klik bintang</div>
+          <div class="code-box" style="text-align:left"><code>rater({element:el, max:5, rating:4.5})</code><button class="code-copy" onclick="copyCode(&quot;rater({element:el})&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://github.com/fredolss/rater-js" target="_blank" rel="noopener">Docs Rater <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Prism.js -->
+      <div class="dash-card addon-card" id="card-prism" data-cat="code">
+        <div class="dash-card-header"><h3><i class="bi bi-code-slash"></i> Prism.js — Syntax Highlight</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag interact">Code</span><span class="addon-note"><i class="bi bi-box-seam"></i> prism@1.29</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 10px">Highlight snippet undangan — untuk dokumentasi developer.</p>
+          <pre style="margin:0;border-radius:10px;overflow:hidden"><code class="language-html">&lt;div class="inv-card"&gt;
+  &lt;h1&gt;Arya &amp; Nabila&lt;/h1&gt;
+  &lt;p&gt;24 Okt 2025 • Plataran Menteng&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+          <div class="code-box"><code>Prism.highlightAll()</code><button class="code-copy" onclick="copyCode(&quot;Prism.highlightAll()&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://prismjs.com/" target="_blank" rel="noopener">Docs Prism <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+
+      <!-- ApexCharts -->
+
+
+      <div class="dash-card addon-card" id="card-apexcharts" data-cat="chart" style="grid-column:1/-1">
+        <div class="dash-card-header"><h3><i class="bi bi-graph-up-arrow"></i> ApexCharts — Statistik Kunjungan Tamu</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag chart">Charts</span><span class="addon-note"><i class="bi bi-box-seam"></i> apexcharts@3</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 10px">Area chart kunjungan vs RSVP — alternatif <code>Chart.js</code> ala AdminKit, animasi smooth & tooltip interaktif.</p>
+          <div id="apexArea" style="min-height:280px"></div>
+          <div class="code-box"><code>new ApexCharts(el,{chart:{type:'area'}, series:[...]})</code><button class="code-copy" onclick="copyCode(&quot;new ApexCharts(el, options).render()&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://apexcharts.com/" target="_blank" rel="noopener">Docs ApexCharts <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Plugin table — ala AdminLTE & Velzon documentation -->
+    <div class="dash-card" id="pluginTable" style="margin-top:16px;scroll-margin-top:88px">
+      <div class="dash-card-header">
+        <h3><i class="bi bi-table"></i> Daftar Lengkap Plugin — ala AdminLTE Docs</h3>
+        <span class="dash-badge info">25 plugin • MIT / BSD / WTFPL</span>
+      </div>
+      <div class="plugin-table-wrap">
+        <table class="dash-table">
+          <thead>
+            <tr><th>#</th><th>Plugin</th><th>Versi</th><th>Kategori</th><th>Penggunaan di JanjiSuci</th><th>Lisensi</th><th>Docs</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><strong>SweetAlert2</strong></td><td><span class="dash-badge info">v11</span></td><td><span class="plugin-tag form">Notifikasi</span></td><td>Konfirmasi hapus, toast publish</td><td>MIT</td><td><a class="plugin-docs-link" href="https://sweetalert2.github.io/" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>2</td><td><strong>Flatpickr</strong></td><td><span class="dash-badge info">v4.6</span></td><td><span class="plugin-tag form">Form</span></td><td>Picker tanggal akad & range resepsi</td><td>MIT</td><td><a class="plugin-docs-link" href="https://flatpickr.js.org/" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>3</td><td><strong>Choices.js</strong></td><td><span class="dash-badge info">v10.2</span></td><td><span class="plugin-tag form">Form</span></td><td>Pilih tema & tags (pengganti Select2, vanilla)</td><td>MIT</td><td><a class="plugin-docs-link" href="https://choices-js.github.io/Choices/" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>4</td><td><strong>Toastr</strong></td><td><span class="dash-badge success">v2.1</span></td><td><span class="plugin-tag form">Notifikasi</span></td><td>Toast ringan selain SweetAlert</td><td>MIT</td><td><a class="plugin-docs-link" href="https://codeseven.github.io/toastr/" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>5</td><td><strong>IMask</strong></td><td><span class="dash-badge info">v7</span></td><td><span class="plugin-tag form">Form</span></td><td>Mask WA, rupiah, kartu</td><td>MIT</td><td><a class="plugin-docs-link" href="https://imask.js.org/" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>6</td><td><strong>Quill</strong></td><td><span class="dash-badge warning">v2</span></td><td><span class="plugin-tag editor">Editor</span></td><td>Cerita prewedding & catatan admin</td><td>BSD-3</td><td><a class="plugin-docs-link" href="https://quilljs.com/" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>7</td><td><strong>Dropzone</strong></td><td><span class="dash-badge warning">v5.9</span></td><td><span class="plugin-tag editor">Upload</span></td><td>Galeri foto drag & drop</td><td>MIT</td><td><a class="plugin-docs-link" href="https://docs.dropzone.dev/" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>8</td><td><strong>noUiSlider</strong></td><td><span class="dash-badge warning">v15</span></td><td><span class="plugin-tag form">Slider</span></td><td>Range budget amplop</td><td>WTFPL</td><td><a class="plugin-docs-link" href="https://refreshless.com/nouislider/" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>9</td><td><strong>SortableJS</strong></td><td><span class="dash-badge warning">v1.15</span></td><td><span class="plugin-tag interact">Interact</span></td><td>Susun agenda akad & resepsi</td><td>MIT</td><td><a class="plugin-docs-link" href="https://github.com/SortableJS/Sortable" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>10</td><td><strong>GLightbox</strong></td><td><span class="dash-badge info">v3.3</span></td><td><span class="plugin-tag media">Media</span></td><td>Lightbox galeri prewedding</td><td>MIT</td><td><a class="plugin-docs-link" href="https://biati-digital.github.io/glightbox/" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>11</td><td><strong>ClipboardJS</strong></td><td><span class="dash-badge info">v2</span></td><td><span class="plugin-tag interact">Utility</span></td><td>Copy link undangan tamu</td><td>MIT</td><td><a class="plugin-docs-link" href="https://clipboardjs.com/" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>12</td><td><strong>ApexCharts</strong></td><td><span class="dash-badge warning">v3.54</span></td><td><span class="plugin-tag chart">Charts</span></td><td>Area chart kunjungan vs RSVP</td><td>MIT</td><td><a class="plugin-docs-link" href="https://apexcharts.com/" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>13</td><td><strong>FullCalendar</strong></td><td><span class="dash-badge warning">v6.1</span></td><td><span class="plugin-tag chart" style="background:#e8edf5;border-color:#d6ddea;color:#142238">Calendar</span></td><td>Kalender jadwal akad & resepsi</td><td>MIT</td><td><a class="plugin-docs-link" href="https://fullcalendar.io/docs" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>14</td><td><strong>Leaflet</strong></td><td><span class="dash-badge info">v1.9</span></td><td><span class="plugin-tag media">Maps</span></td><td>Peta venue OpenStreetMap</td><td>BSD-2</td><td><a class="plugin-docs-link" href="https://leafletjs.com/reference.html" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>15</td><td><strong>Swiper</strong></td><td><span class="dash-badge success">v11</span></td><td><span class="plugin-tag media" style="background:#fef3f2;border-color:#fecdd3;color:#a83854">Slider</span></td><td>Slider geser galeri & katalog (carousel)</td><td>MIT</td><td><a class="plugin-docs-link" href="https://swiperjs.com/get-started" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>16</td><td><strong>Chart.js</strong></td><td><span class="dash-badge success">v4.4</span></td><td><span class="plugin-tag chart">Charts</span></td><td>Line & bar dashboard (alternatif Apex)</td><td>MIT</td><td><a class="plugin-docs-link" href="https://www.chartjs.org/docs/latest/" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>17</td><td><strong>DataTables</strong></td><td><span class="dash-badge info">v1.13</span></td><td><span class="plugin-tag form" style="background:#e8edf5;border-color:#d6ddea;color:#405189">Table</span></td><td>Tabel interaktif search & paginasi</td><td>MIT</td><td><a class="plugin-docs-link" href="https://datatables.net/" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>18</td><td><strong>jsVectorMap</strong></td><td><span class="dash-badge info">v1.5</span></td><td><span class="plugin-tag media" style="background:#e8f3ec;border-color:#b6e0d8;color:#0a3622">Maps</span></td><td>Peta vektor persebaran tamu</td><td>MIT</td><td><a class="plugin-docs-link" href="https://jvm-docs.vercel.app/" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>19</td><td><strong>Pickr</strong></td><td><span class="dash-badge warning">v1.8</span></td><td><span class="plugin-tag form" style="background:#fef4e4;border-color:#fbe8b8;color:#664d03">Picker</span></td><td>Color picker tema undangan</td><td>MIT</td><td><a class="plugin-docs-link" href="https://github.com/Simonwep/pickr" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>20</td><td><strong>QRCode.js</strong></td><td><span class="dash-badge success">v1.0</span></td><td><span class="plugin-tag interact">Utility</span></td><td>Generate QR link undangan</td><td>MIT</td><td><a class="plugin-docs-link" href="https://github.com/davidshimjs/qrcodejs" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>21</td><td><strong>Plyr</strong></td><td><span class="dash-badge success">v3.7</span></td><td><span class="plugin-tag media">Media</span></td><td>Audio player musik undangan</td><td>MIT</td><td><a class="plugin-docs-link" href="https://github.com/sampotts/plyr" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>22</td><td><strong>bs-stepper</strong></td><td><span class="dash-badge info">v1.7</span></td><td><span class="plugin-tag form">Wizard</span></td><td>Wizard step pembuatan undangan</td><td>MIT</td><td><a class="plugin-docs-link" href="https://github.com/Johann-S/bs-stepper" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>23</td><td><strong>intl-tel-input</strong></td><td><span class="dash-badge success">v18.2</span></td><td><span class="plugin-tag form">Form</span></td><td>Input telepon internasional</td><td>MIT</td><td><a class="plugin-docs-link" href="https://github.com/jackocnr/intl-tel-input" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>24</td><td><strong>Rater.js</strong></td><td><span class="dash-badge warning">v1.0</span></td><td><span class="plugin-tag form" style="background:#fef4e4;border-color:#fbe8b8;color:#664d03">Rating</span></td><td>Star rating testimoni</td><td>MIT</td><td><a class="plugin-docs-link" href="https://github.com/fredolss/rater-js" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+            <tr><td>25</td><td><strong>Prism.js</strong></td><td><span class="dash-badge info">v1.29</span></td><td><span class="plugin-tag interact">Code</span></td><td>Syntax highlight dokumentasi</td><td>MIT</td><td><a class="plugin-docs-link" href="https://prismjs.com/" target="_blank" rel="noopener">Buka <i class="bi bi-box-arrow-up-right"></i></a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="dash-card-body" style="background:#fafaf9;border-top:1px solid var(--dash-border);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between">
+        <div style="font-size:12px;color:var(--dash-muted)"><i class="bi bi-info-circle"></i> Semua plugin dimuat via <strong>jsDelivr CDN</strong>. Untuk produksi: pertimbangkan <code>npm i</code> + bundler bila butuh tree-shaking. Tema Royale otomatis inherit tanpa config tambahan.</div>
+        <button class="dash-btn dash-btn-primary" style="padding:8px 14px;font-size:12px" onclick="dashToast('Dokumentasi plugin diunduh (PDF)')"><i class="bi bi-download"></i> Unduh Rekap PDF</button>
+      </div>
+    </div>
+
+    <!-- Calendar & Maps — FullCalendar + Leaflet (ala AdminKit) -->
+    <div class="addon-grid" style="margin-top:16px">
+      <!-- FullCalendar -->
+      <div class="dash-card addon-card" id="card-fullcalendar" data-cat="calendar">
+        <div class="dash-card-header"><h3><i class="bi bi-calendar-week"></i> FullCalendar — Jadwal Akad & Resepsi</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag chart" style="background:#e8edf5;border-color:#d6ddea;color:#142238">Calendar</span><span class="addon-note"><i class="bi bi-box-seam"></i> fullcalendar@6</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 10px">Kalender interaktif ala AdminKit — drag & drop jadwal, klik tanggal untuk tambah acara. Data contoh: akad & resepsi Arya & Nabila.</p>
+          <div id="fullCalendar"></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+            <button class="dash-btn dash-btn-secondary" style="padding:6px 10px;font-size:12px" id="calToday"><i class="bi bi-calendar-event"></i> Hari Ini</button>
+            <button class="dash-btn dash-btn-secondary" style="padding:6px 10px;font-size:12px" id="calAddEvent"><i class="bi bi-plus-lg"></i> Tambah Acara</button>
+            <span style="font-size:11px;color:var(--dash-muted);align-self:center"><i class="bi bi-info-circle"></i> Klik tanggal / seret event untuk ubah jadwal</span>
+          </div>
+          <div class="code-box"><code>new FullCalendar.Calendar(el,{locale:'id', events:[...]})</code><button class="code-copy" onclick="copyCode(&quot;new FullCalendar.Calendar(el,{locale:'id'})&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://fullcalendar.io/docs" target="_blank" rel="noopener">Docs FullCalendar <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+      <!-- Leaflet Maps -->
+      <div class="dash-card addon-card" id="card-leaflet" data-cat="maps">
+        <div class="dash-card-header"><h3><i class="bi bi-geo-alt-fill"></i> Leaflet — Peta Venue</h3><span style="display:flex;gap:8px;align-items:center"><span class="plugin-tag media">Maps</span><span class="addon-note"><i class="bi bi-box-seam"></i> leaflet@1.9</span></span></div>
+        <div class="dash-card-body">
+          <p style="font-size:13px;color:var(--dash-muted);margin:0 0 10px">Peta interaktif venue akad & resepsi — tile OpenStreetMap, marker & popup. Cocok untuk halaman preview tamu.</p>
+          <div id="venueMap"></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+            <button class="dash-btn dash-btn-secondary" style="padding:6px 10px;font-size:12px" id="mapVenue1"><i class="bi bi-geo"></i> Plataran Menteng</button>
+            <button class="dash-btn dash-btn-secondary" style="padding:6px 10px;font-size:12px" id="mapVenue2"><i class="bi bi-building"></i> Dharmawangsa</button>
+            <a href="https://maps.app.goo.gl/plataran-menteng" target="_blank" rel="noopener" class="dash-btn dash-btn-primary" style="padding:6px 10px;font-size:12px"><i class="bi bi-box-arrow-up-right"></i> Buka GMaps</a>
+          </div>
+          <div class="code-box"><code>L.map('venueMap').setView([-6.195,106.822],14)</code><button class="code-copy" onclick="copyCode(&quot;L.map('venueMap').setView([-6.195,106.822],14)&quot;,this)"><i class="bi bi-clipboard"></i> Copy</button></div>
+          <a class="plugin-docs-link" href="https://leafletjs.com/reference.html" target="_blank" rel="noopener">Docs Leaflet <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- Help card -->
+    <div class="dash-card" style="background:var(--dash-primary-container);border-color:var(--dash-primary-container);margin-top:16px">
+      <div class="dash-card-body">
+        <div style="display:flex;align-items:center;gap:12px"><div style="width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,0.12);display:grid;place-items:center;color:var(--dash-gold)"><i class="bi bi-stars"></i></div><div><div style="font-family:'Inter',sans-serif;font-size:16px;font-weight:700;color:#fff">Butuh plugin lain?</div><div style="font-size:12px;color:rgba(255,255,255,0.7)">Tim Royale siap bantu integrasi custom — Chart.js, DataTables, Vector Maps, dsb.</div></div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px"><a href="https://wa.me/628123456789" class="dash-btn" style="background:#fff;color:var(--dash-primary-container)"><i class="bi bi-whatsapp"></i> WhatsApp</a><a href="ui-elements.html" class="dash-btn" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.2)"><i class="bi bi-layers"></i> Komponen</a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="dash-footer">
+    <div>© 2025 JanjiSuci DashAdmin • Nusantara Royale Romance • v1.0.0 — Plugins & Addons Royale</div>
+    <div style="display:flex;gap:16px"><a href="../index.html">Landing</a> <a href="profile.html">Profile</a> <span>Dibuat di Indonesia 🇮🇩</span></div>
+  </footer>
+</main>
+
+<button class="dash-scrolltop" id="dashScrollTop"><i class="bi bi-arrow-up"></i></button>
+
+<script src="assets/js/dashadmin.js"></script>
+<!-- ====== Extra Plugins JS ====== -->
+<script src="assets/plugins/vendor/sweetalert2/sweetalert2.all.min.js"></script>
+<script src="assets/plugins/vendor/jquery/jquery.min.js"></script>
+<script src="assets/plugins/vendor/choices/choices.min.js"></script>
+<script src="assets/plugins/vendor/flatpickr/flatpickr.min.js"></script>
+<script src="assets/plugins/vendor/flatpickr/l10n-id.js"></script>
+<script src="assets/plugins/vendor/imask/imask.min.js"></script>
+<script src="assets/plugins/vendor/quill/quill.js"></script>
+<script src="assets/plugins/vendor/dropzone/dropzone.min.js"></script>
+<script src="assets/plugins/vendor/nouislider/nouislider.min.js"></script>
+<script src="assets/plugins/vendor/sortable/Sortable.min.js"></script>
+<script src="assets/plugins/vendor/glightbox/glightbox.min.js"></script>
+<script src="assets/plugins/vendor/clipboard/clipboard.min.js"></script>
+<script src="assets/plugins/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="assets/plugins/vendor/toastr/toastr.min.js"></script>
+<script src="assets/plugins/vendor/fullcalendar/index.global.min.js"></script>
+<script src="assets/plugins/vendor/leaflet/leaflet.js"></script>
+<script src="assets/plugins/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/plugins/vendor/chartjs/chart.umd.min.js"></script>
+<script src="assets/plugins/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="assets/plugins/vendor/jsvectormap/jsvectormap.min.js"></script>
+<script src="assets/plugins/vendor/jsvectormap/world.js"></script>
+<script src="assets/plugins/vendor/pickr/pickr.min.js"></script>
+<script src="assets/plugins/vendor/qrcode/qrcode.min.js"></script>
+<script src="assets/plugins/vendor/plyr/plyr.polyfilled.js"></script>
+<script src="assets/plugins/vendor/bs-stepper/bs-stepper.min.js"></script>
+<script src="assets/plugins/vendor/intl-tel-input/intlTelInput.min.js"></script>
+<script src="assets/plugins/vendor/rater/rater.min.js"></script>
+<script src="assets/plugins/vendor/prism/prism.js"></script>
+<script src="assets/plugins/data/plugins-data.js"></script>
+<script src="assets/plugins/js/plugins.js"></script>
+<script src="assets/js/theme-switcher.js"></script>
+</body>
+</html>

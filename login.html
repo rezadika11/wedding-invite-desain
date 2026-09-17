@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masuk — JanjiSuci</title>
+<meta name="description" content="Masuk ke akun JanjiSuci untuk kelola undangan pernikahan digital mewah Anda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body class="auth-page">
+
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <!-- Visual - Gambar Saja -->
+      <div class="auth-visual auth-visual--image">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5pY3lIbdiFW0kVZofCRBpg3kr1aTNglddF_qDMM3nATz4q0kQ6tTcJWOABDKdnOJ9et4SWcsii0Wum7DXLf7PhSYDUFH8sSKJrCJcXKbXn-OYjL4MEedg9hBY8J_eiUz7iDqpvf-BY_FQ2HRxhUu2i_xeOiKrDljYqErnAyBUZcG4FGzEHE5rpLvOxKt1T75N3yGe-TaAKuaZ5tM5AjPqXEa_q3VMxeZsbJLW3myNDtmbnzvAGbBv" alt="Pasangan pengantin Nusantara Royale - JanjiSuci">
+        <div class="auth-visual-overlay" aria-hidden="true"></div>
+        <span class="auth-visual-badge"><i class="bi bi-heart-fill" style="color:var(--secondary);"></i> JanjiSuci • Nusantara Royale</span>
+      </div>
+
+      <!-- Form -->
+      <div class="auth-form-side">
+        <div class="auth-eyebrow"><i class="bi bi-box-arrow-in-right"></i> Masuk Akun</div>
+        <h1 class="auth-title">Masuk ke JanjiSuci</h1>
+        <p class="auth-subtitle">Belum punya akun? <a href="register.html">Daftar gratis — aktif selamanya</a></p>
+
+        <form class="auth-form" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div class="input-wrap">
+              <i class="bi bi-envelope input-icon"></i>
+              <input id="email" type="email" placeholder="nama@contoh.com" required autocomplete="email" value="">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <label for="password" style="margin:0;">Kata Sandi</label>
+              <a href="lupa-password.html" class="link-muted" style="font-size:12px;">Lupa kata sandi?</a>
+            </div>
+            <div class="input-wrap has-right">
+              <i class="bi bi-lock input-icon"></i>
+              <input id="password" type="password" placeholder="Minimal 8 karakter" required autocomplete="current-password">
+              <button type="button" class="input-action" onclick="togglePass('password',this)" aria-label="Lihat sandi"><i class="bi bi-eye"></i></button>
+            </div>
+          </div>
+
+          <div class="checkbox-row">
+            <label class="checkbox-label"><input type="checkbox" id="remember" checked> Ingat saya di perangkat ini</label>
+            <span style="font-size:12px;color:var(--on-surface-variant);display:flex;align-items:center;gap:4px;"><i class="bi bi-shield-lock" style="color:var(--status-success);"></i> Sesi terenkripsi</span>
+          </div>
+
+          <button type="submit" class="btn-auth btn-auth-primary" id="loginBtn">
+            <span>Masuk &amp; Kelola Undangan</span>
+            <i class="bi bi-arrow-right"></i>
+          </button>
+
+          <div class="auth-divider">atau lanjutkan dengan</div>
+
+          <div class="auth-alts">
+            <button type="button" class="btn-auth btn-auth-google" onclick="alert('Demo: Login dengan Google')">
+              <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" alt="" style="width:18px;height:18px;object-fit:contain;"> Lanjutkan dengan Google
+            </button>
+            <a href="register.html" class="btn-auth btn-auth-google" style="text-decoration:none;">
+              <i class="bi bi-person-plus"></i> Buat akun baru — Gratis
+            </a>
+          </div>
+
+          <p class="auth-note">Dengan masuk, Anda menyetujui <a href="#">Syarat &amp; Ketentuan</a> dan <a href="#">Kebijakan Privasi</a> JanjiSuci.</p>
+        </form>
+
+        <div style="margin-top:18px;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;font-size:12px;color:var(--on-surface-variant);">
+          <i class="bi bi-headset" style="color:var(--secondary);font-size:16px;"></i> Butuh bantuan? <a href="https://wa.me/628123456789" style="color:var(--primary);font-weight:700;text-decoration:underline;">Hubungi CS WhatsApp 24/7</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+function togglePass(id,btn){
+  const el=document.getElementById(id);
+  const icon=btn.querySelector('i');
+  const isPass=el.type==='password';
+  el.type=isPass?'text':'password';
+  icon.className=isPass?'bi bi-eye-slash':'bi bi-eye';
+}
+function handleLogin(e){
+  e.preventDefault();
+  const btn=document.getElementById('loginBtn');
+  const email=document.getElementById('email').value.trim();
+  const pass=document.getElementById('password').value;
+  if(!email || !pass){alert('Lengkapi email dan kata sandi.');return;}
+  btn.innerHTML='<span class="bi bi-arrow-repeat" style="animation:spin 0.8s linear infinite;display:inline-block;"></span> Memverifikasi...';
+  btn.disabled=true;
+  setTimeout(()=>{
+    btn.innerHTML='<i class="bi bi-check-circle-fill"></i> Berhasil — Mengalihkan...';
+    setTimeout(()=> location.href='dashboard.html', 900);
+  }, 1100);
+}
+</script>
+<style>@keyframes spin{to{transform:rotate(360deg);}} .show-sm{display:none;}@media(min-width:640px){.show-sm{display:inline;}}</style>
+</body>
+</html>
