@@ -61,9 +61,39 @@ body.dash-body{
   .dash-navbar .dash-menu-btn[data-navbar-toggle]{display:grid;}
 }
 @media(min-width:992px){
-  .dash-navbar{left:var(--dash-sidebar-w);padding:0 24px;}
-  body.sidebar-collapsed .dash-navbar{left:var(--dash-sidebar-collapsed);}
+  .dash-navbar{left:0;right:0;padding:0 24px 0 calc(var(--dash-sidebar-w) + 24px);}
+  body.sidebar-collapsed .dash-navbar{left:0;padding-left:calc(var(--dash-sidebar-collapsed) + 24px);}
 }
+/* ---------- VARIANT: Navbar tidak fixed (opsi default static) ---------- */
+/* Jika mau default TIDAK fixed: tambahkan class "navbar-not-fixed" pada <body> */
+body.navbar-not-fixed .dash-navbar{
+  position:sticky;
+  top:0;
+  left:0;right:0;
+  width:100%;
+  padding:0 24px 0 calc(var(--dash-sidebar-w) + 24px);
+  z-index:1030;
+}
+body.navbar-not-fixed.sidebar-collapsed .dash-navbar{
+  padding-left:calc(var(--dash-sidebar-collapsed) + 24px);
+}
+@media(max-width:991px){
+  body.navbar-not-fixed .dash-navbar,
+  body.navbar-not-fixed.sidebar-collapsed .dash-navbar{
+    padding:0 16px;
+  }
+}
+body.navbar-not-fixed .dash-main{
+  margin-top:0;
+}
+body.navbar-not-fixed .dash-sidebar{
+  top:0;
+}
+body.navbar-sticky .dash-navbar{
+  position:sticky;
+  top:0;
+}
+
 .dash-navbar-left{display:flex;align-items:center;gap:12px;flex:1;min-width:0;}
 .dash-menu-btn{
   width:40px;height:40px;border-radius:10px;
